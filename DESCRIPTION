@@ -1,4 +1,4 @@
-Package: R.echarts
+Package: recharts
 Type: Package
 Title: A R Interface to ECharts
 Version: 0.01
@@ -7,6 +7,6 @@ Depends: knitr, RJSONIO
 Maintainer: Taiyun Wei <weitaiyun@gmail.com>
 Description: A R Interface to ECharts
 License: MIT
-URL: https://github.com/taiyun/R.echarts
-BugReports: https://github.com/taiyun/R.echarts/issues
+URL: https://github.com/taiyun/recharts
+BugReports: https://github.com/taiyun/recharts/issues
 VignetteBuilder: knitr
