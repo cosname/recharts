@@ -1,0 +1,2 @@
+eRadar = function(){
+}

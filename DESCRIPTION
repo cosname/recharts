@@ -1,0 +1,12 @@
+Package: R.echarts
+Type: Package
+Title: A R Interface to ECharts
+Version: 0.01
+Author: Taiyun WEI, Yang ZHOU
+Depends: knitr, RJSONIO
+Maintainer: Taiyun Wei <weitaiyun@gmail.com>
+Description: A R Interface to ECharts
+License: MIT
+URL: https://github.com/taiyun/R.echarts
+BugReports: https://github.com/taiyun/R.echarts/issues
+VignetteBuilder: knitr
