@@ -1,0 +1,6 @@
+.gitignore
+NEWS.md
+^\.Rproj\.user$
+^.*\.Rproj$
+FAQ.md
+Makefile

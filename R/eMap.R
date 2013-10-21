@@ -1,4 +1,23 @@
-eMap = function(dat, opt=list(), only=FALSE, local=FALSE, style=NULL) {
+#' Map charts
+#'
+#' ECharts style map charts. Only support CHINA now.
+#'
+#' @param dat    data.frame or matrix, rownames are province names.
+#' @param opt    option of ECharts.
+#' @param filename   logical or character. If TRUE or a chacacter, output a html that contains echarts; 
+#' if a character, the name of html file will be named. If FALSE, return div and script environment in html.
+#' @param local  logical, online or local.
+#' @param style  character,  div style.
+#' @return The HTML code as a character string.
+#' @export
+#' @examples
+#'  options(encoding="UTF-8")
+#'  Sys.setlocale("LC_CTYPE","chs")
+#'  load(url('http://yzhou.org/recharts/ChinaGDP.RData'))
+#'  ChinaGDP
+#'  eMap(ChinaGDP, filename = 'ChinaGDP')
+
+eMap = function(dat, opt=list(), filename=FALSE, local=FALSE, style=NULL) {
 
     if(is.null(opt$toolbox$show)) {
         opt$toolbox$show = TRUE
@@ -90,5 +109,5 @@ eMap = function(dat, opt=list(), only=FALSE, local=FALSE, style=NULL) {
         style = "height:500px;border:1px solid #ccc;padding:10px;"
     }
 
-    invisible(configHtml(opt=optJSON, only=only, local=local, style=style))
+    invisible(configHtml(opt=optJSON, filename=filename, local=local, style=style))
 }

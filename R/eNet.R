@@ -1,2 +1,0 @@
-eNet = function(){
-}

@@ -1,2 +1,0 @@
-eRadar = function(){
-}

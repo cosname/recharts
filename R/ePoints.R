@@ -1,4 +1,20 @@
-ePoints = function(dat, opt=list(), only=FALSE, local=FALSE, style=NULL) {
+#' Points charts
+#'
+#' ECharts style scatter charts. 
+#'
+#' @param dat    data.frame or matrix, should have two column or three colume. 
+#' If three, the third colume should be factor or character, it will be treated as category labels.
+#' @param opt    option of ECharts.
+#' @param filename   logical or character. If TRUE or a chacacter, output a html that contains echarts; 
+#' if a character, the name of html file will be named. If FALSE, return div and script environment in html.
+#' @param local  logical, online or local.
+#' @param style  character,  div style.
+#' @return The HTML code as a character string.
+#' @export
+#' @examples
+#'  ePoints(iris[,3:5], filename = 'irisPoints')
+
+ePoints = function(dat, opt=list(), filename=FALSE, local=FALSE, style=NULL) {
 
     if(is.null(opt$toolbox$show)) {
         opt$toolbox$show = TRUE
@@ -111,5 +127,5 @@ ePoints = function(dat, opt=list(), only=FALSE, local=FALSE, style=NULL) {
         style = "height:500px;border:1px solid #ccc;padding:10px;"
     }
 
-    invisible(configHtml(opt=optJSON, only=only, local=local, style=style))
+    invisible(configHtml(opt=optJSON, filename=filename, local=local, style=style))
 }

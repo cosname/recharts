@@ -1,4 +1,21 @@
-eLine = function(dat, opt=list(), only=FALSE, local=FALSE, style=NULL) {
+#' Line charts
+#'
+#' ECharts style line charts.
+#'
+#' @param dat    data.frame or matrix.
+#' @param opt    option of ECharts.
+#' @param filename   logical or character. If TRUE or a chacacter, output a html that contains echarts; 
+#' if a character, the name of html file will be named. If FALSE, return div and script environment in html.
+#' @param local  logical, online or local.
+#' @param style  character,  div style.
+#' @return The HTML code as a character string.
+#' @export
+#' @examples
+#'  eLine(iris[,1:4], filename = 'irisLine')
+#'  eLine(iris[,1:4], opt=list(dataZoom=list(show=TRUE,end=35)), 
+#'        filename = 'irisLineZoom')
+
+eLine = function(dat, opt=list(), filename=FALSE, local=FALSE, style=NULL) {
     
     if(is.null(opt$legend$data)) {
         opt$legend$data = colnames(dat)
@@ -76,10 +93,25 @@ eLine = function(dat, opt=list(), only=FALSE, local=FALSE, style=NULL) {
         style = "height:500px;border:1px solid #ccc;padding:10px;"
     }
 
-    configHtml(opt=optJSON, only=only, local=local, style=style)
+    invisible(configHtml(opt=optJSON, filename=filename, local=local, style=style))
 }
 
-eArea = function(dat, opt=list(), only=FALSE, local=FALSE, style=NULL) {
+#' Line charts
+#'
+#' ECharts style area charts.
+#'
+#' @param dat    data.frame or matrix
+#' @param opt    option of ECharts.
+#' @param filename   logical or character. If TRUE or a chacacter, output a html that contains echarts; 
+#' if a character, the name of html file will be named. If FALSE, return div and script environment in html.
+#' @param local  logical, online or local.
+#' @param style  character,  div style.
+#' @return The HTML code as a character string.
+#' @export
+#' @examples
+#'  eArea(iris[,1:4], filename = 'irisArea')
+
+eArea = function(dat, opt=list(), filename=FALSE, local=FALSE, style=NULL) {
    if(is.null(opt$series)) {
         opt$series =  vector("list", ncol(dat))
     } else if(length(opt$series)!=ncol(dat)) {
@@ -96,5 +128,5 @@ eArea = function(dat, opt=list(), only=FALSE, local=FALSE, style=NULL) {
         }   
     }
 
-    eLine(dat=dat, opt=opt, only=only, local=local, style=style)
+    eLine(dat=dat, opt=opt, filename=filename, local=local, style=style)
 }

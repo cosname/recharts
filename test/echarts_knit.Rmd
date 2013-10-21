@@ -1,10 +1,15 @@
+```{r eval=FALSE}
+library(knitr)
+knit2html('echarts_knit.Rmd', template = 'tempt.html')
+```
+
 ```{r }
 library(recharts)
 ```
-
 # Line Plot
 ```{r results='asis'}
 eLine(iris[,1:4])
+eLine(iris[,1:4], opt=list(dataZoom=list(show=TRUE,end=35)))
 ```
 
 # Area Plot
@@ -33,7 +38,6 @@ eBar(iris[1:5,1:4])
 ```{r results='asis'}
 options(encoding="UTF-8")
 Sys.setlocale("LC_CTYPE","chs")
-data(ChinaGDP)
-
-eBar(ChinaGDP, opt=list(title=list(text='2008~2010年大陆各省GDP占全国百分数')))
+load(url('http://yzhou.org/recharts/ChinaGDP.RData'))
+eMap(ChinaGDP, opt=list(title=list(text='2008~2010年大陆各省GDP占全国百分数')))
 ```

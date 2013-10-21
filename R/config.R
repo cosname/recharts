@@ -1,4 +1,4 @@
-configHtml = function(opt, only, local, style) {
+configHtml = function(opt, filename, local, style) {
 
 
 	id = paste('ID', format(Sys.time(), "%Y%m%d%H%M%S"), proc.time()[3]*100, sep="_")
@@ -15,9 +15,9 @@ configHtml = function(opt, only, local, style) {
 	}
 
 	echartsIn = "
-    <div id='ID' style='STYLE'></div>
+<div id='ID' style='STYLE'></div>
     
-    <script type='text/javascript'>
+<script type='text/javascript'>
     // Step:3 conifg ECharts's path, link to echarts.js from current page.
     require.config({
         paths:{ 
@@ -52,7 +52,7 @@ configHtml = function(opt, only, local, style) {
             EChart_ID.setOption(option_ID);
         }
     );
-    </script>
+</script>
 	"
 
 	echartsOut = echartsIn
@@ -63,12 +63,12 @@ configHtml = function(opt, only, local, style) {
 	echartsOut = gsub("OPT", opt, echartsOut)
 
 
-	if(!only) {
+	if(filename==FALSE) {
+        cat(echartsOut)
 		return(echartsOut)
 	}
 
-	if(only) {
-    	head = "		
+	head = "		
 <!DOCTYPE html>
 <html lang='en'>
 <head>
@@ -80,15 +80,17 @@ configHtml = function(opt, only, local, style) {
 
 <body>
 "
-		foot = "
+	foot = "
 </body>
 </html>
 "
-		head = gsub('esl', esl, head)
-		echartsOut = paste(head, echartsOut, foot, sep='\n\n\n')
-		filename=paste(id, '.html' , sep='')
-		cat(echartsOut, file=filename)
-		browseURL(filename)
-	}
-
+	head = gsub('esl', esl, head)
+	echartsOut = paste(head, echartsOut, foot, sep='\n\n\n')
+	
+    
+    filename = ifelse(is.character(filename), filename, id)
+    filename = paste(filename, '.html' , sep='')
+	cat(echartsOut, file=filename)
+	browseURL(filename)
+    cat(paste('Out file:', filename, '.\n'))
 }
