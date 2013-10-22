@@ -23,8 +23,9 @@ eLine(iris[,1:4], filename = 'irisLine')
 eLine(iris[,1:4], opt=list(dataZoom=list(show=TRUE,end=35)), 
       filename = 'irisLineZoom')
 ```
-![Area Plot](screenshots/irisLine.png)
-![Area Plot](screenshots/irisLineZoom.png)
+![Line Plot](./screenshots/irisLine.png)
+
+![Line Zoom Plot](screenshots/irisLineZoom.png)
 
 ### Area Plot
 ```r
