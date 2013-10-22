@@ -30,7 +30,8 @@ eMap(ChinaGDP, opt=list(title=list(text='2008~2010年大陆各省GDP占全国百
 
 
 # Force Network
-
+options(encoding="UTF-8")
+Sys.setlocale("LC_CTYPE","chs")
 networkMatrix <- matrix(c(
 	c(0, 1, 2, 1, 2, 3, 6, 6, 1, 1, 1 ),
 	c(1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ),
@@ -57,11 +58,11 @@ propertyDf <- data.frame(
 
 rownames(propertyDf) = propertyDf$name
 
-eForce(networkMatrix=networkMatrix, propertyDf=propertyDf, only=T)
+eForce(networkMatrix=networkMatrix, propertyDf=propertyDf, outfile='Jobs')
 
 
 # A lite example for Force network
 
 testData <- matrix(1:25, nrow=5)
-eForce(testData, only=T)
+eForce(testData, outfile='testData')
 

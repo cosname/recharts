@@ -267,7 +267,7 @@ eForce = function(networkMatrix, propertyDf=NULL, opt=list(), outfile=FALSE, jsd
         style = "height:500px;border:1px solid #ccc;padding:10px;"
     }	
 		
-	invisible(configHtml(opt=optJSON, outfile=FALSE, jsdir=NULL, style=NULL))
+	invisible(configHtml(opt=optJSON, outfile=outfile, jsdir=jsdir, style=style))
 	
 		
 }		
