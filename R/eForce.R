@@ -1,7 +1,7 @@
 #####################################
 ##  The network graph:
-##		   Jobs(10)
-##		  //1     \\2
+##	    Jobs(10)
+##	  //1     \\2
 ##       //    3   \\
 ##    Gates(9)----Obama(8)
 ##
@@ -261,7 +261,7 @@ eForce = function(networkMatrix, propertyDf=NULL, opt=list(), only=FALSE, local=
 		
 	opt$series = list(opt$series)
 	
-	optJSON = RJSONIO::toJSON(opt)
+	optJSON = RJSONIO::toJSON(opt, pretty=T)
 	
 	if(is.null(style)) {
         style = "height:500px;border:1px solid #ccc;padding:10px;"
