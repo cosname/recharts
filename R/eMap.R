@@ -4,9 +4,10 @@
 #'
 #' @param dat    data.frame or matrix, rownames are province names.
 #' @param opt    option of ECharts.
-#' @param filename   logical or character. If TRUE or a chacacter, output a html that contains echarts; 
+#' @param outfile   logical or character. If TRUE or a chacacter, output a html that contains echarts; 
 #' if a character, the name of html file will be named. If FALSE, return div and script environment in html.
-#' @param local  logical, online or local.
+#' @param jsdir,  character, directory where esl JS and echarts JS in. The default directory is
+#'  'http://efe.baidu.com/echarts/doc/example/www/js/'
 #' @param style  character,  div style.
 #' @return The HTML code as a character string.
 #' @export
@@ -15,9 +16,9 @@
 #'  Sys.setlocale("LC_CTYPE","chs")
 #'  load(url('http://yzhou.org/recharts/ChinaGDP.RData'))
 #'  ChinaGDP
-#'  eMap(ChinaGDP, filename = 'ChinaGDP')
+#'  eMap(ChinaGDP, outfile = 'ChinaGDP')
 
-eMap = function(dat, opt=list(), filename=FALSE, local=FALSE, style=NULL) {
+eMap = function(dat, opt=list(), outfile=FALSE, jsdir=NULL, style=NULL) {
 
     if(is.null(opt$toolbox$show)) {
         opt$toolbox$show = TRUE
@@ -109,5 +110,5 @@ eMap = function(dat, opt=list(), filename=FALSE, local=FALSE, style=NULL) {
         style = "height:500px;border:1px solid #ccc;padding:10px;"
     }
 
-    invisible(configHtml(opt=optJSON, filename=filename, local=local, style=style))
+    invisible(configHtml(opt=optJSON, outfile=outfile, jsdir=jsdir, style=style))
 }

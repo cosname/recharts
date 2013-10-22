@@ -1,18 +1,17 @@
-configHtml = function(opt, filename, local, style) {
+configHtml = function(opt, outfile, jsdir, style) {
 
 
 	id = paste('ID', format(Sys.time(), "%Y%m%d%H%M%S"), proc.time()[3]*100, sep="_")
 	Sys.sleep(0.02)
 
+	if(is.null(jsdir)) {
+		jsdir = 'http://efe.baidu.com/echarts/doc/example/www/js/'
+	}
 
-	if(local){
-		eJS = './js/echarts-map'
-		esl = "./js/esl.js"
-	}
-	if(!local){
-		eJS = 'http://efe.baidu.com/echarts/doc/example/www/js/echarts-map'
-		esl = "http://efe.baidu.com/echarts/doc/example/www/js/esl.js"
-	}
+	jsdir = gsub('/$', '', jsdir)
+	eJS = paste(jsdir, 'echarts-map', sep = '/')
+	esl = paste(jsdir, 'esl.js', sep = '/')
+
 
 	echartsIn = "
 <div id='ID' style='STYLE'></div>
@@ -63,7 +62,7 @@ configHtml = function(opt, filename, local, style) {
 	echartsOut = gsub("OPT", opt, echartsOut)
 
 
-	if(filename==FALSE) {
+	if(outfile==FALSE) {
         cat(echartsOut)
 		return(echartsOut)
 	}
@@ -88,9 +87,9 @@ configHtml = function(opt, filename, local, style) {
 	echartsOut = paste(head, echartsOut, foot, sep='\n\n\n')
 	
     
-    filename = ifelse(is.character(filename), filename, id)
-    filename = paste(filename, '.html' , sep='')
-	cat(echartsOut, file=filename)
-	browseURL(filename)
-    cat(paste('Out file:', filename, '.\n'))
+    outfile = ifelse(is.character(outfile), outfile, id)
+    outfile = paste(outfile, '.html' , sep='')
+	cat(echartsOut, file=outfile)
+	browseURL(outfile)
+    cat(paste('Out file:', outfile, '.\n'))
 }

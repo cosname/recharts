@@ -4,18 +4,19 @@
 #'
 #' @param dat    vector, names will be treated as labels
 #' @param opt    option of ECharts.
-#' @param filename   logical or character. If TRUE or a chacacter, output a html that contains echarts; 
+#' @param outfile   logical or character. If TRUE or a chacacter, output a html that contains echarts; 
 #' if a character, the name of html file will be named. If FALSE, return div and script environment in html.
-#' @param local  logical, online or local.
+#' @param jsdir,  character, directory where esl JS and echarts JS in. The default directory is
+#'  'http://efe.baidu.com/echarts/doc/example/www/js/'
 #' @param style  character,  div style.
 #' @return The HTML code as a character string.
 #' @export
 #' @examples
 #' x = runif(6)
 #' names(x) = LETTERS[1:6]
-#' ePie(x, filename = 'xPie')
+#' ePie(x, outfile = 'xPie')
 
-ePie = function(dat, opt=list(), filename=FALSE, local=FALSE, style=NULL){
+ePie = function(dat, opt=list(), outfile=FALSE, jsdir=NULL, style=NULL){
     if(is.null(opt$toolbox$show)) {
         opt$toolbox$show = TRUE
     }
@@ -88,5 +89,5 @@ ePie = function(dat, opt=list(), filename=FALSE, local=FALSE, style=NULL){
         style = "height:500px;border:1px solid #ccc;padding:10px;"
     }
 
-    invisible(configHtml(opt=optJSON, filename=filename, local=local, style=style))
+    invisible(configHtml(opt=optJSON, outfile=outfile, jsdir=jsdir, style=style))
 }

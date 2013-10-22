@@ -2,7 +2,7 @@
 \alias{eMap}
 \title{Map charts}
 \usage{
-  eMap(dat, opt = list(), filename = FALSE, local = FALSE,
+  eMap(dat, opt = list(), outfile = FALSE, jsdir = NULL,
     style = NULL)
 }
 \arguments{
@@ -11,12 +11,14 @@
 
   \item{opt}{option of ECharts.}
 
-  \item{filename}{logical or character. If TRUE or a
+  \item{outfile}{logical or character. If TRUE or a
   chacacter, output a html that contains echarts; if a
   character, the name of html file will be named. If FALSE,
   return div and script environment in html.}
 
-  \item{local}{logical, online or local.}
+  \item{jsdir,}{character, directory where esl JS and
+  echarts JS in. The default directory is
+  'http://efe.baidu.com/echarts/doc/example/www/js/'}
 
   \item{style}{character, div style.}
 }
@@ -31,6 +33,6 @@ options(encoding="UTF-8")
  Sys.setlocale("LC_CTYPE","chs")
  load(url('http://yzhou.org/recharts/ChinaGDP.RData'))
  ChinaGDP
- eMap(ChinaGDP, filename = 'ChinaGDP')
+ eMap(ChinaGDP, outfile = 'ChinaGDP')
 }
 
