@@ -46,13 +46,13 @@
 
 # rownames(propertyDf) = propertyDf$name
 
-# eForce(networkMatrix=networkMatrix, propertyDf=propertyDf, only=T)
+# eForce(networkMatrix=networkMatrix, propertyDf=propertyDf, outfile=TRUE)
 
 ## testData <- matrix(1:25, nrow=5)
-## eForce(testData, only=T)
+## eForce(testData, outfile=TRUE)
 ##
 
-eForce = function(networkMatrix, propertyDf=NULL, opt=list(), only=FALSE, local=FALSE, style=NULL) {
+eForce = function(networkMatrix, propertyDf=NULL, opt=list(), outfile=FALSE, jsdir=NULL, style=NULL) {
 	## networkMatrix would be a symmetric matrix (对称矩阵)
 	## if the propertyDf is null, all the category and value are 0 as default.
 	
@@ -267,7 +267,7 @@ eForce = function(networkMatrix, propertyDf=NULL, opt=list(), only=FALSE, local=
         style = "height:500px;border:1px solid #ccc;padding:10px;"
     }	
 		
-	configHtml(opt=optJSON, only=only, local=local, style=style)
+	invisible(configHtml(opt=optJSON, outfile=FALSE, jsdir=NULL, style=NULL))
 	
 		
 }		
