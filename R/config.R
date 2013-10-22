@@ -88,6 +88,7 @@ configHtml = function(opt, outfile, jsdir, style) {
 	
     
     outfile = ifelse(is.character(outfile), outfile, id)
+	outfile = gsub('.html$', '', outfile)
     outfile = paste(outfile, '.html' , sep='')
 	cat(echartsOut, file=outfile)
 	browseURL(outfile)

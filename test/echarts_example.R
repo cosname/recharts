@@ -62,7 +62,6 @@ eForce(networkMatrix=networkMatrix, propertyDf=propertyDf, outfile='Jobs')
 
 
 # A lite example for Force network
-
 testData <- matrix(1:25, nrow=5)
 eForce(testData, outfile='testData')
 

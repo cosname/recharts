@@ -46,10 +46,10 @@
 
 # rownames(propertyDf) = propertyDf$name
 
-# eForce(networkMatrix=networkMatrix, propertyDf=propertyDf, outfile=TRUE)
+# eForce(networkMatrix=networkMatrix, propertyDf=propertyDf, outfile='Jobs')
 
 ## testData <- matrix(1:25, nrow=5)
-## eForce(testData, outfile=TRUE)
+## eForce(testData, outfile='testData')
 ##
 
 eForce = function(networkMatrix, propertyDf=NULL, opt=list(), outfile=FALSE, jsdir=NULL, style=NULL) {
@@ -261,7 +261,7 @@ eForce = function(networkMatrix, propertyDf=NULL, opt=list(), outfile=FALSE, jsd
 		
 	opt$series = list(opt$series)
 	
-	optJSON = RJSONIO::toJSON(opt, pretty=T)
+	optJSON = RJSONIO::toJSON(opt, pretty=TRUE)
 	
 	if(is.null(style)) {
         style = "height:500px;border:1px solid #ccc;padding:10px;"

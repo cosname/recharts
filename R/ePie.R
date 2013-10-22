@@ -84,7 +84,7 @@ ePie = function(dat, opt=list(), outfile=FALSE, jsdir=NULL, style=NULL){
     }
     
 
-    optJSON = RJSONIO::toJSON(opt)
+	optJSON = RJSONIO::toJSON(opt, pretty=TRUE)
     if(is.null(style)) {
         style = "height:500px;border:1px solid #ccc;padding:10px;"
     }
