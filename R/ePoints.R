@@ -7,7 +7,7 @@
 #' @param opt    option of ECharts.
 #' @param outfile   logical or character. If TRUE or a chacacter, output a html that contains echarts; 
 #' if a character, the name of html file will be named. If FALSE, return div and script environment in html.
-#' @param jsdir,  character, directory where esl JS and echarts JS in. The default directory is
+#' @param jsdir   character, directory where esl JS and echarts JS in. The default directory is
 #'  'http://efe.baidu.com/echarts/doc/example/www/js/'
 #' @param style  character,  div style.
 #' @return The HTML code as a character string.
