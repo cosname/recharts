@@ -22,6 +22,14 @@ ePie(x, outfile = 'xPie')
 eBar(head(iris[,1:4]), outfile = 'irisBar')
 
 
+# Radar PLot
+require(plyr)
+dat = ddply(iris, .(Species), colwise(mean)) 
+rownames(dat) = dat[,1]
+dat = dat[, -1]
+eRadar(dat, outfile = 'irisRadar')
+
+
 # Map
 options(encoding="UTF-8")
 Sys.setlocale("LC_CTYPE","chs")

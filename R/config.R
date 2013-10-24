@@ -94,3 +94,9 @@ configHtml = function(opt, outfile, jsdir, style) {
 	browseURL(outfile)
     cat(paste('Out file:', outfile, '.\n'))
 }
+
+
+unnames = function(x){
+	names(x) = NULL
+	return(x)
+}

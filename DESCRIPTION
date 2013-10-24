@@ -3,9 +3,8 @@ Type: Package
 Title: A R Interface to ECharts
 Version: 0.01
 Author: Taiyun WEI, Yang ZHOU
-Depends:
-    knitr,
-    RJSONIO
+Depends: RJSONIO
+Suggests: plyr, knitr	
 Maintainer: Taiyun Wei <weitaiyun@gmail.com>
 Description: A R Interface to ECharts
 License: MIT
@@ -20,3 +19,4 @@ Collate:
     'ePie.R'
     'ePoints.R'
     'eForce.R'
+    'eRadar.R'
