@@ -92,7 +92,7 @@ configHtml = function(opt, outfile, jsdir, style) {
     outfile = paste(outfile, '.html' , sep='')
 	cat(echartsOut, file=outfile)
 	browseURL(outfile)
-    cat(paste('Out file:', outfile, '.\n'))
+    cat(paste('Out file: ', '"', getwd(), '/', outfile, '"', '.\n', sep=''))
 }
 
 
