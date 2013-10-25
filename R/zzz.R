@@ -1,7 +1,5 @@
-
 .onAttach <- function(libname, pkgname ){
-	packageStartupMessage( paste("# recharts Version:", packageDescription("recharts", fields = "Version"), "\n") )
-	
+
 	
 	## we'd really recommended user to use Chrome browser to display the canvas charts.
 	chrome_path = file.path(Sys.getenv("LOCALAPPDATA"), "Google\\Chrome\\Application\\chrome.exe", fsep ="\\")
