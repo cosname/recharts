@@ -1,0 +1,78 @@
+** The data visulization for recharts package**
+
+** This documents are maintained and developed by Taiyun Wei and Yang Zhou**
+
+```{r, echo=FALSE, eval=TRUE, message=FALSE, warning=FALSE}
+library(recharts)
+library(knitr)
+
+```
+test here
+
+```{r results='asis', tidy=FALSE}
+op <- options(recharts.plot.tag='chart')
+
+# rForce Chart
+# R script here
+networkMatrix <- matrix(c(
+	c(0, 1, 2, 1, 2, 3, 6, 6, 1, 1, 1 ),
+	c(1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ),
+	c(2, 0, 0, 1, 0, 0, 1, 0, 0, 0, 0 ),
+	c(1, 0, 1, 0, 0, 0, 1, 1, 0, 0, 0 ),
+	c(2, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0 ),
+	c(3, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0 ),
+	c(6, 0, 1, 1, 1, 1, 0, 6, 0, 1, 0 ),
+	c(6, 0, 0, 1, 0, 0, 6, 0, 0, 0, 0 ),
+	c(1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ),
+	c(1, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0 ),
+	c(1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 )
+	), ncol=11
+)
+
+
+propertyDf <- data.frame(
+	category = c("a", "b", "b", "b", "b", "c", 
+				"c", "c", "c", "c", "c"),
+	name = c("Steven Jobs", "Lisa Jobs", "Paul Jobs", " Kalala Jobs",
+			"Lauren Powell", "Steve woz Ike", "Obama", "Bill Gates", 
+			"Jonathan", "Tim Cook", "Wayne"),
+	value = c(10, 2, 3, 3, 7, 5, 8, 9, 4, 4, 0)
+ )
+
+rownames(propertyDf) = propertyDf$name
+
+recharts.eForce <- eForce(networkMatrix=networkMatrix, propertyDf=propertyDf)
+
+plot(recharts.eForce)
+
+#
+#knit2html("E:/kuaipan/recharts/recharts/inst/demo/recharts_knitr.Rmd")
+
+```
+
+```{r results='asis', tidy=FALSE}
+op <- options(recharts.plot.tag='chart')
+# force lite demo
+testData <- matrix(1:25, nrow=5)
+recharts.eForceLite  <- eForce(testData)
+
+plot(recharts.eForceLite)
+
+
+
+```
+
+```{r results='asis', tidy=FALSE}
+op <- options(recharts.plot.tag='chart')
+# force lite demo
+testData <- matrix(1:25, nrow=5)
+recharts.eForceLite  <- eForce(testData)
+
+plot(recharts.eForceLite)
+
+
+
+```
+
+
+

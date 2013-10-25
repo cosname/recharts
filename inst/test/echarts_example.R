@@ -71,10 +71,9 @@ propertyDf <- data.frame(
 
 rownames(propertyDf) = propertyDf$name
 
-eForce(networkMatrix=networkMatrix, propertyDf=propertyDf, outfile='Jobs')
-
+output_1 <- eForce(networkMatrix=networkMatrix, propertyDf=propertyDf)
 
 # A lite example for Force network
 testData <- matrix(1:25, nrow=5)
-eForce(testData, outfile='network')
+output <- eForce(testData)
 
