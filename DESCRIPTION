@@ -4,7 +4,8 @@ Title: A R Interface to ECharts
 Version: 0.01
 Author: Taiyun WEI, Yang ZHOU
 Depends:
-    RJSONIO, tools
+    RJSONIO,
+    tools
 Suggests:
     plyr,
     knitr
@@ -14,3 +15,15 @@ License: MIT
 URL: https://github.com/taiyun/recharts
 BugReports: https://github.com/taiyun/recharts/issues
 VignetteBuilder: knitr
+Collate:
+    'config.R'
+    'eBar.R'
+    'eForce.R'
+    'eLine.R'
+    'eMap.R'
+    'ePie.R'
+    'ePoints.R'
+    'eRadar.R'
+    'plot.recharts.R'
+    'utils.R'
+    'zzz.R'

@@ -1,5 +1,8 @@
-
-# exportPattern("^[^\\.]")
-exportPattern(".")
-
-
+export(.eForceJSON)
+export(eArea)
+export(eBar)
+export(eLine)
+export(eMap)
+export(ePie)
+export(ePoints)
+export(eRadar)

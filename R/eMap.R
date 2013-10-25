@@ -51,11 +51,11 @@ eMap = function(dat, opt=list(), outfile=FALSE, jsdir=NULL, style=NULL) {
      }  
 
     if(is.null(opt$dataRange$min)) {
-    	opt$dataRange$min = min(dat)
+    	opt$dataRange$min = min(dat, na.rm = TRUE)
      }  
 
     if(is.null(opt$dataRange$max)) {
-    	opt$dataRange$max = max(rowSums(dat))
+    	opt$dataRange$max = max(dat, na.rm = TRUE)
      }  
 
      if(is.null(opt$dataRange$text)) {
