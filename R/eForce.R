@@ -77,6 +77,43 @@
 ## eForce(testData, outfile='testData')
 ##
 
+eForce <- function(networkMatrix, propertyDf=NULL, opt=list(),
+		srcdir = getOption("recharts.html5.dir")
+) {
+
+	templatedir = getOption("recharts.template.dir")
+	charttype <- "eForce"
+	chartid <- paste(charttype, basename(tempfile(pattern = "")), sep = "ID")
+
+	
+	jsonList <- .eForceJSON(networkMatrix=networkMatrix, propertyDf=propertyDf, opt=opt)
+	jsonStr <- toJSON(jsonList, pretty=T)
+	
+	headerHtml <- readLines(file.path(templatedir, "header.html"))
+	footerHtml <- readLines(file.path(templatedir, "footer.html"))
+	captionHtml <- readLines(file.path(templatedir, "caption.html"))
+	chartHtml <- readLines(file.path(templatedir, "chart.recharts.html"))
+
+	headerStr <- gsub("HEADER", chartid, headerHtml)
+	footerStr <- footerHtml
+	captionStr <- gsub("CHARTID", chartid, captionHtml)
+	chartStr <- gsub("TEMPID", chartid, chartHtml)
+	chartStr <- gsub("<!--JSONHERE-->", jsonStr, chartStr)
+	
+	headerStr <- paste(headerStr, collapse = "\n")
+	footerStr <- paste(footerStr, collapse = "\n")
+	captionStr <- paste(captionStr, collapse = "\n")
+	chartStr <- paste(chartStr, collapse = "\n")
+	
+	outList <- list()
+	outList$type <- charttype
+	outList$chartid <- chartid
+	outList$html <- list(header = headerStr, chart = chartStr, caption = captionStr, footer = footerStr)
+	
+	class(outList) <-  c("recharts",  "list")
+	return(outList)
+}
+
 .eForceJSON = function(networkMatrix, propertyDf=NULL, opt=list()) {
 	## networkMatrix would be a symmetric matrix (对称矩阵)
 	## if the propertyDf is null, all the category and value are 0 as default.
@@ -288,42 +325,7 @@
 		
 		
 
-eForce <- function(networkMatrix, propertyDf=NULL, opt=list(),
-		srcdir = getOption("recharts.html5.dir")
-) {
 
-	templatedir = getOption("recharts.template.dir")
-	charttype <- "eForce"
-	chartid <- paste(charttype, basename(tempfile(pattern = "")), sep = "ID")
-
-	
-	jsonList <- .eForceJSON(networkMatrix=networkMatrix, propertyDf=propertyDf, opt=opt)
-	jsonStr <- toJSON(jsonList, pretty=T)
-	
-	headerHtml <- readLines(file.path(templatedir, "header.html"))
-	footerHtml <- readLines(file.path(templatedir, "footer.html"))
-	captionHtml <- readLines(file.path(templatedir, "caption.html"))
-	chartHtml <- readLines(file.path(templatedir, "chart.recharts.html"))
-
-	headerStr <- gsub("HEADER", chartid, headerHtml)
-	footerStr <- footerHtml
-	captionStr <- gsub("CHARTID", chartid, captionHtml)
-	chartStr <- gsub("TEMPID", chartid, chartHtml)
-	chartStr <- gsub("<!--JSONHERE-->", jsonStr, chartStr)
-	
-	headerStr <- paste(headerStr, collapse = "\n")
-	footerStr <- paste(footerStr, collapse = "\n")
-	captionStr <- paste(captionStr, collapse = "\n")
-	chartStr <- paste(chartStr, collapse = "\n")
-	
-	outList <- list()
-	outList$type <- charttype
-	outList$chartid <- chartid
-	outList$html <- list(header = headerStr, chart = chartStr, caption = captionStr, footer = footerStr)
-	
-	class(outList) <-  c("recharts",  "list")
-	return(outList)
-}
 
 
 		

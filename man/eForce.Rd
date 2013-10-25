@@ -3,7 +3,7 @@
 \title{Force network graph}
 \usage{
   eForce(networkMatrix, propertyDf = NULL, opt = list(),
-    outfile = FALSE, jsdir = NULL, style = NULL)
+    srcdir = getOption("recharts.html5.dir"))
 }
 \arguments{
   \item{networkMatrix}{required, a symmetric matrix, each
