@@ -28,6 +28,6 @@
   ECharts style area charts.
 }
 \examples{
-eArea(iris[,1:4], outfile = 'irisArea')
+eArea(WorldPhones, outfile = 'WorldPhonesArea')
 }
 

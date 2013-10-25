@@ -6,7 +6,7 @@
     style = NULL)
 }
 \arguments{
-  \item{dat}{data.frame or matrix.}
+  \item{dat}{data.frame.}
 
   \item{opt}{option of ECharts.}
 
@@ -28,8 +28,6 @@
   ECharts style line charts.
 }
 \examples{
-eLine(iris[,1:4], outfile = 'irisLine')
- eLine(iris[,1:4], opt=list(dataZoom=list(show=TRUE,end=35)),
-       outfile = 'irisLineZoom')
+eLine(WorldPhones, outfile = 'WorldPhonesLine')
 }
 

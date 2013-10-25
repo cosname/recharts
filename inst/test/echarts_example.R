@@ -1,11 +1,9 @@
 # Line Plot
-eLine(iris[,1:4], outfile = 'irisLine')
-eLine(iris[,1:4], opt=list(dataZoom=list(show=TRUE,end=35)), 
-      outfile = 'irisLineZoom')
+eLine(WorldPhones, outfile = 'WorldPhonesLine')
 
 
 # Area Plot
-eArea(iris[,1:4], outfile = 'irisArea')
+eArea(WorldPhones, outfile = 'WorldPhonesArea')
 
 
 # Scatter Plot
@@ -19,7 +17,13 @@ ePie(x, outfile = 'xPie')
 
 
 # Bar Plot
-eBar(head(iris[,1:4]), outfile = 'irisBar')
+require(plyr)
+dat = ddply(iris, .(Species), colwise(mean))
+rownames(dat) = dat[,1]
+dat = dat[, -1]
+dat
+eBar(dat, outfile = 'irisBar')
+eBar(dat, horiz = TRUE, outfile = 'irisBarHoriz')
 
 
 # Radar PLot
@@ -27,6 +31,7 @@ require(plyr)
 dat = ddply(iris, .(Species), colwise(mean)) 
 rownames(dat) = dat[,1]
 dat = dat[, -1]
+dat
 eRadar(dat, outfile = 'irisRadar')
 
 
@@ -71,5 +76,5 @@ eForce(networkMatrix=networkMatrix, propertyDf=propertyDf, outfile='Jobs')
 
 # A lite example for Force network
 testData <- matrix(1:25, nrow=5)
-eForce(testData, outfile='testData')
+eForce(testData, outfile='network')
 

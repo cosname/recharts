@@ -6,10 +6,9 @@
     style = NULL)
 }
 \arguments{
-  \item{dat}{data.frame or matrix, should have two column
-  or three colume. If three, the third colume should be
-  factor or character, it will be treated as category
-  labels.}
+  \item{dat}{data.frame, should have two column or three
+  colume. If three, the third colume should be factor or
+  character, it will be treated as category labels.}
 
   \item{opt}{option of ECharts.}
 

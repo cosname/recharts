@@ -38,6 +38,6 @@
 }
 \examples{
 testData <- matrix(1:25, nrow=5)
-  eForce(testData, outfile='testData')
+eForce(testData, outfile='network')
 }
 

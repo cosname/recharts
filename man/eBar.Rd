@@ -2,12 +2,16 @@
 \alias{eBar}
 \title{Bar charts}
 \usage{
-  eBar(dat, opt = list(), outfile = FALSE, jsdir = NULL,
-    style = NULL)
+  eBar(dat, horiz = FALSE, opt = list(), outfile = FALSE,
+    jsdir = NULL, style = NULL)
 }
 \arguments{
-  \item{dat}{data.frame or matrix, should have colnames and
-  rownames.}
+  \item{dat}{data.frame.}
+
+  \item{horiz}{logical. If FALSE, the bars are drawn
+  vertically with the first bar to the left. If TRUE, the
+  bars are drawn horizontally with the first at the
+  bottom.}
 
   \item{opt}{option of ECharts.}
 
@@ -29,6 +33,12 @@
   ECharts style bar charts.
 }
 \examples{
-eBar(head(iris[,1:4]), outfile = 'irisBar')
+require(plyr)
+dat = ddply(iris, .(Species), colwise(mean))
+rownames(dat) = dat[,1]
+dat = dat[, -1]
+dat
+eBar(dat, outfile = 'irisBar')
+eBar(dat, horiz = TRUE, outfile = 'irisBarHoriz')
 }
 

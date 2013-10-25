@@ -17,6 +17,7 @@
 #' dat = ddply(iris, .(Species), colwise(mean))  
 #' rownames(dat) = dat[,1]
 #' dat = dat[, -1]
+#' dat
 #' eRadar(dat, outfile = 'irisRadar')
 
 eRadar = function(dat, limit=NULL, opt=list(), outfile=FALSE, jsdir=NULL, style=NULL) {

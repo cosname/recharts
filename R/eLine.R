@@ -2,7 +2,7 @@
 #'
 #' ECharts style line charts.
 #'
-#' @param dat    data.frame or matrix.
+#' @param dat    data.frame.
 #' @param opt    option of ECharts.
 #' @param outfile   logical or character. If TRUE or a chacacter, output a html that contains echarts; 
 #' if a character, the name of html file will be named. If FALSE, return div and script environment in html.
@@ -12,12 +12,11 @@
 #' @return The HTML code as a character string.
 #' @export
 #' @examples
-#'  eLine(iris[,1:4], outfile = 'irisLine')
-#'  eLine(iris[,1:4], opt=list(dataZoom=list(show=TRUE,end=35)), 
-#'        outfile = 'irisLineZoom')
+#' eLine(WorldPhones, outfile = 'WorldPhonesLine')
+
 
 eLine = function(dat, opt=list(), outfile=FALSE, jsdir=NULL, style=NULL) {
-    
+	
     if(is.null(opt$legend$data)) {
         opt$legend$data = colnames(dat)
     }
@@ -82,7 +81,7 @@ eLine = function(dat, opt=list(), outfile=FALSE, jsdir=NULL, style=NULL) {
         }
         
         if(is.null(opt$series[[i]]$data)) {
-            opt$series[[i]]$data = dat[,i]
+            opt$series[[i]]$data = unnames(dat[,i])
         } else {
             warning('You can set series:data with dat.')
         }
@@ -111,10 +110,11 @@ eLine = function(dat, opt=list(), outfile=FALSE, jsdir=NULL, style=NULL) {
 #' @return The HTML code as a character string.
 #' @export
 #' @examples
-#'  eArea(iris[,1:4], outfile = 'irisArea')
+#' eArea(WorldPhones, outfile = 'WorldPhonesArea')
 
 eArea = function(dat, opt=list(), outfile=FALSE, jsdir=NULL, style=NULL) {
-   if(is.null(opt$series)) {
+	
+	if(is.null(opt$series)) {
         opt$series =  vector("list", ncol(dat))
     } else if(length(opt$series)!=ncol(dat)) {
         stop('Lengh of opt:series should be the same with nol(dat).')

@@ -16,8 +16,8 @@
 #' @return The HTML code as a character string.
 #' @export
 #' @examples
-#'   testData <- matrix(1:25, nrow=5)
-#'   eForce(testData, outfile='testData')
+#' testData <- matrix(1:25, nrow=5)
+#' eForce(testData, outfile='network')
 
 
 

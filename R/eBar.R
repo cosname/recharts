@@ -2,7 +2,9 @@
 #'
 #' ECharts style bar charts.
 #'
-#' @param dat    data.frame or matrix, should have colnames and rownames.
+#' @param dat    data.frame.
+#' @param horiz   logical. If FALSE, the bars are drawn vertically with the first bar to the left. 
+#' If TRUE, the bars are drawn horizontally with the first at the bottom.
 #' @param opt    option of ECharts.
 #' @param outfile   logical or character. If TRUE or a chacacter, output a html that contains echarts; 
 #' if a character, the name of html file will be named. If FALSE, return div and script environment in html.
@@ -12,10 +14,16 @@
 #' @return The HTML code as a character string.
 #' @export
 #' @examples
-#'  eBar(head(iris[,1:4]), outfile = 'irisBar')
+#' require(plyr)
+#' dat = ddply(iris, .(Species), colwise(mean))  
+#' rownames(dat) = dat[,1]
+#' dat = dat[, -1]
+#' dat
+#' eBar(dat, outfile = 'irisBar')
+#' eBar(dat, horiz = TRUE, outfile = 'irisBarHoriz')
 
-eBar = function(dat, opt=list(), outfile=FALSE, jsdir=NULL, style=NULL) {
-    
+eBar = function(dat, horiz = FALSE, opt=list(), outfile=FALSE, jsdir=NULL, style=NULL) {
+	
     if(is.null(opt$legend$data)) {
         opt$legend$data = colnames(dat)
     }
@@ -48,6 +56,11 @@ eBar = function(dat, opt=list(), outfile=FALSE, jsdir=NULL, style=NULL) {
 		opt$tooltip$trigger = 'axis'
     }
 	
+	if(is.null(opt$yAxis$type)) {
+		opt$yAxis$type = 'value'
+	}
+	
+
 	if(is.null(opt$xAxis$type)) {
 		opt$xAxis$type = 'category'
 	}
@@ -77,11 +90,17 @@ eBar = function(dat, opt=list(), outfile=FALSE, jsdir=NULL, style=NULL) {
         }
         
         if(is.null(opt$series[[i]]$data)) {
-            opt$series[[i]]$data = dat[,i]
+            opt$series[[i]]$data = unnames(dat[,i])
         } else {
             warning('You can set series:data with dat.')
         }
     }
+	
+	if(horiz==TRUE) {
+		tmp = opt$xAxis
+		opt$xAxis = opt$yAxis
+		opt$yAxis = tmp
+	}
 
 	optJSON = RJSONIO::toJSON(opt, pretty=TRUE)
     if(is.null(style)) {

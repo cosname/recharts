@@ -2,7 +2,7 @@
 #'
 #' ECharts style scatter charts. 
 #'
-#' @param dat    data.frame or matrix, should have two column or three colume. 
+#' @param dat    data.frame, should have two column or three colume. 
 #' If three, the third colume should be factor or character, it will be treated as category labels.
 #' @param opt    option of ECharts.
 #' @param outfile   logical or character. If TRUE or a chacacter, output a html that contains echarts; 
@@ -16,7 +16,7 @@
 #'  ePoints(iris[,3:5], outfile = 'irisPoints')
 
 ePoints = function(dat, opt=list(), outfile=FALSE, jsdir=NULL, style=NULL) {
-
+	
     if(is.null(opt$toolbox$show)) {
         opt$toolbox$show = TRUE
     }

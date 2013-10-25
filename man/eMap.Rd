@@ -6,8 +6,7 @@
     style = NULL)
 }
 \arguments{
-  \item{dat}{data.frame or matrix, rownames are province
-  names.}
+  \item{dat}{data.frame, rownames are province names.}
 
   \item{opt}{option of ECharts.}
 

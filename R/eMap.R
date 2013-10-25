@@ -2,7 +2,7 @@
 #'
 #' ECharts style map charts. Only support CHINA now.
 #'
-#' @param dat    data.frame or matrix, rownames are province names.
+#' @param dat    data.frame, rownames are province names.
 #' @param opt    option of ECharts.
 #' @param outfile   logical or character. If TRUE or a chacacter, output a html that contains echarts; 
 #' if a character, the name of html file will be named. If FALSE, return div and script environment in html.

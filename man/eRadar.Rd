@@ -36,6 +36,7 @@ require(plyr)
 dat = ddply(iris, .(Species), colwise(mean))
 rownames(dat) = dat[,1]
 dat = dat[, -1]
+dat
 eRadar(dat, outfile = 'irisRadar')
 }
 
