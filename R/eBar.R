@@ -102,10 +102,11 @@ eBar = function(dat, horiz = FALSE, opt=list(), outfile=FALSE, jsdir=NULL, style
 		opt$yAxis = tmp
 	}
 
-	optJSON = RJSONIO::toJSON(opt, pretty=TRUE)
-    if(is.null(style)) {
-        style = "height:500px;border:1px solid #ccc;padding:10px;"
-    }
 
-    invisible(configHtml(opt=optJSON, outfile=outfile, jsdir=jsdir, style=style))
+	jsonStr <- toJSON(opt, pretty=TRUE)
+	
+	outList <- .rechartsOutput(jsonStr, charttype="eBar")
+	return(outList)
+	
 }
+

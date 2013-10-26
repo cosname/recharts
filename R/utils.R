@@ -32,3 +32,35 @@
 }
 
 
+.rechartsOutput <- function(jsonStr, charttype="default" ){
+	templatedir = getOption("recharts.template.dir")
+	chartid <- paste(charttype, basename(tempfile(pattern = "")), sep = "ID")
+	
+	headerHtml <- readLines(file.path(templatedir, "header.html"))
+	footerHtml <- readLines(file.path(templatedir, "footer.html"))
+	captionHtml <- readLines(file.path(templatedir, "caption.html"))
+	chartHtml <- readLines(file.path(templatedir, "chart.recharts.html"))
+
+	headerStr <- gsub("HEADER", chartid, headerHtml)
+	footerStr <- footerHtml
+	captionStr <- gsub("CHARTID", chartid, captionHtml)
+	chartStr <- gsub("TEMPID", chartid, chartHtml)
+	chartStr <- gsub("<!--JSONHERE-->", jsonStr, chartStr)
+	
+	headerStr <- paste(headerStr, collapse = "\n")
+	footerStr <- paste(footerStr, collapse = "\n")
+	captionStr <- paste(captionStr, collapse = "\n")
+	chartStr <- paste(chartStr, collapse = "\n")
+	
+	outList <- list()
+	outList$type <- charttype
+	outList$chartid <- chartid
+	outList$html <- list(header = headerStr, chart = chartStr, caption = captionStr, footer = footerStr)
+	
+	class(outList) <-  c("recharts",  "list")
+	return(outList)
+
+}
+
+
+

@@ -98,10 +98,9 @@ eRadar = function(dat, limit=NULL, opt=list(), outfile=FALSE, jsdir=NULL, style=
         opt$series[[1]]$data = datList
     } 
 	
-	optJSON = RJSONIO::toJSON(opt, pretty=TRUE)
-    if(is.null(style)) {
-        style = "height:500px;border:1px solid #ccc;padding:10px;"
-    }
 
-    invisible(configHtml(opt=optJSON, outfile=outfile, jsdir=jsdir, style=style))
+	jsonStr <- toJSON(opt, pretty=TRUE)
+	
+	outList <- .rechartsOutput(jsonStr, charttype="eRadar")
+	return(outList)
 }

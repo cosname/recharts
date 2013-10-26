@@ -88,12 +88,11 @@ eLine = function(dat, opt=list(), outfile=FALSE, jsdir=NULL, style=NULL) {
     }
 
 
-	optJSON = RJSONIO::toJSON(opt, pretty=TRUE)
-    if(is.null(style)) {
-        style = "height:500px;border:1px solid #ccc;padding:10px;"
-    }
-
-    invisible(configHtml(opt=optJSON, outfile=outfile, jsdir=jsdir, style=style))
+	jsonStr <- toJSON(opt, pretty=TRUE)
+	
+	outList <- .rechartsOutput(jsonStr, charttype="eLine")
+	return(outList)
+	
 }
 
 #' Line charts
@@ -130,5 +129,9 @@ eArea = function(dat, opt=list(), outfile=FALSE, jsdir=NULL, style=NULL) {
         }   
     }
 
-    eLine(dat=dat, opt=opt, outfile=outfile, jsdir=jsdir, style=style)
+
+	jsonStr <- toJSON(opt, pretty=TRUE)
+	
+	outList <- .rechartsOutput(jsonStr, charttype="eArea")
+	return(outList)
 }
