@@ -161,7 +161,7 @@ eForce = function(networkMatrix, propertyDf=NULL, opt=list(),
 		})
 		
 		categoriesOutput <- list(list(
-			name = "默认类别",
+			name = "Default",
 			itemStyle = list(
 				normal = list(
 					color = .gg.color.hue(1)
@@ -171,7 +171,7 @@ eForce = function(networkMatrix, propertyDf=NULL, opt=list(),
 		
 		opt$legend = list(
 			x = "left",
-			data = list("默认类别")
+			data = list("Default")
 		)
 		
 		

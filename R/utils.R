@@ -83,4 +83,7 @@ recharts.shiny.init <- function(){
 }
 
 
+pause <- function(){  
+  invisible(readline("\nPress <return> to continue: ")) 
+}
 

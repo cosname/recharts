@@ -5,10 +5,10 @@ plot(recharts.eLine)
 pause()
 
 
-# Area Plot
-recharts.eArea <- eArea(WorldPhones)
-plot(recharts.eArea)
-pause()
+#  Area Plot
+# recharts.eArea <- eArea(WorldPhones)
+# plot(recharts.eArea)
+# pause()
 
 
 # Scatter Plot
