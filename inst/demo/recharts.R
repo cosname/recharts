@@ -88,8 +88,8 @@ networkMatrix <- matrix(c(
 )
 
 propertyDf <- data.frame(
-	category = c("人物", "家人", "家人", "家人", "家人", "朋友", 
-				"朋友", "朋友", "朋友", "朋友", "朋友"),
+	category = c("A", "B", "B", "B", "B", "C", 
+					"C", "C", "C", "C", "C"),
 	name = c("Steven Jobs", "Lisa Jobs", "Paul Jobs", " Kalala Jobs",
 			"Lauren Powell", "Steve woz Ike", "Obama", "Bill Gates", 
 			"Jonathan", "Tim Cook", "Wayne"),
