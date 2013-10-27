@@ -10,8 +10,9 @@ library(knitr)
 test here
 
 ```{r results='asis', tidy=FALSE}
+Sys.setlocale("LC_CTYPE", "eng")
 op <- options(recharts.plot.tag='chart')
-
+recharts.init()
 # rForce Chart
 # R script here
 networkMatrix <- matrix(c(

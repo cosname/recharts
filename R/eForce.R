@@ -82,10 +82,8 @@ eForce = function(networkMatrix, propertyDf=NULL, opt=list(),
 	## networkMatrix would be a symmetric matrix (对称矩阵)
 	## if the propertyDf is null, all the category and value are 0 as default.
 	
-    if(is.null(opt$legend$data)) {
-        opt$legend$data = colnames(networkMatrix)
-    }
-	
+	opt$legend = list()
+
 	if(is.null(opt$tooltip)) {
 		opt$tooltip$trigger = 'item'
 		opt$tooltip$formatter = '{a} : {b}'
@@ -171,6 +169,11 @@ eForce = function(networkMatrix, propertyDf=NULL, opt=list(),
 			)
 		))
 		
+		opt$legend = list(
+			x = "left",
+			data = list("默认类别")
+		)
+		
 		
 	}else{
 		if(is.null(propertyDf$value)){
@@ -193,6 +196,10 @@ eForce = function(networkMatrix, propertyDf=NULL, opt=list(),
 		}
 		
 		categoryList = unique(propertyDf$category)
+		opt$legend = list(
+			x="left",
+			data = categoryList
+		)
 		nodesOutput <- lapply(colnames(networkMatrix), FUN = function(nodeName){
 			indexOfDf = which(rownames(propertyDf) == nodeName)[1]
 			if(is.na (indexOfDf)){

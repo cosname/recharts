@@ -62,5 +62,25 @@
 
 }
 
+recharts.init <- function(){
+	jsLoaderFlag <<- FALSE
+}
+
+renderEcharts <- function (expr, env = parent.frame(), quoted = FALSE) 
+{
+    func <- shiny::exprToFunction(expr, env, quoted)
+    function() {
+        chart <- func()
+        paste(chart$html$chart, collapse = "\n")
+    }
+}
+
+
+
+recharts.shiny.init <- function(){
+	return(file.path(system.file("shiny", package = "recharts"),  "rechartsWidget.html" ))
+
+}
+
 
 

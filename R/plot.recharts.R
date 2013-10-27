@@ -67,7 +67,8 @@ print.recharts <- function (x, tag = NULL, file = "", ...)
     tag <- ifelse(tag %in% c("chartid", "type", "html"), tag, 
         paste(".", tag, sep = ""))
     output <- unlist(x)
-	if (jsLoaderFlag){
+	print(tag)
+	if (jsLoaderFlag && tag==".chart"){
 		output <- gsub("<script src='http://efe.baidu.com/echarts/doc/example/www/js/esl.js'></script>","",output) 
 	}
 	jsLoaderFlag <<- TRUE

@@ -1,3 +1,69 @@
+
+# Line Plot
+recharts.eLine <- eLine(WorldPhones)
+plot(recharts.eLine)
+pause()
+
+
+# Area Plot
+recharts.eArea <- eArea(WorldPhones)
+plot(recharts.eArea)
+pause()
+
+
+# Scatter Plot
+recharts.ePoints <- ePoints(iris[,3:5])
+plot(recharts.ePoints)
+pause()
+
+
+# Pie Plot
+x = sample(4)
+names(x) = LETTERS[1:4]
+recharts.ePie <- ePie(x)
+plot(recharts.ePie)
+pause()
+
+
+
+# Bar Plot
+require(plyr)
+dat = ddply(iris, .(Species), colwise(mean))
+rownames(dat) = dat[,1]
+dat = dat[, -1]
+dat
+recharts.eBar <- eBar(dat)
+plot(recharts.eBar)
+pause()
+
+
+recharts.eBar2 <- eBar(dat, horiz = TRUE)
+plot(recharts.eBar2)
+pause()
+
+
+
+# Radar PLot
+require(plyr)
+dat = ddply(iris, .(Species), colwise(mean)) 
+rownames(dat) = dat[,1]
+dat = dat[, -1]
+dat
+recharts.eRadar <-  eRadar(dat)
+plot(recharts.eRadar)
+pause()
+
+# Map
+options(encoding="UTF-8")
+Sys.setlocale("LC_CTYPE","chs")
+load(url('http://yzhou.org/recharts/ChinaGDP.RData'))
+recharts.eMap <- eMap(ChinaGDP, opt=list(title=list(text='2008~2010年大陆各省GDP占全国百分数')))
+plot(recharts.eMap)
+pause()
+
+
+
+
 ## recharts demo
 pause <- function(){  
   invisible(readline("\nPress <return> to continue: ")) 
