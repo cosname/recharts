@@ -57,7 +57,7 @@ pause()
 options(encoding="UTF-8")
 Sys.setlocale("LC_CTYPE","chs")
 load(url('http://yzhou.org/recharts/ChinaGDP.RData'))
-recharts.eMap <- eMap(ChinaGDP, opt=list(title=list(text='2008~2010年大陆各省GDP占全国百分数')))
+recharts.eMap <- eMap(ChinaGDP, opt=list(title=list(text='2008~2010 GDP Data Visulization')))
 plot(recharts.eMap)
 pause()
 
