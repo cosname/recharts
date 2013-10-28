@@ -4,11 +4,6 @@
 #'
 #' @param dat    vector, names will be treated as labels
 #' @param opt    option of ECharts.
-#' @param outfile   logical or character. If TRUE or a chacacter, output a html that contains echarts; 
-#' if a character, the name of html file will be named. If FALSE, return div and script environment in html.
-#' @param jsdir   character, directory where esl JS and echarts JS in. The default directory is
-#'  'http://efe.baidu.com/echarts/doc/example/www/js/'
-#' @param style  character,  div style.
 #' @return The HTML code as a character string.
 #' @export
 #' @examples
@@ -16,7 +11,7 @@
 #' names(x) = LETTERS[1:6]
 #' ePie(x, outfile = 'xPie')
 
-ePie = function(dat, opt=list(), outfile=FALSE, jsdir=NULL, style=NULL){
+ePie = function(dat, opt=list()){
     if(is.null(opt$toolbox$show)) {
         opt$toolbox$show = TRUE
     }

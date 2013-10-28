@@ -5,11 +5,6 @@
 #' @param dat    data.frame or matrix, should have colnames and rownames.
 #' @param limit  data.frame or matrix, 2 column, indicates the limit of each axis.
 #' @param opt    option of ECharts.
-#' @param outfile   logical or character. If TRUE or a chacacter, output a html that contains echarts; 
-#' if a character, the name of html file will be named. If FALSE, return div and script environment in html.
-#' @param jsdir  character, directory where esl JS and echarts JS in. The default directory is
-#'  'http://efe.baidu.com/echarts/doc/example/www/js/'
-#' @param style  character,  div style.
 #' @return The HTML code as a character string.
 #' @export
 #' @examples
@@ -18,9 +13,9 @@
 #' rownames(dat) = dat[,1]
 #' dat = dat[, -1]
 #' dat
-#' eRadar(dat, outfile = 'irisRadar')
+#' plot(eRadar(dat, outfile = 'irisRadar'))
 
-eRadar = function(dat, limit=NULL, opt=list(), outfile=FALSE, jsdir=NULL, style=NULL) {
+eRadar = function(dat, limit=NULL, opt=list()) {
     # limit=NULL; opt=list()
     if(is.null(opt$legend$data)) {
         opt$legend$data = rownames(dat)

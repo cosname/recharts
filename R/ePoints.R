@@ -5,17 +5,12 @@
 #' @param dat    data.frame, should have two column or three colume. 
 #' If three, the third colume should be factor or character, it will be treated as category labels.
 #' @param opt    option of ECharts.
-#' @param outfile   logical or character. If TRUE or a chacacter, output a html that contains echarts; 
-#' if a character, the name of html file will be named. If FALSE, return div and script environment in html.
-#' @param jsdir   character, directory where esl JS and echarts JS in. The default directory is
-#'  'http://efe.baidu.com/echarts/doc/example/www/js/'
-#' @param style  character,  div style.
 #' @return The HTML code as a character string.
 #' @export
 #' @examples
-#'  ePoints(iris[,3:5], outfile = 'irisPoints')
+#' plot(ePoints(iris[,3:5]))
 
-ePoints = function(dat, opt=list(), outfile=FALSE, jsdir=NULL, style=NULL) {
+ePoints = function(dat, opt=list()) {
 	
     if(is.null(opt$toolbox$show)) {
         opt$toolbox$show = TRUE

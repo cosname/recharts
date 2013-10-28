@@ -8,16 +8,11 @@
 #' @param propertyDf   optional, dataframe which contain the metadata for the nodes. 
 #' It could contain category, value and color columns. The colnames and rownames are required.
 #' @param opt    option of ECharts.
-#' @param outfile   logical or character. If TRUE or a chacacter, output a html that contains echarts; 
-#' if a character, the name of html file will be named. If FALSE, return div and script environment in html.
-#' @param jsdir   character, directory where esl JS and echarts JS in. The default directory is
-#'  'http://efe.baidu.com/echarts/doc/example/www/js/'
-#' @param style  character,  div style.
 #' @return The HTML code as a character string.
 #' @export
 #' @examples
 #' testData <- matrix(1:25, nrow=5)
-#' eForce(testData, outfile='network')
+#' plot(eForce(testData))
 
 
 
@@ -73,13 +68,10 @@
 
 # eForce(networkMatrix=networkMatrix, propertyDf=propertyDf, outfile='Jobs')
 
-## testData <- matrix(1:25, nrow=5)
-## eForce(testData, outfile='testData')
-##
 
 eForce = function(networkMatrix, propertyDf=NULL, opt=list(),
 		srcdir = getOption("recharts.html5.dir")) {
-	## networkMatrix would be a symmetric matrix (对称矩阵)
+	## networkMatrix would be a symmetric matrix
 	## if the propertyDf is null, all the category and value are 0 as default.
 	
 	opt$legend = list()

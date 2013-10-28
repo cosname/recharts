@@ -4,18 +4,13 @@
 #'
 #' @param dat    data.frame.
 #' @param opt    option of ECharts.
-#' @param outfile   logical or character. If TRUE or a chacacter, output a html that contains echarts; 
-#' if a character, the name of html file will be named. If FALSE, return div and script environment in html.
-#' @param jsdir   character, directory where esl JS and echarts JS in. The default directory is
-#'  'http://efe.baidu.com/echarts/doc/example/www/js/'
-#' @param style  character,  div style.
 #' @return The HTML code as a character string.
 #' @export
 #' @examples
-#' eLine(WorldPhones, outfile = 'WorldPhonesLine')
+#' plot(eLine(WorldPhones, outfile = 'WorldPhonesLine'))
 
 
-eLine = function(dat, opt=list(), outfile=FALSE, jsdir=NULL, style=NULL) {
+eLine = function(dat, opt=list()) {
 	
     if(is.null(opt$legend$data)) {
         opt$legend$data = colnames(dat)
@@ -101,17 +96,12 @@ eLine = function(dat, opt=list(), outfile=FALSE, jsdir=NULL, style=NULL) {
 #'
 #' @param dat    data.frame or matrix
 #' @param opt    option of ECharts.
-#' @param outfile   logical or character. If TRUE or a chacacter, output a html that contains echarts; 
-#' if a character, the name of html file will be named. If FALSE, return div and script environment in html.
-#' @param jsdir   character, directory where esl JS and echarts JS in. The default directory is
-#'  'http://efe.baidu.com/echarts/doc/example/www/js/'
-#' @param style  character,  div style.
 #' @return The HTML code as a character string.
 #' @export
 #' @examples
-#' eArea(WorldPhones, outfile = 'WorldPhonesArea')
+#' plot(eArea(WorldPhones, outfile = 'WorldPhonesArea'))
 
-eArea = function(dat, opt=list(), outfile=FALSE, jsdir=NULL, style=NULL) {
+eArea = function(dat, opt=list()) {
 	
 	if(is.null(opt$series)) {
         opt$series =  vector("list", ncol(dat))
