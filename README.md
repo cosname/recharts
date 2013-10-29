@@ -7,13 +7,14 @@ A R interface to [ECharts](https://github.com/ecomfe/echarts) for data visualiza
 
 
 ## Installation
-You can install `recharts` from github using the `devtools` package
 
+You can install `recharts` from github using the `devtools` package:
 
-```
+```s
 require(devtools)
 install_github('recharts', 'taiyun')
 ```
+
 ## Features
 
 
@@ -22,26 +23,28 @@ install_github('recharts', 'taiyun')
 
 ### Line Plot
 
-```
+```s
 eLine(iris[,1:4], outfile = 'irisLine')
-eLine(iris[,1:4], opt=list(dataZoom=list(show=TRUE,end=35)), 
+eLine(iris[,1:4], opt=list(dataZoom=list(show=TRUE,end=35)),
       outfile = 'irisLineZoom')
 ```
+
 ![Line Plot](screenshots/irisLine.PNG)
 
 ![Line Zoom Plot](screenshots/irisLineZoom.PNG)
 
 ### Area Plot
 
-```
+```s
 eArea(iris[,1:4], outfile = 'irisArea')
 ```
+
 ![Area Plot](screenshots/irisArea.PNG)
 
 
 ### Scatter Plot
 
-```
+```s
 ePoints(iris[,3:5], outfile = 'irisPoints')
 ```
 
@@ -50,7 +53,7 @@ ePoints(iris[,3:5], outfile = 'irisPoints')
 
 ### Pie Plot
 
-```
+```s
 x = sample(4)
 names(x) = LETTERS[1:4]
 ePie(x, outfile = 'xPie')
@@ -62,7 +65,7 @@ ePie(x, outfile = 'xPie')
 ### Bar Plot
 
 
-```
+```s
 eBar(head(iris[,1:4]), outfile = 'irisBar')
 ```
 
@@ -71,7 +74,7 @@ eBar(head(iris[,1:4]), outfile = 'irisBar')
 
 ### Map
 
-```
+```s
 options(encoding="UTF-8")
 Sys.setlocale("LC_CTYPE","chs")
 load(url('http://yzhou.org/recharts/ChinaGDP.RData'))
