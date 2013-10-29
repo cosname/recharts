@@ -1,3 +1,59 @@
+#' recharts initial for knitr
+#'
+#' An shell function for initializing knitr.
+#'
+#' Only the first chuck of recharts plot needs this function, 
+#' the rest chuck mustn't include this function.
+#' 
+#' @export 
+#' 
+
+recharts.init <- function(){
+	jsLoaderFlag <<- FALSE
+}
+
+#' render recharts for shiny
+#'
+#' An shell function for rendering recharts.
+#'
+#' 
+#' @export 
+#' 
+renderEcharts <- function (expr, env = parent.frame(), quoted = FALSE) 
+{
+    func <- shiny::exprToFunction(expr, env, quoted)
+    function() {
+        chart <- func()
+        paste(chart$html$chart, collapse = "\n")
+    }
+}
+
+
+
+#' recharts initial for knitr
+#'
+#' An shell function for initializing knitr.
+#' which include the script head for html output.
+#' 
+#' @export 
+recharts.shiny.init <- function(){
+	return(file.path(system.file("shiny", package = "recharts"),  "rechartsWidget.html" ))
+
+}
+
+
+#' recharts demo pause function
+#'
+#' An function for pausing the command between two chunks of demo codes.
+#'
+#' @export 
+pause <- function(){  
+  invisible(readline("\nPress <return> to continue: ")) 
+}
+
+
+
+
 .recharts.httpd.handler <- function (path, query, ...) 
 {
 	path <- gsub("^/custom/recharts/", "", path)
@@ -61,49 +117,3 @@
 	return(outList)
 
 }
-
-#' recharts initial for knitr
-#'
-#' An shell function for initializing knitr.
-#'
-#' Only the first chuck of recharts plot needs this function, 
-#' the rest chuck mustn't include this function.
-#' 
-#' @export 
-
-recharts.init <- function(){
-	jsLoaderFlag <<- FALSE
-}
-
-renderEcharts <- function (expr, env = parent.frame(), quoted = FALSE) 
-{
-    func <- shiny::exprToFunction(expr, env, quoted)
-    function() {
-        chart <- func()
-        paste(chart$html$chart, collapse = "\n")
-    }
-}
-
-
-
-#' recharts initial for knitr
-#'
-#' An shell function for initializing knitr.
-#' which include the script head for html output.
-#' 
-#' @export 
-recharts.shiny.init <- function(){
-	return(file.path(system.file("shiny", package = "recharts"),  "rechartsWidget.html" ))
-
-}
-
-
-#' recharts demo pause function
-#'
-#' An function for pausing the command between two chunks of demo codes.
-#'
-#' @export 
-pause <- function(){  
-  invisible(readline("\nPress <return> to continue: ")) 
-}
-
