@@ -62,6 +62,15 @@
 
 }
 
+#' recharts initial for knitr
+#'
+#' An shell function for initializing knitr.
+#'
+#' Only the first chuck of recharts plot needs this function, 
+#' the rest chuck mustn't include this function.
+#' 
+#' @export 
+
 recharts.init <- function(){
 	jsLoaderFlag <<- FALSE
 }
@@ -77,12 +86,23 @@ renderEcharts <- function (expr, env = parent.frame(), quoted = FALSE)
 
 
 
+#' recharts initial for knitr
+#'
+#' An shell function for initializing knitr.
+#' which include the script head for html output.
+#' 
+#' @export 
 recharts.shiny.init <- function(){
 	return(file.path(system.file("shiny", package = "recharts"),  "rechartsWidget.html" ))
 
 }
 
 
+#' recharts demo pause function
+#'
+#' An function for pausing the command between two chunks of demo codes.
+#'
+#' @export 
 pause <- function(){  
   invisible(readline("\nPress <return> to continue: ")) 
 }
