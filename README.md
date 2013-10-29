@@ -1,6 +1,8 @@
 recharts
 ========
 
+[![Build Status](https://travis-ci.org/taiyun/recharts.png)](https://travis-ci.org/taiyun/recharts)
+
 A R interface to [ECharts](https://github.com/ecomfe/echarts) for data visualization.
 
 
