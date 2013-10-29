@@ -1,19 +1,29 @@
+
 # Line Plot
-eLine(WorldPhones, outfile = 'WorldPhonesLine')
+recharts.eLine <- eLine(WorldPhones)
+plot(recharts.eLine)
+pause()
 
 
-# Area Plot
-eArea(WorldPhones, outfile = 'WorldPhonesArea')
+#  Area Plot
+# recharts.eArea <- eArea(WorldPhones)
+# plot(recharts.eArea)
+# pause()
 
 
 # Scatter Plot
-ePoints(iris[,3:5], outfile = 'irisPoints')
+recharts.ePoints <- ePoints(iris[,3:5])
+plot(recharts.ePoints)
+pause()
 
 
 # Pie Plot
 x = sample(4)
 names(x) = LETTERS[1:4]
-ePie(x, outfile = 'xPie')
+recharts.ePie <- ePie(x)
+plot(recharts.ePie)
+pause()
+
 
 
 # Bar Plot
@@ -22,8 +32,15 @@ dat = ddply(iris, .(Species), colwise(mean))
 rownames(dat) = dat[,1]
 dat = dat[, -1]
 dat
-eBar(dat, outfile = 'irisBar')
-eBar(dat, horiz = TRUE, outfile = 'irisBarHoriz')
+recharts.eBar <- eBar(dat)
+plot(recharts.eBar)
+pause()
+
+
+recharts.eBar2 <- eBar(dat, horiz = TRUE)
+plot(recharts.eBar2)
+pause()
+
 
 
 # Radar PLot
@@ -32,17 +49,27 @@ dat = ddply(iris, .(Species), colwise(mean))
 rownames(dat) = dat[,1]
 dat = dat[, -1]
 dat
-eRadar(dat, outfile = 'irisRadar')
-
+recharts.eRadar <-  eRadar(dat)
+plot(recharts.eRadar)
+pause()
 
 # Map
 options(encoding="UTF-8")
 Sys.setlocale("LC_CTYPE","chs")
 load(url('http://yzhou.org/recharts/ChinaGDP.RData'))
-eMap(ChinaGDP, opt=list(title=list(text='2008~2010年大陆各省GDP占全国百分数')), outfile = 'ChinaGDP')
+recharts.eMap <- eMap(ChinaGDP, opt=list(title=list(text='2008~2010 GDP Data Visulization')))
+plot(recharts.eMap)
+pause()
 
 
-# Force Network
+
+
+## recharts demo
+pause <- function(){  
+  invisible(readline("\nPress <return> to continue: ")) 
+}
+
+# force Chart
 options(encoding="UTF-8")
 Sys.setlocale("LC_CTYPE","chs")
 networkMatrix <- matrix(c(
@@ -61,8 +88,8 @@ networkMatrix <- matrix(c(
 )
 
 propertyDf <- data.frame(
-	category = c("人物", "家人", "家人", "家人", "家人", "朋友", 
-				"朋友", "朋友", "朋友", "朋友", "朋友"),
+	category = c("A", "B", "B", "B", "B", "C", 
+					"C", "C", "C", "C", "C"),
 	name = c("Steven Jobs", "Lisa Jobs", "Paul Jobs", " Kalala Jobs",
 			"Lauren Powell", "Steve woz Ike", "Obama", "Bill Gates", 
 			"Jonathan", "Tim Cook", "Wayne"),
@@ -71,9 +98,14 @@ propertyDf <- data.frame(
 
 rownames(propertyDf) = propertyDf$name
 
-output_1 <- eForce(networkMatrix=networkMatrix, propertyDf=propertyDf)
+recharts.eForce <- eForce(networkMatrix=networkMatrix, propertyDf=propertyDf)
 
-# A lite example for Force network
+plot(recharts.eForce)
+pause()
+
+# force lite demo
 testData <- matrix(1:25, nrow=5)
-output <- eForce(testData)
+recharts.eForceLite  <- eForce(testData)
+
+plot(recharts.eForceLite)
 

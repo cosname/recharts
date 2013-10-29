@@ -13,7 +13,7 @@
 #' rownames(dat) = dat[,1]
 #' dat = dat[, -1]
 #' dat
-#' plot(eRadar(dat, outfile = 'irisRadar'))
+#' plot(eRadar(dat))
 
 eRadar = function(dat, limit=NULL, opt=list()) {
     # limit=NULL; opt=list()

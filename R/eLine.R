@@ -7,7 +7,7 @@
 #' @return The HTML code as a character string.
 #' @export
 #' @examples
-#' plot(eLine(WorldPhones, outfile = 'WorldPhonesLine'))
+#' plot(eLine(WorldPhones))
 
 
 eLine = function(dat, opt=list()) {
@@ -99,7 +99,7 @@ eLine = function(dat, opt=list()) {
 #' @return The HTML code as a character string.
 #' @export
 #' @examples
-#' plot(eArea(WorldPhones, outfile = 'WorldPhonesArea'))
+#' plot(eArea(WorldPhones))
 
 eArea = function(dat, opt=list()) {
 	

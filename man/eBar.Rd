@@ -2,8 +2,7 @@
 \alias{eBar}
 \title{Bar charts}
 \usage{
-  eBar(dat, horiz = FALSE, opt = list(), outfile = FALSE,
-    jsdir = NULL, style = NULL)
+  eBar(dat, horiz = FALSE, opt = list())
 }
 \arguments{
   \item{dat}{data.frame.}
@@ -14,17 +13,6 @@
   bottom.}
 
   \item{opt}{option of ECharts.}
-
-  \item{outfile}{logical or character. If TRUE or a
-  chacacter, output a html that contains echarts; if a
-  character, the name of html file will be named. If FALSE,
-  return div and script environment in html.}
-
-  \item{jsdir}{character, directory where esl JS and
-  echarts JS in. The default directory is
-  'http://efe.baidu.com/echarts/doc/example/www/js/'}
-
-  \item{style}{character, div style.}
 }
 \value{
   The HTML code as a character string.
@@ -38,7 +26,7 @@ dat = ddply(iris, .(Species), colwise(mean))
 rownames(dat) = dat[,1]
 dat = dat[, -1]
 dat
-eBar(dat, outfile = 'irisBar')
-eBar(dat, horiz = TRUE, outfile = 'irisBarHoriz')
+plot(eBar(dat))
+plot(eBar(dat, horiz = TRUE))
 }
 

@@ -2,8 +2,7 @@
 \alias{eForce}
 \title{Force network graph}
 \usage{
-  eForce(networkMatrix, propertyDf = NULL, opt = list(),
-    srcdir = getOption("recharts.html5.dir"))
+  eForce(networkMatrix, propertyDf = NULL, opt = list())
 }
 \arguments{
   \item{networkMatrix}{required, a symmetric matrix, each
@@ -17,17 +16,6 @@
   required.}
 
   \item{opt}{option of ECharts.}
-
-  \item{outfile}{logical or character. If TRUE or a
-  chacacter, output a html that contains echarts; if a
-  character, the name of html file will be named. If FALSE,
-  return div and script environment in html.}
-
-  \item{jsdir}{character, directory where esl JS and
-  echarts JS in. The default directory is
-  'http://efe.baidu.com/echarts/doc/example/www/js/'}
-
-  \item{style}{character, div style.}
 }
 \value{
   The HTML code as a character string.
@@ -38,6 +26,6 @@
 }
 \examples{
 testData <- matrix(1:25, nrow=5)
-eForce(testData, outfile='network')
+plot(eForce(testData))
 }
 

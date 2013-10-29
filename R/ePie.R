@@ -9,7 +9,7 @@
 #' @examples
 #' x = runif(6)
 #' names(x) = LETTERS[1:6]
-#' ePie(x, outfile = 'xPie')
+#' ePie(x)
 
 ePie = function(dat, opt=list()){
     if(is.null(opt$toolbox$show)) {

@@ -1,3 +1,12 @@
+#' recharts plot fucntion
+#'
+#' An shell function for ploting of the recharts object.
+#'
+#' @param x    recharts plot object.
+#' @param tag   whether plot the recharts object to browser or string.
+#' @param ...   default parameter.
+#' @return The HTML code as a character string or an html page.
+#' @export
 
 
 
@@ -29,7 +38,7 @@ plot.recharts <- function (x, tag = NULL, ...)
 		}else {
 			basex <- basename(x)
 			if (length(grep("htm", substr(basex, nchar(basex) - 
-											3, nchar(basex)))) < 1) 
+											3, nchar(basex)))) < 1)
 				warning("The file does not appear to be an html file.\n")
 			file.copy(from = x, to = file.path(root.dir, basex), 
 					...)
@@ -56,10 +65,21 @@ plot.recharts <- function (x, tag = NULL, ...)
 	}
 }
 
+#' recharts print fucntion
+#'
+#' An shell function for printing of the recharts object.
+#'
+#' @param x    recharts print object.
+#' @param tag   whether print the recharts object to browser or string.
+#' @param ...   default parameter.
+#' @return The HTML code as a character string.
+#' @export 
+
+
 print.recharts <- function (x, tag = NULL, file = "", ...) 
 {	
 
-    if (is.null(tag)) 
+    if (is.null(tag))
         tag <- getOption("recharts.print.tag")
     if (!tag %in% getOption("recharts.tags"))
         stop(paste(tag, "is not a valid option. Set tag to NULL or one of the following:\n", 
@@ -68,10 +88,12 @@ print.recharts <- function (x, tag = NULL, file = "", ...)
         paste(".", tag, sep = ""))
     output <- unlist(x)
 	print(tag)
-	if (jsLoaderFlag && tag==".chart"){
-		output <- gsub("<script src='http://efe.baidu.com/echarts/doc/example/www/js/esl.js'></script>","",output) 
+	if (exists("jsLoaderFlag")){
+		if (jsLoaderFlag && tag==".chart"){
+			output <- gsub("<script src='http://efe.baidu.com/echarts/doc/example/www/js/esl.js'></script>","",output) 
+		}
+		jsLoaderFlag <<- TRUE
 	}
-	jsLoaderFlag <<- TRUE
     tag.names <- names(output)
     .id <- apply(t(tag), 2, function(y) grep(paste("\\", y, sep = ""), 
         tag.names))

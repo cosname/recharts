@@ -69,8 +69,7 @@
 # eForce(networkMatrix=networkMatrix, propertyDf=propertyDf, outfile='Jobs')
 
 
-eForce = function(networkMatrix, propertyDf=NULL, opt=list(),
-		srcdir = getOption("recharts.html5.dir")) {
+eForce = function(networkMatrix, propertyDf=NULL, opt=list()) {
 	## networkMatrix would be a symmetric matrix
 	## if the propertyDf is null, all the category and value are 0 as default.
 	

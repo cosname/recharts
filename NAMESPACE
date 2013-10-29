@@ -1,12 +1,10 @@
-
-importFrom("RJSONIO", "toJSON")
-importFrom(tools, startDynamicHelp)  	 
-
-export(eArea, eBar, eForce, eLine, eMap, ePie, ePoints, eRadar)
-export(recharts.init, renderEcharts, recharts.shiny.init, pause)
-
-#Methods
-S3method(plot, recharts)		 
-S3method(print, recharts)		 
-
-
+export(eArea)
+export(eBar)
+export(eForce)
+export(eLine)
+export(eMap)
+export(ePie)
+export(ePoints)
+export(eRadar)
+export(plot.recharts)
+export(print.recharts)
