@@ -15,11 +15,23 @@ require(devtools)
 install_github('recharts', 'taiyun')
 ```
 
-## Features
 
 
 ## Examples
 
+
+### Demo
+```s
+demo(recharts::recharts)
+```
+
+```s
+demo(recharts::recharts_shiny)
+```
+
+```s
+demo(recharts::recharts_shiny_pie)
+```
 
 ### Line Plot
 
