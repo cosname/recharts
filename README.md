@@ -22,6 +22,7 @@ install_github('recharts', 'taiyun')
 
 ### Demo
 ```s
+require(recharts)
 demo(recharts::recharts)
 ```
 
