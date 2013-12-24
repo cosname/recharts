@@ -60,35 +60,35 @@ tt, code, pre {
    font-family: 'DejaVu Sans Mono', 'Droid Sans Mono', 'Lucida Console', Consolas, Monaco, monospace;
 }
 
-h1 { 
-   font-size:2.2em; 
+h1 {
+   font-size:2.2em;
 }
 
-h2 { 
-   font-size:1.8em; 
+h2 {
+   font-size:1.8em;
 }
 
-h3 { 
-   font-size:1.4em; 
+h3 {
+   font-size:1.4em;
 }
 
-h4 { 
-   font-size:1.0em; 
+h4 {
+   font-size:1.0em;
 }
 
-h5 { 
-   font-size:0.9em; 
+h5 {
+   font-size:0.9em;
 }
 
-h6 { 
-   font-size:0.8em; 
+h6 {
+   font-size:0.8em;
 }
 
 a:visited {
    color: rgb(50%, 0%, 50%);
 }
 
-pre {	
+pre {
    margin-top: 0;
    max-width: 95%;
    border: 1px solid #ccc;
@@ -123,54 +123,54 @@ hr {
 }
 
 @media print {
-   * { 
-      background: transparent !important; 
-      color: black !important; 
-      filter:none !important; 
-      -ms-filter: none !important; 
+   * {
+      background: transparent !important;
+      color: black !important;
+      filter:none !important;
+      -ms-filter: none !important;
    }
 
-   body { 
-      font-size:12pt; 
-      max-width:100%; 
-   }
-       
-   a, a:visited { 
-      text-decoration: underline; 
+   body {
+      font-size:12pt;
+      max-width:100%;
    }
 
-   hr { 
+   a, a:visited {
+      text-decoration: underline;
+   }
+
+   hr {
       visibility: hidden;
       page-break-before: always;
    }
 
-   pre, blockquote { 
-      padding-right: 1em; 
-      page-break-inside: avoid; 
+   pre, blockquote {
+      padding-right: 1em;
+      page-break-inside: avoid;
    }
 
-   tr, img { 
-      page-break-inside: avoid; 
+   tr, img {
+      page-break-inside: avoid;
    }
 
-   img { 
-      max-width: 100% !important; 
+   img {
+      max-width: 100% !important;
    }
 
-   @page :left { 
-      margin: 15mm 20mm 15mm 10mm; 
-   }
-     
-   @page :right { 
-      margin: 15mm 10mm 15mm 20mm; 
+   @page :left {
+      margin: 15mm 20mm 15mm 10mm;
    }
 
-   p, h2, h3 { 
-      orphans: 3; widows: 3; 
+   @page :right {
+      margin: 15mm 10mm 15mm 20mm;
    }
 
-   h2, h3 { 
-      page-break-after: avoid; 
+   p, h2, h3 {
+      orphans: 3; widows: 3;
+   }
+
+   h2, h3 {
+      page-break-after: avoid;
    }
 }
 </style>
@@ -207,10 +207,10 @@ networkMatrix &lt;- matrix(c(
 
 
 propertyDf &lt;- data.frame(
-    category = c(&quot;a&quot;, &quot;b&quot;, &quot;b&quot;, &quot;b&quot;, &quot;b&quot;, &quot;c&quot;, 
+    category = c(&quot;a&quot;, &quot;b&quot;, &quot;b&quot;, &quot;b&quot;, &quot;b&quot;, &quot;c&quot;,
                 &quot;c&quot;, &quot;c&quot;, &quot;c&quot;, &quot;c&quot;, &quot;c&quot;),
     name = c(&quot;Steven Jobs&quot;, &quot;Lisa Jobs&quot;, &quot;Paul Jobs&quot;, &quot; Kalala Jobs&quot;,
-            &quot;Lauren Powell&quot;, &quot;Steve woz Ike&quot;, &quot;Obama&quot;, &quot;Bill Gates&quot;, 
+            &quot;Lauren Powell&quot;, &quot;Steve woz Ike&quot;, &quot;Obama&quot;, &quot;Bill Gates&quot;,
             &quot;Jonathan&quot;, &quot;Tim Cook&quot;, &quot;Wayne&quot;),
     value = c(10, 2, 3, 3, 7, 5, 8, 9, 4, 4, 0)
  )
@@ -224,7 +224,7 @@ plot(recharts.eForce)
 
 <!-- jsHeader -->
 
-<script src='http://efe.baidu.com/echarts/doc/example/www/js/esl.js'></script>
+<script src='http://echarts.baidu.com/doc/example/www/js/esl.js'></script>
 
 <!-- jsHeader -->
 
@@ -237,19 +237,19 @@ plot(recharts.eForce)
 <script>
 
    require.config({
-        paths:{ 
-            'echarts': 'http://efe.baidu.com/echarts/doc/example/www/js/echarts-map',
-            'echarts/chart/bar' : 'http://efe.baidu.com/echarts/doc/example/www/js/echarts-map',
-            'echarts/chart/line': 'http://efe.baidu.com/echarts/doc/example/www/js/echarts-map',
-            'echarts/chart/scatter': 'http://efe.baidu.com/echarts/doc/example/www/js/echarts-map',
-            'echarts/chart/k': 'http://efe.baidu.com/echarts/doc/example/www/js/echarts-map',
-            'echarts/chart/pie': 'http://efe.baidu.com/echarts/doc/example/www/js/echarts-map',
-            'echarts/chart/map': 'http://efe.baidu.com/echarts/doc/example/www/js/echarts-map',
-            'echarts/chart/force': 'http://efe.baidu.com/echarts/doc/example/www/js/echarts-map',
-            'echarts/chart/radar': 'http://efe.baidu.com/echarts/doc/example/www/js/echarts-map'
+        paths:{
+            'echarts': 'http://echarts.baidu.com/doc/example/www/js/echarts-map',
+            'echarts/chart/bar' : 'http://echarts.baidu.com/doc/example/www/js/echarts-map',
+            'echarts/chart/line': 'http://echarts.baidu.com/doc/example/www/js/echarts-map',
+            'echarts/chart/scatter': 'http://echarts.baidu.com/doc/example/www/js/echarts-map',
+            'echarts/chart/k': 'http://echarts.baidu.com/doc/example/www/js/echarts-map',
+            'echarts/chart/pie': 'http://echarts.baidu.com/doc/example/www/js/echarts-map',
+            'echarts/chart/map': 'http://echarts.baidu.com/doc/example/www/js/echarts-map',
+            'echarts/chart/force': 'http://echarts.baidu.com/doc/example/www/js/echarts-map',
+            'echarts/chart/radar': 'http://echarts.baidu.com/doc/example/www/js/echarts-map'
         }
     });
-    
+
     // Step:4 require echarts and use it in the callback.
     require(
         [
@@ -265,7 +265,7 @@ plot(recharts.eForce)
         ],
     function(ec) {
         var EChart_eForceID1e2c1c0a849 = ec.init(document.getElementById('eForceID1e2c1c0a849'))
-        var option_eForceID1e2c1c0a849 = 
+        var option_eForceID1e2c1c0a849 =
 {
     "tooltip" : {
         "trigger" : "item",
@@ -516,19 +516,19 @@ plot(recharts.eForceLite)
 <script>
 
    require.config({
-        paths:{ 
-            'echarts': 'http://efe.baidu.com/echarts/doc/example/www/js/echarts-map',
-            'echarts/chart/bar' : 'http://efe.baidu.com/echarts/doc/example/www/js/echarts-map',
-            'echarts/chart/line': 'http://efe.baidu.com/echarts/doc/example/www/js/echarts-map',
-            'echarts/chart/scatter': 'http://efe.baidu.com/echarts/doc/example/www/js/echarts-map',
-            'echarts/chart/k': 'http://efe.baidu.com/echarts/doc/example/www/js/echarts-map',
-            'echarts/chart/pie': 'http://efe.baidu.com/echarts/doc/example/www/js/echarts-map',
-            'echarts/chart/map': 'http://efe.baidu.com/echarts/doc/example/www/js/echarts-map',
-            'echarts/chart/force': 'http://efe.baidu.com/echarts/doc/example/www/js/echarts-map',
-            'echarts/chart/radar': 'http://efe.baidu.com/echarts/doc/example/www/js/echarts-map'
+        paths:{
+            'echarts': 'http://echarts.baidu.com/doc/example/www/js/echarts-map',
+            'echarts/chart/bar' : 'http://echarts.baidu.com/doc/example/www/js/echarts-map',
+            'echarts/chart/line': 'http://echarts.baidu.com/doc/example/www/js/echarts-map',
+            'echarts/chart/scatter': 'http://echarts.baidu.com/doc/example/www/js/echarts-map',
+            'echarts/chart/k': 'http://echarts.baidu.com/doc/example/www/js/echarts-map',
+            'echarts/chart/pie': 'http://echarts.baidu.com/doc/example/www/js/echarts-map',
+            'echarts/chart/map': 'http://echarts.baidu.com/doc/example/www/js/echarts-map',
+            'echarts/chart/force': 'http://echarts.baidu.com/doc/example/www/js/echarts-map',
+            'echarts/chart/radar': 'http://echarts.baidu.com/doc/example/www/js/echarts-map'
         }
     });
-    
+
     // Step:4 require echarts and use it in the callback.
     require(
         [
@@ -544,7 +544,7 @@ plot(recharts.eForceLite)
         ],
     function(ec) {
         var EChart_eForceID1e2c1bf25b4a = ec.init(document.getElementById('eForceID1e2c1bf25b4a'))
-        var option_eForceID1e2c1bf25b4a = 
+        var option_eForceID1e2c1bf25b4a =
 {
     "tooltip" : {
         "trigger" : "item",
@@ -707,19 +707,19 @@ plot(recharts.eForceLite)
 <script>
 
    require.config({
-        paths:{ 
-            'echarts': 'http://efe.baidu.com/echarts/doc/example/www/js/echarts-map',
-            'echarts/chart/bar' : 'http://efe.baidu.com/echarts/doc/example/www/js/echarts-map',
-            'echarts/chart/line': 'http://efe.baidu.com/echarts/doc/example/www/js/echarts-map',
-            'echarts/chart/scatter': 'http://efe.baidu.com/echarts/doc/example/www/js/echarts-map',
-            'echarts/chart/k': 'http://efe.baidu.com/echarts/doc/example/www/js/echarts-map',
-            'echarts/chart/pie': 'http://efe.baidu.com/echarts/doc/example/www/js/echarts-map',
-            'echarts/chart/map': 'http://efe.baidu.com/echarts/doc/example/www/js/echarts-map',
-            'echarts/chart/force': 'http://efe.baidu.com/echarts/doc/example/www/js/echarts-map',
-            'echarts/chart/radar': 'http://efe.baidu.com/echarts/doc/example/www/js/echarts-map'
+        paths:{
+            'echarts': 'http://echarts.baidu.com/doc/example/www/js/echarts-map',
+            'echarts/chart/bar' : 'http://echarts.baidu.com/doc/example/www/js/echarts-map',
+            'echarts/chart/line': 'http://echarts.baidu.com/doc/example/www/js/echarts-map',
+            'echarts/chart/scatter': 'http://echarts.baidu.com/doc/example/www/js/echarts-map',
+            'echarts/chart/k': 'http://echarts.baidu.com/doc/example/www/js/echarts-map',
+            'echarts/chart/pie': 'http://echarts.baidu.com/doc/example/www/js/echarts-map',
+            'echarts/chart/map': 'http://echarts.baidu.com/doc/example/www/js/echarts-map',
+            'echarts/chart/force': 'http://echarts.baidu.com/doc/example/www/js/echarts-map',
+            'echarts/chart/radar': 'http://echarts.baidu.com/doc/example/www/js/echarts-map'
         }
     });
-    
+
     // Step:4 require echarts and use it in the callback.
     require(
         [
@@ -735,7 +735,7 @@ plot(recharts.eForceLite)
         ],
     function(ec) {
         var EChart_eForceID1e2c167654f3 = ec.init(document.getElementById('eForceID1e2c167654f3'))
-        var option_eForceID1e2c167654f3 = 
+        var option_eForceID1e2c167654f3 =
 {
     "tooltip" : {
         "trigger" : "item",
