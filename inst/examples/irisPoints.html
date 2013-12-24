@@ -1,12 +1,12 @@
-		
+
 <!DOCTYPE html>
 <html lang='en'>
 <head>
     <meta charset='utf-8'>
     <title>ECharts</title>
-    <!--Step:1 Import a module loader, such as http://efe.baidu.com/echarts/doc/example/www/js/esl.js.js or require.js-->
-    <script src='http://efe.baidu.com/echarts/doc/example/www/js/esl.js'></script>
-	
+    <!--Step:1 Import a module loader, such as http://echarts.baidu.com/doc/example/www/js/esl.js.js or require.js-->
+    <script src='http://echarts.baidu.com/doc/example/www/js/esl.js'></script>
+
 </head>
 
 <body>
@@ -15,23 +15,23 @@
 
 
     <div id='ID_20131022000819_92935' style='height:500px;border:1px solid #ccc;padding:10px;'></div>
-    
+
     <script type='text/javascript'>
     // Step:3 conifg ECharts's path, link to echarts.js from current page.
     require.config({
-        paths:{ 
-            'echarts': 'http://efe.baidu.com/echarts/doc/example/www/js/echarts-map',
-            'echarts/chart/bar' : 'http://efe.baidu.com/echarts/doc/example/www/js/echarts-map',
-            'echarts/chart/line': 'http://efe.baidu.com/echarts/doc/example/www/js/echarts-map',
-            'echarts/chart/scatter': 'http://efe.baidu.com/echarts/doc/example/www/js/echarts-map',
-            'echarts/chart/k': 'http://efe.baidu.com/echarts/doc/example/www/js/echarts-map',
-            'echarts/chart/pie': 'http://efe.baidu.com/echarts/doc/example/www/js/echarts-map',
-            'echarts/chart/map': 'http://efe.baidu.com/echarts/doc/example/www/js/echarts-map',
-            'echarts/chart/force': 'http://efe.baidu.com/echarts/doc/example/www/js/echarts-map',
-            'echarts/chart/radar': 'http://efe.baidu.com/echarts/doc/example/www/js/echarts-map'
+        paths:{
+            'echarts': 'http://echarts.baidu.com/doc/example/www/js/echarts-map',
+            'echarts/chart/bar' : 'http://echarts.baidu.com/doc/example/www/js/echarts-map',
+            'echarts/chart/line': 'http://echarts.baidu.com/doc/example/www/js/echarts-map',
+            'echarts/chart/scatter': 'http://echarts.baidu.com/doc/example/www/js/echarts-map',
+            'echarts/chart/k': 'http://echarts.baidu.com/doc/example/www/js/echarts-map',
+            'echarts/chart/pie': 'http://echarts.baidu.com/doc/example/www/js/echarts-map',
+            'echarts/chart/map': 'http://echarts.baidu.com/doc/example/www/js/echarts-map',
+            'echarts/chart/force': 'http://echarts.baidu.com/doc/example/www/js/echarts-map',
+            'echarts/chart/radar': 'http://echarts.baidu.com/doc/example/www/js/echarts-map'
         }
     });
-    
+
     // Step:4 require echarts and use it in the callback.
     require(
         [
@@ -55,26 +55,26 @@
 "dataView": true,
 "dataZoom": true,
 "restore": true,
-"saveAsImage": true 
-} 
+"saveAsImage": true
+}
 },
 "tooltip": {
- "trigger": "item" 
+ "trigger": "item"
 },
 "xAxis": {
  "type": "value",
 "power":      1,
 "precision":      1,
-"scale": true 
+"scale": true
 },
 "yAxis": {
  "type": "value",
 "power":      1,
 "precision":      1,
-"scale": true 
+"scale": true
 },
 "legend": {
- "data": [ "setosa", "versicolor", "virginica" ] 
+ "data": [ "setosa", "versicolor", "virginica" ]
 },
 "series": [
  {
@@ -129,7 +129,7 @@
 [    1.6,    0.2 ],
 [    1.4,    0.2 ],
 [    1.5,    0.2 ],
-[    1.4,    0.2 ] ] 
+[    1.4,    0.2 ] ]
 },
 {
  "type": "scatter",
@@ -183,7 +183,7 @@
 [    4.2,    1.3 ],
 [    4.3,    1.3 ],
 [      3,    1.1 ],
-[    4.1,    1.3 ] ] 
+[    4.1,    1.3 ] ]
 },
 {
  "type": "scatter",
@@ -237,15 +237,15 @@
 [      5,    1.9 ],
 [    5.2,      2 ],
 [    5.4,    2.3 ],
-[    5.1,    1.8 ] ] 
-} 
-] 
-}            
+[    5.1,    1.8 ] ]
+}
+]
+}
             EChart_ID_20131022000819_92935.setOption(option_ID_20131022000819_92935);
         }
     );
     </script>
-	
+
 
 
 
