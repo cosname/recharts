@@ -6,44 +6,7 @@
 
 test here
 
-
-```r
-op <- options(recharts.plot.tag='chart')
-
-# rForce Chart
-# R script here
-networkMatrix <- matrix(c(
-	c(0, 1, 2, 1, 2, 3, 6, 6, 1, 1, 1 ),
-	c(1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ),
-	c(2, 0, 0, 1, 0, 0, 1, 0, 0, 0, 0 ),
-	c(1, 0, 1, 0, 0, 0, 1, 1, 0, 0, 0 ),
-	c(2, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0 ),
-	c(3, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0 ),
-	c(6, 0, 1, 1, 1, 1, 0, 6, 0, 1, 0 ),
-	c(6, 0, 0, 1, 0, 0, 6, 0, 0, 0, 0 ),
-	c(1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ),
-	c(1, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0 ),
-	c(1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 )
-	), ncol=11
-)
-
-
-propertyDf <- data.frame(
-	category = c("a", "b", "b", "b", "b", "c",
-				"c", "c", "c", "c", "c"),
-	name = c("Steven Jobs", "Lisa Jobs", "Paul Jobs", " Kalala Jobs",
-			"Lauren Powell", "Steve woz Ike", "Obama", "Bill Gates",
-			"Jonathan", "Tim Cook", "Wayne"),
-	value = c(10, 2, 3, 3, 7, 5, 8, 9, 4, 4, 0)
- )
-
-rownames(propertyDf) = propertyDf$name
-
-recharts.eForce <- eForce(networkMatrix=networkMatrix, propertyDf=propertyDf)
-
-plot(recharts.eForce)
-```
-
+[1] "English_United Kingdom.1252"
 
 <!-- jsHeader -->
 <script src='http://echarts.baidu.com/doc/example/www/js/esl.js'></script>
@@ -51,13 +14,13 @@ plot(recharts.eForce)
 
 
 <!-- divChart -->
-<div id='eForceID1e2c1c0a849' style='height:500px;border:1px solid #ccc;padding:10px;'></div>
+<div id='eForceID2360170427c5' style='width:1024px; height:768px; ;border:1px solid #ccc;padding:10px;'></div>
 
 <!-- jsChart -->
 <script>
 
    require.config({
-        paths:{
+        paths:{ 
             'echarts': 'http://echarts.baidu.com/doc/example/www/js/echarts-map',
             'echarts/chart/bar' : 'http://echarts.baidu.com/doc/example/www/js/echarts-map',
             'echarts/chart/line': 'http://echarts.baidu.com/doc/example/www/js/echarts-map',
@@ -69,7 +32,7 @@ plot(recharts.eForce)
             'echarts/chart/radar': 'http://echarts.baidu.com/doc/example/www/js/echarts-map'
         }
     });
-
+    
     // Step:4 require echarts and use it in the callback.
     require(
         [
@@ -84,18 +47,32 @@ plot(recharts.eForce)
             'echarts/chart/radar'
         ],
 	function(ec) {
-		var EChart_eForceID1e2c1c0a849 = ec.init(document.getElementById('eForceID1e2c1c0a849'))
-		var option_eForceID1e2c1c0a849 =
+		var EChart_eForceID2360170427c5 = ec.init(document.getElementById('eForceID2360170427c5'))
+		var option_eForceID2360170427c5 = 
 {
-	"tooltip" : {
-		"trigger" : "item",
-		"formatter" : "{a} : {b}"
-	},
 	"title" : {
-		"text" : "network Matrix Ouput",
+		"text" : "",
 		"subtext" : "",
+		"x" : "center",
+		"y" : "top"
+	},
+	"calculable" : false,
+	"tooltip" : {
+		"show" : true,
+		"trigger" : "item"
+	},
+	"toolbox" : {
+		"show" : true,
 		"x" : "right",
-		"y" : "bottom"
+		"y" : "top",
+		"orient" : "horizontal",
+		"feature" : {
+			"mark" : true,
+			"dataZoom" : false,
+			"magicType" : false,
+			"restore" : true,
+			"saveAsImage" : true
+		}
 	},
 	"series" : [
 		{
@@ -107,7 +84,7 @@ plot(recharts.eForce)
 			"itemStyle" : {
 				"normal" : {
 					"label" : {
-						"show" : "true",
+						"show" : true,
 						"textStyle" : {
 							"color" : "#800080"
 						}
@@ -120,10 +97,10 @@ plot(recharts.eForce)
 				},
 				"emphasis" : {
 					"label" : {
-						"show" : "true"
+						"show" : true
 					},
 					"nodeStyle" : {
-						"r" : 30
+						"r" : 25
 					}
 				}
 			},
@@ -303,28 +280,50 @@ plot(recharts.eForce)
 				}
 			]
 		}
-	]
+	],
+	"legend" : {
+		"show" : true,
+		"orient" : "horizontal",
+		"x" : "left",
+		"y" : "top",
+		"data" : [
+			"a",
+			"b",
+			"c"
+		]
+	}
 }
-  EChart_eForceID1e2c1c0a849.setOption(option_eForceID1e2c1c0a849);
+  EChart_eForceID2360170427c5.setOption(option_eForceID2360170427c5);
         }
     );
 </script>
 
-```r
-
-#
-#knit2html("E:/kuaipan/recharts/recharts/inst/demo/recharts_knitr.Rmd")
-```
-
-
+体能好坏跟哪些因素有关？如果说跟人种有关的话，我们不跟欧非美比，韩国，日本，朝鲜。同样是我们东亚的，体能哪一个不比我们强？我就不懂，中国每一次大赛都发现大面积的抽筋，去年对香港，有个球迷调侃说海东那是“战术抽筋！”不管老的小的，体能没有一个棒的，李铁引以为豪的体能优势一去英超就根本体现不出来！有些在26，7岁当打之年的球员也抽筋，简直可笑！我真的很羡慕韩国人02世界杯上的“跑不死”，没有体能做保证也不可能连克诸强！虽然有黑哨嫌疑，不是我看不起我们自己的足球，就是裁判想帮我们忙，恐怕都找不出机会来的！
+中国经常出现黑色3分钟，70分钟以后丢球，这跟体能差有很大关系！中国球员的职业精神实在是不敢恭维，在国内出点小名气就开始享受，消极训练，饱食终日，一点上进心都没有，状态说下划就下划！
+悲哀呀！要想成为世界足球强国，必须从内部做起，自己做起！体能只是一方面，基础！
+这里我想起了蒋委员长的一句话：
+攘外必须先安内！
 
 ```r
 op <- options(recharts.plot.tag='chart')
 # force lite demo
-testData <- matrix(1:25, nrow=5)
-recharts.eForceLite  <- eForce(testData)
+library(recharts)
+library(tmcn)
+options(shiny.transcode.json = FALSE)
+#setwd("E:/kuaipan/git/recharts/inst/shiny/recharts_shiny_football/")
+load("E:/kuaipan/git/recharts/inst/shiny/recharts_shiny_football/football.rda")
+stateData <- table_state[,c(1, 10:13 )]
+playerData <- table_player[ , c(1, 10:13) ]
+names(stateData) <- toUTF8(c("球队名","上半场第一阶段","上半场第二阶段","下半场第一阶段","下半场第二阶段"))
+names(playerData) <- toUTF8(c("球员名","上半场第一阶段","上半场第二阶段","下半场第一阶段","下半场第二阶段"))
+outputData <- list(stateData=stateData, playerData = playerData)
+plotDf <- outputData
+stateDf <- plotDf$stateData
+rownames(stateDf) <- stateDf[,1]
+stateDf <- stateDf[,-1]
 
-plot(recharts.eForceLite)
+eBarOutput <- eBar(stateDf, size= c(800,648), ylim = c(0,5000))
+plot(eBarOutput)
 ```
 
 
@@ -334,13 +333,13 @@ plot(recharts.eForceLite)
 
 
 <!-- divChart -->
-<div id='eForceID1e2c1bf25b4a' style='height:500px;border:1px solid #ccc;padding:10px;'></div>
+<div id='eBarID2360604d3d33' style='width:800px; height:648px; ;border:1px solid #ccc;padding:10px;'></div>
 
 <!-- jsChart -->
 <script>
 
    require.config({
-        paths:{
+        paths:{ 
             'echarts': 'http://echarts.baidu.com/doc/example/www/js/echarts-map',
             'echarts/chart/bar' : 'http://echarts.baidu.com/doc/example/www/js/echarts-map',
             'echarts/chart/line': 'http://echarts.baidu.com/doc/example/www/js/echarts-map',
@@ -352,7 +351,7 @@ plot(recharts.eForceLite)
             'echarts/chart/radar': 'http://echarts.baidu.com/doc/example/www/js/echarts-map'
         }
     });
-
+    
     // Step:4 require echarts and use it in the callback.
     require(
         [
@@ -367,159 +366,217 @@ plot(recharts.eForceLite)
             'echarts/chart/radar'
         ],
 	function(ec) {
-		var EChart_eForceID1e2c1bf25b4a = ec.init(document.getElementById('eForceID1e2c1bf25b4a'))
-		var option_eForceID1e2c1bf25b4a =
+		var EChart_eBarID2360604d3d33 = ec.init(document.getElementById('eBarID2360604d3d33'))
+		var option_eBarID2360604d3d33 = 
 {
-	"tooltip" : {
-		"trigger" : "item",
-		"formatter" : "{a} : {b}"
-	},
 	"title" : {
-		"text" : "network Matrix Ouput",
+		"text" : "",
 		"subtext" : "",
+		"x" : "center",
+		"y" : "top"
+	},
+	"calculable" : true,
+	"tooltip" : {
+		"show" : true,
+		"trigger" : "item"
+	},
+	"toolbox" : {
+		"show" : true,
 		"x" : "right",
-		"y" : "bottom"
+		"y" : "top",
+		"orient" : "horizontal",
+		"feature" : {
+			"mark" : true,
+			"dataZoom" : false,
+			"magicType" : [
+				"line",
+				"bar"
+			],
+			"restore" : true,
+			"dataView" : {
+				"readOnly" : false
+			},
+			"saveAsImage" : true
+		}
+	},
+	"legend" : {
+		"show" : true,
+		"orient" : "horizontal",
+		"x" : "left",
+		"y" : "top",
+		"data" : [
+			"上半场第一阶段",
+			"上半场第二阶段",
+			"下半场第一阶段",
+			"下半场第二阶段"
+		]
+	},
+	"xAxis" : {
+		"position" : "bottom",
+		"name" : "",
+		"nameLocation" : "start",
+		"scale" : true,
+		"precision" : 2,
+		"power" : 2,
+		"axisLine" : {
+			"show" : true
+		},
+		"axisTick" : {
+			"show" : false
+		},
+		"axisLable" : {
+			"show" : true
+		},
+		"splitLine" : {
+			"show" : true
+		},
+		"splitArea" : {
+			"show" : false
+		},
+		"type" : "category",
+		"data" : [
+			"中国",
+			"韩国",
+			"日本",
+			"德国",
+			"多特蒙德",
+			"意大利",
+			"西班牙",
+			"英格兰",
+			"巴西",
+			"阿根廷",
+			"美国",
+			"荷兰"
+		],
+		"boundaryGap" : true
+	},
+	"yAxis" : {
+		"position" : "left",
+		"name" : "",
+		"nameLocation" : "start",
+		"scale" : true,
+		"precision" : 2,
+		"power" : 2,
+		"axisLine" : {
+			"show" : true
+		},
+		"axisTick" : {
+			"show" : false
+		},
+		"axisLable" : {
+			"show" : true
+		},
+		"splitLine" : {
+			"show" : true
+		},
+		"splitArea" : {
+			"show" : false
+		},
+		"max" : 5000,
+		"min" : 0,
+		"type" : "value",
+		"boundaryGap" : [
+			0,
+			0
+		]
 	},
 	"series" : [
 		{
-			"type" : "force",
-			"minRadius" : 15,
-			"maxRadius" : 25,
-			"density" : 0.05,
-			"attractiveness" : 1.2,
-			"itemStyle" : {
-				"normal" : {
-					"label" : {
-						"show" : "true",
-						"textStyle" : {
-							"color" : "#800080"
-						}
-					},
-					"nodeStyle" : {
-						"brushType" : "both",
-						"strokeColor" : "rgba(255,215,0,0.4)",
-						"lineWidth" : 8
-					}
-				},
-				"emphasis" : {
-					"label" : {
-						"show" : "true"
-					},
-					"nodeStyle" : {
-						"r" : 30
-					}
-				}
-			},
-			"categories" : [
-				{
-					"name" : "默认类别",
-					"itemStyle" : {
-						"normal" : {
-							"color" : "#F8766D"
-						}
-					}
-				}
-			],
-			"nodes" : [
-				{
-					"category" : 0,
-					"name" : "1",
-					"value" : 0
-				},
-				{
-					"category" : 0,
-					"name" : "2",
-					"value" : 0
-				},
-				{
-					"category" : 0,
-					"name" : "3",
-					"value" : 0
-				},
-				{
-					"category" : 0,
-					"name" : "4",
-					"value" : 0
-				},
-				{
-					"category" : 0,
-					"name" : "5",
-					"value" : 0
-				}
-			],
-			"links" : [
-				{
-					"source" : 1,
-					"target" : 0,
-					"weight" : 2
-				},
-				{
-					"source" : 2,
-					"target" : 0,
-					"weight" : 3
-				},
-				{
-					"source" : 3,
-					"target" : 0,
-					"weight" : 4
-				},
-				{
-					"source" : 4,
-					"target" : 0,
-					"weight" : 5
-				},
-				{
-					"source" : 2,
-					"target" : 1,
-					"weight" : 8
-				},
-				{
-					"source" : 3,
-					"target" : 1,
-					"weight" : 9
-				},
-				{
-					"source" : 4,
-					"target" : 1,
-					"weight" : 10
-				},
-				{
-					"source" : 3,
-					"target" : 2,
-					"weight" : 14
-				},
-				{
-					"source" : 4,
-					"target" : 2,
-					"weight" : 15
-				},
-				{
-					"source" : 4,
-					"target" : 3,
-					"weight" : 20
-				}
+			"type" : "bar",
+			"name" : "上半场第一阶段",
+			"data" : [
+				3309.1,
+				3200,
+				2564,
+				2525,
+				2625,
+				2550,
+				2665.6,
+				2274.6,
+				2810,
+				2819.1,
+				2891.3,
+				2991.3
+			]
+		},
+		{
+			"type" : "bar",
+			"name" : "上半场第二阶段",
+			"data" : [
+				2673.1,
+				2700,
+				2842,
+				2542,
+				2642,
+				2789,
+				2682.4,
+				2570.5,
+				2470.4,
+				2774.7,
+				2668.7,
+				2768.7
+			]
+		},
+		{
+			"type" : "bar",
+			"name" : "下半场第一阶段",
+			"data" : [
+				2632.6,
+				3400,
+				2465,
+				2546,
+				2646,
+				2970,
+				2376.9,
+				2452.4,
+				2554.7,
+				2934.4,
+				3023.3,
+				3123.3
+			]
+		},
+		{
+			"type" : "bar",
+			"name" : "下半场第二阶段",
+			"data" : [
+				1832.2,
+				3242,
+				2755,
+				2782,
+				2882,
+				2880,
+				2542.5,
+				2624.5,
+				2935,
+				2614,
+				2810.3,
+				2910.3
 			]
 		}
 	]
 }
-  EChart_eForceID1e2c1bf25b4a.setOption(option_eForceID1e2c1bf25b4a);
+  EChart_eBarID2360604d3d33.setOption(option_eBarID2360604d3d33);
         }
     );
 </script>
 
-```r
-
-```
 
 
+那么让我们来看一下2013年中国队的体能分配情况。
 
 ```r
 op <- options(recharts.plot.tag='chart')
-# force lite demo
-testData <- matrix(1:25, nrow=5)
-recharts.eForceLite  <- eForce(testData)
+playerDf <- plotDf$playerData
 
-plot(recharts.eForceLite)
+outputDf <- apply(playerDf[,2:5], 2, mean)
+
+#print(playerDf)
+names(outputDf) <- toUTF8(c("上半场第一阶段","上半场第二阶段","下半场第一阶段","下半场第二阶段"))
+
+ePieOutput <- ePie(outputDf, size= c(500,500), title=toUTF8("中国球员体能分配"), title.y=30, legend.y="b")
+#ePieOutput$html$chart <- gsub("http://echarts.baidu.com/doc/example/www", ".", ePieOutput$html$chart)
+
+plot(ePieOutput)
 ```
 
 
@@ -529,13 +586,13 @@ plot(recharts.eForceLite)
 
 
 <!-- divChart -->
-<div id='eForceID1e2c167654f3' style='height:500px;border:1px solid #ccc;padding:10px;'></div>
+<div id='ePieID23605a3521ba' style='width:500px; height:500px; ;border:1px solid #ccc;padding:10px;'></div>
 
 <!-- jsChart -->
 <script>
 
    require.config({
-        paths:{
+        paths:{ 
             'echarts': 'http://echarts.baidu.com/doc/example/www/js/echarts-map',
             'echarts/chart/bar' : 'http://echarts.baidu.com/doc/example/www/js/echarts-map',
             'echarts/chart/line': 'http://echarts.baidu.com/doc/example/www/js/echarts-map',
@@ -547,7 +604,7 @@ plot(recharts.eForceLite)
             'echarts/chart/radar': 'http://echarts.baidu.com/doc/example/www/js/echarts-map'
         }
     });
-
+    
     // Step:4 require echarts and use it in the callback.
     require(
         [
@@ -562,149 +619,107 @@ plot(recharts.eForceLite)
             'echarts/chart/radar'
         ],
 	function(ec) {
-		var EChart_eForceID1e2c167654f3 = ec.init(document.getElementById('eForceID1e2c167654f3'))
-		var option_eForceID1e2c167654f3 =
+		var EChart_ePieID23605a3521ba = ec.init(document.getElementById('ePieID23605a3521ba'))
+		var option_ePieID23605a3521ba = 
 {
-	"tooltip" : {
-		"trigger" : "item",
-		"formatter" : "{a} : {b}"
-	},
 	"title" : {
-		"text" : "network Matrix Ouput",
+		"text" : "中国球员体能分配",
 		"subtext" : "",
+		"x" : "center",
+		"y" : 30
+	},
+	"calculable" : true,
+	"tooltip" : {
+		"show" : true,
+		"trigger" : "item"
+	},
+	"toolbox" : {
+		"show" : true,
 		"x" : "right",
-		"y" : "bottom"
+		"y" : "top",
+		"orient" : "horizontal",
+		"feature" : {
+			"mark" : true,
+			"dataZoom" : false,
+			"magicType" : [
+				"line",
+				"bar"
+			],
+			"restore" : true,
+			"dataView" : {
+				"readOnly" : false
+			},
+			"saveAsImage" : true
+		}
+	},
+	"legend" : {
+		"show" : true,
+		"orient" : "horizontal",
+		"x" : "left",
+		"y" : "bottom",
+		"data" : [
+			"上半场第一阶段",
+			"上半场第二阶段",
+			"下半场第一阶段",
+			"下半场第二阶段"
+		]
 	},
 	"series" : [
 		{
-			"type" : "force",
-			"minRadius" : 15,
-			"maxRadius" : 25,
-			"density" : 0.05,
-			"attractiveness" : 1.2,
+			"name" : "pie chart",
+			"type" : "pie",
+			"radius" : [
+				20,
+				110
+			],
+			"center" : [
+				"50%",
+				"200"
+			],
+			"roseType" : "",
 			"itemStyle" : {
 				"normal" : {
 					"label" : {
-						"show" : "true",
-						"textStyle" : {
-							"color" : "#800080"
-						}
+						"show" : true
 					},
-					"nodeStyle" : {
-						"brushType" : "both",
-						"strokeColor" : "rgba(255,215,0,0.4)",
-						"lineWidth" : 8
+					"labelLine" : {
+						"show" : true
 					}
 				},
 				"emphasis" : {
 					"label" : {
-						"show" : "true"
+						"show" : false
 					},
-					"nodeStyle" : {
-						"r" : 30
+					"labelLine" : {
+						"show" : false
 					}
 				}
 			},
-			"categories" : [
+			"data" : [
 				{
-					"name" : "默认类别",
-					"itemStyle" : {
-						"normal" : {
-							"color" : "#F8766D"
-						}
-					}
-				}
-			],
-			"nodes" : [
-				{
-					"category" : 0,
-					"name" : "1",
-					"value" : 0
+					"value" : 2954.6,
+					"name" : "上半场第一阶段"
 				},
 				{
-					"category" : 0,
-					"name" : "2",
-					"value" : 0
+					"value" : 2396.4,
+					"name" : "上半场第二阶段"
 				},
 				{
-					"category" : 0,
-					"name" : "3",
-					"value" : 0
+					"value" : 2356.4,
+					"name" : "下半场第一阶段"
 				},
 				{
-					"category" : 0,
-					"name" : "4",
-					"value" : 0
-				},
-				{
-					"category" : 0,
-					"name" : "5",
-					"value" : 0
-				}
-			],
-			"links" : [
-				{
-					"source" : 1,
-					"target" : 0,
-					"weight" : 2
-				},
-				{
-					"source" : 2,
-					"target" : 0,
-					"weight" : 3
-				},
-				{
-					"source" : 3,
-					"target" : 0,
-					"weight" : 4
-				},
-				{
-					"source" : 4,
-					"target" : 0,
-					"weight" : 5
-				},
-				{
-					"source" : 2,
-					"target" : 1,
-					"weight" : 8
-				},
-				{
-					"source" : 3,
-					"target" : 1,
-					"weight" : 9
-				},
-				{
-					"source" : 4,
-					"target" : 1,
-					"weight" : 10
-				},
-				{
-					"source" : 3,
-					"target" : 2,
-					"weight" : 14
-				},
-				{
-					"source" : 4,
-					"target" : 2,
-					"weight" : 15
-				},
-				{
-					"source" : 4,
-					"target" : 3,
-					"weight" : 20
+					"value" : 1649.4,
+					"name" : "下半场第二阶段"
 				}
 			]
 		}
 	]
 }
-  EChart_eForceID1e2c167654f3.setOption(option_eForceID1e2c167654f3);
+  EChart_ePieID23605a3521ba.setOption(option_ePieID23605a3521ba);
         }
     );
 </script>
-
-```r
-
-```
 
 
 

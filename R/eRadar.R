@@ -15,65 +15,35 @@
 #' dat
 #' plot(eRadar(dat))
 
-eRadar = function(dat, limit=NULL, opt=list()) {
-    # limit=NULL; opt=list()
-    if(is.null(opt$legend$data)) {
-        opt$legend$data = rownames(dat)
-    }
-
-    if(is.null(opt$legend$orient)) {
-        opt$legend$orient = 'vertical'
-    }
-
-    if(is.null(opt$legend$x)) {
-        opt$legend$x = 'left'
-    }
-
-    if(is.null(opt$legend$y)) {
-        opt$legend$y = 'center'
-    }	
-
-    if(is.null(opt$toolbox$show)) {
-        opt$toolbox$show = TRUE
-    }
-
-    if(is.null(opt$toolbox$feature$mark)) {
-        opt$toolbox$feature$mark = TRUE
-    }
-
-    if(is.null(opt$toolbox$feature$dataView)) {
-        opt$toolbox$feature$dataView = TRUE
-    }
-
-    if(is.null(opt$toolbox$feature$restore)) {
-        opt$toolbox$feature$restore = TRUE
-    }    
+eRadar = function(dat, size = c(1024, 768), ymin=vector(), ymax=vector(),
+	title = NULL, subtitle = NULL, title.x = "center", title.y = "top", 
+	legend = TRUE, legend.data=NULL, legend.x = "left", legend.y= "top", legend.orient="horizontal", 
+	toolbox = TRUE, toolbox.orient = "horizontal", toolbox.x = "right", toolbox.y = "top", 
+	dataView = TRUE, readOnly = FALSE, mark=TRUE, dataZoom=FALSE, magicType=TRUE,
+	tooltip = TRUE, tooltip.trigger="item", formatter="", axis.scale=TRUE,
+	xlab=FALSE, ylab=FALSE,	calculable=TRUE, showLabel=TRUE, opt = list())
+{
+	# option$title format.
+	opt$title = tilteSet(title = title, subtitle=subtitle,
+			title.x = title.x, title.y = title.y)
 	
-	if(is.null(opt$toolbox$feature$saveAsImage)) {
-        opt$toolbox$feature$saveAsImage = TRUE
-    }  
+	opt$calculable = calculableSet(calculable = calculable)
+
+	# opt$tooltip format, not open to user now.
+	opt$tooltip = tooltipSet( tooltip=tooltip,trigger=tooltip.trigger,
+			formatter = "", islandFormatter="")
 	
-    if(is.null(opt$tooltip$trigger)) {
-		opt$tooltip$trigger = 'axis'
-    }
+	opt$toolbox = toolboxSet(toolbox=toolbox, toolbox.x=toolbox.x, toolbox.y=toolbox.y, orient=toolbox.orient,
+				dataView=dataView, mark=mark, dataZoom = dataZoom, magicType = magicType, restore = TRUE, readOnly = readOnly,
+				saveAsImage=TRUE)
+			
+	if(missing(legend.data) | is.null(legend.data)){legendData = rownames(dat)
+	}else{legendData = legend.data}
 	
-	if(is.null(limit)){
-		limit = matrix(0, ncol(dat), 2)
-		limit[,2] = apply(dat,2,max)
-	}
+	opt$legend = legendSet( legend=legend, data=legendData, legend.x=legend.x, legend.y=legend.y, orient=legend.orient)
 	
-	ind = data.frame(text=colnames(dat), min=limit[,1], max=limit[,2])
-	indList = split(ind, 1:nrow(ind))
-    names(indList) = NULL
-	
-	
-	if(is.null(opt$polar)) {
-        opt$polar =  vector("list", 1)
-    } 
-	if(is.null(opt$polar[[1]]$indicator)){
-		opt$polar[[1]]$indicator = indList
-	}
-		
+	opt$polar = list(polarSet(name=colnames(dat), ymin=ymin, ymax=ymax))
+
 	datList = vector("list", nrow(dat))
 	for(i in 1:nrow(dat)){
 		datList[[i]]$name  = rownames(dat)[i]
@@ -83,19 +53,24 @@ eRadar = function(dat, limit=NULL, opt=list()) {
 
 	
 	if(is.null(opt$series)) {
-        opt$series =  vector("list", 1)
+        opt$series = vector("list", 1)
     } 
     if(is.null(opt$series[[1]]$type)) {
         opt$series[[1]]$type =  'radar'
-    } 
+    }
     
     if(is.null(opt$series[[1]]$data)) {
         opt$series[[1]]$data = datList
-    } 
+    }
 	
 
 	jsonStr <- toJSON(opt, pretty=TRUE)
+	outList <- .rechartsOutput(jsonStr, charttype="eRadar", size=size)
+	opt$size = size
+	output <- list(outList=outList, opt=opt)
+	class(output) <- c("recharts", "eRadar", "list")
 	
-	outList <- .rechartsOutput(jsonStr, charttype="eRadar")
-	return(outList)
+	### output list format
+	return(output)
+	
 }

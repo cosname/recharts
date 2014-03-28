@@ -10,8 +10,9 @@
 
 
 
-plot.recharts <- function (x, tag = NULL, Local = FALSE, ...)
+plot.recharts <- function (x, tag = NULL, Local = FALSE, ...) 
 {
+
 	if (missing(tag))
 		tag <- getOption("recharts.plot.tag")
 	if (is.null(tag) | !("recharts" %in% class(x))) {
@@ -23,25 +24,25 @@ plot.recharts <- function (x, tag = NULL, Local = FALSE, ...)
 		root.dir <- tempdir()
 		print(paste("chart path", root.dir))
 		if (!file.exists(root.dir)) dir.create(root.dir, recursive = TRUE)
-		if (x$type == "geoVis") {
+		if (x$outList$type == "geoVis") {
 			file.copy(getOption("recharts.geoData.dir"), root.dir, recursive = TRUE)
 		}
 
 		if ("recharts" %in% class(x)) {
-			chart.txt <- "<!DOCTYPE html PUBLIC \"-//W3C//DTD XHTML 1.0 Strict//EN\"\n        \"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd\">\n<html xmlns=\"http://www.w3.org/1999/xhtml\">\n<head>\n  <title>%s</title>\n  <meta http-equiv=\"content-type\" content=\"text/html;charset=utf-8\" />\n  <style type=\"text/css\">\n    body {\n          color: #444444;\n          font-family: Arial,Helvetica,sans-serif;\n          font-size: 75%%;\n    }\n    a {\n          color: #4D87C7;\n          text-decoration: none;\n    }\n  </style>\n</head>\n<body>\n<p>\n  You find below the HTML code of the visualisation.<br />\n  You can copy and paste the code into an existing HTML page.<br />\n  For more information see also <a href=\"/library/googleVis/html/gvisMethods.html\">?print.recharts</a></p>\n<p><textarea rows=\"50\" name=\"html\" cols=\"80\">\n%s\n</textarea>\n</p>\n</body>\n</html>\n"
-			chart.txt <- sprintf(chart.txt, x$chartid, gsub(">",
-							"&gt;", gsub("<", "&lt;", paste(unlist(x$html$chart),
+			chart.txt <- "<!DOCTYPE html PUBLIC \"-//W3C//DTD XHTML 1.0 Strict//EN\"\n        \"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd\">\n<html xmlns=\"http://www.w3.org/1999/xhtml\">\n<head>\n  <title>%s</title>\n  <meta http-equiv=\"content-type\" content=\"text/html;charset=GBK\" />\n  <style type=\"text/css\">\n    body {\n          color: #444444;\n          font-family: Arial,Helvetica,sans-serif;\n          font-size: 75%%;\n    }\n    a {\n          color: #4D87C7;\n          text-decoration: none;\n    }\n  </style>\n</head>\n<body>\n<p>\n  You find below the HTML code of the visualisation.<br />\n  You can copy and paste the code into an existing HTML page.<br />\n  For more information see also <a href=\"/library/googleVis/html/gvisMethods.html\">?print.recharts</a></p>\n<p><textarea rows=\"50\" name=\"html\" cols=\"80\">\n%s\n</textarea>\n</p>\n</body>\n</html>\n"
+			chart.txt <- sprintf(chart.txt, x$outList$chartid, gsub(">", 
+							"&gt;", gsub("<", "&lt;", paste(unlist(x$outList$html$chart), 
 											collapse = "\n"))))
-			cat(chart.txt, file = file.path(root.dir, paste("Chart_",
-									x$chartid, ".html", sep = "")))
-			file <- file.path(root.dir, paste(x$chartid, ".html",
+			cat(chart.txt, file = file.path(root.dir, paste("Chart_", 
+									x$outList$chartid, ".html", sep = "")))
+			file <- file.path(root.dir, paste(x$outList$chartid, ".html", 
 							sep = ""))
 		}else {
 			basex <- basename(x)
-			if (length(grep("htm", substr(basex, nchar(basex) -
+			if (length(grep("htm", substr(basex, nchar(basex) - 
 											3, nchar(basex)))) < 1)
 				warning("The file does not appear to be an html file.\n")
-			file.copy(from = x, to = file.path(root.dir, basex),
+			file.copy(from = x, to = file.path(root.dir, basex), 
 					...)
 			file <- file.path(root.dir, basex)
 		}
@@ -55,7 +56,7 @@ plot.recharts <- function (x, tag = NULL, Local = FALSE, ...)
 			#.url <- file.path(root.dir, basename(file))
 			.url <- file
 		}else{
-			.url <- sprintf("http://127.0.0.1:%s/custom/recharts/%s",
+			.url <- sprintf("http://127.0.0.1:%s/custom/recharts/%s", 
 					tools:::httpdPort, basename(file))
 		}
 		if (interactive()) {
@@ -84,32 +85,254 @@ plot.recharts <- function (x, tag = NULL, Local = FALSE, ...)
 #' @param tag   whether print the recharts object to browser or string.
 #' @param ...   default parameter.
 #' @return The HTML code as a character string.
-#' @export
+#' @export 
 
 
-print.recharts <- function (x, tag = NULL, file = "", ...)
+print.recharts <- function (x, tag = NULL, file = "", ...) 
 {
-
+	
     if (is.null(tag))
         tag <- getOption("recharts.print.tag")
     if (!tag %in% getOption("recharts.tags"))
-        stop(paste(tag, "is not a valid option. Set tag to NULL or one of the following:\n",
+        stop(paste(tag, "is not a valid option. Set tag to NULL or one of the following:\n", 
             paste(getOption("recharts.tags"), collapse = ", ")))
-    tag <- ifelse(tag %in% c("chartid", "type", "html"), tag,
+    tag <- ifelse(tag %in% c("chartid", "type", "html"), tag, 
         paste(".", tag, sep = ""))
-    output <- unlist(x)
-	print(tag)
+    output <- unlist(x$outList)
+	#print(tag)
 	if (exists("jsLoaderFlag")){
 		if (jsLoaderFlag && tag==".chart"){
-			output <- gsub("<script src='http://echarts.baidu.com/doc/example/www/js/esl.js'></script>","",output)
+			output <- gsub("<script src='http://echarts.baidu.com/doc/example/www/js/esl.js'></script>","",output) 
 		}
 		jsLoaderFlag <<- TRUE
 	}
     tag.names <- names(output)
-    .id <- apply(t(tag), 2, function(y) grep(paste("\\", y, sep = ""),
+    .id <- apply(t(tag), 2, function(y) grep(paste("\\", y, sep = ""), 
         tag.names))
     cat(output[.id], file = file, ...)
 }
+
+
+
+#' recharts set fucntion
+#'
+#' An shell function for setting arguments of the recharts object.
+#'
+#' @param obj  recharts object.
+#' @return The output list of recharts as a list.
+#' @export 
+
+set <- function(x, optionList=NULL, ...){
+	
+	if(is.null(optionList)){
+		settings <- list(...)
+	}else{
+		settings <- optionList
+	}
+	
+	
+	print(settings)
+	# settings <- list(title = 1, size = c(500,600))
+	switch(class(x)[2],
+		eForce = {
+			argList <- c("size", "title", "subtitle", "title.x", "title.y", "legend", "legend.x", "legend.y", "legend.oreint", 
+				"toolbox", "toolbox.x", "toolbox.y", "readOnly", "mark", "showLabel", "tooltip.formatter", 
+				"minRadius", "maxRadius", "density", "attractiveness")
+			setList <- settings[names(settings) %in% argList]
+			
+			mappedList <- c("size", "title$text", "title$subtext", "title$x", "title$y", "legend$show", "legend$x", "legend$y", "legend$oreint",
+				"toolbox$show", "toolbox$x", "toolbox$y", "toolbox$feature$readOnly", "toolbox$feature$mark", 
+				"series[[1]]$itemStyle$normal$label$show", "tooltip$formatter", 
+				"series[[1]]$minRadius", "series[[1]]$maxRadius", "series[[1]]$density", "series[[1]]$attractiveness")
+			
+			nameOfSetList <- mappedList[ match(names(setList), argList)]
+			
+			names(setList) <- nameOfSetList
+			for (i in 1:length(setList)){
+				name = nameOfSetList[i]
+				print(name)
+				#print(class(setList[i]))
+				if(class(unlist(setList[i])) == "character"){
+					eval( parse(text = sprintf("x$opt$%s='%s'", name, setList[i])))
+				}else{
+					eval( parse(text = sprintf("x$opt$%s=%s", name, setList[i])))
+				}
+			}
+			
+			# modify the opt list as the showable option is not open to current echarts.
+			print(x$opt$legend$show)
+			if(x$opt$legend$show=="false" | x$opt$legend$show==FALSE){
+				x$opt$legend = list(show = "false")
+			}else{
+				x$opt$legend$show = "true"
+			}
+			
+			# print( x$opt$legend)
+			# print( x$opt$title)
+			# print( x$opt$toolbox)
+			
+			return(.list2JSON(x))
+
+		}
+	)
+}
+
+#' Reports whether x is a option object
+#' @param x An object to test
+#' @export
+is.option <- function(x) inherits(x, "option")
+
+#' Set recharts option
+#' 
+#' @export
+#'
+option <- function(...) {
+
+	elements <- list(...)
+	structure(elements, class ="option")
+
+}
+
+#' Set recharts option
+#' 
+#' @export
+#'
+eTitle = function(...){
+	elements <- list(...)
+	structure(elements, class ="option")
+}
+eToolbox = function(...){
+	elements <- list(...)
+	structure(elements, class ="option")
+}
+eCalculable = function(...){
+	elements <- list(...)
+	structure(elements, class ="option")
+}
+eLegend = function(...){
+	elements <- list(...)
+	structure(elements, class ="option")
+}
+eTooltip = function(...){
+	elements <- list(...)
+	structure(elements, class ="option")
+}
+eDataRange = function(...){
+	elements <- list(...)
+	structure(elements, class ="option")
+}
+eAxis.X = function(...){
+	elements <- list(...)
+	structure(elements, class ="option")
+}
+eAxis.Y = function(...){
+	elements <- list(...)
+	structure(elements, class ="option")
+}
+ePolar = function(...){
+	elements <- list(...)
+	structure(elements, class ="option")
+}
+
+
+"setFunctionName" <- function(e2name){
+	e2name <- strstrip(e2name)
+	functionName = gsub("\\(.*", "", e2name)
+	print(functionName)
+	setFuncList <- c("eTitle", "eToolbox", "eCalculable", "eLegend", "eTooltip", "eDataRange",
+		"eAxis.X", "eAxis.Y", "ePolar", "option")
+	if (!functionName %in% setFuncList){
+		stop(paste("unspported eCharts setting function inputs", functionName))
+		return(FALSE)
+	}else{
+		return(functionName)
+	}
+}
+
+#' Modify a recharts by adding on new components.
+#' 
+#' @param e1 An object of class \code{recharts}
+#' @param e2 A component to add to \code{e1}
+#'
+#' @export
+#'
+#' @seealso \code{\link{set}}
+#' @method + recharts
+"+.recharts" <- function(e1, e2){
+	#print(e1)
+	#print("e2")
+	#print(e2)
+	#print("go")
+	e2name <- deparse(substitute(e2))
+	
+	optType <- setFunctionName(e2name)
+
+	switch(optType,
+		eTitle = {
+			if ("recharts" %in% class(e1) & is.option(e2)){
+				class(e2) <- "list"
+				return(eTitleSet(e1, optionList=e2))
+			}
+		},
+		eToolbox = {
+			if ("recharts" %in% class(e1) & is.option(e2)){
+				class(e2) <- "list"
+				return(eToolboxSet(e1, optionList=e2))
+			}
+		},		
+		eCalculable = {
+			if ("recharts" %in% class(e1) & is.option(e2)){
+				class(e2) <- "list"
+				return(eCalculableSet(e1, optionList=e2))
+			}
+		},		
+		eTooltip = {
+			if ("recharts" %in% class(e1) & is.option(e2)){
+				class(e2) <- "list"
+				return(eTooltipSet(e1, optionList=e2))
+			}
+		},		
+		eLegend = {
+			if ("recharts" %in% class(e1) & is.option(e2)){
+				class(e2) <- "list"
+				return(eLegendSet(e1, optionList=e2))
+			}
+		},		
+		eDataRange = {
+			if ("recharts" %in% class(e1) & is.option(e2)){
+				class(e2) <- "list"
+				return(eDataRangeSet(e1, optionList=e2))
+			}
+		},		
+		eAxis.X = {
+			if ("recharts" %in% class(e1) & is.option(e2)){
+				class(e2) <- "list"
+				return(eAxis.XSet(e1, optionList=e2))
+			}
+		},		
+		eAxis.Y = {
+			if ("recharts" %in% class(e1) & is.option(e2)){
+				class(e2) <- "list"
+				return(eAxis.YSet(e1, optionList=e2))
+			}
+		},		
+		ePolar = {
+			if ("recharts" %in% class(e1) & is.option(e2)){
+				class(e2) <- "list"
+				return(ePolarSet(e1, optionList=e2))
+			}
+		},
+		option = {
+			if ("recharts" %in% class(e1) & is.option(e2)){
+				class(e2) <- "list"
+				return(set(e1, optionList=e2))
+			}
+		}
+	)
+}
+
+#' @export
+"%+%" <- `+.recharts`
 
 
 

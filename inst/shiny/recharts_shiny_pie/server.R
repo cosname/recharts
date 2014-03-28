@@ -21,15 +21,17 @@ shinyServer(function(input, output) {
 	})
 	
 	 output$rechartPie <- renderEcharts({
-		plotArray <- datasetInput()
+		plotArray <<- datasetInput()
 		recharts.init()	
 		class(plotArray) <- "integer"
 		mm <<- ePie(plotArray)
-		class(mm) <-"list"
+		mm <- mm + eTitle(title="test")
+		mm <- mm + option(size=c(500,500))
+		class(mm) <- "list"
 		return(mm)
 	})
  })
  
- # runApp("E:/kuaipan/recharts/recharts/inst/shiny/recharts_shiny_pie/")
+ # runApp("E:/kuaipan/git/recharts/inst/shiny/recharts_shiny_pie/")
  
  

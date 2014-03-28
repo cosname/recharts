@@ -25,5 +25,8 @@ Collate:
     'ePoints.R'
     'eRadar.R'
     'plot.recharts.R'
+	'optSetUtils.R'
     'utils.R'
     'zzz.R'
+    'chartOpt.R'
+

@@ -10,99 +10,145 @@
 #' options(encoding="UTF-8")
 #' Sys.setlocale("LC_CTYPE","chs")
 #' load(url('http://yzhou.org/recharts/ChinaGDP.RData'))
-#' ChinaGDP
+#' 
 #' plot(eMap(ChinaGDP))
 
-eMap = function(dat, opt=list()) {
-
-    if(is.null(opt$toolbox$show)) {
-        opt$toolbox$show = TRUE
-    }
-
-    if(is.null(opt$toolbox$feature$mark)) {
-        opt$toolbox$feature$mark = TRUE
-    }
-
-    if(is.null(opt$toolbox$feature$dataView)) {
-        opt$toolbox$feature$dataView = TRUE
-    }
-
-    if(is.null(opt$toolbox$feature$restore)) {
-        opt$toolbox$feature$restore = TRUE
-    }    
+eMap = function(dat, namevar=NULL, datavar=1:ncol(dat), size = c(1024, 768), region="china", color=c("#1e90ff", "#f0ffff"),
+	title = NULL, subtitle = NULL, title.x = "center", title.y = "top", 
+	legend = TRUE, legend.x = "left", legend.y= "top", legend.orient="horizontal", 
+	toolbox = TRUE, toolbox.orient = "horizontal", toolbox.x = "right", toolbox.y = "top", 
+	dataRange = TRUE, dataRange.x="left", dataRange.y="bottom", dataRange.min=NULL, dataRange.max=NULL,
+	dataRange.calculable=TRUE, dataRange.text=c("high", "low"), dataRange.orient="horizontal",
+	dataView = FALSE, readOnly = FALSE, mark=TRUE, dataZoom=FALSE,
+	tooltip = TRUE, tooltip.trigger="item", formatter="", 
+	calculable=FALSE, xlab = NULL, ylab=NULL,
+	showLabel=TRUE, opt = list()) {
 	
-	if(is.null(opt$toolbox$feature$saveAsImage)) {
-        opt$toolbox$feature$saveAsImage = TRUE
-    }  
+	region = switch(region,
+		beijing = "北京",
+		shanghai = "上海",
+		tianjin = "天津",
+		heilongjiang = "黑龙江",
+		neimenggu = "内蒙古",
+		jilin = "吉林",
+		liaoning = "辽宁",
+		tianjin = "天津",
+		hebei = "河北",
+		shandong = "山东",
+		shanxi = "山西",
+		shannxi = "陕西",
+		ningxia = "宁夏",
+		gansu = "甘肃",
+		qinghai = "青海",
+		xizang = "西藏",
+		xinjinag = "新疆",
+		sichuan = "四川",
+		yunnan = "云南",
+		guizhou = "贵州",
+		chongqing = "重庆",
+		guangxi = "广西",
+		guangdong = "广东",
+		hainan = "海南",
+		taiwan = "台湾",
+		macau = "澳门",
+		hongkong = "香港",
+		fujian = "福建",
+		jiangxi = "江西",
+		hunan = "湖南",
+		hunbei = "湖北",
+		anhui = "安徽",
+		zhejiang = "浙江",
+		jiangsu = "江苏",
+		henan = "河南",
+		region
+	)
+	
+	if(class(datavar) == "integer" | class(datavar) == "numeric"){
+		datavar = colnames(dat)[datavar]
+		datavar = datavar[!is.na(datavar)]
+	}else{
+		datavar = datavar[datavar%in%colnames(dat)]
+	}
+	
+	if (missing(namevar)| is.null(namevar)){
+		insertColumn <- rownames(dat)
+		dat <- cbind(insertColumn, dat)
+		colnames(dat)[1] <- "region"
+		namevar = "region"
+	}
 
-    if(is.null(opt$tooltip$trigger)) {
-        opt$tooltip$trigger = 'item'
-    }	
+	if(length(namevar) > 1) namevar=namevar[1]
+	if(class(namevar) == "integer" | class(namevar) == "numeric"){
+		namevar = colnames(dat)[as.numeric(namevar)]
+	}else if(!namevar %in% colnames(dat)){
+		namevar = colnames(dat)[1]
+	}
+
+	if(length(datavar) == 0) datavar = colnames(dat)[2]
+	if(length(namevar) == 0) namevar = colnames(dat)[1]
+
+	validData <- dat[,c(namevar, datavar)]
+
+	# legendData set
+	legendData <- datavar
+	opt$legend = legendSet(legend=legend, data=legendData, legend.x=legend.x, legend.y=legend.y, orient=legend.orient)
+
+	valueDf <- dat[,datavar]
+	
+	# option$title format.
+	opt$title = tilteSet(title = title, subtitle=subtitle,
+			title.x = title.x, title.y = title.y)
+	
+	opt$calculable = calculableSet(calculable = calculable)
+
+	# opt$tooltip format, not open to user now.
+	opt$tooltip = tooltipSet( tooltip=tooltip,trigger=tooltip.trigger,
+			formatter = "", islandFormatter="")
+
+	opt$toolbox = toolboxSet(toolbox=toolbox, toolbox.x=toolbox.x, toolbox.y=toolbox.y, orient=toolbox.orient,
+				dataView=dataView, mark=mark, dataZoom = dataZoom, magicType = FALSE, restore = TRUE, readOnly = readOnly,
+				saveAsImage=TRUE)
 
 
-    names = colnames(dat)
-    if(is.null(opt$legend$data)) {
-    	opt$legend$data = names
-     }  
+	if(missing(dataRange.min)|is.null(dataRange.min)){
+		dataRange.min=min(validData[,datavar], na.rm = TRUE)
+	}
 
-    if(is.null(opt$dataRange$min)) {
-    	opt$dataRange$min = min(dat, na.rm = TRUE)
-     }  
+	if(missing(dataRange.max)|is.null(dataRange.max)){
+		dataRange.max=max(validData[,datavar], na.rm = TRUE)
+	}
 
-    if(is.null(opt$dataRange$max)) {
-    	opt$dataRange$max = max(dat, na.rm = TRUE)
-     }  
-
-     if(is.null(opt$dataRange$text)) {
-    	opt$dataRange$text = c('High','Low')
-     }  
-         
-     if(is.null(opt$dataRange$calculable)) {
-    	opt$dataRange$calculable = TRUE
-     }  
-             
-    
-    if(is.null(opt$series)) {
-        opt$series =  vector("list", length(names))
-    } else if(length(opt$series)!=length(names)) {
-        stop('Lengh of opt:series should be the same with nol(y).')
-    }
-
-    for(i in 1:length(names)) {
-
-    	datFrame = data.frame(name=rownames(dat), value=dat[,i]) 
-    	datList = split(datFrame, 1:dim(datFrame)[1])
-    	names(datList) = NULL
-
-        if(is.null(opt$series[[i]]$name)) {
-            opt$series[[i]]$name = names[i]
-        }
-
-        if(is.null(opt$series[[i]]$type)) {
-            opt$series[[i]]$type = 'map'
-        }
-
-        if(is.null(opt$series[[i]]$mapType)) {
-            opt$series[[i]]$mapType = 'china'
-        }
-
-
-        if(is.null(opt$series[[i]]$itemStyle$normal$label$show)) {
-            opt$series[[i]]$itemStyle$normal$label$show = TRUE
-        }
-
-        if(is.null(opt$series[[i]]$itemStyle$emphasis$label$show)) {
-            opt$series[[i]]$itemStyle$emphasis$label$show = TRUE
-        }
-
-        if(is.null(opt$series[[i]]$data)) { 
-            opt$series[[i]]$data = datList
-        }
-    }
-
+	opt$dataRange = dataRangeSet(dataRange=dataRange, calculable=dataRange.calculable, dataRange.x=dataRange.x, dataRange.y=dataRange.y,
+		dataRange.text = dataRange.text, color=color, precision=1, orient=dataRange.orient, min=dataRange.min, max=dataRange.max)		
+				
+	opt$series =  vector("list", length(datavar))
+    for(i in 1:length(datavar)){		
+		outputData <- list()
+		#print(datavar[i])
+		outputData <- lapply(1:nrow(validData), FUN = function(X){
+			list( name= validData[X, namevar], value = validData[X, datavar[i]], selected="false")
+		})
+		
+		opt$series[[i]] = list(
+			name = datavar[i],
+			type = "map",
+			mapType = region,
+			itemStyle = list(
+				normal = list(
+					label = list(show=showLabel)
+				)
+			),
+			data = outputData
+		)
+	}	
+	
 
 	jsonStr <- toJSON(opt, pretty=TRUE)
+	outList <- .rechartsOutput(jsonStr, charttype="eMap", size=size)
+	opt$size = size
+	output <- list(outList=outList, opt=opt)
+	class(output) <- c("recharts", "eMap", "list")
 	
-	outList <- .rechartsOutput(jsonStr, charttype="eMap")
-	return(outList)
+	### output list format
+	return(output)
 }

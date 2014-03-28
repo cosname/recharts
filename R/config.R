@@ -5,7 +5,7 @@ configHtml = function(opt, outfile, jsdir, style) {
 	Sys.sleep(0.02)
 
 	if(is.null(jsdir)) {
-		jsdir = 'http://echarts.baidu.com/doc/example/www/js/'
+		jsdir = 'http://echarts.baidu.com/doc/asset/js/esl/'
 	}
 
 	jsdir = gsub('/$', '', jsdir)
@@ -15,11 +15,11 @@ configHtml = function(opt, outfile, jsdir, style) {
 
 	echartsIn = "
 <div id='ID' style='STYLE'></div>
-
+    
 <script type='text/javascript'>
     // Step:3 conifg ECharts's path, link to echarts.js from current page.
     require.config({
-        paths:{
+        paths:{ 
             'echarts': 'eJS',
             'echarts/chart/bar' : 'eJS',
             'echarts/chart/line': 'eJS',
@@ -31,7 +31,7 @@ configHtml = function(opt, outfile, jsdir, style) {
             'echarts/chart/radar': 'eJS'
         }
     });
-
+    
     // Step:4 require echarts and use it in the callback.
     require(
         [
@@ -47,7 +47,7 @@ configHtml = function(opt, outfile, jsdir, style) {
         ],
         function(ec) {
             var EChart_ID = ec.init(document.getElementById('ID'));
-            var option_ID = OPT
+            var option_ID = OPT            
             EChart_ID.setOption(option_ID);
         }
     );
@@ -67,7 +67,7 @@ configHtml = function(opt, outfile, jsdir, style) {
 		return(echartsOut)
 	}
 
-	head = "
+	head = "		
 <!DOCTYPE html>
 <html lang='en'>
 <head>
@@ -85,8 +85,8 @@ configHtml = function(opt, outfile, jsdir, style) {
 "
 	head = gsub('esl', esl, head)
 	echartsOut = paste(head, echartsOut, foot, sep='\n\n\n')
-
-
+	
+    
     outfile = ifelse(is.character(outfile), outfile, id)
 	outfile = gsub('.html$', '', outfile)
     outfile = paste(outfile, '.html' , sep='')

@@ -4,21 +4,22 @@
 #'
 #' @param dat    vector, names will be treated as labels
 #' @param opt    option of ECharts.
-#' @return The HTML code as a character string.
+#' @return T	he HTML code as a character string.
 #' @export
 #' @examples
 #' x = runif(6)
 #' names(x) = LETTERS[1:6]
 #' plot(ePie(x))
 
-ePie = function(dat, xvar=NULL, namevar=NULL, type=c("pie", "rose"), roseType=c("radias", "area"),
-	windowSize = c(500, 500), main = NULL, subtitle = NULL, titlePos.x = c("center", "left", "right"),
-	titlePos.y = c("top", "center", "bottom"), legend.x = c("center", "left", "right"), legend.y= c("bottom", "center", "top"),
-	legend.orient=c("horizontal", "vertical"),xlab = NULL, toolbox = TRUE, readOnly = TRUE, mark=FALSE, showLabel=TRUE) 
-	{
-    
-	opt = list()
-	
+ePie = function(dat, size = c(1024, 768), xvar=NULL, namevar=NULL, type=c("pie", "rose"), roseType=c("radias", "area"),
+	title = NULL, subtitle = NULL, title.x = "center", title.y = "top", 
+	legend = TRUE, legend.x = "left", legend.y= "top", legend.orient="horizontal", 
+	toolbox = TRUE, toolbox.orient = "horizontal", toolbox.x = "right", toolbox.y = "top", 
+	dataView = TRUE, readOnly = FALSE, mark=TRUE, dataZoom=FALSE, magicType=TRUE,
+	tooltip = TRUE, tooltip.trigger="item", formatter="", axis.scale=TRUE,
+	xlab=FALSE, ylab=FALSE,	calculable=TRUE, showLabel=TRUE, opt = list())
+{	
+
 	type <- match.arg(type)
 	roseType <- match.arg(roseType)
 	
@@ -35,56 +36,38 @@ ePie = function(dat, xvar=NULL, namevar=NULL, type=c("pie", "rose"), roseType=c(
 	}
 	
 	# option$title format.
-	if (is.null(main)){
+	if (is.null(title)){
 		if (type == "rose"){
-			main = paste("rose plot for", roseType, "type")
+			ifelse(roseType == "area", headerInfo = "Area", headerInfo = "Radius")
+			title = paste("RoseType！！！！", headerInfo, "Mode")
 		}else{
-			main = "pie chart of recharts"
+			title = "Pie Chart"
 		}
 	}
-	if (is.null(subtitle)){
-		subtitle = ""
-	}
-	opt$title = list(
-		text = main,
-		subtext = subtitle,
-		x = match.arg(titlePos.x), 
-		y = match.arg(titlePos.y)
-	)
 	
+	# option$title format.
+	opt$title = tilteSet(title = title, subtitle=subtitle,
+			title.x = title.x, title.y = title.y)
+	
+	opt$calculable = calculableSet(calculable = calculable)
+
 	# opt$tooltip format, not open to user now.
-	opt$tooltip = list(
-		trigger = "item",
-		formatter = "{a} <br/>{b} : {c} ({d}%)"
-	)
+	opt$tooltip = tooltipSet( tooltip=tooltip,trigger=tooltip.trigger,
+			formatter = "", islandFormatter="")
 	
-	# toolbox format
-	opt$toolbox=list(
-		show = ifelse(toolbox, "true", "false"),
-		feature = list(
-			mark = ifelse(mark, "true", "false"),
-			dataView = list(readOnly = ifelse(readOnly, "true", "false")),
-			restore = "true",
-			saveAsImage = "true"
-		)
-	)
-	
-	# format legend
-	opt$legend = list(
-		orient = match.arg(legend.orient),
-		x = match.arg(legend.x),
-		y = match.arg(legend.y),
-		data = dat[[namevar]]
-	)
-	
-	opt$calculable = TRUE
+	opt$toolbox = toolboxSet(toolbox=toolbox, toolbox.x=toolbox.x, toolbox.y=toolbox.y, orient=toolbox.orient,
+				dataView=dataView, mark=mark, dataZoom = dataZoom, magicType = magicType, restore = TRUE, readOnly = readOnly,
+				saveAsImage=TRUE)
+
+				
+	opt$legend = legendSet( legend=legend, data=dat[[namevar]], legend.x=legend.x, legend.y=legend.y, orient=legend.orient)
 	
 	datFrame = data.frame(value=dat[[xvar]], name=dat[[namevar]])
     datList = split(datFrame, 1:dim(datFrame)[1])
     names(datList) = NULL
 	
 	#showLabelLine=showLabel
-	# now we don't support the multiple graph in one canvas
+	#now we don't support the multiple graph in one canvas
 	opt$series = list(
 		list(
 			name = paste(type, "chart"),
@@ -104,13 +87,15 @@ ePie = function(dat, xvar=NULL, namevar=NULL, type=c("pie", "rose"), roseType=c(
 			),
 			data = datList   
 		)
-	)	
+	)
 	
-	
-
 	jsonStr <- toJSON(opt, pretty=TRUE)
+	outList <- .rechartsOutput(jsonStr, charttype="ePie", size=size)
+	opt$size = size
+	output <- list(outList=outList, opt=opt)
+	class(output) <- c("recharts", "ePie", "list")
 	
-	outList <- .rechartsOutput(jsonStr, charttype="ePie")
-	return(outList)
+	### output list format
+	return(output)
 }
 

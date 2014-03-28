@@ -7,7 +7,7 @@
 #' The matrix should have colnames or rownames.
 #' @param propertyDf   optional, dataframe which contain the metadata for the nodes. 
 #' It could contain category, value and color columns. The colnames and rownames are required.
-#' @param opt    option of ECharts.
+#' @param opt option of ECharts.
 #' @return The HTML code as a character string.
 #' @export
 #' @examples
@@ -20,9 +20,9 @@
 
 #####################################
 ##  The network graph:
-##	    Jobs(10)
-##	  //1    \\2
-##       //    3   \\
+##	       Jobs(10)
+##	      //1    \\2
+##       //    3  \\
 ##    Gates(9)----Obama(8)
 ##
 ##  The weighted network Matrix would be:
@@ -66,27 +66,38 @@
 
 # rownames(propertyDf) = propertyDf$name
 
-# eForce(networkMatrix=networkMatrix, propertyDf=propertyDf, outfile='Jobs')
+# eForce(networkMatrix=networkMatrix, propertyDf=propertyDf)
 
 
-eForce = function(networkMatrix, propertyDf=NULL, opt=list()) {
+eForce = function(networkMatrix, propertyDf=NULL, size = c(1024, 768),
+	maxR=25, minR=15, density=0.05, attractiveness=1.2, showLabel=TRUE, 
+	title = NULL, subtitle = NULL, title.x = "center", title.y = "top", 
+	legend = TRUE, legend.x = "left", legend.y= "top", legend.orient="horizontal", 
+	toolbox = TRUE, toolbox.orient = "horizontal", toolbox.x = "right", toolbox.y = "top", 
+	dataView = FALSE, readOnly = TRUE, mark=TRUE, dataZoom=FALSE,
+	tooltip = TRUE, tooltip.trigger="item", formatter="", 
+	calculable=FALSE, xlab = NULL, ylab=NULL, opt = list() ) {
 	## networkMatrix would be a symmetric matrix
 	## if the propertyDf is null, all the category and value are 0 as default.
 	
-	opt$legend = list()
+	# option$title format.
+	opt$title = tilteSet(title = title, subtitle=subtitle,
+			title.x = title.x, title.y = title.y)
+	
 
-	if(is.null(opt$tooltip)) {
-		opt$tooltip$trigger = 'item'
-		opt$tooltip$formatter = '{a} : {b}'
-    }
+	opt$calculable = calculableSet(calculable = calculable)
+
+	# opt$tooltip format, not open to user now.
+	opt$tooltip = tooltipSet( tooltip=tooltip,trigger=tooltip.trigger,
+			formatter = "", islandFormatter="")
+
 	
-	if(is.null(opt$title)) {
-		opt$title$text = 'network Matrix Ouput'
-		opt$title$subtext = ''
-		opt$title$x = "right"
-		opt$title$y = "bottom"
-    }	
 	
+	opt$toolbox = toolboxSet(toolbox=toolbox, toolbox.x=toolbox.x, toolbox.y=toolbox.y, orient=toolbox.orient,
+				dataView=dataView, mark=mark, dataZoom = dataZoom, magicType = FALSE, restore = TRUE, readOnly = readOnly,
+				saveAsImage=TRUE)
+
+	### data format and data map.
 	if(!is.null(propertyDf) && (nrow(propertyDf) != nrow(networkMatrix))){
 		warning("dat matrix doesn't have the same length to propertyDf. The propertyDf will be ignored.")
 		propertyDf = NULL
@@ -159,13 +170,7 @@ eForce = function(networkMatrix, propertyDf=NULL, opt=list()) {
 				)
 			)
 		))
-		
-		opt$legend = list(
-			x = "left",
-			data = list("Default")
-		)
-		
-		
+		categoryList = list("Default")
 	}else{
 		if(is.null(propertyDf$value)){
 			# if the propertyDf has no column named value, the value will set to 0.
@@ -187,10 +192,9 @@ eForce = function(networkMatrix, propertyDf=NULL, opt=list()) {
 		}
 		
 		categoryList = unique(propertyDf$category)
-		opt$legend = list(
-			x="left",
-			data = categoryList
-		)
+		
+		legendData = categoryList
+
 		nodesOutput <- lapply(colnames(networkMatrix), FUN = function(nodeName){
 			indexOfDf = which(rownames(propertyDf) == nodeName)[1]
 			if(is.na (indexOfDf)){
@@ -226,25 +230,28 @@ eForce = function(networkMatrix, propertyDf=NULL, opt=list()) {
 			}
 		)
 	}
+	
+	#legendData set
+	
 
 	if(is.null(opt$series$type)) {
 		opt$series$type = "force"
 	}
 	
 	if(is.null(opt$series$minRadius)) {
-		opt$series$minRadius = 15
+		opt$series$minRadius = minR
 	}
 		
 	if(is.null(opt$series$maxRadius)) {
-		opt$series$maxRadius = 25
+		opt$series$maxRadius = maxR
 	}
 
 	if(is.null(opt$series$density)) {
-		opt$series$density = 0.05
+		opt$series$density = density
 	}
 		
 	if(is.null(opt$series$attractiveness)) {
-		opt$series$attractiveness = 1.2
+		opt$series$attractiveness = attractiveness
 	}
 		
 	if(is.null(opt$series$itemStyle)) {
@@ -265,29 +272,43 @@ eForce = function(networkMatrix, propertyDf=NULL, opt=list()) {
 					show = "true"
 				),
 				nodeStyle = list(
-					r = 30
+					r = maxR
 				)
 			)
 		)
 	}
-		
+	#legend setting
+		# option$legend Should set at last...
+	# if(legend){
+	#	opt$legend = list(
+	#		show =  "true",
+	#		x = matchPos.x(legend.x),
+	#		y = matchPos.y(legend.y),
+	#		orient =  match.arg(legend.orient)
+	#	)
+	#}else{
+	#	opt$legend = list(
+	#		show = ifelse(legend, "true", "false")
+	#	)
+	#}
+	
+	opt$legend = legendSet( legend=legend, data=categoryList, legend.x=legend.x, legend.y=legend.y, orient=legend.orient)
+
 	
 	opt$series$itemStyle = itemStyleOutput
 	opt$series$categories = categoriesOutput
 	opt$series$nodes = nodesOutput
 	opt$series$links = linksOutput
-	
-		
 	opt$series = list(opt$series)
+
+	jsonStr <- toJSON(opt, pretty=TRUE)
+	outList <- .rechartsOutput(jsonStr, charttype="eForce", size=size)
+	opt$size = size
+	output <- list(outList=outList, opt=opt)
+	class(output) <- c("recharts", "eForce", "list")
 	
 	### output list format
+	return(output)
+}
 	
-	jsonStr <- toJSON(opt, pretty=TRUE)
-	
-	outList <- .rechartsOutput(jsonStr, charttype="eForce")
-	return(outList)
-	
-	
-}		
-		
 	

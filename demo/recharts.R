@@ -1,14 +1,19 @@
 
 # Line Plot
+require(recharts)
 recharts.eLine <- eLine(WorldPhones)
+
+bb <- recharts.eLine 
+plot(bb+ eTitle(title="11", x=10, y=10))
+
 plot(recharts.eLine)
 pause()
 
 
 #  Area Plot
-# recharts.eArea <- eArea(WorldPhones)
-# plot(recharts.eArea)
-# pause()
+recharts.eArea <- eArea(WorldPhones)
+plot(recharts.eArea)
+pause()
 
 
 # Scatter Plot
@@ -54,10 +59,9 @@ plot(recharts.eRadar)
 pause()
 
 # Map
-options(encoding="UTF-8")
 Sys.setlocale("LC_CTYPE","chs")
 load(url('http://yzhou.org/recharts/ChinaGDP.RData'))
-recharts.eMap <- eMap(ChinaGDP, opt=list(title=list(text='2008~2010 GDP Data Visulization')))
+recharts.eMap <- eMap(ChinaGDP,title='2008~2010 GDP Data Visulization')
 plot(recharts.eMap)
 pause()
 
@@ -70,8 +74,6 @@ pause <- function(){
 }
 
 # force Chart
-options(encoding="UTF-8")
-Sys.setlocale("LC_CTYPE","chs")
 networkMatrix <- matrix(c(
 	c(0, 1, 2, 1, 2, 3, 6, 6, 1, 1, 1 ),
 	c(1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ),
