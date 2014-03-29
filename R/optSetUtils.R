@@ -56,7 +56,6 @@ tooltipSet = function(tooltip, trigger=c("item","axis"), formatter="", islandFor
 	returnList$formatter = formatter
 	returnList$islandFormatter = islandFormatter			
 	return(returnList)
-
 }
 
 toolboxSet = function(toolbox=TRUE, toolbox.x="left", toolbox.y="top", orient=c("horizontal", "vertical"), 

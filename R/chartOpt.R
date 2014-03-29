@@ -91,7 +91,7 @@ eToolboxSet = function(e1, ...)
 		e1$opt$toolbox$feature$dataZoom = ifelse(settings$dataZoom, "true", "false")
 	}
 	if (!is.null(settings$magicType)){
-		e1$opt$toolbox$feature$magicType = ifelse(settings$magicType, c("line", "bar"), "false")
+		e1$opt$toolbox$feature$magicType = ifelse(settings$magicType, list(c("line", "bar")), "false")
 	}
 	if (!is.null(settings$restore)){
 		e1$opt$toolbox$feature$restore = ifelse(settings$restore, "true", "false")

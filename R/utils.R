@@ -54,7 +54,9 @@ pause <- function(){
 
 matchPos.x <- function(x){
 	X <- tryCatch({
-		as.numeric(x)
+		x <- as.numeric(x)
+		x <- ifelse(is.na(x), "", x)
+		return(x)
 	},warning = function(w){
 		match.arg(x,c("center", "left", "right"))
 	})
@@ -63,7 +65,9 @@ matchPos.x <- function(x){
 
 matchPos.y <- function(y){
 	Y <- tryCatch({
-		as.numeric(y)
+		y <- as.numeric(y)
+		y <- ifelse(is.na(y), "", y)
+		return(y)
 	},warning = function(w){
 		match.arg(y,c("bottom", "center", "top"))
 	})

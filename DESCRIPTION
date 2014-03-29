@@ -5,6 +5,7 @@ Version: 0.01
 Author: Taiyun WEI, Yang ZHOU
 Depends:
     RJSONIO,
+	shiny(>= 0.9.1),
     tools
 Suggests:
     plyr,
@@ -29,3 +30,4 @@ Collate:
     'utils.R'
     'zzz.R'
     'chartOpt.R'
+    'lazyPlot.R'
