@@ -120,9 +120,9 @@ eCalculableSet = function(e1, ...)
 		wm_2 <- paste("Acceptable calculable set: ", paste( usedSettings, collapse=", "), ".", sep="")
 		warning(paste(wm_1, wm_2, sep="\n\r"))
 	}
-	# option$toolbox format.
+	# option$calcuable format.
 	if (!is.null(settings$calculable)){
-		e1$opt$toolbox$calculable = ifelse(settings$calculable, "true", "false")
+		e1$opt$calculable = ifelse(settings$calculable, "true", "false")
 	}
 	return(.list2JSON(e1))
 
@@ -672,4 +672,41 @@ ePolarSet = function(e1, ...)
 	}
 	
 	return(.list2JSON(e1))
+}
+
+
+#' recharts set fucntion
+#'
+#' An shell function for setting arguments of the recharts object.
+#'
+#' @param obj  recharts object.
+#' @return The output list of recharts as a list.
+#' @export 
+
+optionSet <- function(e1, ...){
+
+	settings <- list(...)$optionList
+	print(settings)
+	if(length(settings) == 0){
+		return(FALSE)
+	}
+
+	usedSettings = c("size", "calcuable")
+
+	unusedSettings <- setdiff(names(settings), usedSettings)
+	if (length(unusedSettings)>0){
+		wm_1 <- paste("unused eOption setting inputs: ", paste(unusedSettings, collapse=","), ".", sep="")
+		wm_2 <- paste("Acceptable eOption set: ", paste( usedSettings, collapse=", "), ".", sep="")
+		warning(paste(wm_1, wm_2, sep="\n\r"))
+	}
+	
+	if(length(settings$size) == 2){
+		e1$opt$size = as.numeric(settings$size)
+	}
+		
+	if (!is.null(settings$calculable)){
+		e1$opt$calculable = ifelse(settings$calculable, "true", "false")
+	}
+	return(.list2JSON(e1))
+
 }

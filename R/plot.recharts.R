@@ -114,69 +114,6 @@ print.recharts <- function (x, tag = NULL, file = "", ...)
 
 
 
-#' recharts set fucntion
-#'
-#' An shell function for setting arguments of the recharts object.
-#'
-#' @param obj  recharts object.
-#' @return The output list of recharts as a list.
-#' @export 
-
-set <- function(x, optionList=NULL, ...){
-	
-	if(is.null(optionList)){
-		settings <- list(...)
-	}else{
-		settings <- optionList
-	}
-	
-	
-	print(settings)
-	# settings <- list(title = 1, size = c(500,600))
-	switch(class(x)[2],
-		eForce = {
-			argList <- c("size", "title", "subtitle", "title.x", "title.y", "legend", "legend.x", "legend.y", "legend.oreint", 
-				"toolbox", "toolbox.x", "toolbox.y", "readOnly", "mark", "showLabel", "tooltip.formatter", 
-				"minRadius", "maxRadius", "density", "attractiveness")
-			setList <- settings[names(settings) %in% argList]
-			
-			mappedList <- c("size", "title$text", "title$subtext", "title$x", "title$y", "legend$show", "legend$x", "legend$y", "legend$oreint",
-				"toolbox$show", "toolbox$x", "toolbox$y", "toolbox$feature$readOnly", "toolbox$feature$mark", 
-				"series[[1]]$itemStyle$normal$label$show", "tooltip$formatter", 
-				"series[[1]]$minRadius", "series[[1]]$maxRadius", "series[[1]]$density", "series[[1]]$attractiveness")
-			
-			nameOfSetList <- mappedList[ match(names(setList), argList)]
-			
-			names(setList) <- nameOfSetList
-			for (i in 1:length(setList)){
-				name = nameOfSetList[i]
-				print(name)
-				#print(class(setList[i]))
-				if(class(unlist(setList[i])) == "character"){
-					eval( parse(text = sprintf("x$opt$%s='%s'", name, setList[i])))
-				}else{
-					eval( parse(text = sprintf("x$opt$%s=%s", name, setList[i])))
-				}
-			}
-			
-			# modify the opt list as the showable option is not open to current echarts.
-			print(x$opt$legend$show)
-			if(x$opt$legend$show=="false" | x$opt$legend$show==FALSE){
-				x$opt$legend = list(show = "false")
-			}else{
-				x$opt$legend$show = "true"
-			}
-			
-			# print( x$opt$legend)
-			# print( x$opt$title)
-			# print( x$opt$toolbox)
-			
-			return(.list2JSON(x))
-
-		}
-	)
-}
-
 #' Reports whether x is a option object
 #' @param x An object to test
 #' @export
@@ -198,6 +135,10 @@ option <- function(...) {
 #' @export
 #'
 eTitle = function(...){
+	elements <- list(...)
+	structure(elements, class ="option")
+}
+eOption = function(...){
 	elements <- list(...)
 	structure(elements, class ="option")
 }
@@ -239,7 +180,7 @@ ePolar = function(...){
 	e2name <- strstrip(e2name)
 	functionName = gsub("\\(.*", "", e2name)
 	print(functionName)
-	setFuncList <- c("eTitle", "eToolbox", "eCalculable", "eLegend", "eTooltip", "eDataRange",
+	setFuncList <- c("eOption", "eTitle", "eToolbox", "eCalculable", "eLegend", "eTooltip", "eDataRange",
 		"eAxis.X", "eAxis.Y", "ePolar", "option")
 	if (!functionName %in% setFuncList){
 		stop(paste("unspported eCharts setting function inputs", functionName))
@@ -322,10 +263,10 @@ ePolar = function(...){
 				return(ePolarSet(e1, optionList=e2))
 			}
 		},
-		option = {
+		eOption = {
 			if ("recharts" %in% class(e1) & is.option(e2)){
 				class(e2) <- "list"
-				return(set(e1, optionList=e2))
+				return(optionSet(e1, optionList=e2))
 			}
 		}
 	)
