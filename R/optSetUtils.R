@@ -62,9 +62,9 @@ toolboxSet = function(toolbox=TRUE, toolbox.x="left", toolbox.y="top", orient=c(
 		dataView=TRUE, readOnly=TRUE, mark = TRUE, restore=TRUE, dataZoom=FALSE, saveAsImage=TRUE, magicType=FALSE)
 {
 	if (magicType){
-		magicType = c("line", "bar")
+		magicType = list( show = "true", type = c("line", "bar", "stack", "tiled"))
 	}else{
-		magicType <- "false"
+		magicType <- list( show  = "false")
 	}
 	
 	if (!dataView){
@@ -74,11 +74,11 @@ toolboxSet = function(toolbox=TRUE, toolbox.x="left", toolbox.y="top", orient=c(
 			y = matchPos.y(toolbox.y),
 			orient = match.arg(orient),
 			feature = list(
-				mark = ifelse(mark, "true", "false"),
-				dataZoom = ifelse(dataZoom, "true", "false"),
+				mark = list( show = ifelse(mark, "true", "false")),
+				dataZoom = list( show = ifelse(dataZoom, "true", "false")),
 				magicType = magicType,
-				restore = ifelse(restore, "true", "false"),
-				saveAsImage = ifelse(saveAsImage, "true", "false")
+				restore = list( show =ifelse(restore, "true", "false")),
+				saveAsImage = list( show =ifelse(saveAsImage, "true", "false"))
 			)
 		)
 	}else{
@@ -88,12 +88,12 @@ toolboxSet = function(toolbox=TRUE, toolbox.x="left", toolbox.y="top", orient=c(
 			y = matchPos.y(toolbox.y),
 			orient = match.arg(orient),
 			feature = list(
-				mark = ifelse(mark, "true", "false"),
-				dataZoom = ifelse(dataZoom, "true", "false"),
+				mark = list( show =ifelse(mark, "true", "false")),
+				dataZoom = list( show =ifelse(dataZoom, "true", "false")),
 				magicType = magicType,
-				restore = ifelse(restore, "true", "false"),
-				dataView = list(readOnly = ifelse(readOnly, "true", "false")),
-				saveAsImage = ifelse(saveAsImage, "true", "false")
+				restore = list( show =ifelse(restore, "true", "false")),
+				dataView = list( show =list(readOnly = ifelse(readOnly, "true", "false"))),
+				saveAsImage = list( show =ifelse(saveAsImage, "true", "false"))
 			)
 		)
 	}
@@ -123,17 +123,17 @@ legendSet = function(legend=TRUE, data=NULL, orient = c("horizontal", "vertical"
 }
 	
 dataRangeSet = function(dataRange=TRUE, max=NULL, min=NULL, dataRange.text=c("high","low"), dataRange.x="left", dataRange.y="bottom",
-			precision=1, calculable=TRUE, color=c("#1e90ff", "#f0ffff"), orient=c("horizontal", "vertical"))
+			precision=1, calculable=TRUE, color=c("#1e90ff", "#f0ffff"), orient=c("vertical", "horizontal"))
 {
 
 	if (length(color) >= 2){
-		color = color[1, length(color)]
+		color = color[c(1, length(color))]
 	}else{
 		color = c("#1e90ff", "#f0ffff")
 	}	
 	
 	if (length(dataRange.text) >= 2){
-		dataRange.text = dataRange.text[1, length(dataRange.text)]
+		dataRange.text = dataRange.text[c(1, length(dataRange.text))]
 	}else{
 		dataRange.text = c("high","low")
 	}
@@ -290,5 +290,55 @@ polarSet = function(name=NULL, ymin=NULL, ymax=NULL, center=NULL, radius=NULL, s
 	return(returnList)
 }
 
-
-
+dataZoomSet = function(show=FALSE, realtime=TRUE, orient=c("horizontal", "vertical"), x=NULL, y=NULL, zoomLock=FALSE,
+				start = 0, end = 100, width = NULL, height = NULL, backgroundColor= "#eee",
+				databackgroundColor = "#ccc", fillerColor="rgba(50,205,50,0.4)", 
+				handleColor = "rgba(70,130,180,0.8)", xAxisIndex=NULL, yAxisIndex=NULL)
+{
+	# type = match.arg(type)
+	
+	returnList <- list(
+			show = ifelse(show, "true", "false"),
+			realtime = ifelse(realtime, "true", "false"),
+			orient = match.arg(orient),
+			zoomLock = ifelse(zoomLock, "true", "false"),
+			start = as.numeric(start),
+			end = as.numeric(end),
+			backgroundColor = backgroundColor,
+			databackgroundColor = databackgroundColor,
+			fillerColor = fillerColor,
+			handleColor = handleColor,
+	)
+	
+	if(!is.null(x) && !is.na(as.numeric(x))){
+		returnList$x = as.numeric(x)
+	}else{
+		returnList$x = NULL
+	}
+	
+	if(!is.null(y) && !is.na(as.numeric(y))){
+		returnList$y = as.numeric(y)
+	}else{
+		returnList$y = NULL
+	}
+	
+	if(!is.null(width) && !is.na(as.numeric(width))){
+		returnList$width = as.numeric(width)
+	}else{
+		returnList$width = NULL
+	}
+	
+	if(!is.null(height) && !is.na(as.numeric(height))){
+		returnList$height = as.numeric(height)
+	}else{
+		returnList$height = NULL
+	}	
+	if(length(xAxisIndex) > 0){
+		returnList$xAxisIndex = as.list(xAxisIndex)
+	}
+	if(length(yAxisIndex) > 0){
+		returnList$yAxisIndex = as.list(yAxisIndex)
+	}
+	
+	return(returnList)
+}

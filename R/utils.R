@@ -149,7 +149,83 @@ matchPos.y <- function(y){
 }
 
 cnformat <- function (cnstring) {
+	# this function is copied from tmcn(Author: Jian Li)
+	# since the tmcn package is not available from Git or Cran.
 	
+	isUTF8 <- function (string, combine = FALSE) 
+	{
+		string <- .verifyChar(string)
+		if (length(string) == 1) {
+			OUT <- .C("CWrapper_encoding_isutf8", characters = as.character(string), 
+				numres = 2L)
+			OUT <- as.logical(OUT$numres)
+		}
+		else {
+			if (combine) {
+				OUT <- isUTF8(paste(string, collapse = ""))
+			}
+			else {
+				OUT <- as.vector(sapply(string, isUTF8))
+			}
+		}
+		return(OUT)
+	}
+	
+	isGB2312 <- function (string, combine = FALSE) 
+	{
+		string <- .verifyChar(string)
+		if (length(string) == 1) {
+			OUT <- .C("CWrapper_encoding_isgb2312", characters = as.character(string), 
+				numres = 2L)
+			OUT <- as.logical(OUT$numres)
+		}
+		else {
+			if (combine) {
+				OUT <- isGB2312(paste(string, collapse = ""))
+			}
+			else {
+				OUT <- as.vector(sapply(string, isGB2312))
+			}
+		}
+		return(OUT)
+	}
+	isBIG5 <- function (string, combine = FALSE) 
+	{
+		string <- .verifyChar(string)
+		if (length(string) == 1) {
+			OUT <- .C("CWrapper_encoding_isbig5", characters = as.character(string), 
+				numres = 2L)
+			OUT <- as.logical(OUT$numres)
+		}
+		else {
+			if (combine) {
+				OUT <- isBIG5(paste(string, collapse = ""))
+			}
+			else {
+				OUT <- as.vector(sapply(string, isBIG5))
+			}
+		}
+		return(OUT)
+	}	
+	isGBK <- function (string, combine = FALSE) 
+	{
+		string <- .verifyChar(string)
+		if (length(string) == 1) {
+			OUT <- .C("CWrapper_encoding_isbig5", characters = as.character(string), 
+				numres = 2L)
+			OUT <- as.logical(OUT$numres)
+		}
+		else {
+			if (combine) {
+				OUT <- isBIG5(paste(string, collapse = ""))
+			}
+			else {
+				OUT <- as.vector(sapply(string, isBIG5))
+			}
+		}
+		return(OUT)
+	}
+
 	.verifyChar <- function (vec){
 		if (!is.atomic(vec)) 
 			stop("Must be an atomic vector!", call. = FALSE)
@@ -190,6 +266,7 @@ strstrip <- function(string, side = c("both", "left", "right")) {
 }
 
 .list2JSON <- function(x){
+	classArray <- class(x)
 	size = x$opt$size
 	x$opt$size = NULL
 	
@@ -197,8 +274,27 @@ strstrip <- function(string, side = c("both", "left", "right")) {
 	outList <- .rechartsOutput(jsonStr, charttype="eForce", size=size)
 	x$opt$size = size
 	output <- list(outList=outList, opt=x$opt)
-	class(output) <- c("recharts", "eForce", "list")
+	class(output) <- classArray
 	return(output)
 }
 
+tooltipFormat <- function(){
+	library(tmcn)
+	Sys.setlocale("LC_ALL", "chs")
+	tooltipTable <- read.csv("E:/kuaipan/git/recharts/inst/tooltip/tooltip.csv", stringsAsFactors=F)
+	script_template <- "$('#%s').attr('title', '%s')"
+	script_template_2 <- "$('label[for=%s]').attr('title', '%s')"
+	write("",file="E:/kuaipan/git/recharts/inst/tooltip/tooltip.js", sep="\n", append =F)
+	for (i in 1:length(tooltipTable[,1])){
+		tooltip = tooltipTable[i,]
+		name = tooltip["ID"]
+		tipstr = capture.output(catUTF8(paste0("Ä¬ÈÏÖµ£º", tooltip["defaultValue"], "\\n", tooltip['description'])))
 
+		script_tooltip <- sprintf(script_template, name, tipstr)
+		script_tooltip_2 <- sprintf(script_template_2, name, tipstr)
+		#print( script_tooltip)
+		write(script_tooltip,file="E:/kuaipan/git/recharts/inst/tooltip/tooltip.js", sep="\n", append =T)
+		write(script_tooltip_2,file="E:/kuaipan/git/recharts/inst/tooltip/tooltip.js", sep="\n", append =T)
+		
+	}
+}

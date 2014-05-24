@@ -174,6 +174,10 @@ ePolar = function(...){
 	elements <- list(...)
 	structure(elements, class ="option")
 }
+eDataZoom = function(...){
+	elements <- list(...)
+	structure(elements, class ="option")
+}
 
 
 "setFunctionName" <- function(e2name){
@@ -181,7 +185,7 @@ ePolar = function(...){
 	functionName = gsub("\\(.*", "", e2name)
 	print(functionName)
 	setFuncList <- c("eOption", "eTitle", "eToolbox", "eCalculable", "eLegend", "eTooltip", "eDataRange",
-		"eAxis.X", "eAxis.Y", "ePolar", "option")
+		"eAxis.X", "eAxis.Y", "ePolar", "eDataZoom", "option")
 	if (!functionName %in% setFuncList){
 		stop(paste("unspported eCharts setting function inputs", functionName))
 		return(FALSE)
@@ -261,6 +265,12 @@ ePolar = function(...){
 			if ("recharts" %in% class(e1) & is.option(e2)){
 				class(e2) <- "list"
 				return(ePolarSet(e1, optionList=e2))
+			}
+		},		
+		eDataZoom = {
+			if ("recharts" %in% class(e1) & is.option(e2)){
+				class(e2) <- "list"
+				return(eDataZoomSet(e1, optionList=e2))
 			}
 		},
 		eOption = {

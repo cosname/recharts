@@ -13,7 +13,7 @@
 #' 
 #' plot(eMap(ChinaGDP))
 
-eMap = function(dat, namevar=NULL, datavar=1:ncol(dat), size = c(1024, 768), region="china", color=c("#1e90ff", "#f0ffff"),
+eMap = function(dat, namevar=NULL, datavar=2:ncol(dat), size = c(1024, 768), region="china", color=c("#1e90ff", "#f0ffff"),
 	title = NULL, subtitle = NULL, title.x = "center", title.y = "top", 
 	legend = TRUE, legend.x = "left", legend.y= "top", legend.orient="horizontal", 
 	toolbox = TRUE, toolbox.orient = "horizontal", toolbox.x = "right", toolbox.y = "top", 
@@ -41,7 +41,7 @@ eMap = function(dat, namevar=NULL, datavar=1:ncol(dat), size = c(1024, 768), reg
 		gansu = "甘肃",
 		qinghai = "青海",
 		xizang = "西藏",
-		xinjinag = "新疆",
+		xinjiang = "新疆",
 		sichuan = "四川",
 		yunnan = "云南",
 		guizhou = "贵州",
@@ -69,7 +69,7 @@ eMap = function(dat, namevar=NULL, datavar=1:ncol(dat), size = c(1024, 768), reg
 	}else{
 		datavar = datavar[datavar%in%colnames(dat)]
 	}
-	
+	print(datavar)
 	if (missing(namevar)| is.null(namevar)){
 		insertColumn <- rownames(dat)
 		dat <- cbind(insertColumn, dat)
@@ -91,21 +91,21 @@ eMap = function(dat, namevar=NULL, datavar=1:ncol(dat), size = c(1024, 768), reg
 
 	# legendData set
 	legendData <- datavar
-	opt$legend = legendSet(legend=legend, data=legendData, legend.x=legend.x, legend.y=legend.y, orient=legend.orient)
+	opt$legend = recharts:::legendSet(legend=legend, data=legendData, legend.x=legend.x, legend.y=legend.y, orient=legend.orient)
 
 	valueDf <- dat[,datavar]
 	
 	# option$title format.
-	opt$title = tilteSet(title = title, subtitle=subtitle,
+	opt$title = recharts:::tilteSet(title = title, subtitle=subtitle,
 			title.x = title.x, title.y = title.y)
 	
-	opt$calculable = calculableSet(calculable = calculable)
+	opt$calculable = recharts:::calculableSet(calculable = calculable)
 
 	# opt$tooltip format, not open to user now.
-	opt$tooltip = tooltipSet( tooltip=tooltip,trigger=tooltip.trigger,
+	opt$tooltip = recharts:::tooltipSet( tooltip=tooltip,trigger=tooltip.trigger,
 			formatter = "", islandFormatter="")
 
-	opt$toolbox = toolboxSet(toolbox=toolbox, toolbox.x=toolbox.x, toolbox.y=toolbox.y, orient=toolbox.orient,
+	opt$toolbox = recharts:::toolboxSet(toolbox=toolbox, toolbox.x=toolbox.x, toolbox.y=toolbox.y, orient=toolbox.orient,
 				dataView=dataView, mark=mark, dataZoom = dataZoom, magicType = FALSE, restore = TRUE, readOnly = readOnly,
 				saveAsImage=TRUE)
 
@@ -118,9 +118,9 @@ eMap = function(dat, namevar=NULL, datavar=1:ncol(dat), size = c(1024, 768), reg
 		dataRange.max=max(validData[,datavar], na.rm = TRUE)
 	}
 
-	opt$dataRange = dataRangeSet(dataRange=dataRange, calculable=dataRange.calculable, dataRange.x=dataRange.x, dataRange.y=dataRange.y,
+	opt$dataRange = recharts:::dataRangeSet(dataRange=dataRange, calculable=dataRange.calculable, dataRange.x=dataRange.x, dataRange.y=dataRange.y,
 		dataRange.text = dataRange.text, color=color, precision=1, orient=dataRange.orient, min=dataRange.min, max=dataRange.max)		
-				
+	
 	opt$series =  vector("list", length(datavar))
     for(i in 1:length(datavar)){		
 		outputData <- list()

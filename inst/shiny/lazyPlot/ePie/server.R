@@ -28,43 +28,22 @@ shinyServer(function(input, output) {
 			restore = input$toolbox.restore,
 			saveAsImage = input$toolbox.saveAsImage
 		)
-		
-		legendSetting = list( 
-			show = input$legend.show,
-			x = input$legend.x,
-			y = input$legend.y,
-			orient = input$legend.orient,
-			data = input$toolbox.data
-		)		
-		
-		calculableSetting = list( 
-			calcuable = input$calcuable
-		)
-		
-
 		return(list(
-			titleSetting =titleSetting, 
-			toolboxSetting = toolboxSetting,
-			calculableSetting = calculableSetting,
-			legendSetting = legendSetting
-			))
+			titleSetting=titleSetting, 
+			toolboxSetting= toolboxSetting))
 	})
 	
 	 output$lazePlot <- renderEcharts({
 		recharts.init()
 		titleSetting <<- datasetInput()$titleSetting
 		toolboxSetting <<- datasetInput()$toolboxSetting
-		calculableSetting <<- datasetInput()$calculableSetting
-		legendSetting <<- datasetInput()$legendSetting
 
 		mm <- recharts:::eTitleSet(tempEchartsObject, optionList=titleSetting)
 		mm <- recharts:::eToolboxSet(mm, optionList=toolboxSetting)
-		mm <- recharts:::eLegendSet(mm, optionList=legendSetting)
-		mm <- recharts:::eCalculableSet(mm, optionList=calculableSetting)
 		return(mm)
 	})
  })
  
- # runApp("D:/kuaipan/git/recharts/inst/shiny/lazyPlot/")
+ # runApp("E:/kuaipan/git/recharts/inst/shiny/lazyPlot/")
  
  

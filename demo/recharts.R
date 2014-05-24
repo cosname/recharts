@@ -59,14 +59,13 @@ plot(recharts.eRadar)
 pause()
 
 # Map
+recharts_oldLocal <- Sys.getlocale("LC_CTYPE")
 Sys.setlocale("LC_CTYPE","chs")
-load(url('http://yzhou.org/recharts/ChinaGDP.RData'))
-recharts.eMap <- eMap(ChinaGDP,title='2008~2010 GDP Data Visulization')
+cityDF = read.csv(system.file( "tooltip", "cityDF.csv", package="recharts"), stringsAsFactor=F)
+recharts.eMap <- eMap(cityDF, namevar=1, datavar = 2, title='2008~2010 GDP Data Visulization')
 plot(recharts.eMap)
+Sys.setlocale("LC_CTYPE", recharts_oldLocal)
 pause()
-
-
-
 
 ## recharts demo
 pause <- function(){  
