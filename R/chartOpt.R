@@ -227,28 +227,28 @@ eDataZoomSet = function(e1, ...)
 		warning(paste(wm_1, wm_2, sep="\n\r"))
 	}
 	
-	#ÊÇ·ñÏÔÊ¾£¬µ±showÎªtrueÊ±Ôò½Ó¹ÜÊ¹ÓÃÖ¸¶¨ÀàÄ¿ÖáµÄÈ«²¿ÏµÁĞÊı¾İ£¬Èç²»Ö¸¶¨Ôò½Ó¹ÜÈ«²¿Ö±½Ç×ø±êÏµÊı¾İ¡£
+	#æ˜¯å¦æ˜¾ç¤ºï¼Œå½“showä¸ºtrueæ—¶åˆ™æ¥ç®¡ä½¿ç”¨æŒ‡å®šç±»ç›®è½´çš„å…¨éƒ¨ç³»åˆ—æ•°æ®ï¼Œå¦‚ä¸æŒ‡å®šåˆ™æ¥ç®¡å…¨éƒ¨ç›´è§’åæ ‡ç³»æ•°æ®ã€‚
 	if (!is.null(settings$show)){
 		e1$opt$dataZoom$show = ifelse(settings$show, "true", "false")
 	}	
 	
-	# Ëõ·Å±ä»¯ÊÇ·ñÊµÊ±ÏÔÊ¾£¬½¨ÒéĞÔÄÜ½ÏµÍµÄä¯ÀÀÆ÷»òÊı¾İÁ¿¾Ş´óÊ±²»Æô¶¯ÊµÊ±Ğ§¹û¡£
+	# ç¼©æ”¾å˜åŒ–æ˜¯å¦å®æ—¶æ˜¾ç¤ºï¼Œå»ºè®®æ€§èƒ½è¾ƒä½çš„æµè§ˆå™¨æˆ–æ•°æ®é‡å·¨å¤§æ—¶ä¸å¯åŠ¨å®æ—¶æ•ˆæœã€‚
 	if (!is.null(settings$realtime)){
 		e1$opt$dataZoom$realtime = ifelse(settings$realtime, "true", "false")
 	}
 	
-	# ²¼¾Ö·½Ê½£¬Ä¬ÈÏÎªË®Æ½²¼¾Ö£¬¿ÉÑ¡Îª£º'horizontal' | 'vertical'
+	# å¸ƒå±€æ–¹å¼ï¼Œé»˜è®¤ä¸ºæ°´å¹³å¸ƒå±€ï¼Œå¯é€‰ä¸ºï¼š'horizontal' | 'vertical'
 	if (!is.null(settings$orient)){
 		e1$opt$dataZoom$orient = match.arg(settings$orient, c("horizontal", "vertical"))
 	}
 	
-	# Ë®Æ½°²·ÅÎ»ÖÃ£¬Ä¬ÈÏÎª¸ù¾İgrid²ÎÊıÊÊÅä£¬×İÏò²¼¾ÖÄ¬ÈÏ×ó²à£¬¿ÉÖ¸¶¨ {number}£¨×óÉÏ½Çx×ø±ê£¬µ¥Î»px£©
+	# æ°´å¹³å®‰æ”¾ä½ç½®ï¼Œé»˜è®¤ä¸ºæ ¹æ®gridå‚æ•°é€‚é…ï¼Œçºµå‘å¸ƒå±€é»˜è®¤å·¦ä¾§ï¼Œå¯æŒ‡å®š {number}ï¼ˆå·¦ä¸Šè§’xåæ ‡ï¼Œå•ä½pxï¼‰
 	if(!is.null(settings$x) && !is.na(as.numeric(settings$x))){
 		e1$opt$dataZoom$x = as.numeric(settings$x)
 	}else{
 		e1$opt$dataZoom$x = NULL
 	}
-	# ´¹Ö±°²·ÅÎ»ÖÃ£¬Ä¬ÈÏÎª¸ù¾İgrid²ÎÊıÊÊÅä£¬×İÏò²¼¾ÖÄ¬ÈÏÏÂ·½£¬¿ÉÖ¸¶¨ {number}£¨×óÉÏ½Çy×ø±ê£¬µ¥Î»px£©
+	# å‚ç›´å®‰æ”¾ä½ç½®ï¼Œé»˜è®¤ä¸ºæ ¹æ®gridå‚æ•°é€‚é…ï¼Œçºµå‘å¸ƒå±€é»˜è®¤ä¸‹æ–¹ï¼Œå¯æŒ‡å®š {number}ï¼ˆå·¦ä¸Šè§’yåæ ‡ï¼Œå•ä½pxï¼‰
 	if(!is.null(settings$y) && !is.na(as.numeric(settings$y))){
 		e1$opt$dataZoom$y = as.numeric(settings$y)
 	}else{
@@ -256,19 +256,19 @@ eDataZoomSet = function(e1, ...)
 	}
 
 	
-	# Êı¾İËõ·Å£¬Ñ¡ÔñÆğÊ¼±ÈÀı£¬Ä¬ÈÏÎª0£¬´ÓÊ×¸öÊı¾İÆğÑ¡Ôñ¡£
+	# æ•°æ®ç¼©æ”¾ï¼Œé€‰æ‹©èµ·å§‹æ¯”ä¾‹ï¼Œé»˜è®¤ä¸º0ï¼Œä»é¦–ä¸ªæ•°æ®èµ·é€‰æ‹©ã€‚
 	if(!is.null(settings$start) && !is.na(as.numeric(settings$start))){
 		e1$opt$dataZoom$start = as.numeric(settings$start)
 	}else{
 		e1$opt$dataZoom$start = NULL
 	}
 
-	# Êı¾İËõ·ÅËø£¬Ä¬ÈÏÎªfalse£¬µ±ÉèÖÃÎªtrueÊ±Ñ¡ÔñÇøÓò²»ÄÜÉìËõ£¬¼´(end - start)Öµ±£³Ö²»±ä£¬½öÄÜ×öÊı¾İÂşÓÎ¡£
+	# æ•°æ®ç¼©æ”¾é”ï¼Œé»˜è®¤ä¸ºfalseï¼Œå½“è®¾ç½®ä¸ºtrueæ—¶é€‰æ‹©åŒºåŸŸä¸èƒ½ä¼¸ç¼©ï¼Œå³(end - start)å€¼ä¿æŒä¸å˜ï¼Œä»…èƒ½åšæ•°æ®æ¼«æ¸¸ã€‚
 	if (!is.null(settings$zoomLock)){
 		e1$opt$dataZoom$zoomLock = ifelse(settings$zoomLock, "true", "false")
 	}
 	
-	# Êı¾İËõ·Å£¬Ñ¡Ôñ½áÊø±ÈÀı£¬Ä¬ÈÏÎª100£¨%£©£¬µ½×îºóÒ»¸öÊı¾İÑ¡Ôñ½áÊø¡£
+	# æ•°æ®ç¼©æ”¾ï¼Œé€‰æ‹©ç»“æŸæ¯”ä¾‹ï¼Œé»˜è®¤ä¸º100ï¼ˆ%ï¼‰ï¼Œåˆ°æœ€åä¸€ä¸ªæ•°æ®é€‰æ‹©ç»“æŸã€‚
 	if(!is.null(settings$end) && !is.na(as.numeric(settings$end))){
 		e1$opt$dataZoom$end = as.numeric(settings$end)
 	}else{
@@ -276,14 +276,14 @@ eDataZoomSet = function(e1, ...)
 	}
 
 	
-	# Ö¸¶¨¿í¶È£¬ºáÏò²¼¾ÖÊ±Ä¬ÈÏÎª¸ù¾İgrid²ÎÊıÊÊÅä£¬×İÏò²¼¾ÖÊÇÄ¬ÈÏÎª30£¬¿ÉÖ¸¶¨ {number}£¨¿í¶È£¬µ¥Î»px£©
+	# æŒ‡å®šå®½åº¦ï¼Œæ¨ªå‘å¸ƒå±€æ—¶é»˜è®¤ä¸ºæ ¹æ®gridå‚æ•°é€‚é…ï¼Œçºµå‘å¸ƒå±€æ˜¯é»˜è®¤ä¸º30ï¼Œå¯æŒ‡å®š {number}ï¼ˆå®½åº¦ï¼Œå•ä½pxï¼‰
 	
 	if(!is.null(settings$width) && !is.na(as.numeric(settings$width))){
 		e1$opt$dataZoom$width = as.numeric(settings$width)
 	}else{
 		e1$opt$dataZoom$width = NULL
 	}
-	# Ö¸¶¨¿í¶È£¬ºáÏò²¼¾ÖÊ±Ä¬ÈÏÎª¸ù¾İgrid²ÎÊıÊÊÅä£¬×İÏò²¼¾ÖÊÇÄ¬ÈÏÎª30£¬¿ÉÖ¸¶¨ {number}£¨¿í¶È£¬µ¥Î»px£©
+	# æŒ‡å®šå®½åº¦ï¼Œæ¨ªå‘å¸ƒå±€æ—¶é»˜è®¤ä¸ºæ ¹æ®gridå‚æ•°é€‚é…ï¼Œçºµå‘å¸ƒå±€æ˜¯é»˜è®¤ä¸º30ï¼Œå¯æŒ‡å®š {number}ï¼ˆå®½åº¦ï¼Œå•ä½pxï¼‰
 	
 	if(!is.null(settings$height) && !is.na(as.numeric(settings$height))){
 		e1$opt$dataZoom$height = as.numeric(settings$height)
@@ -292,30 +292,30 @@ eDataZoomSet = function(e1, ...)
 	}
 
 	
-	# ±³¾°ÑÕÉ« '#eee'
+	# èƒŒæ™¯é¢œè‰² '#eee'
 	if (!is.null(settings$backgroundColor)){
 		e1$opt$dataZoom$backgroundColor = settings$backgroundColor
 	}
 	
-	# Êı¾İËõÂÔ±³¾°ÑÕÉ« '#ccc'
+	# æ•°æ®ç¼©ç•¥èƒŒæ™¯é¢œè‰² '#ccc'
 	if (!is.null(settings$databackgroundColor)){
 		e1$opt$dataZoom$databackgroundColor = settings$databackgroundColor
 	}
 
-	# Ñ¡ÔñÇøÓòÌî³äÑÕÉ« 'rgba(50,205,50,0.4)'
+	# é€‰æ‹©åŒºåŸŸå¡«å……é¢œè‰² 'rgba(50,205,50,0.4)'
 	if (!is.null(settings$fillerColor)){
 		e1$opt$dataZoom$fillerColor = settings$fillerColor
 	}
 	
-	# ¿ØÖÆÊÖ±úÑÕÉ« 'rgba(70,130,180,0.8)'
+	# æ§åˆ¶æ‰‹æŸ„é¢œè‰² 'rgba(70,130,180,0.8)'
 	if (!is.null(settings$handleColor)){
 		e1$opt$dataZoom$handleColor = settings$handleColor
 	}	
-	# µ±²»Ö¸¶¨Ê±Ä¬ÈÏ¿ØÖÆËùÓĞºáÏòÀàÄ¿£¬¿ÉÍ¨¹ıÊı×éÖ¸¶¨¶à¸öĞèÒª¿ØÖÆµÄºáÏòÀàÄ¿×ø±êÖáIndex£¬½öÒ»¸öÊ±¿ÉÖ±½ÓÎªÊı×Ö
+	# å½“ä¸æŒ‡å®šæ—¶é»˜è®¤æ§åˆ¶æ‰€æœ‰æ¨ªå‘ç±»ç›®ï¼Œå¯é€šè¿‡æ•°ç»„æŒ‡å®šå¤šä¸ªéœ€è¦æ§åˆ¶çš„æ¨ªå‘ç±»ç›®åæ ‡è½´Indexï¼Œä»…ä¸€ä¸ªæ—¶å¯ç›´æ¥ä¸ºæ•°å­—
 	if (!is.null(settings$xAxisIndex)){
 		e1$opt$dataZoom$xAxisIndex = as.list(settings$xAxisIndex)
 	}	
-	# µ±²»Ö¸¶¨Ê±Ä¬ÈÏ¿ØÖÆËùÓĞ×İÏòÀàÄ¿£¬¿ÉÍ¨¹ıÊı×éÖ¸¶¨¶à¸öĞèÒª¿ØÖÆµÄ×İÏòÀàÄ¿×ø±êÖáIndex£¬½öÒ»¸öÊ±¿ÉÖ±½ÓÎªÊı×Ö
+	# å½“ä¸æŒ‡å®šæ—¶é»˜è®¤æ§åˆ¶æ‰€æœ‰çºµå‘ç±»ç›®ï¼Œå¯é€šè¿‡æ•°ç»„æŒ‡å®šå¤šä¸ªéœ€è¦æ§åˆ¶çš„çºµå‘ç±»ç›®åæ ‡è½´Indexï¼Œä»…ä¸€ä¸ªæ—¶å¯ç›´æ¥ä¸ºæ•°å­—
 	if (!is.null(settings$yAxisIndex)){
 		e1$opt$dataZoom$yAxisIndex = as.list(settings$yAxisIndex)
 	}
@@ -834,41 +834,41 @@ optionSet <- function(e1, ...){
 	if (!is.null(settings$region)){
 		
 			newRegion = switch(settings$region,
-				beijing = "±±¾©",
-				shanghai = "ÉÏº£",
-				tianjin = "Ìì½ò",
-				heilongjiang = "ºÚÁú½­",
-				neimenggu = "ÄÚÃÉ¹Å",
-				jilin = "¼ªÁÖ",
-				liaoning = "ÁÉÄş",
-				tianjin = "Ìì½ò",
-				hebei = "ºÓ±±",
-				shandong = "É½¶«",
-				shanxi = "É½Î÷",
-				shannxi = "ÉÂÎ÷",
-				ningxia = "ÄşÏÄ",
-				gansu = "¸ÊËà",
-				qinghai = "Çàº£",
-				xizang = "Î÷²Ø",
-				xinjiang = "ĞÂ½®",
-				sichuan = "ËÄ´¨",
-				yunnan = "ÔÆÄÏ",
-				guizhou = "¹óÖİ",
-				chongqing = "ÖØÇì",
-				guangxi = "¹ãÎ÷",
-				guangdong = "¹ã¶«",
-				hainan = "º£ÄÏ",
-				taiwan = "Ì¨Íå",
-				macau = "°ÄÃÅ",
-				hongkong = "Ïã¸Û",
-				fujian = "¸£½¨",
-				jiangxi = "½­Î÷",
-				hunan = "ºşÄÏ",
-				hunbei = "ºş±±",
-				anhui = "°²»Õ",
-				zhejiang = "Õã½­",
-				jiangsu = "½­ËÕ",
-				henan = "ºÓÄÏ",
+				beijing = "åŒ—äº¬",
+				shanghai = "ä¸Šæµ·",
+				tianjin = "å¤©æ´¥",
+				heilongjiang = "é»‘é¾™æ±Ÿ",
+				neimenggu = "å†…è’™å¤",
+				jilin = "å‰æ—",
+				liaoning = "è¾½å®",
+				tianjin = "å¤©æ´¥",
+				hebei = "æ²³åŒ—",
+				shandong = "å±±ä¸œ",
+				shanxi = "å±±è¥¿",
+				shannxi = "é™•è¥¿",
+				ningxia = "å®å¤",
+				gansu = "ç”˜è‚ƒ",
+				qinghai = "é’æµ·",
+				xizang = "è¥¿è—",
+				xinjiang = "æ–°ç–†",
+				sichuan = "å››å·",
+				yunnan = "äº‘å—",
+				guizhou = "è´µå·",
+				chongqing = "é‡åº†",
+				guangxi = "å¹¿è¥¿",
+				guangdong = "å¹¿ä¸œ",
+				hainan = "æµ·å—",
+				taiwan = "å°æ¹¾",
+				macau = "æ¾³é—¨",
+				hongkong = "é¦™æ¸¯",
+				fujian = "ç¦å»º",
+				jiangxi = "æ±Ÿè¥¿",
+				hunan = "æ¹–å—",
+				hunbei = "æ¹–åŒ—",
+				anhui = "å®‰å¾½",
+				zhejiang = "æµ™æ±Ÿ",
+				jiangsu = "æ±Ÿè‹",
+				henan = "æ²³å—",
 				settings$region
 			)
 		for (i in 1:length(e1$opt$series)){
