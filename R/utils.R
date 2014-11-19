@@ -288,7 +288,7 @@ tooltipFormat <- function(){
 	for (i in 1:length(tooltipTable[,1])){
 		tooltip = tooltipTable[i,]
 		name = tooltip["ID"]
-		tipstr = capture.output(catUTF8(paste0("Ä¬ÈÏÖµ£º", tooltip["defaultValue"], "\\n", tooltip['description'])))
+		tipstr = capture.output(catUTF8(paste0("é»˜è®¤å€¼ï¼š", tooltip["defaultValue"], "\\n", tooltip['description'])))
 
 		script_tooltip <- sprintf(script_template, name, tipstr)
 		script_tooltip_2 <- sprintf(script_template_2, name, tipstr)
