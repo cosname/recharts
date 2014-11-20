@@ -39,7 +39,7 @@ ePie = function(dat, size = c(1024, 768), xvar=NULL, namevar=NULL, type=c("pie",
 	if (is.null(title)){
 		if (type == "rose"){
 			ifelse(roseType == "area", headerInfo = "Area", headerInfo = "Radius")
-			title = paste("RoseType！！！！", headerInfo, "Mode")
+			title = paste("RoseType_", headerInfo, "Mode")
 		}else{
 			title = "Pie Chart"
 		}

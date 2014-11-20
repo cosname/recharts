@@ -5,12 +5,12 @@ configHtml = function(opt, outfile, jsdir, style) {
 	Sys.sleep(0.02)
 
 	if(is.null(jsdir)) {
-		jsdir = 'http://echarts.baidu.com/doc/asset/js/esl/'
+		jsdir = 'http://echarts.baidu.com/build/dist'
 	}
 
 	jsdir = gsub('/$', '', jsdir)
 	eJS = paste(jsdir, 'echarts-map', sep = '/')
-	esl = paste(jsdir, 'esl.js', sep = '/')
+	esl = paste(jsdir, 'echarts.js', sep = '/')
 
 
 	echartsIn = "
@@ -20,15 +20,7 @@ configHtml = function(opt, outfile, jsdir, style) {
     // Step:3 conifg ECharts's path, link to echarts.js from current page.
     require.config({
         paths:{ 
-            'echarts': 'eJS',
-            'echarts/chart/bar' : 'eJS',
-            'echarts/chart/line': 'eJS',
-            'echarts/chart/scatter': 'eJS',
-            'echarts/chart/k': 'eJS',
-            'echarts/chart/pie': 'eJS',
-            'echarts/chart/map': 'eJS',
-            'echarts/chart/force': 'eJS',
-            'echarts/chart/radar': 'eJS'
+            'echarts': 'eJS'
         }
     });
     
@@ -67,7 +59,7 @@ configHtml = function(opt, outfile, jsdir, style) {
 		return(echartsOut)
 	}
 
-	head = "		
+	head = "
 <!DOCTYPE html>
 <html lang='en'>
 <head>

@@ -102,7 +102,7 @@ print.recharts <- function (x, tag = NULL, file = "", ...)
 	#print(tag)
 	if (exists("jsLoaderFlag")){
 		if (jsLoaderFlag && tag==".chart"){
-			output <- gsub("<script src='http://echarts.baidu.com/doc/example/www/js/esl.js'></script>","",output) 
+			output <- gsub("<script src='http://echarts.baidu.com/doc/example/www/js/echarts.js'></script>","",output) 
 		}
 		jsLoaderFlag <<- TRUE
 	}
@@ -112,6 +112,75 @@ print.recharts <- function (x, tag = NULL, file = "", ...)
     cat(output[.id], file = file, ...)
 }
 
+
+#' Reports whether x is a option object
+#' @param x An object to test
+#' @export
+plainPlot <- function(str){
+	if (missing(tag))
+		tag <- getOption("recharts.plot.tag")
+	if (is.null(tag) | !("recharts" %in% class(x))) {
+		if (!.isServerRunning()) {
+			tools:::startDynamicHelp()
+		}
+		env <- get(".httpd.handlers.env", asNamespace("tools"))
+		env[["recharts"]] <- .recharts.httpd.handler
+		root.dir <- tempdir()
+		print(paste("chart path", root.dir))
+		if (!file.exists(root.dir)) dir.create(root.dir, recursive = TRUE)
+		if (x$outList$type == "geoVis") {
+			file.copy(getOption("recharts.geoData.dir"), root.dir, recursive = TRUE)
+		}
+		
+		if ("recharts" %in% class(x)) {
+			chart.txt <- "<!DOCTYPE html PUBLIC \"-//W3C//DTD XHTML 1.0 Strict//EN\"\n        \"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd\">\n<html xmlns=\"http://www.w3.org/1999/xhtml\">\n<head>\n  <title>%s</title>\n  <meta http-equiv=\"content-type\" content=\"text/html;charset=GBK\" />\n  <style type=\"text/css\">\n    body {\n          color: #444444;\n          font-family: Arial,Helvetica,sans-serif;\n          font-size: 75%%;\n    }\n    a {\n          color: #4D87C7;\n          text-decoration: none;\n    }\n  </style>\n</head>\n<body>\n<p>\n  You find below the HTML code of the visualisation.<br />\n  You can copy and paste the code into an existing HTML page.<br />\n  For more information see also <a href=\"/library/googleVis/html/gvisMethods.html\">?print.recharts</a></p>\n<p><textarea rows=\"50\" name=\"html\" cols=\"80\">\n%s\n</textarea>\n</p>\n</body>\n</html>\n"
+			chart.txt <- sprintf(chart.txt, x$outList$chartid, gsub(">", 
+							"&gt;", gsub("<", "&lt;", paste(unlist(x$outList$html$chart), 
+											collapse = "\n"))))
+			cat(chart.txt, file = file.path(root.dir, paste("Chart_", 
+									x$outList$chartid, ".html", sep = "")))
+			file <- file.path(root.dir, paste(x$outList$chartid, ".html", 
+							sep = ""))
+		}else {
+			basex <- basename(x)
+			if (length(grep("htm", substr(basex, nchar(basex) - 
+											3, nchar(basex)))) < 1)
+				warning("The file does not appear to be an html file.\n")
+			file.copy(from = x, to = file.path(root.dir, basex), 
+					...)
+			file <- file.path(root.dir, basex)
+		}
+		print(x, file = file)
+		
+		if (Local){
+			file.copy(file.path(getOption("recharts.template.dir"), "js"), root.dir, recursive = TRUE )
+			localHTML <- readLines(file)
+			localHtml <- gsub("http://echarts.baidu.com/doc/example/www", ".", localHTML)
+			write(localHtml, file = file)
+			#.url <- file.path(root.dir, basename(file))
+			.url <- file
+		}else{
+			.url <- sprintf("http://127.0.0.1:%s/custom/recharts/%s", 
+					tools:::httpdPort, basename(file))
+		}
+		if (interactive()) {
+			browseURL(.url, ...)
+		}
+		else {
+			browseURL(.url, browser = "false", ...)
+		}
+		invisible(file)
+	}
+	else {
+		if ("recharts" %in% class(x)) {
+			return(print(x, tag = tag))
+		}
+		else {
+			return(print(x))
+		}
+	}
+	
+}
 
 
 #' Reports whether x is a option object
@@ -284,6 +353,33 @@ eDataZoom = function(...){
 
 #' @export
 "%+%" <- `+.recharts`
+
+#' Points charts
+#'
+#' ECharts style scatter charts. 
+#'
+#' @param dat    data.frame, should have two column or three colume. 
+#' If three, the third colume should be factor or character, it will be treated as category labels.
+#' @param opt    option of ECharts.
+#' @return The HTML code as a character string.
+#' @export
+#' @examples
+#' plot(ePlain(iris[,3:5]))
+
+ePlain = function(obj, size = c(1024, 768), opt = list())
+{
+	### ePoint data setting,
+	# preprocess data to xvar, yvar, namevar.
+
+	jsonStr <- toJSON(obj, pretty=TRUE)
+	outList <- .rechartsOutput_plain(jsonStr, charttype="ePoints", size=size)
+	#opt$size = size
+	output <- list(outList=outList, opt=opt)
+	class(output) <- c("recharts", "ePoints", "list")
+	
+	### output list format
+	return(output)
+}
 
 
 
