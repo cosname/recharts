@@ -63,7 +63,7 @@ ePie = function(dat, size = c(1024, 768), xvar=NULL, namevar=NULL, type=c("pie",
 	opt$legend = legendSet( legend=legend, data=dat[[namevar]], legend.x=legend.x, legend.y=legend.y, orient=legend.orient)
 	
 	datFrame = data.frame(value=dat[[xvar]], name=dat[[namevar]])
-    datList = split(datFrame, 1:dim(datFrame)[1])
+    datList = lapply(split(datFrame, seq_len(nrow(datFrame))), as.list)
     names(datList) = NULL
 	
 	#showLabelLine=showLabel
