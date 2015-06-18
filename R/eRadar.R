@@ -13,7 +13,7 @@
 #' rownames(dat) = dat[,1]
 #' dat = dat[, -1]
 #' dat
-#' plot(eRadar(dat))
+#' eRadar(dat)
 
 eRadar = function(dat, size = c(1024, 768), ymin=vector(), ymax=vector(),
 	title = NULL, subtitle = NULL, title.x = "center", title.y = "top", 
@@ -47,7 +47,7 @@ eRadar = function(dat, size = c(1024, 768), ymin=vector(), ymax=vector(),
 	datList = vector("list", nrow(dat))
 	for(i in 1:nrow(dat)){
 		datList[[i]]$name  = rownames(dat)[i]
-		datList[[i]]$value = unnames(dat[i,])
+		datList[[i]]$value = unnames(unlist(dat[i,]))
 	}
 	names(datList) = NULL
 
@@ -64,13 +64,12 @@ eRadar = function(dat, size = c(1024, 768), ymin=vector(), ymax=vector(),
     }
 	
 
-	jsonStr <- toJSON(opt, pretty=TRUE)
-	outList <- .rechartsOutput(jsonStr, charttype="eRadar", size=size)
 	opt$size = size
-	output <- list(outList=outList, opt=opt)
-	class(output) <- c("recharts", "eRadar", "list")
 	
 	### output list format
-	return(output)
+	chart = htmlwidgets::createWidget(
+		'echarts', opt, width = size[1], height = size[2], package = 'recharts'
+	)
+	chart
 	
 }

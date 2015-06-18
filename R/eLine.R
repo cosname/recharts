@@ -7,7 +7,7 @@
 #' @return The HTML code as a character string.
 #' @export
 #' @examples
-#' plot(eLine(WorldPhones))
+#' eLine(WorldPhones)
 
 
 eLine = function(dat, size = c(1024, 768), horiz = FALSE,
@@ -39,7 +39,7 @@ eLine = function(dat, size = c(1024, 768), horiz = FALSE,
 				dataView=dataView, mark=mark, dataZoom = dataZoom, magicType = magicType, restore = TRUE, readOnly = readOnly,
 				saveAsImage=TRUE)
 
-				
+
 	opt$legend = legendSet( legend=legend, data=colnames(dat), legend.x=legend.x, legend.y=legend.y, orient=legend.orient)
 	
 	if(match.arg(xlab.type, c("category" , "value")) == "category" & is.null(xlab.data)){
@@ -83,14 +83,13 @@ eLine = function(dat, size = c(1024, 768), horiz = FALSE,
 		opt$xAxis = opt$yAxis
 		opt$yAxis = tmp
 	}
-	jsonStr <- toJSON(opt, pretty=TRUE)
-	outList <- .rechartsOutput(jsonStr, charttype="eLine", size=size)
 	opt$size = size
-	output <- list(outList=outList, opt=opt)
-	class(output) <- c("recharts", "eLine", "list")
 	
 	### output list format
-	return(output)
+	chart = htmlwidgets::createWidget(
+		'echarts', opt, width = size[1], height = size[2], package = 'recharts'
+	)
+	chart
 
 }
 
@@ -103,7 +102,7 @@ eLine = function(dat, size = c(1024, 768), horiz = FALSE,
 #' @return The HTML code as a character string.
 #' @export
 #' @examples
-#' plot(eArea(WorldPhones))
+#' eArea(WorldPhones)
 
 eArea = function(dat, size = c(1024, 768), horiz = FALSE, stack="SUM",
 	title = NULL, subtitle = NULL, title.x = "center", title.y = "top", 
@@ -188,13 +187,13 @@ eArea = function(dat, size = c(1024, 768), horiz = FALSE, stack="SUM",
 		opt$xAxis = opt$yAxis
 		opt$yAxis = tmp
 	}
-	jsonStr <- toJSON(opt, pretty=TRUE)
-	outList <- .rechartsOutput(jsonStr, charttype="eArea", size=size)
+	
 	opt$size = size
-	output <- list(outList=outList, opt=opt)
-	class(output) <- c("recharts", "eArea", "list")
 	
 	### output list format
-	return(output)
+	chart = htmlwidgets::createWidget(
+		'echarts', opt, width = size[1], height = size[2], package = 'recharts'
+	)
+	chart
 
 }

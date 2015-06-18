@@ -1,18 +1,18 @@
 #' Force network graph
 #'
-#' ECharts style Force network graph visulize the social network matrix data.
+#' ECharts style 力导向图 graph visulize the social network matrix data.
 #'
 #' @param networkMatrix   required, a symmetric matrix, each cell value indicates 
 #' the weight of the two nodes and the 0 or NA cell would not be counted in. 
 #' The matrix should have colnames or rownames.
 #' @param propertyDf   optional, dataframe which contain the metadata for the nodes. 
 #' It could contain category, value and color columns. The colnames and rownames are required.
-#' @param opt option of ECharts.
+#' @param opt 力导向图选项.
 #' @return The HTML code as a character string.
 #' @export
 #' @examples
-#' testData <- matrix(1:25, nrow=5)
-#' plot(eForce(testData))
+#' testData <- matrix(1:25, nrow=5) #测试中文
+#' eForce(testData)
 
 
 
@@ -301,14 +301,13 @@ eForce = function(networkMatrix, propertyDf=NULL, size = c(1024, 768),
 	opt$series$links = linksOutput
 	opt$series = list(opt$series)
 
-	jsonStr <- toJSON(opt, pretty=TRUE)
-	outList <- .rechartsOutput(jsonStr, charttype="eForce", size=size)
 	opt$size = size
-	output <- list(outList=outList, opt=opt)
-	class(output) <- c("recharts", "eForce", "list")
 	
 	### output list format
-	return(output)
+	chart = htmlwidgets::createWidget(
+		'echarts', opt, width = size[1], height = size[2], package = 'recharts'
+	)
+	chart
 }
 	
 	

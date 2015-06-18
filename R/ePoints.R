@@ -8,9 +8,9 @@
 #' @return The HTML code as a character string.
 #' @export
 #' @examples
-#' plot(ePoints(iris[,3:5]))
+#' ePoints(iris[,3:5])
 
-ePoints = function(dat, size = c(1024, 768), xvar=NULL, yvar=NULL, namevar=NULL, power=2, precision=2,
+ePoints = function(dat, xvar=NULL, yvar=NULL, size = c(1024, 768),  namevar=NULL, power=2, precision=2,
 	title = NULL, subtitle = NULL, title.x = "center", title.y = "top", 
 	legend = TRUE, legend.data=NULL, legend.x = "left", legend.y= "top", legend.orient="horizontal", 
 	toolbox = TRUE, toolbox.orient = "horizontal", toolbox.x = "right", toolbox.y = "top", 
@@ -145,13 +145,14 @@ ePoints = function(dat, size = c(1024, 768), xvar=NULL, yvar=NULL, namevar=NULL,
         }
     }
 
-	jsonStr <- toJSON(opt, pretty=TRUE)
-	outList <- .rechartsOutput(jsonStr, charttype="ePoints", size=size)
+	#jsonStr <- toJSON(opt, pretty=TRUE)
+	#outList <- .rechartsOutput(jsonStr, charttype="ePoints", size=size)
 	opt$size = size
-	output <- list(outList=outList, opt=opt)
-	class(output) <- c("recharts", "ePoints", "list")
 	
 	### output list format
-	return(output)
+	chart = htmlwidgets::createWidget(
+		'echarts', opt, width = size[1], height = size[2], package = 'recharts'
+	)
+	chart
 }
 

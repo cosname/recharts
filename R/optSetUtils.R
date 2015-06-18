@@ -64,7 +64,7 @@ toolboxSet = function(toolbox=TRUE, toolbox.x="left", toolbox.y="top", orient=c(
 	if (magicType){
 		magicType = list( show = "true", type = c("line", "bar", "stack", "tiled"))
 	}else{
-		magicType <- list( show  = "false")
+		magicType <- list()
 	}
 	
 	if (!dataView){
@@ -119,7 +119,6 @@ legendSet = function(legend=TRUE, data=NULL, orient = c("horizontal", "vertical"
 			show="false"
 		))
 	}
-
 }
 	
 dataRangeSet = function(dataRange=TRUE, max=NULL, min=NULL, dataRange.text=c("high","low"), dataRange.x="left", dataRange.y="bottom",

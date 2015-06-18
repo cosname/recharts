@@ -14,8 +14,8 @@
 #' rownames(dat) = dat[,1]
 #' dat = dat[, -1]
 #' dat
-#' plot(eBar(dat))
-#' plot(eBar(dat, horiz = TRUE))
+#' eBar(dat)
+#' eBar(dat, horiz = TRUE)
 
 eBar = function(dat, size = c(1024, 768), horiz = FALSE,
 	title = NULL, subtitle = NULL, title.x = "center", title.y = "top", 
@@ -89,15 +89,22 @@ eBar = function(dat, size = c(1024, 768), horiz = FALSE,
 		opt$xAxis = opt$yAxis
 		opt$yAxis = tmp
 	}
-	jsonStr <- toJSON(opt, pretty=TRUE)
-	outList <- .rechartsOutput(jsonStr, charttype="eBar", size=size)
 	opt$size = size
-	output <- list(outList=outList, opt=opt)
-	class(output) <- c("recharts", "eBar", "list")
 	
 	### output list format
-	return(output)
-
-	
+	chart = htmlwidgets::createWidget(
+		'echarts', opt, width = size[1], height = size[2], package = 'recharts'
+	)
+	chart
 }
+
+
+
+
+
+
+
+
+
+
 
