@@ -7,11 +7,16 @@
 #' @return an htmlwidgets object which can be rendered by Browser.
 #' @export
 #' @examples
+#' library(recharts)
 #' x = round(runif(6) * 100)
 #' names(x) = LETTERS[1:6]
 #' eWordcloud(x) + eTitle(title="test")
+#' testData <- read.csv(system.file("examples", "testDataForMap.csv", package = "recharts"),stringsAsFactors=F) 
+#' testData$data2 <- testData$data2 * 100
+#' eWordcloud(head(testData), ~province, ~data2)
 
-eWordcloud = function(dat, namevar=NULL, xvar=NULL,  size = c(1024, 768),
+
+eWordcloud = function(dat, namevar=NULL, valvar=NULL,  size = NULL,
 	title = NULL, subtitle = NULL, title.x = "center", title.y = "top", 
 	legend = TRUE, legend.x = "left", legend.y= "top", legend.orient="horizontal", 
 	toolbox = TRUE, toolbox.orient = "horizontal", toolbox.x = "right", toolbox.y = "top", 
@@ -19,20 +24,31 @@ eWordcloud = function(dat, namevar=NULL, xvar=NULL,  size = c(1024, 768),
 	tooltip = TRUE, tooltip.trigger="item", formatter="", axis.scale=TRUE,
 	xlab=FALSE, ylab=FALSE,	calculable=TRUE, showLabel=TRUE, opt = list())
 {
-
-	
-	# format the dat to data.frame
-	if (class(dat) != "data.frame") dat <- as.data.frame(dat)
-	
-	# if the xvar is null, will use the first column of dat as default.	And check the xvar in the dat colnames.
-	if (is.null(xvar) || !xvar %in% colnames(dat)) xvar = colnames(dat)[1]
-	
-	# if the namevar is null, will use rownames of dat as default.	And check the xvar in the dat colnames.
-	if (is.null(namevar) || !namevar %in% colnames(dat)) {
-		dat[,"NAME"] = rownames(dat)
-		namevar = "NAME"
+	if(is.vector(dat) || is.array(dat)){
+		dat <- as.data.frame(dat)
+		valvar <- 1
+		dat$namevar <- rownames(dat)
+		namevar <- "namevar"
 	}
-	
+	else{
+		# if the input dat is not data.frame will format it into data.frame.
+		if (class(dat) != "data.frame") dat <- as.data.frame(dat)
+		
+		# if the user input argument namevar is null, will use colume one as name input
+		if(is.null(namevar)){
+			namevar <- 1
+		}else{
+			namevar = autoArgLabel(namevar, deparse(substitute(namevar)))
+			namevar = evalFormula(namevar, data)
+		}
+		if(is.null(valvar)){
+			valvar <- 2
+		}else{
+			valvar = autoArgLabel(valvar, deparse(substitute(valvar)))
+			valvar = evalFormula(valvar, data)
+		}
+	}
+
 	# option$title format.
 	opt$title = tilteSet(title = title, subtitle=subtitle,
 			title.x = title.x, title.y = title.y)
@@ -44,7 +60,7 @@ eWordcloud = function(dat, namevar=NULL, xvar=NULL,  size = c(1024, 768),
 			formatter = "", islandFormatter="")
 
 
-	datFrame = data.frame(value=dat[[xvar]], name=dat[[namevar]])
+	datFrame = data.frame(value=dat[[valvar]], name=dat[[namevar]])
     datList = unname(lapply(split(datFrame, seq_len(nrow(datFrame))), as.list))
 	
 	#showLabelLine=showLabel

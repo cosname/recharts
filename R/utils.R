@@ -10,6 +10,13 @@ evalFormula = function(x, data) {
   eval(x[[2]], data, environment(x))
 }
 
+# automatic labels from function arguments
+autoArgLabel = function(arg, auto) {
+  if (is.null(arg)) return('')
+  if (inherits(arg, 'formula')) return(deparse(arg[[2]]))
+  auto
+}
+
 # merge two lists by names, e.g. x = list(a = 1, b = 2), mergeList(x, list(b =
 # 3)) => list(a = 1, b = 3)
 mergeList = function(x, y) {
@@ -27,13 +34,6 @@ mergeList = function(x, y) {
     } else x[[i]] = yi
   }
   x
-}
-
-# automatic labels from function arguments
-autoArgLabel = function(arg, auto) {
-  if (is.null(arg)) return('')
-  if (inherits(arg, 'formula')) return(deparse(arg[[2]]))
-  auto
 }
 
 

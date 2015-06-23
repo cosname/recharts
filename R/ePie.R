@@ -10,31 +10,48 @@
 #' x = runif(6)
 #' names(x) = LETTERS[1:6]
 #' ePie(x) + eTitle("test")
+#' testData <- read.csv(system.file("examples", "testDataForMap.csv", package = "recharts"),stringsAsFactors=F) 
+#' ePie(head(testData), ~province, ~data2)
+#' ePie(dat, ~namevar, ~valvar)
 
-ePie = function(dat, namevar=NULL, xvar=NULL,  size = c(1024, 768),   type=c("pie", "rose"), roseType=c("radias", "area"),
+
+ePie = function(dat, namevar=NULL, valvar=NULL, size = NULL,   type=c("pie", "rose"), roseType=c("radias", "area"),
 	title = NULL, subtitle = NULL, title.x = "center", title.y = "top", 
 	legend = TRUE, legend.x = "left", legend.y= "top", legend.orient="horizontal", 
 	toolbox = TRUE, toolbox.orient = "horizontal", toolbox.x = "right", toolbox.y = "top", 
 	dataView = TRUE, readOnly = FALSE, mark=TRUE, dataZoom=FALSE, magicType=TRUE,
 	tooltip = TRUE, tooltip.trigger="item", formatter="", axis.scale=TRUE,
 	xlab=FALSE, ylab=FALSE,	calculable=TRUE, showLabel=TRUE, opt = list())
-{	
-
+{
 	type <- match.arg(type)
 	roseType <- match.arg(roseType)
-	
-	# format the dat to data.frame
-	if (class(dat) != "data.frame") dat <- as.data.frame(dat)
-	
-	# if the xvar is null, will use the first column of dat as default.	And check the xvar in the dat colnames.
-	if (is.null(xvar) || !xvar %in% colnames(dat)) xvar = colnames(dat)[1]
-	
-	# if the namevar is null, will use rownames of dat as default.	And check the xvar in the dat colnames.
-	if (is.null(namevar) || !namevar %in% colnames(dat)) {
-		dat[,"NAME"] = rownames(dat)
-		namevar = "NAME"
+	# if the input is an array or a vector, will use the names as the pie name,
+	# and use the value as the pie value
+	if(is.vector(dat) || is.array(dat)){
+		dat <- as.data.frame(dat)
+		valvar <- 1
+		dat$namevar <- rownames(dat)
+		namevar <- "namevar"
 	}
-	
+	else{
+		# if the input dat is not data.frame will format it into data.frame.
+		if (class(dat) != "data.frame") dat <- as.data.frame(dat)
+		
+		# if the user input argument namevar is null, will use colume one as name input
+		if(is.null(namevar)){
+			namevar <- 1
+		}else{
+			namevar = autoArgLabel(namevar, deparse(substitute(namevar)))
+			namevar = evalFormula(namevar, data)
+		}
+		if(is.null(valvar)){
+			valvar <- 2
+		}else{
+			valvar = autoArgLabel(valvar, deparse(substitute(valvar)))
+			valvar = evalFormula(valvar, data)
+		}
+	}
+
 	# option$title format.
 	if (is.null(title)){
 		if (type == "rose"){
@@ -60,9 +77,9 @@ ePie = function(dat, namevar=NULL, xvar=NULL,  size = c(1024, 768),   type=c("pi
 				saveAsImage=TRUE)
 
 				
-	opt$legend = legendSet( legend=legend, data=dat[[namevar]], legend.x=legend.x, legend.y=legend.y, orient=legend.orient)
+	opt$legend = legendSet( show=legend, data=dat[[namevar]], legend.x=legend.x, legend.y=legend.y, orient=legend.orient)
 	
-	datFrame = data.frame(value=dat[[xvar]], name=dat[[namevar]])
+	datFrame = data.frame(value=dat[[valvar]], name=dat[[namevar]])
     datList = lapply(split(datFrame, seq_len(nrow(datFrame))), as.list)
     names(datList) = NULL
 	

@@ -69,7 +69,7 @@
 # eForce(networkMatrix=networkMatrix, propertyDf=propertyDf)
 
 
-eForce = function(networkMatrix, propertyDf=NULL, size = c(1024, 768),
+eForce = function(networkMatrix, propertyDf=NULL, size = NULL,
 	maxR=25, minR=15, density=0.05, attractiveness=1.2, showLabel=TRUE, 
 	title = NULL, subtitle = NULL, title.x = "center", title.y = "top", 
 	legend = TRUE, legend.x = "left", legend.y= "top", legend.orient="horizontal", 
@@ -292,7 +292,7 @@ eForce = function(networkMatrix, propertyDf=NULL, size = c(1024, 768),
 	#	)
 	#}
 	
-	opt$legend = legendSet( legend=legend, data=categoryList, legend.x=legend.x, legend.y=legend.y, orient=legend.orient)
+	opt$legend = legendSet( show=legend, data=categoryList, legend.x=legend.x, legend.y=legend.y, orient=legend.orient)
 
 	
 	opt$series$itemStyle = itemStyleOutput

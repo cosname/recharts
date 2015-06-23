@@ -1,0 +1,516 @@
+
+<!DOCTYPE html>
+<html lang='en'>
+<head>
+    <meta charset='utf-8'>
+    <title>ECharts</title>
+    <!--Step:1 Import a module loader, such as http://echarts.baidu.com/doc/example/www/js/esl.js.js or require.js-->
+    <script src='http://echarts.baidu.com/doc/example/www/js/esl.js'></script>
+</head>
+
+<body>
+
+
+
+
+    <div id='ID_20131022000820_93000' style='height:500px;border:1px solid #ccc;padding:10px;'></div>
+
+    <script type='text/javascript'>
+    // Step:3 conifg ECharts's path, link to echarts.js from current page.
+    require.config({
+        paths:{
+            'echarts': 'http://echarts.baidu.com/doc/example/www/js/echarts-map',
+            'echarts/chart/bar' : 'http://echarts.baidu.com/doc/example/www/js/echarts-map',
+            'echarts/chart/line': 'http://echarts.baidu.com/doc/example/www/js/echarts-map',
+            'echarts/chart/scatter': 'http://echarts.baidu.com/doc/example/www/js/echarts-map',
+            'echarts/chart/k': 'http://echarts.baidu.com/doc/example/www/js/echarts-map',
+            'echarts/chart/pie': 'http://echarts.baidu.com/doc/example/www/js/echarts-map',
+            'echarts/chart/map': 'http://echarts.baidu.com/doc/example/www/js/echarts-map',
+            'echarts/chart/force': 'http://echarts.baidu.com/doc/example/www/js/echarts-map',
+            'echarts/chart/radar': 'http://echarts.baidu.com/doc/example/www/js/echarts-map'
+        }
+    });
+
+    // Step:4 require echarts and use it in the callback.
+    require(
+        [
+            'echarts',
+            'echarts/chart/bar',
+            'echarts/chart/line',
+            'echarts/chart/scatter',
+            'echarts/chart/k',
+            'echarts/chart/pie',
+            'echarts/chart/map',
+            'echarts/chart/force',
+            'echarts/chart/radar'
+        ],
+        function(ec) {
+            var EChart_ID_20131022000820_93000 = ec.init(document.getElementById('ID_20131022000820_93000'));
+            var option_ID_20131022000820_93000 = {
+ "title": {
+ "text": "2008~2010年大陆各省GDP占全国百分数"
+},
+"toolbox": {
+ "show": true,
+"feature": {
+ "mark": true,
+"dataView": true,
+"restore": true,
+"saveAsImage": true
+}
+},
+"tooltip": {
+ "trigger": "item"
+},
+"legend": {
+ "data": [ "2010年GDP百分比", "2009年GDP百分比", "2008年GDP百分比" ]
+},
+"dataRange": {
+ "min":   0.13,
+"max":  34.76,
+"precision":2,
+"text": [ "High", "Low" ],
+"calculable": true
+},
+"series": [
+ {
+ "name": "2010年GDP百分比",
+"type": "map",
+"mapType": "china",
+"itemStyle": {
+ "normal": {
+ "label": {
+ "show": true
+}
+},
+"emphasis": {
+ "label": {
+ "show": true
+}
+}
+},
+"data": [
+ {
+ "name": "广东",
+"value":  11.46
+},
+{
+ "name": "江苏",
+"value":  10.32
+},
+{
+ "name": "山东",
+"value":   9.76
+},
+{
+ "name": "浙江",
+"value":    6.9
+},
+{
+ "name": "河南",
+"value":   5.75
+},
+{
+ "name": "河北",
+"value":   5.08
+},
+{
+ "name": "辽宁",
+"value":    4.6
+},
+{
+ "name": "上海",
+"value":   4.28
+},
+{
+ "name": "四川",
+"value":   4.28
+},
+{
+ "name": "湖南",
+"value":   3.99
+},
+{
+ "name": "湖北",
+"value":   3.98
+},
+{
+ "name": "福建",
+"value":   3.67
+},
+{
+ "name": "北京",
+"value":   3.52
+},
+{
+ "name": "安徽",
+"value":   3.08
+},
+{
+ "name": "内蒙古",
+"value":   2.91
+},
+{
+ "name": "黑龙江",
+"value":   2.58
+},
+{
+ "name": "陕西",
+"value":   2.52
+},
+{
+ "name": "广西",
+"value":   2.38
+},
+{
+ "name": "江西",
+"value":   2.35
+},
+{
+ "name": "天津",
+"value":    2.3
+},
+{
+ "name": "山西",
+"value":   2.29
+},
+{
+ "name": "吉林",
+"value":   2.16
+},
+{
+ "name": "重庆",
+"value":   1.97
+},
+{
+ "name": "云南",
+"value":    1.8
+},
+{
+ "name": "新疆",
+"value":   1.35
+},
+{
+ "name": "贵州",
+"value":   1.15
+},
+{
+ "name": "甘肃",
+"value":   1.03
+},
+{
+ "name": "海南",
+"value":   0.51
+},
+{
+ "name": "宁夏",
+"value":   0.42
+},
+{
+ "name": "青海",
+"value":   0.34
+},
+{
+ "name": "西藏",
+"value":   0.13
+}
+]
+},
+{
+ "name": "2009年GDP百分比",
+"type": "map",
+"mapType": "china",
+"itemStyle": {
+ "normal": {
+ "label": {
+ "show": true
+}
+},
+"emphasis": {
+ "label": {
+ "show": true
+}
+}
+},
+"data": [
+ {
+ "name": "广东",
+"value":  11.58
+},
+{
+ "name": "江苏",
+"value":  10.11
+},
+{
+ "name": "山东",
+"value":   9.94
+},
+{
+ "name": "浙江",
+"value":   6.74
+},
+{
+ "name": "河南",
+"value":   5.71
+},
+{
+ "name": "河北",
+"value":   5.06
+},
+{
+ "name": "辽宁",
+"value":   4.46
+},
+{
+ "name": "上海",
+"value":   4.41
+},
+{
+ "name": "四川",
+"value":   4.15
+},
+{
+ "name": "湖南",
+"value":   3.83
+},
+{
+ "name": "湖北",
+"value":    3.8
+},
+{
+ "name": "福建",
+"value":   3.59
+},
+{
+ "name": "北京",
+"value":   3.56
+},
+{
+ "name": "安徽",
+"value":   2.95
+},
+{
+ "name": "内蒙古",
+"value":   2.86
+},
+{
+ "name": "黑龙江",
+"value":   2.52
+},
+{
+ "name": "陕西",
+"value":    2.4
+},
+{
+ "name": "广西",
+"value":   2.28
+},
+{
+ "name": "江西",
+"value":   2.25
+},
+{
+ "name": "天津",
+"value":   2.21
+},
+{
+ "name": "山西",
+"value":   2.16
+},
+{
+ "name": "吉林",
+"value":   2.14
+},
+{
+ "name": "重庆",
+"value":   1.92
+},
+{
+ "name": "云南",
+"value":   1.81
+},
+{
+ "name": "新疆",
+"value":   1.25
+},
+{
+ "name": "贵州",
+"value":   1.15
+},
+{
+ "name": "甘肃",
+"value":   0.99
+},
+{
+ "name": "海南",
+"value":   0.49
+},
+{
+ "name": "宁夏",
+"value":    0.4
+},
+{
+ "name": "青海",
+"value":   0.32
+},
+{
+ "name": "西藏",
+"value":   0.13
+}
+]
+},
+{
+ "name": "2008年GDP百分比",
+"type": "map",
+"mapType": "china",
+"itemStyle": {
+ "normal": {
+ "label": {
+ "show": true
+}
+},
+"emphasis": {
+ "label": {
+ "show": true
+}
+}
+},
+"data": [
+ {
+ "name": "广东",
+"value":  11.72
+},
+{
+ "name": "江苏",
+"value":   9.87
+},
+{
+ "name": "山东",
+"value":   9.85
+},
+{
+ "name": "浙江",
+"value":   6.83
+},
+{
+ "name": "河南",
+"value":   5.74
+},
+{
+ "name": "河北",
+"value":    5.1
+},
+{
+ "name": "辽宁",
+"value":   4.35
+},
+{
+ "name": "上海",
+"value":   4.48
+},
+{
+ "name": "四川",
+"value":   4.01
+},
+{
+ "name": "湖南",
+"value":   3.68
+},
+{
+ "name": "湖北",
+"value":   3.61
+},
+{
+ "name": "福建",
+"value":   3.45
+},
+{
+ "name": "北京",
+"value":   3.54
+},
+{
+ "name": "安徽",
+"value":   2.82
+},
+{
+ "name": "内蒙古",
+"value":   2.71
+},
+{
+ "name": "黑龙江",
+"value":   2.65
+},
+{
+ "name": "陕西",
+"value":   2.33
+},
+{
+ "name": "广西",
+"value":   2.24
+},
+{
+ "name": "江西",
+"value":   2.22
+},
+{
+ "name": "天津",
+"value":   2.14
+},
+{
+ "name": "山西",
+"value":   2.33
+},
+{
+ "name": "吉林",
+"value":   2.05
+},
+{
+ "name": "重庆",
+"value":   1.84
+},
+{
+ "name": "云南",
+"value":   1.81
+},
+{
+ "name": "新疆",
+"value":   1.33
+},
+{
+ "name": "贵州",
+"value":   1.13
+},
+{
+ "name": "甘肃",
+"value":   1.01
+},
+{
+ "name": "海南",
+"value":   0.48
+},
+{
+ "name": "宁夏",
+"value":   0.38
+},
+{
+ "name": "青海",
+"value":   0.32
+},
+{
+ "name": "西藏",
+"value":   0.13
+}
+]
+}
+]
+}
+            EChart_ID_20131022000820_93000.setOption(option_ID_20131022000820_93000);
+        }
+    );
+    </script>
+
+
+
+
+</body>
+</html>

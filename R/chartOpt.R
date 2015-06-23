@@ -193,7 +193,7 @@ eLegendSet = function(chart, ...)
 		#print(111)
 		if(length(settings$data) > 0)chart$x$legend$data = as.list(settings$data)
 	}
-	
+
 	if(chart$x$legend$show == TRUE){
 		chart$x$legend$show = TRUE
 		if (!is.null(settings$x)){
@@ -208,7 +208,6 @@ eLegendSet = function(chart, ...)
 	}else{
 		chart$x$legend = list(show=FALSE)
 	}
-	
 	chart
 }
 eDataZoomSet = function(chart, ...)

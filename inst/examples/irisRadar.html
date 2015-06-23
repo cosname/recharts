@@ -1,0 +1,142 @@
+
+<!DOCTYPE html>
+<html lang='en'>
+<head>
+    <meta charset='utf-8'>
+    <title>ECharts</title>
+    <!--Step:1 Import a module loader, such as http://echarts.baidu.com/doc/example/www/js/esl.js.js or require.js-->
+    <script src='http://echarts.baidu.com/doc/example/www/js/esl.js'></script>
+</head>
+
+<body>
+
+
+
+
+<div id='ID_20131024132517_1001' style='height:500px;border:1px solid #ccc;padding:10px;'></div>
+
+<script type='text/javascript'>
+    // Step:3 conifg ECharts's path, link to echarts.js from current page.
+    require.config({
+        paths:{
+            'echarts': 'http://echarts.baidu.com/doc/example/www/js/echarts-map',
+            'echarts/chart/bar' : 'http://echarts.baidu.com/doc/example/www/js/echarts-map',
+            'echarts/chart/line': 'http://echarts.baidu.com/doc/example/www/js/echarts-map',
+            'echarts/chart/scatter': 'http://echarts.baidu.com/doc/example/www/js/echarts-map',
+            'echarts/chart/k': 'http://echarts.baidu.com/doc/example/www/js/echarts-map',
+            'echarts/chart/pie': 'http://echarts.baidu.com/doc/example/www/js/echarts-map',
+            'echarts/chart/map': 'http://echarts.baidu.com/doc/example/www/js/echarts-map',
+            'echarts/chart/force': 'http://echarts.baidu.com/doc/example/www/js/echarts-map',
+            'echarts/chart/radar': 'http://echarts.baidu.com/doc/example/www/js/echarts-map'
+        }
+    });
+
+    // Step:4 require echarts and use it in the callback.
+    require(
+        [
+            'echarts',
+            'echarts/chart/bar',
+            'echarts/chart/line',
+            'echarts/chart/scatter',
+            'echarts/chart/k',
+            'echarts/chart/pie',
+            'echarts/chart/map',
+            'echarts/chart/force',
+            'echarts/chart/radar'
+        ],
+        function(ec) {
+            var EChart_ID_20131024132517_1001 = ec.init(document.getElementById('ID_20131024132517_1001'));
+            var option_ID_20131024132517_1001 = {
+	"legend" : {
+		"data" : [
+			"setosa",
+			"versicolor",
+			"virginica"
+		],
+		"orient" : "vertical",
+		"x" : "left",
+		"y" : "center"
+	},
+	"toolbox" : {
+		"show" : true,
+		"feature" : {
+			"mark" : true,
+			"dataView" : true,
+			"restore" : true,
+			"saveAsImage" : true
+		}
+	},
+	"tooltip" : {
+		"trigger" : "axis"
+	},
+	"polar" : [
+		{
+			"indicator" : [
+				{
+					"text" : "Sepal.Length",
+					"min" : 0,
+					"max" : 6.588
+				},
+				{
+					"text" : "Sepal.Width",
+					"min" : 0,
+					"max" : 3.428
+				},
+				{
+					"text" : "Petal.Length",
+					"min" : 0,
+					"max" : 5.552
+				},
+				{
+					"text" : "Petal.Width",
+					"min" : 0,
+					"max" : 2.026
+				}
+			]
+		}
+	],
+	"series" : [
+		{
+			"type" : "radar",
+			"data" : [
+				{
+					"name" : "setosa",
+					"value" : [
+						5.006,
+						3.428,
+						1.462,
+						0.246
+					]
+				},
+				{
+					"name" : "versicolor",
+					"value" : [
+						5.936,
+						2.77,
+						4.26,
+						1.326
+					]
+				},
+				{
+					"name" : "virginica",
+					"value" : [
+						6.588,
+						2.974,
+						5.552,
+						2.026
+					]
+				}
+			]
+		}
+	]
+}
+            EChart_ID_20131024132517_1001.setOption(option_ID_20131024132517_1001);
+        }
+    );
+</script>
+
+
+
+
+</body>
+</html>

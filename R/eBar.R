@@ -16,8 +16,21 @@
 #' dat
 #' eBar(dat)
 #' eBar(dat, horiz = TRUE)
+#' #mode 2 input.
+#' df2 <- data.frame(
+#'  saleNum=c(10,20,30,40,50,60,70,15,25,35,45,55,65,75,25,35,45,55,65,75,85),
+#' 	seller=c(rep("小黄",7), rep("小红",7), rep("小白",7)),
+#'	weekDay = c(rep(c("周一","周二","周三","周四","周五","周六","周日"),3))
+#' )
+#' dat <- df2
+#' xvar=~weekDay; yvar= ~saleNum; series=~seller
+#' eBar(df2, ~weekDay, ~saleNum, ~seller)
+#' dat <- cut(rnorm(1000), -4:4)
+#' eBar(dat)
+#' xvar=NULL; yvar=NULL; series=NULL
 
-eBar = function(dat, size = c(1024, 768), horiz = FALSE,
+
+eBar = function(dat, xvar=NULL, yvar=NULL, series=NULL, size = NULL, horiz = FALSE,
 	title = NULL, subtitle = NULL, title.x = "center", title.y = "top", 
 	legend = TRUE, legend.x = "left", legend.y= "top", legend.orient="horizontal", 
 	toolbox = TRUE, toolbox.orient = "horizontal", toolbox.x = "right", toolbox.y = "top", 
@@ -30,36 +43,72 @@ eBar = function(dat, size = c(1024, 768), horiz = FALSE,
 	ylab.name = "", ylab.namePosition="start", ylim=NULL,
 	calculable=TRUE, showLabel=TRUE, opt = list()) 
 {
+	xlab = recharts:::autoArgLabel(xvar, deparse(substitute(xvar)))
+	ylab = recharts:::autoArgLabel(yvar, deparse(substitute(yvar)))
 
-	# option$title format.
-	opt$title = tilteSet(title = title, subtitle=subtitle,
-			title.x = title.x, title.y = title.y)
+	xvar = recharts:::evalFormula(xvar, dat)
+	yvar = recharts:::evalFormula(yvar, dat)
+
+	series = recharts:::evalFormula(series, dat)
+
+	# if series is null, we will use the xvar and yvar to construct the bar plot..
+	if(is.null(xvar) & is.null(yvar) & !is.factor(dat)){
+		# Mode 1. use default data.frame as input...
+		dat <- as.data.frame(dat, stringsAsFactor=F)
+	}else if(!is.null(xvar) & !is.null(yvar) & !is.null(series)){
+		#print("Mode1")
+		# Mode 2. all of xvar, yvar and series are valid...
+		dat <- with(dat, {
+			out <- matrix(nrow=nlevels(series), ncol=nlevels(xvar),
+						dimnames=list(levels(series), levels(xvar)))
+			out[cbind(series, xvar)] <- yvar
+			out
+		})
+		dat <- as.data.frame(dat)
+	}else if(!is.null(xvar) & !is.null(yvar) & is.null(series)){
+		# Mode 3. format dat with only x and y variable.
+		dat <- data.frame(val = yvar)
+		colnames(dat) <- ylab
+		rownames(dat) <- xvar
+	}else if(is.null(xvar) & is.null(yvar) & is.factor(dat)){
+		# Mode 4. factor
+		tempD <- as.data.frame(table(dat))
+		dat <- data.frame(val = tempD[,"Freq"])
+		colnames(dat) <- "Frequency"
+		rownames(dat) <- tempD[,1]
+	}
 	
-	opt$calculable = calculableSet(calculable = calculable)
+	
+	#opt = list()
+	
+	# option$title format.
+	opt$title = recharts:::tilteSet(title = title, subtitle=subtitle,
+			title.x = title.x, title.y = title.y)
+
+	opt$calculable = recharts:::calculableSet(calculable = calculable)
 
 	# opt$tooltip format, not open to user now.
-	opt$tooltip = tooltipSet( tooltip=tooltip,trigger=tooltip.trigger,
+	opt$tooltip = recharts:::tooltipSet(tooltip=tooltip,trigger=tooltip.trigger,
 			formatter = "", islandFormatter="")
-	
-	opt$toolbox = toolboxSet(toolbox=toolbox, toolbox.x=toolbox.x, toolbox.y=toolbox.y, orient=toolbox.orient,
+
+	opt$toolbox = recharts:::toolboxSet(toolbox=toolbox, toolbox.x=toolbox.x, toolbox.y=toolbox.y, orient=toolbox.orient,
 				dataView=dataView, mark=mark, dataZoom = dataZoom, magicType = magicType, restore = TRUE, readOnly = readOnly,
 				saveAsImage=TRUE)
 
-				
-	opt$legend = legendSet( legend=legend, data=colnames(dat), legend.x=legend.x, legend.y=legend.y, orient=legend.orient)
-	
+	opt$legend = recharts:::legendSet( show=legend, data=colnames(dat), legend.x=legend.x, legend.y=legend.y, orient=legend.orient)
+
 	if(match.arg(xlab.type, c("category" , "value")) == "category" & is.null(xlab.data)){
 		xlab.data = rownames(dat)
 	}
 	if(match.arg(ylab.type, c("category" , "value")) == "category" & is.null(ylab.data)){
 		ylab.data = colnames(dat)
 	}
-	opt$xAxis = xAxisSet(axisShow=xlab, type=xlab.type, data=xlab.data, position=xlab.position,
+	opt$xAxis = recharts:::xAxisSet(axisShow=xlab, type=xlab.type, data=xlab.data, position=xlab.position,
 				labelName=xlab.name, label.namePosition=xlab.namePosition, lim=xlim,
 				axisLine=axis.line, axisTick=axis.tick, axisLable=axis.lable, splitLine=axis.splitLine, 
 				splitArea=axis.splitArea, boundaryGap=axis.boundaryGap, scale=axis.scale)	
-	
-	opt$yAxis = yAxisSet(axisShow=ylab, type=ylab.type, data=ylab.data, position=ylab.position,
+
+	opt$yAxis = recharts:::yAxisSet(axisShow=ylab, type=ylab.type, data=ylab.data, position=ylab.position,
 				labelName=ylab.name, label.namePosition=ylab.namePosition, lim=ylim,
 				axisLine=axis.line, axisTick=axis.tick, axisLable=axis.lable, splitLine=axis.splitLine, 
 				splitArea=axis.splitArea, boundaryGap=axis.boundaryGap, scale=axis.scale)
@@ -78,17 +127,18 @@ eBar = function(dat, size = c(1024, 768), horiz = FALSE,
         }
 
         if(is.null(opt$series[[i]]$data)) {
-            opt$series[[i]]$data = unnames(dat[,i])
+            opt$series[[i]]$data = unname(dat[,i])
         } else {
             warning('You can set series:data with dat.')
         }
     }
-
 	if(horiz==TRUE) {
 		tmp = opt$xAxis
 		opt$xAxis = opt$yAxis
 		opt$yAxis = tmp
 	}
+	#jsonStr <- toJSON(opt, pretty=TRUE)
+	#outList <- .rechartsOutput(jsonStr, charttype="ePoints", size=size)
 	opt$size = size
 	
 	### output list format

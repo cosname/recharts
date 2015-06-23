@@ -11,7 +11,7 @@
 #' 
 #' eMap(testData, namevar="province")
 
-eMap = function(dat, namevar=NULL, datavar=1:ncol(dat), size = c(1024, 768), region="china", color=c("#1e90ff", "#f0ffff"),
+eMap = function(dat, namevar=NULL, datavar=1:ncol(dat), size = NULL, region="china", color=c("#1e90ff", "#f0ffff"),
 	title = NULL, subtitle = NULL, title.x = "center", title.y = "top", 
 	legend = TRUE, legend.x = "left", legend.y= "top", legend.orient="horizontal", 
 	toolbox = TRUE, toolbox.orient = "horizontal", toolbox.x = "right", toolbox.y = "top", 
@@ -21,7 +21,7 @@ eMap = function(dat, namevar=NULL, datavar=1:ncol(dat), size = c(1024, 768), reg
 	tooltip = TRUE, tooltip.trigger="item", formatter="", 
 	calculable=FALSE, xlab = NULL, ylab=NULL,
 	showLabel=TRUE, opt = list()) {
-	
+
 	if(class(datavar) == "integer" | class(datavar) == "numeric"){
 		datavar = colnames(dat)[datavar]
 		datavar = datavar[!is.na(datavar)]
@@ -50,7 +50,7 @@ eMap = function(dat, namevar=NULL, datavar=1:ncol(dat), size = c(1024, 768), reg
 
 	# legendData set
 	legendData <- datavar
-	opt$legend = recharts:::legendSet(legend=legend, data=legendData, legend.x=legend.x, legend.y=legend.y, orient=legend.orient)
+	opt$legend = recharts:::legendSet(show=legend, data=legendData, legend.x=legend.x, legend.y=legend.y, orient=legend.orient)
 
 	valueDf <- dat[,datavar]
 	

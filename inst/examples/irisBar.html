@@ -1,0 +1,102 @@
+
+<!DOCTYPE html>
+<html lang='en'>
+<head>
+    <meta charset='utf-8'>
+    <title>ECharts</title>
+    <!--Step:1 Import a module loader, such as http://echarts.baidu.com/doc/example/www/js/esl.js.js or require.js-->
+    <script src='http://echarts.baidu.com/doc/example/www/js/esl.js'></script>
+</head>
+
+<body>
+
+
+
+
+    <div id='ID_20131022000819_92942' style='height:500px;border:1px solid #ccc;padding:10px;'></div>
+
+    <script type='text/javascript'>
+    // Step:3 conifg ECharts's path, link to echarts.js from current page.
+    require.config({
+        paths:{
+            'echarts': 'http://echarts.baidu.com/doc/example/www/js/echarts-map',
+            'echarts/chart/bar' : 'http://echarts.baidu.com/doc/example/www/js/echarts-map',
+            'echarts/chart/line': 'http://echarts.baidu.com/doc/example/www/js/echarts-map',
+            'echarts/chart/scatter': 'http://echarts.baidu.com/doc/example/www/js/echarts-map',
+            'echarts/chart/k': 'http://echarts.baidu.com/doc/example/www/js/echarts-map',
+            'echarts/chart/pie': 'http://echarts.baidu.com/doc/example/www/js/echarts-map',
+            'echarts/chart/map': 'http://echarts.baidu.com/doc/example/www/js/echarts-map',
+            'echarts/chart/force': 'http://echarts.baidu.com/doc/example/www/js/echarts-map',
+            'echarts/chart/radar': 'http://echarts.baidu.com/doc/example/www/js/echarts-map'
+        }
+    });
+
+    // Step:4 require echarts and use it in the callback.
+    require(
+        [
+            'echarts',
+            'echarts/chart/bar',
+            'echarts/chart/line',
+            'echarts/chart/scatter',
+            'echarts/chart/k',
+            'echarts/chart/pie',
+            'echarts/chart/map',
+            'echarts/chart/force',
+            'echarts/chart/radar'
+        ],
+        function(ec) {
+            var EChart_ID_20131022000819_92942 = ec.init(document.getElementById('ID_20131022000819_92942'));
+            var option_ID_20131022000819_92942 = {
+ "legend": {
+ "data": [ "Sepal.Length", "Sepal.Width", "Petal.Length", "Petal.Width" ]
+},
+"toolbox": {
+ "show": true,
+"feature": {
+ "mark": true,
+"dataView": true,
+"magicType": [ "line", "bar" ],
+"restore": true,
+"saveAsImage": true
+}
+},
+"tooltip": {
+ "trigger": "axis"
+},
+"xAxis": {
+ "type": "category",
+"data": [ "1", "2", "3", "4", "5", "6" ]
+},
+"series": [
+ {
+ "type": "bar",
+"name": "Sepal.Length",
+"data": [    5.1,    4.9,    4.7,    4.6,      5,    5.4 ]
+},
+{
+ "type": "bar",
+"name": "Sepal.Width",
+"data": [    3.5,      3,    3.2,    3.1,    3.6,    3.9 ]
+},
+{
+ "type": "bar",
+"name": "Petal.Length",
+"data": [    1.4,    1.4,    1.3,    1.5,    1.4,    1.7 ]
+},
+{
+ "type": "bar",
+"name": "Petal.Width",
+"data": [    0.2,    0.2,    0.2,    0.2,    0.2,    0.4 ]
+}
+]
+}
+            EChart_ID_20131022000819_92942.setOption(option_ID_20131022000819_92942);
+        }
+    );
+    </script>
+
+
+
+
+</body>
+</html>

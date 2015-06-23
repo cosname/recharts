@@ -1,0 +1,102 @@
+
+<!DOCTYPE html>
+<html lang='en'>
+<head>
+    <meta charset='utf-8'>
+    <title>ECharts</title>
+    <!--Step:1 Import a module loader, such as http://echarts.baidu.com/doc/example/www/js/esl.js.js or require.js-->
+    <script src='http://echarts.baidu.com/doc/example/www/js/esl.js'></script>
+</head>
+
+<body>
+
+
+
+
+    <div id='ID_20131022000819_92939' style='height:500px;border:1px solid #ccc;padding:10px;'></div>
+
+    <script type='text/javascript'>
+    // Step:3 conifg ECharts's path, link to echarts.js from current page.
+    require.config({
+        paths:{
+            'echarts': 'http://echarts.baidu.com/doc/example/www/js/echarts-map',
+            'echarts/chart/bar' : 'http://echarts.baidu.com/doc/example/www/js/echarts-map',
+            'echarts/chart/line': 'http://echarts.baidu.com/doc/example/www/js/echarts-map',
+            'echarts/chart/scatter': 'http://echarts.baidu.com/doc/example/www/js/echarts-map',
+            'echarts/chart/k': 'http://echarts.baidu.com/doc/example/www/js/echarts-map',
+            'echarts/chart/pie': 'http://echarts.baidu.com/doc/example/www/js/echarts-map',
+            'echarts/chart/map': 'http://echarts.baidu.com/doc/example/www/js/echarts-map',
+            'echarts/chart/force': 'http://echarts.baidu.com/doc/example/www/js/echarts-map',
+            'echarts/chart/radar': 'http://echarts.baidu.com/doc/example/www/js/echarts-map'
+        }
+    });
+
+    // Step:4 require echarts and use it in the callback.
+    require(
+        [
+            'echarts',
+            'echarts/chart/bar',
+            'echarts/chart/line',
+            'echarts/chart/scatter',
+            'echarts/chart/k',
+            'echarts/chart/pie',
+            'echarts/chart/map',
+            'echarts/chart/force',
+            'echarts/chart/radar'
+        ],
+        function(ec) {
+            var EChart_ID_20131022000819_92939 = ec.init(document.getElementById('ID_20131022000819_92939'));
+            var option_ID_20131022000819_92939 = {
+ "toolbox": {
+ "show": true,
+"feature": {
+ "mark": true,
+"dataView": true,
+"restore": true,
+"saveAsImage": true
+}
+},
+"tooltip": {
+ "trigger": "item",
+"formatter": "{b} : {c} ({d}%)"
+},
+"legend": {
+ "orient": "vertical",
+"x": "left",
+"data": [ "A", "B", "C", "D" ]
+},
+"calculable": true,
+"series": [
+ {
+ "type": "pie",
+"data": [
+ {
+ "value": 4,
+"name": "A"
+},
+{
+ "value": 3,
+"name": "B"
+},
+{
+ "value": 2,
+"name": "C"
+},
+{
+ "value": 1,
+"name": "D"
+}
+]
+}
+]
+}
+            EChart_ID_20131022000819_92939.setOption(option_ID_20131022000819_92939);
+        }
+    );
+    </script>
+
+
+
+
+</body>
+</html>

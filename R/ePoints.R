@@ -10,7 +10,7 @@
 #' @examples
 #' ePoints(iris[,3:5])
 
-ePoints = function(dat, xvar=NULL, yvar=NULL, size = c(1024, 768),  namevar=NULL, power=2, precision=2,
+ePoints = function(dat, xvar=NULL, yvar=NULL, series=NULL, size = NULL,   power=2, precision=2,
 	title = NULL, subtitle = NULL, title.x = "center", title.y = "top", 
 	legend = TRUE, legend.data=NULL, legend.x = "left", legend.y= "top", legend.orient="horizontal", 
 	toolbox = TRUE, toolbox.orient = "horizontal", toolbox.x = "right", toolbox.y = "top", 
@@ -24,8 +24,20 @@ ePoints = function(dat, xvar=NULL, yvar=NULL, size = c(1024, 768),  namevar=NULL
 	calculable=FALSE, showLabel=TRUE, opt = list())
 {
 	### ePoint data setting,
-	# preprocess data to xvar, yvar, namevar.
-		
+	# preprocess data to xvar, yvar, serieslab.
+	xvar = recharts:::autoArgLabel(xvar, deparse(substitute(xvar)))
+	yvar = recharts:::autoArgLabel(yvar, deparse(substitute(yvar)))
+	namevar = recharts:::autoArgLabel(series, deparse(substitute(series)))
+	
+	if(missing(xvar) | is.null(xvar) | xvar=="") xvar = colnames(dat)[1]
+	if(missing(yvar) | is.null(yvar) | yvar=="" ) yvar = colnames(dat)[2]
+	if(missing(namevar) | is.null(namevar)| namevar==""){
+		namevar = "defaultName"
+		dat[,"defaultName"] = "default"
+	}
+	dat <- dat[,c(xvar, yvar, namevar)]
+	
+	
 	# format the dat to data.frame
 	if (class(dat) != "data.frame") dat <- as.data.frame(dat, stringsAsFactor=F)
 	
@@ -37,12 +49,7 @@ ePoints = function(dat, xvar=NULL, yvar=NULL, size = c(1024, 768),  namevar=NULL
 		namevar = "name"
 	}
 
-	if(missing(xvar) | is.null(xvar)) xvar = colnames(dat)[1]
-	if(missing(yvar) | is.null(yvar)) yvar = colnames(dat)[2]
-	if(missing(namevar) | is.null(namevar)){
-		namevar = "defaultName"
-		dat[,"defaultName"] = "default"
-	}
+
 	
 	if(length(xvar) > 1) xvar = xvar[1]
 	if(class(xvar) == "integer" | class(xvar) == "numeric"){
@@ -77,7 +84,6 @@ ePoints = function(dat, xvar=NULL, yvar=NULL, size = c(1024, 768),  namevar=NULL
 		stop("wrong namevar input...")
 	}
 	
-	
 
 	# if the xvar/yvar/namevar is null, will use the first column of dat as default.	And check the xvar in the dat colnames.
 	if (is.null(xvar) || !xvar %in% colnames(dat)) xvar = colnames(dat)[1]
@@ -105,7 +111,7 @@ ePoints = function(dat, xvar=NULL, yvar=NULL, size = c(1024, 768),  namevar=NULL
 	if(missing(legend.data) | is.null(legend.data)){legendData = group
 	}else{legendData = legend.data}
 	
-	opt$legend = legendSet( legend=legend, data=legendData, legend.x=legend.x, legend.y=legend.y, orient=legend.orient)
+	opt$legend = legendSet( show=legend, data=legendData, legend.x=legend.x, legend.y=legend.y, orient=legend.orient)
 
 	opt$xAxis = xAxisSet(axisShow=xlab, type=xlab.type, data=xlab.data, position=xlab.position,
 				labelName=xlab.name, label.namePosition=xlab.namePosition, lim=xlim,

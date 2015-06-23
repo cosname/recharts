@@ -10,7 +10,7 @@
 #' eLine(WorldPhones)
 
 
-eLine = function(dat, size = c(1024, 768), horiz = FALSE,
+eLine = function(dat, xvar=NULL, yvar=NULL, series=NULL, size = NULL, horiz = FALSE,
 	title = NULL, subtitle = NULL, title.x = "center", title.y = "top", 
 	legend = TRUE, legend.x = "left", legend.y= "top", legend.orient="horizontal", 
 	toolbox = TRUE, toolbox.orient = "horizontal", toolbox.x = "right", toolbox.y = "top", 
@@ -23,8 +23,41 @@ eLine = function(dat, size = c(1024, 768), horiz = FALSE,
 	ylab.name = "", ylab.namePosition="start", ylim=NULL,
 	calculable=TRUE, showLabel=TRUE, opt = list()) 
 {
-	if (class(dat) != "data.frame") dat <- as.data.frame(dat, stringsAsFactor=F)
+	xlab = recharts:::autoArgLabel(xvar, deparse(substitute(xvar)))
+	ylab = recharts:::autoArgLabel(yvar, deparse(substitute(yvar)))
 
+	xvar = recharts:::evalFormula(xvar, dat)
+	yvar = recharts:::evalFormula(yvar, dat)
+
+	series = recharts:::evalFormula(series, dat)
+
+	# if series is null, we will use the xvar and yvar to construct the bar plot..
+	if(is.null(xvar) & is.null(yvar) & !is.factor(dat)){
+		# Mode 1. use default data.frame as input...
+		dat <- as.data.frame(dat, stringsAsFactor=F)
+	}else if(!is.null(xvar) & !is.null(yvar) & !is.null(series)){
+		#print("Mode1")
+		# Mode 2. all of xvar, yvar and series are valid...
+		dat <- with(dat, {
+			out <- matrix(nrow=nlevels(series), ncol=nlevels(xvar),
+						dimnames=list(levels(series), levels(xvar)))
+			out[cbind(series, xvar)] <- yvar
+			out
+		})
+		dat <- as.data.frame(dat)
+	}else if(!is.null(xvar) & !is.null(yvar) & is.null(series)){
+		# Mode 3. format dat with only x and y variable.
+		dat <- data.frame(val = yvar)
+		colnames(dat) <- ylab
+		rownames(dat) <- xvar
+	}else if(is.null(xvar) & is.null(yvar) & is.factor(dat)){
+		# Mode 4. factor
+		tempD <- as.data.frame(table(dat))
+		dat <- data.frame(val = tempD[,"Freq"])
+		colnames(dat) <- "Frequency"
+		rownames(dat) <- tempD[,1]
+	}
+	
 	# option$title format.
 	opt$title = tilteSet(title = title, subtitle=subtitle,
 			title.x = title.x, title.y = title.y)
@@ -64,7 +97,6 @@ eLine = function(dat, size = c(1024, 768), horiz = FALSE,
         if(is.null(opt$series[[i]]$type)) {
             opt$series[[i]]$type = 'line'
         }
-
         if(is.null(opt$series[[i]]$name)) {
             opt$series[[i]]$name = colnames(dat)[i]
         } else {
@@ -104,7 +136,7 @@ eLine = function(dat, size = c(1024, 768), horiz = FALSE,
 #' @examples
 #' eArea(WorldPhones)
 
-eArea = function(dat, size = c(1024, 768), horiz = FALSE, stack="SUM",
+eArea = function(dat, xvar=NULL, yvar=NULL, series=NULL, size = NULL, horiz = FALSE, stack="SUM",
 	title = NULL, subtitle = NULL, title.x = "center", title.y = "top", 
 	legend = TRUE, legend.x = "left", legend.y= "top", legend.orient="horizontal", 
 	toolbox = TRUE, toolbox.orient = "horizontal", toolbox.x = "right", toolbox.y = "top", 
@@ -117,8 +149,40 @@ eArea = function(dat, size = c(1024, 768), horiz = FALSE, stack="SUM",
 	ylab.name = "", ylab.namePosition="start", ylim=NULL,
 	calculable=TRUE, showLabel=TRUE, opt = list()) 
 {
-	if (class(dat) != "data.frame") dat <- as.data.frame(dat, stringsAsFactor=F)
+	xlab = recharts:::autoArgLabel(xvar, deparse(substitute(xvar)))
+	ylab = recharts:::autoArgLabel(yvar, deparse(substitute(yvar)))
 
+	xvar = recharts:::evalFormula(xvar, dat)
+	yvar = recharts:::evalFormula(yvar, dat)
+
+	series = recharts:::evalFormula(series, dat)
+
+	# if series is null, we will use the xvar and yvar to construct the bar plot..
+	if(is.null(xvar) & is.null(yvar) & !is.factor(dat)){
+		# Mode 1. use default data.frame as input...
+		dat <- as.data.frame(dat, stringsAsFactor=F)
+	}else if(!is.null(xvar) & !is.null(yvar) & !is.null(series)){
+		#print("Mode1")
+		# Mode 2. all of xvar, yvar and series are valid...
+		dat <- with(dat, {
+			out <- matrix(nrow=nlevels(series), ncol=nlevels(xvar),
+						dimnames=list(levels(series), levels(xvar)))
+			out[cbind(series, xvar)] <- yvar
+			out
+		})
+		dat <- as.data.frame(dat)
+	}else if(!is.null(xvar) & !is.null(yvar) & is.null(series)){
+		# Mode 3. format dat with only x and y variable.
+		dat <- data.frame(val = yvar)
+		colnames(dat) <- ylab
+		rownames(dat) <- xvar
+	}else if(is.null(xvar) & is.null(yvar) & is.factor(dat)){
+		# Mode 4. factor
+		tempD <- as.data.frame(table(dat))
+		dat <- data.frame(val = tempD[,"Freq"])
+		colnames(dat) <- "Frequency"
+		rownames(dat) <- tempD[,1]
+	}
 	# option$title format.
 	opt$title = tilteSet(title = title, subtitle=subtitle,
 			title.x = title.x, title.y = title.y)
@@ -134,7 +198,7 @@ eArea = function(dat, size = c(1024, 768), horiz = FALSE, stack="SUM",
 				saveAsImage=TRUE)
 
 				
-	opt$legend = legendSet( legend=legend, data=colnames(dat), legend.x=legend.x, legend.y=legend.y, orient=legend.orient)
+	opt$legend = legendSet( show=legend, data=colnames(dat), legend.x=legend.x, legend.y=legend.y, orient=legend.orient)
 	
 	if(match.arg(xlab.type, c("category" , "value")) == "category" & is.null(xlab.data)){
 		xlab.data = rownames(dat)
