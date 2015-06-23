@@ -73,7 +73,7 @@ eLine = function(dat, xvar=NULL, yvar=NULL, series=NULL, size = NULL, horiz = FA
 				saveAsImage=TRUE)
 
 
-	opt$legend = legendSet( legend=legend, data=colnames(dat), legend.x=legend.x, legend.y=legend.y, orient=legend.orient)
+	opt$legend = legendSet( show=legend, data=colnames(dat), legend.x=legend.x, legend.y=legend.y, orient=legend.orient)
 	
 	if(match.arg(xlab.type, c("category" , "value")) == "category" & is.null(xlab.data)){
 		xlab.data = rownames(dat)
