@@ -86,7 +86,7 @@ eRadar = function(dat, xvar=NULL, yvar=NULL, series=NULL, size = NULL, ymin=vect
 	if(missing(legend.data) | is.null(legend.data)){legendData = rownames(dat)
 	}else{legendData = legend.data}
 	
-	opt$legend = legendSet( legend=legend, data=legendData, legend.x=legend.x, legend.y=legend.y, orient=legend.orient)
+	opt$legend = legendSet( show=legend, data=legendData, legend.x=legend.x, legend.y=legend.y, orient=legend.orient)
 	
 	opt$polar = list(polarSet(name=colnames(dat), ymin=ymin, ymax=ymax))
 
