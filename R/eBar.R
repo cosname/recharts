@@ -43,13 +43,14 @@ eBar = function(dat, xvar=NULL, yvar=NULL, series=NULL, size = NULL, horiz = FAL
 	ylab.name = "", ylab.namePosition="start", ylim=NULL,
 	calculable=TRUE, showLabel=TRUE, opt = list()) 
 {
-	xlab = recharts:::autoArgLabel(xvar, deparse(substitute(xvar)))
-	ylab = recharts:::autoArgLabel(yvar, deparse(substitute(yvar)))
+	xlab = autoArgLabel(xvar, deparse(substitute(xvar)))
+	ylab = autoArgLabel(yvar, deparse(substitute(yvar)))
 
-	xvar = recharts:::evalFormula(xvar, dat)
-	yvar = recharts:::evalFormula(yvar, dat)
+	xvar = as.factor(evalFormula(xvar, dat))
+	yvar = evalFormula(yvar, dat)
+	serieslab = autoArgLabel(series, deparse(substitute(series)))
 
-	series = recharts:::evalFormula(series, dat)
+	series = as.factor(evalFormula(series, dat))
 
 	# if series is null, we will use the xvar and yvar to construct the bar plot..
 	if(is.null(xvar) & is.null(yvar) & !is.factor(dat)){
@@ -59,7 +60,7 @@ eBar = function(dat, xvar=NULL, yvar=NULL, series=NULL, size = NULL, horiz = FAL
 		#print("Mode1")
 		# Mode 2. all of xvar, yvar and series are valid...
 		dat <- with(dat, {
-			out <- matrix(nrow=nlevels(series), ncol=nlevels(xvar),
+			out <- matrix(nrow=nlevels(series), ncol=nlevels(as.factor(xvar)),
 						dimnames=list(levels(series), levels(xvar)))
 			out[cbind(series, xvar)] <- yvar
 			out

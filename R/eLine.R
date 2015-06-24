@@ -26,10 +26,10 @@ eLine = function(dat, xvar=NULL, yvar=NULL, series=NULL, size = NULL, horiz = FA
 	xlab = recharts:::autoArgLabel(xvar, deparse(substitute(xvar)))
 	ylab = recharts:::autoArgLabel(yvar, deparse(substitute(yvar)))
 
-	xvar = recharts:::evalFormula(xvar, dat)
+	xvar = as.factor(recharts:::evalFormula(xvar, dat))
 	yvar = recharts:::evalFormula(yvar, dat)
 
-	series = recharts:::evalFormula(series, dat)
+	series = as.factor(recharts:::evalFormula(series, dat))
 
 	# if series is null, we will use the xvar and yvar to construct the bar plot..
 	if(is.null(xvar) & is.null(yvar) & !is.factor(dat)){
@@ -152,10 +152,10 @@ eArea = function(dat, xvar=NULL, yvar=NULL, series=NULL, size = NULL, horiz = FA
 	xlab = recharts:::autoArgLabel(xvar, deparse(substitute(xvar)))
 	ylab = recharts:::autoArgLabel(yvar, deparse(substitute(yvar)))
 
-	xvar = recharts:::evalFormula(xvar, dat)
+	xvar = as.factor(recharts:::evalFormula(xvar, dat))
 	yvar = recharts:::evalFormula(yvar, dat)
 
-	series = recharts:::evalFormula(series, dat)
+	series = as.factor(recharts:::evalFormula(series, dat))
 
 	# if series is null, we will use the xvar and yvar to construct the bar plot..
 	if(is.null(xvar) & is.null(yvar) & !is.factor(dat)){

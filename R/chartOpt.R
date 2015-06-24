@@ -10,9 +10,9 @@
 
 eTitleSet = function(chart, ...)
 {
-	print("eTitleSet")
+	#print("eTitleSet")
 	settings <- list(...)$optionList
-	print(settings)
+	#print(settings)
 	if (length(settings) == 0){
 		return(FALSE)
 	}
@@ -815,7 +815,7 @@ optionSet <- function(chart, ...){
 	if (!is.null(settings$calculable)){
 		chart$x$calculable = ifelse(settings$calculable, TRUE, FALSE)
 	}	
-	print(settings$region)
+	#print(settings$region)
 	if (!is.null(settings$region)){
 		newRegion = settings$region
 		for (i in 1:length(chart$x$series)){
