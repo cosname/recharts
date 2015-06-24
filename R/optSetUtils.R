@@ -130,7 +130,8 @@ legendSet = function(show=TRUE, data=NULL, orient = c("horizontal", "vertical"),
 		return(returnList)
 	}else{
 		return(list(
-			show=FALSE
+			show=FALSE,
+			data = as.list(data)
 		))
 	}
 }
