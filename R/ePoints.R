@@ -8,7 +8,7 @@
 #' @return The HTML code as a character string.
 #' @export
 #' @examples
-#' ePoints(iris[,3:5])
+#' ePoints(iris[,3:5], theme=2)
 
 ePoints = function(dat, xvar=NULL, yvar=NULL, series=NULL, size = NULL,   power=2, precision=2,
 	theme = "default", title = NULL, subtitle = NULL, title.x = "center", title.y = "top", 

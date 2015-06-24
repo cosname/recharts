@@ -7,7 +7,7 @@
 #' @return The HTML code as a character string.
 #' @export
 #' @examples
-#' eLine(WorldPhones)
+#' eLine(WorldPhones, theme=1)
 
 
 eLine = function(dat, xvar=NULL, yvar=NULL, series=NULL, size = NULL, horiz = FALSE,

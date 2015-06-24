@@ -8,17 +8,10 @@ HTMLWidgets.widget({
 	
   renderValue: function(el, x, instance) {
 
-	require.config({
-		paths:{ 
-			'theme': './lib/echarts-2.2.3/theme/'
-		}
-	});
     instance.setOption(x);
-	
-	require(['theme/' + x.theme], function(tarTheme){
-		curTheme = tarTheme;
-		instance.setTheme(curTheme);
-	})
+	instance.setTheme(eval(x.theme + "Theme"));
+
+
   },
 
   resize: function(el, width, height, instance) {
