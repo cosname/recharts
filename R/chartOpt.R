@@ -242,6 +242,7 @@ eLegendSet = function(chart, ...)
 		}
 	}else{
 		chart$x$legend = list(show=FALSE)
+		chart$x$legend$data = as.list(settings$data)
 	}
 	chart
 }
