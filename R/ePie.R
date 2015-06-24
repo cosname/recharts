@@ -15,11 +15,11 @@
 #' ePie(dat, ~namevar, ~valvar)
 
 
-ePie = function(dat, namevar=NULL, valvar=NULL, size = NULL,   type=c("pie", "rose"), roseType=c("radias", "area"),
-	title = NULL, subtitle = NULL, title.x = "center", title.y = "top", 
+ePie = function(dat, namevar=NULL, valvar=NULL, size = NULL,  type=c("pie", "rose"), roseType=c("radias", "area"),
+	theme = "default", title = NULL, subtitle = NULL, title.x = "center", title.y = "top", 
 	legend = TRUE, legend.x = "left", legend.y= "top", legend.orient="horizontal", 
 	toolbox = TRUE, toolbox.orient = "horizontal", toolbox.x = "right", toolbox.y = "top", 
-	dataView = TRUE, readOnly = FALSE, mark=TRUE, dataZoom=FALSE, magicType=TRUE,
+	dataView = TRUE, readOnly = FALSE, mark=TRUE, dataZoom=FALSE, magicType=FALSE,
 	tooltip = TRUE, tooltip.trigger="item", formatter="", axis.scale=TRUE,
 	xlab=FALSE, ylab=FALSE,	calculable=TRUE, showLabel=TRUE, opt = list())
 {
@@ -53,20 +53,11 @@ ePie = function(dat, namevar=NULL, valvar=NULL, size = NULL,   type=c("pie", "ro
 	}
 
 	# option$title format.
-	if (is.null(title)){
-		if (type == "rose"){
-			ifelse(roseType == "area", headerInfo = "Area", headerInfo = "Radius")
-			title = paste("RoseType_", headerInfo, "Mode")
-		}else{
-			title = "Pie Chart"
-		}
-	}
-	
-	# option$title format.
 	opt$title = tilteSet(title = title, subtitle=subtitle,
 			title.x = title.x, title.y = title.y)
 	
 	opt$calculable = calculableSet(calculable = calculable)
+	opt$theme = themeSet(theme = theme)
 
 	# opt$tooltip format, not open to user now.
 	opt$tooltip = tooltipSet( tooltip=tooltip,trigger=tooltip.trigger,

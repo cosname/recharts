@@ -71,7 +71,7 @@
 
 eForce = function(networkMatrix, propertyDf=NULL, size = NULL,
 	maxR=25, minR=15, density=0.05, attractiveness=1.2, showLabel=TRUE, 
-	title = NULL, subtitle = NULL, title.x = "center", title.y = "top", 
+	theme = "default", title = NULL, subtitle = NULL, title.x = "center", title.y = "top", 
 	legend = TRUE, legend.x = "left", legend.y= "top", legend.orient="horizontal", 
 	toolbox = TRUE, toolbox.orient = "horizontal", toolbox.x = "right", toolbox.y = "top", 
 	dataView = FALSE, readOnly = TRUE, mark=TRUE, dataZoom=FALSE,
@@ -86,6 +86,7 @@ eForce = function(networkMatrix, propertyDf=NULL, size = NULL,
 	
 
 	opt$calculable = calculableSet(calculable = calculable)
+	opt$theme = themeSet(theme = theme)
 
 	# opt$tooltip format, not open to user now.
 	opt$tooltip = tooltipSet( tooltip=tooltip,trigger=tooltip.trigger,

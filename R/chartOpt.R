@@ -131,6 +131,41 @@ eCalculableSet = function(chart, ...)
 	chart
 }
 
+eThemeSet = function(chart, ...)
+{
+	themeArray <- c("macarons","infographic","shiny","dark","blue","green","red","gray","helianthus","roma","mint","macarons2","sakura","default")
+
+	settings <- list(...)$optionList
+	#print(settings)
+	if (length(settings) == 0){
+		return(FALSE)
+	}
+	
+	usedSettings = c("theme")
+	unusedSettings <- setdiff(names(settings), usedSettings)
+	if (length(unusedSettings)>0){
+		wm_1 <- paste("unused calculable setting inputs: ", paste(unusedSettings, collapse=","), ".", sep="")
+		wm_2 <- paste("Acceptable calculable set: ", paste( usedSettings, collapse=", "), ".", sep="")
+		warning(paste(wm_1, wm_2, sep="\n\r"))
+	}
+	
+	# option$calculable format.
+	if (!is.null(settings$theme)){
+		if (is.numeric(settings$theme)){
+			theme = themeArray[settings$theme]
+			chart$x$theme = theme
+		}else if(length(which(themeArray == settings$theme)) >0){
+			chart$x$theme = settings$theme
+		}else{
+			wm_3 = paste("Invalid theme settings:", settings$theme)
+			wm_4 = paste("You can type in the index or the name of theme Array: ",  paste( themeArray, collapse=","))
+			warning(paste(wm_3, wm_4, sep="\n\r"))
+			chart$x$theme = "default"
+		}
+	}
+	chart
+}
+
 eTooltipSet = function(chart, ...)
 {
 

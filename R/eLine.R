@@ -11,11 +11,11 @@
 
 
 eLine = function(dat, xvar=NULL, yvar=NULL, series=NULL, size = NULL, horiz = FALSE,
-	title = NULL, subtitle = NULL, title.x = "center", title.y = "top", 
+	theme = "default", title = NULL, subtitle = NULL, title.x = "center", title.y = "top", 
 	legend = TRUE, legend.x = "left", legend.y= "top", legend.orient="horizontal", 
 	toolbox = TRUE, toolbox.orient = "horizontal", toolbox.x = "right", toolbox.y = "top", 
 	dataView = TRUE, readOnly = FALSE, mark=TRUE, dataZoom=FALSE, magicType=TRUE,
-	tooltip = TRUE, tooltip.trigger="item", formatter="", axis.scale=TRUE,
+	tooltip = TRUE, tooltip.trigger="axis", formatter="", axis.scale=TRUE,
 	axis.line=TRUE, axis.tick=FALSE, axis.lable=TRUE, axis.splitLine=TRUE, axis.splitArea=FALSE, axis.boundaryGap=TRUE,
 	xlab=TRUE, xlab.type="category", xlab.data=NULL, xlab.position="bottom",
 	xlab.name = "", xlab.namePosition="start", xlim=NULL,
@@ -23,8 +23,8 @@ eLine = function(dat, xvar=NULL, yvar=NULL, series=NULL, size = NULL, horiz = FA
 	ylab.name = "", ylab.namePosition="start", ylim=NULL,
 	calculable=TRUE, showLabel=TRUE, opt = list()) 
 {
-	xlab = recharts:::autoArgLabel(xvar, deparse(substitute(xvar)))
-	ylab = recharts:::autoArgLabel(yvar, deparse(substitute(yvar)))
+	xlabName = recharts:::autoArgLabel(xvar, deparse(substitute(xvar)))
+	ylabName = recharts:::autoArgLabel(yvar, deparse(substitute(yvar)))
 
 	xvar = as.factor(recharts:::evalFormula(xvar, dat))
 	yvar = recharts:::evalFormula(yvar, dat)
@@ -48,7 +48,7 @@ eLine = function(dat, xvar=NULL, yvar=NULL, series=NULL, size = NULL, horiz = FA
 	}else if(!is.null(xvar) & !is.null(yvar) & is.null(series)){
 		# Mode 3. format dat with only x and y variable.
 		dat <- data.frame(val = yvar)
-		colnames(dat) <- ylab
+		colnames(dat) <- ylabName
 		rownames(dat) <- xvar
 	}else if(is.null(xvar) & is.null(yvar) & is.factor(dat)){
 		# Mode 4. factor
@@ -63,6 +63,7 @@ eLine = function(dat, xvar=NULL, yvar=NULL, series=NULL, size = NULL, horiz = FA
 			title.x = title.x, title.y = title.y)
 	
 	opt$calculable = calculableSet(calculable = calculable)
+	opt$theme = themeSet(theme = theme)
 
 	# opt$tooltip format, not open to user now.
 	opt$tooltip = tooltipSet( tooltip=tooltip,trigger=tooltip.trigger,
@@ -137,7 +138,7 @@ eLine = function(dat, xvar=NULL, yvar=NULL, series=NULL, size = NULL, horiz = FA
 #' eArea(WorldPhones)
 
 eArea = function(dat, xvar=NULL, yvar=NULL, series=NULL, size = NULL, horiz = FALSE, stack="SUM",
-	title = NULL, subtitle = NULL, title.x = "center", title.y = "top", 
+	theme = "default", title = NULL, subtitle = NULL, title.x = "center", title.y = "top", 
 	legend = TRUE, legend.x = "left", legend.y= "top", legend.orient="horizontal", 
 	toolbox = TRUE, toolbox.orient = "horizontal", toolbox.x = "right", toolbox.y = "top", 
 	dataView = TRUE, readOnly = FALSE, mark=TRUE, dataZoom=FALSE, magicType=TRUE,

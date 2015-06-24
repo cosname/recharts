@@ -25,17 +25,19 @@
 #' dat <- df2
 #' xvar=~weekDay; yvar= ~saleNum; series=~seller
 #' eBar(df2, ~weekDay, ~saleNum, ~seller)
+#' dat <- df2[1:7,]
+#' eBar(dat, ~weekDay, ~saleNum)
 #' dat <- cut(rnorm(1000), -4:4)
 #' eBar(dat)
 #' xvar=NULL; yvar=NULL; series=NULL
 
 
 eBar = function(dat, xvar=NULL, yvar=NULL, series=NULL, size = NULL, horiz = FALSE,
-	title = NULL, subtitle = NULL, title.x = "center", title.y = "top", 
+	theme = "default", title = NULL, subtitle = NULL, title.x = "center", title.y = "top", 
 	legend = TRUE, legend.x = "left", legend.y= "top", legend.orient="horizontal", 
 	toolbox = TRUE, toolbox.orient = "horizontal", toolbox.x = "right", toolbox.y = "top", 
 	dataView = TRUE, readOnly = FALSE, mark=TRUE, dataZoom=FALSE, magicType=TRUE,
-	tooltip = TRUE, tooltip.trigger="item", formatter="", axis.scale=TRUE,
+	tooltip = TRUE, tooltip.trigger="axis", formatter="", axis.scale=TRUE,
 	axis.line=TRUE, axis.tick=FALSE, axis.lable=TRUE, axis.splitLine=TRUE, axis.splitArea=FALSE, axis.boundaryGap=TRUE,
 	xlab=TRUE, xlab.type="category", xlab.data=NULL, xlab.position="bottom",
 	xlab.name = "", xlab.namePosition="start", xlim=NULL, 
@@ -43,21 +45,20 @@ eBar = function(dat, xvar=NULL, yvar=NULL, series=NULL, size = NULL, horiz = FAL
 	ylab.name = "", ylab.namePosition="start", ylim=NULL,
 	calculable=TRUE, showLabel=TRUE, opt = list()) 
 {
-	xlab = autoArgLabel(xvar, deparse(substitute(xvar)))
-	ylab = autoArgLabel(yvar, deparse(substitute(yvar)))
+	xlabName = recharts:::autoArgLabel(xvar, deparse(substitute(xvar)))
+	ylabName = recharts:::autoArgLabel(yvar, deparse(substitute(yvar)))
 
-	xvar = as.factor(evalFormula(xvar, dat))
-	yvar = evalFormula(yvar, dat)
-	serieslab = autoArgLabel(series, deparse(substitute(series)))
-
-	series = as.factor(evalFormula(series, dat))
-
+	xvar = as.factor(as.character(recharts:::evalFormula(xvar, dat)))
+	yvar = recharts:::evalFormula(yvar, dat)
+	seriesName = recharts:::autoArgLabel(series, deparse(substitute(series)))
+	if (!is.null(series)) series = as.factor(as.character(recharts:::evalFormula(series, dat)))
+	
 	# if series is null, we will use the xvar and yvar to construct the bar plot..
 	if(is.null(xvar) & is.null(yvar) & !is.factor(dat)){
 		# Mode 1. use default data.frame as input...
 		dat <- as.data.frame(dat, stringsAsFactor=F)
 	}else if(!is.null(xvar) & !is.null(yvar) & !is.null(series)){
-		#print("Mode1")
+		# print("Mode1")
 		# Mode 2. all of xvar, yvar and series are valid...
 		dat <- with(dat, {
 			out <- matrix(nrow=nlevels(series), ncol=nlevels(as.factor(xvar)),
@@ -69,7 +70,7 @@ eBar = function(dat, xvar=NULL, yvar=NULL, series=NULL, size = NULL, horiz = FAL
 	}else if(!is.null(xvar) & !is.null(yvar) & is.null(series)){
 		# Mode 3. format dat with only x and y variable.
 		dat <- data.frame(val = yvar)
-		colnames(dat) <- ylab
+		colnames(dat) <- ylabName
 		rownames(dat) <- xvar
 	}else if(is.null(xvar) & is.null(yvar) & is.factor(dat)){
 		# Mode 4. factor
@@ -78,15 +79,16 @@ eBar = function(dat, xvar=NULL, yvar=NULL, series=NULL, size = NULL, horiz = FAL
 		colnames(dat) <- "Frequency"
 		rownames(dat) <- tempD[,1]
 	}
-	
-	
+
+
 	#opt = list()
-	
+
 	# option$title format.
 	opt$title = recharts:::tilteSet(title = title, subtitle=subtitle,
 			title.x = title.x, title.y = title.y)
 
 	opt$calculable = recharts:::calculableSet(calculable = calculable)
+	opt$theme = recharts:::themeSet(theme = theme)
 
 	# opt$tooltip format, not open to user now.
 	opt$tooltip = recharts:::tooltipSet(tooltip=tooltip,trigger=tooltip.trigger,

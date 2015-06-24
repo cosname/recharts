@@ -173,14 +173,18 @@ eDataZoom = function(...){
 	elements <- list(...)
 	structure(elements, class ="option")
 }
+eTheme = function(...){
+	elements <- list(...)
+	structure(elements, class ="option")
+}
 
 
 "setFunctionName" <- function(e2name){
 	e2name <- strstrip(e2name)
 	functionName = gsub("\\(.*", "", e2name)
-	print(functionName)
+	#print(functionName)
 	setFuncList <- c("eOption", "eTitle", "eToolbox", "eCalculable", "eLegend", "eTooltip", "eDataRange",
-		"eAxis.X", "eAxis.Y", "ePolar", "eDataZoom", "option")
+		"eAxis.X", "eAxis.Y", "ePolar", "eDataZoom", "eTheme", "option")
 	if (!functionName %in% setFuncList){
 		stop(paste("unspported eCharts setting function inputs", functionName))
 		return(FALSE)
@@ -199,7 +203,7 @@ eDataZoom = function(...){
 #' @seealso \code{\link{set}}
 #' @method + recharts
 "+.echarts" <- function(e1, e2){
-	print(class(e1))
+	#print(class(e1))
 	#print("e2")
 	#print(e2)
 	#print("go")
@@ -225,13 +229,19 @@ eDataZoom = function(...){
 				class(e2) <- "list"
 				return(eCalculableSet(e1, optionList=e2))
 			}
-		},		
+		},
+		eTheme = {
+			if ("echarts" %in% class(e1) & is.option(e2)){
+				class(e2) <- "list"
+				return(eThemeSet(e1, optionList=e2))
+			}
+		},
 		eTooltip = {
 			if ("echarts" %in% class(e1) & is.option(e2)){
 				class(e2) <- "list"
 				return(eTooltipSet(e1, optionList=e2))
 			}
-		},		
+		},
 		eLegend = {
 			if ("echarts" %in% class(e1) & is.option(e2)){
 				class(e2) <- "list"

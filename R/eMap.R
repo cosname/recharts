@@ -11,8 +11,8 @@
 #' 
 #' eMap(testData, namevar="province")
 
-eMap = function(dat, namevar=NULL, datavar=1:ncol(dat), size = NULL, region="china", color=c("#1e90ff", "#f0ffff"),
-	title = NULL, subtitle = NULL, title.x = "center", title.y = "top", 
+eMap = function(dat, namevar=NULL, datavar=2:ncol(dat), size = NULL, region="china", color=c("#1e90ff", "#f0ffff"),
+	theme = "default", title = NULL, subtitle = NULL, title.x = "center", title.y = "top", 
 	legend = TRUE, legend.x = "left", legend.y= "top", legend.orient="horizontal", 
 	toolbox = TRUE, toolbox.orient = "horizontal", toolbox.x = "right", toolbox.y = "top", 
 	dataRange = TRUE, dataRange.x="left", dataRange.y="bottom", dataRange.min=NULL, dataRange.max=NULL,
@@ -57,7 +57,7 @@ eMap = function(dat, namevar=NULL, datavar=1:ncol(dat), size = NULL, region="chi
 	# option$title format.
 	opt$title = recharts:::tilteSet(title = title, subtitle=subtitle,
 			title.x = title.x, title.y = title.y)
-	
+	opt$theme = themeSet(theme = theme)
 	opt$calculable = recharts:::calculableSet(calculable = calculable)
 
 	# opt$tooltip format, not open to user now.

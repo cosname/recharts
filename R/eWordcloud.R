@@ -17,10 +17,10 @@
 
 
 eWordcloud = function(dat, namevar=NULL, valvar=NULL,  size = NULL,
-	title = NULL, subtitle = NULL, title.x = "center", title.y = "top", 
+	theme = "default", title = NULL, subtitle = NULL, title.x = "center", title.y = "top", 
 	legend = TRUE, legend.x = "left", legend.y= "top", legend.orient="horizontal", 
 	toolbox = TRUE, toolbox.orient = "horizontal", toolbox.x = "right", toolbox.y = "top", 
-	dataView = TRUE, readOnly = FALSE, mark=TRUE, dataZoom=FALSE, magicType=TRUE,
+	dataView = TRUE, readOnly = FALSE, mark=TRUE, dataZoom=FALSE, magicType=FALSE,
 	tooltip = TRUE, tooltip.trigger="item", formatter="", axis.scale=TRUE,
 	xlab=FALSE, ylab=FALSE,	calculable=TRUE, showLabel=TRUE, opt = list())
 {
@@ -54,7 +54,7 @@ eWordcloud = function(dat, namevar=NULL, valvar=NULL,  size = NULL,
 			title.x = title.x, title.y = title.y)
 	
 	opt$calculable = calculableSet(calculable = calculable)
-
+	opt$theme = themeSet(theme = theme)
 	# opt$tooltip format, not open to user now.
 	opt$tooltip = tooltipSet( tooltip=tooltip,trigger=tooltip.trigger,
 			formatter = "", islandFormatter="")

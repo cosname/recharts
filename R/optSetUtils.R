@@ -45,6 +45,20 @@ calculableSet = function(calculable)
 	return(ifelse(calculable, TRUE, FALSE) )
 }
 
+themeSet = function(theme="default")
+{
+	themeArray <- c("macarons","infographic","shiny","dark","blue","green","red","gray","helianthus","roma","mint","macarons2","sakura","default")
+	if (is.numeric(theme)){
+		return_theme = themeArray[theme]
+		
+	}else if(length(which(themeArray == theme)) >0){
+		return_theme = theme
+	}else{
+		return_theme = "default"
+	}
+	return(return_theme)
+}
+
 tooltipSet = function(tooltip, trigger=c("item","axis"), formatter="", islandFormatter="islandPoint")
 {
 	if (formatter == "") formatter <- NULL

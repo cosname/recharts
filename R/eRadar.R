@@ -25,16 +25,16 @@
 
 
 eRadar = function(dat, xvar=NULL, yvar=NULL, series=NULL, size = NULL, ymin=vector(), ymax=vector(),
-	title = NULL, subtitle = NULL, title.x = "center", title.y = "top", 
+	theme = "default", title = NULL, subtitle = NULL, title.x = "center", title.y = "top", 
 	legend = TRUE, legend.data=NULL, legend.x = "left", legend.y= "top", legend.orient="horizontal", 
 	toolbox = TRUE, toolbox.orient = "horizontal", toolbox.x = "right", toolbox.y = "top", 
-	dataView = TRUE, readOnly = FALSE, mark=TRUE, dataZoom=FALSE, magicType=TRUE,
+	dataView = TRUE, readOnly = FALSE, mark=TRUE, dataZoom=FALSE, magicType=FALSE,
 	tooltip = TRUE, tooltip.trigger="item", formatter="", axis.scale=TRUE,
 	xlab=FALSE, ylab=FALSE,	calculable=TRUE, showLabel=TRUE, opt = list())
 {
 	
-	xlab = recharts:::autoArgLabel(xvar, deparse(substitute(xvar)))
-	ylab = recharts:::autoArgLabel(yvar, deparse(substitute(yvar)))
+	xlabName = recharts:::autoArgLabel(xvar, deparse(substitute(xvar)))
+	ylabName = recharts:::autoArgLabel(yvar, deparse(substitute(yvar)))
 
 	xvar = as.factor(recharts:::evalFormula(xvar, dat))
 	yvar = recharts:::evalFormula(yvar, dat)
@@ -58,7 +58,7 @@ eRadar = function(dat, xvar=NULL, yvar=NULL, series=NULL, size = NULL, ymin=vect
 	}else if(!is.null(xvar) & !is.null(yvar) & is.null(series)){
 		# Mode 3. format dat with only x and y variable.
 		dat <- data.frame(val = yvar)
-		colnames(dat) <- ylab
+		colnames(dat) <- ylabName
 		rownames(dat) <- xvar
 	}else if(is.null(xvar) & is.null(yvar) & is.factor(dat)){
 		# Mode 4. factor
@@ -74,6 +74,7 @@ eRadar = function(dat, xvar=NULL, yvar=NULL, series=NULL, size = NULL, ymin=vect
 			title.x = title.x, title.y = title.y)
 
 	opt$calculable = calculableSet(calculable = calculable)
+	opt$theme = themeSet(theme = theme)
 
 	# opt$tooltip format, not open to user now.
 	opt$tooltip = tooltipSet( tooltip=tooltip,trigger=tooltip.trigger,

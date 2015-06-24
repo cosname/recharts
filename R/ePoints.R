@@ -11,10 +11,10 @@
 #' ePoints(iris[,3:5])
 
 ePoints = function(dat, xvar=NULL, yvar=NULL, series=NULL, size = NULL,   power=2, precision=2,
-	title = NULL, subtitle = NULL, title.x = "center", title.y = "top", 
+	theme = "default", title = NULL, subtitle = NULL, title.x = "center", title.y = "top", 
 	legend = TRUE, legend.data=NULL, legend.x = "left", legend.y= "top", legend.orient="horizontal", 
 	toolbox = TRUE, toolbox.orient = "horizontal", toolbox.x = "right", toolbox.y = "top", 
-	dataView = TRUE, readOnly = FALSE, mark=TRUE, dataZoom=TRUE, magicType=TRUE,
+	dataView = TRUE, readOnly = FALSE, mark=TRUE, dataZoom=TRUE, magicType=FALSE,
 	tooltip = TRUE, tooltip.trigger="item", formatter="", axis.scale=TRUE,
 	axis.line=TRUE, axis.tick=FALSE, axis.lable=TRUE, axis.splitLine=TRUE, axis.splitArea=FALSE, axis.boundaryGap=TRUE,
 	xlab=TRUE, xlab.type="value", xlab.data=NULL, xlab.position="bottom",
@@ -99,6 +99,7 @@ ePoints = function(dat, xvar=NULL, yvar=NULL, series=NULL, size = NULL,   power=
 			title.x = title.x, title.y = title.y)
 	
 	opt$calculable = calculableSet(calculable = calculable)
+	opt$theme = themeSet(theme = theme)
 
 	# opt$tooltip format, not open to user now.
 	opt$tooltip = tooltipSet( tooltip=tooltip,trigger=tooltip.trigger,
