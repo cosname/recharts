@@ -4,3 +4,4 @@ NEWS.md
 ^.*\.Rproj$
 FAQ.md
 Makefile
+^\.travis\.yml$
