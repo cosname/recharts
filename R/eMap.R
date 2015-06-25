@@ -7,7 +7,7 @@
 #' @return The HTML code as a character string.
 #' @export
 #' @examples
-#' testData <- read.csv(system.file("examples", "testDataForMap.csv", package = "recharts"),stringsAsFactors=F) 
+#' testData <- read.csv(system.file("examples", "testDataForMap.csv", package = "recharts"),stringsAsFactors=FALSE) 
 #' 
 #' eMap(testData, namevar="province")
 
