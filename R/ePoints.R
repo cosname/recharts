@@ -23,6 +23,7 @@ ePoints = function(dat, xvar=NULL, yvar=NULL, series=NULL, size = NULL,   power=
 	ylab.name = "", ylab.namePosition="start", ylim=NULL,
 	calculable=FALSE, showLabel=TRUE, opt = list())
 {
+
 	### ePoint data setting,
 	# preprocess data to xvar, yvar, serieslab.
 	xvar = recharts:::autoArgLabel(xvar, deparse(substitute(xvar)))
