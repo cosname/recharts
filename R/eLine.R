@@ -26,12 +26,11 @@ eLine = function(dat, xvar=NULL, yvar=NULL, series=NULL, size = NULL, horiz = FA
 	xlabName = recharts:::autoArgLabel(xvar, deparse(substitute(xvar)))
 	ylabName = recharts:::autoArgLabel(yvar, deparse(substitute(yvar)))
 
-	xvar = as.factor(as.character(recharts:::evalFormula(xvar, dat)))
+	xvar = recharts:::evalFormula(xvar, dat)
 	yvar = recharts:::evalFormula(yvar, dat)
-
-	seriesName = as.factor(recharts:::evalFormula(series, dat))
+	seriesName = recharts:::autoArgLabel(series, deparse(substitute(series)))
 	if (!is.null(series)) series = as.factor(as.character(recharts:::evalFormula(series, dat)))
-
+	
 	# if series is null, we will use the xvar and yvar to construct the bar plot..
 	if(is.null(xvar) & is.null(yvar) & !is.factor(dat)){
 		# Mode 1. use default data.frame as input...
@@ -39,6 +38,7 @@ eLine = function(dat, xvar=NULL, yvar=NULL, series=NULL, size = NULL, horiz = FA
 	}else if(!is.null(xvar) & !is.null(yvar) & !is.null(series)){
 		#print("Mode1")
 		# Mode 2. all of xvar, yvar and series are valid...
+		xvar = as.factor(as.character(xvar))
 		dat <- with(dat, {
 			out <- matrix(nrow=nlevels(series), ncol=nlevels(xvar),
 						dimnames=list(levels(series), levels(xvar)))
