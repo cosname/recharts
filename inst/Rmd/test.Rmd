@@ -1,0 +1,11 @@
+test
+```{r}
+library(recharts)
+```
+
+# test
+
+```{r}
+eChart(iris, ~1,~2)
+
+```
