@@ -11,7 +11,7 @@
 #' x = round(runif(6) * 100)
 #' names(x) = LETTERS[1:6]
 #' eWordcloud(x) + eTitle(title="test")
-#' testData <- read.csv(system.file("examples", "testDataForMap.csv", package = "recharts"),stringsAsFactors=F) 
+#' testData <- read.csv(system.file("examples", "testDataForMap.csv", package = "recharts"),stringsAsFactors=FALSE) 
 #' testData$data2 <- testData$data2 * 100
 #' eWordcloud(head(testData), ~province, ~data2)
 

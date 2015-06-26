@@ -10,7 +10,7 @@
 #' x = runif(6)
 #' names(x) = LETTERS[1:6]
 #' ePie(x) + eTitle("test")
-#' testData <- read.csv(system.file("examples", "testDataForMap.csv", package = "recharts"),stringsAsFactors=F) 
+#' testData <- read.csv(system.file("examples", "testDataForMap.csv", package = "recharts"),stringsAsFactors=FALSE) 
 #' ePie(head(testData), ~province, ~data2)
 #' ePie(dat, ~namevar, ~valvar)
 
