@@ -1,5 +1,4 @@
 
-
 #' Reports whether x is a option object
 #' @param x An object to test
 #' @export
@@ -177,5 +176,6 @@ eTheme = function(...){
 
 #' @export
 "%+%" <- `+.echarts`
+
 
 
