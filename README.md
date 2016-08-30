@@ -1,30 +1,14 @@
----
-title: "recharts 包设计使用说明"
-author: "Yang Zhou"
-date: "`r Sys.Date()`"
-output: knitr:::html_vignette
-vignette: >
-  %\VignetteIndexEntry{An Introduction to the recharts Package}
-  %\VignetteEngine{knitr::rmarkdown}
-  %\VignetteEncoding{UTF-8}
----
 recharts
 ========
 
+[![Build Status](https://travis-ci.org/taiyun/recharts.png)](https://travis-ci.org/taiyun/recharts)
+
 A R interface to [ECharts](https://github.com/ecomfe/echarts) for data visualization.
 
-recharts 提供了百度开源可视化js框架ECharts的R语言接口，现提供的图形展示接口包括：地图（eMap），柱状图（eBar），折线图（eLine），
-雷达图（eRadar），散点图（ePoints），漏斗图（eFunnel）以及万恶的饼图（ePie）。
-同时计划对力导向图（[eForce](http://echarts.baidu.com/demo.html#graph-force)），
-时间序列散点图([ePoints_timeSeries](http://echarts.baidu.com/demo.html#graph-life-expectancy))，
-矩阵树图([eTree](http://echarts.baidu.com/demo.html#treemap-disk))，
-平行坐标图([eParallel](http://echarts.baidu.com/demo.html#parallel-aqi))
-和桑基图（[eSankey](http://echarts.baidu.com/demo.html#sankey-energy)）图逐一实现。
 
-# recharts的安装(Installation)
-部分R语言版本(R 3.2.2)会出现中文字符乱码，建议使用R语言版本为3.2.5。
+## Installation
 
-recharts包的源代码在[Github/taiyun/recharts](https://github.com/taiyun/recharts)上提供下载与安装，安装需要使用以下代码：
+You can install `recharts` from github using the `devtools` package:
 
 ```s
 require(devtools)
@@ -32,66 +16,81 @@ install_github('recharts', 'taiyun')
 ```
 
 
-# 图形使用模块
 
-## 地图(eMap)使用
-地图分别提供了世界地图、美国、中国地图以及各省级行政区地图，需要使用'''region'''参数进行地图显示地区的设置。
+## Examples
 
-地图的使用需要由一个data.frame作为输入，包括了一列地名和多列数值，需要使用'''~列名'''的方式进行数值传递。
+
+### Demo
+```s
+require(recharts)
+demo(recharts::recharts)
+```
+
+```s
+demo(recharts::recharts_shiny)
+```
+
+```s
+demo(recharts::recharts_shiny_pie)
+```
+
+### Line Plot
+
+```s
+plot(eLine(iris[,1:4]))
+plot(eLine(iris[,1:4], opt=list(dataZoom=list(show=TRUE,end=35))))
+```
+
+![Line Plot](screenshots/irisLine.PNG)
+
+![Line Zoom Plot](screenshots/irisLineZoom.PNG)
+
+### Area Plot
+
+```s
+plot(eArea(iris[,1:4]))
+```
+
+![Area Plot](screenshots/irisArea.PNG)
+
+
+### Scatter Plot
+
+```s
+plot(ePoints(iris[,3:5]))
+```
+
+![Scatter Plot](screenshots/irisPoints.PNG)
+
+
+### Pie Plot
+
+```s
+x = sample(4)
+names(x) = LETTERS[1:4]
+plot(ePie(x))
+```
+
+![Pie Plot](screenshots/xPie.PNG)
+
+
+### Bar Plot
 
 
 ```s
-library(recharts)
-mapData <- data.frame(province=c("上海", "江苏", "广东", "黑龙江"), 
-	val1=c(100, 200, 300, 500), val2=c(200,300,400,200), val3=c(1,2,3,5), stringsAsFactors=F)
-
-## 全国地图
-eMap(mapData, namevar=~province, datavar = ~val1+val2)
-
-provinceMapData <- data.frame(city=c("扬州市", "南京市", "苏州市"), value=c(100, 200, 300),
-                        val2=c(200,300,400), val3=c(1,2,3), stringsAsFactors=F)
-## 省份地图
-eMap(provinceMapData, namevar=~city, datavar = ~value+val2, region="江苏")
+plot(eBar(head(iris[,1:4])))
 ```
-![Map_China](screenshots/map_china.PNG)
 
-![Map_Province](screenshots/map_province.PNG)
+![Bar Plot](screenshots/irisBar.PNG)
 
-## 柱状图(eBar)使用
-柱状图(eBar)，允许3种原始数据输入：
-1. data.frame，需要指定'''xvar=~weekDay; yvar= ~saleNum; series=~seller'''，其中series参数可选。
+
+### Map
 
 ```s
-df2 = data.frame(
-	saleNum=c(10,20,30,40,50,60,70,15,25,35,45,55,65,75,25,35,45,55,65,75,85),
-	seller=c(rep("小黄",7), rep("小红",7), rep("小白",7)),
-	weekDay = c(rep(c("周一","周二","周三","周四","周五","周六","周日"),3))
-)
-eBar(dat= df2, xvar=~weekDay, yvar=~saleNum, series=~seller)
+options(encoding="UTF-8")
+Sys.setlocale("LC_CTYPE","chs")
+load(url('http://yzhou.org/recharts/ChinaGDP.RData'))
+plot(eMap(ChinaGDP, opt=list(title=list(text='2008~2010年大陆各省GDP占全国百分数'))))
 ```
-![Barplot1](screenshots/barplot1.PNG)
 
-
-2. 矩阵对象，以'''WorldPhones'''为例，可以显示以行为X轴分度，列名为颜色分度，
-矩阵数值为Y轴分度的柱状图。
-```s
-eBar(WorldPhones)
-```
-![Barplot2](screenshots/barplot2.PNG)
-
-3. table对象或因子(factor)数组
-```{r, warning = FALSE, message = FALSE}
-library(recharts)
-eBar(cut(rnorm(1000), -4:4))
-```
-![Barplot3](screenshots/barplot3.PNG)
-
-## 散点(ePoints)图
-散点图需要的输入是data.frame，需要指定'''xvar'''和'''yvar'''， '''series'''为可选的颜色分度参数，
-```{r, warning = FALSE, message = FALSE}
-# 测试下中文
-iris$Species <- as.character(iris$Species)
-iris$Species[1:20] ="小红帽"
-ePoints(iris, ~Sepal.Length, ~Sepal.Width, series = ~Species)
-```
-![Scatterplot](screenshots/Scatterplot.PNG)
+![Map](screenshots/irisChinaMap.PNG)
