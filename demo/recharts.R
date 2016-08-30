@@ -2,8 +2,8 @@ require(recharts)
 
 df2 <- data.frame(
 	saleNum=c(10,20,30,40,50,60,70,15,25,35,45,55,65,75,25,35,45,55,65,75,85),
-	seller=c(rep("灏忛粍",7), rep("灏忕孩",7), rep("灏忕櫧",7)),
-	weekDay = c(rep(c("鍛ㄤ竴","鍛ㄤ簩","鍛ㄤ笁","鍛ㄥ洓","鍛ㄤ簲","鍛ㄥ叚","鍛ㄦ棩"),3))
+	seller=c(rep("小黄",7), rep("小红",7), rep("小白",7)),
+	weekDay = c(rep(c("周一","周二","周三","周四","周五","周六","周日"),3))
 )
 
 eBar(df2, ~weekDay, ~saleNum, ~seller)

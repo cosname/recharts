@@ -1,5 +1,13 @@
 dependencies:
   - name: echarts
-    version: 2.2.3
+    version: 3.2.2
     src: htmlwidgets/lib/echarts
-    script: echarts-all.js
+    script: echarts.min.js
+  - name: d3
+    version: 3.0.1
+    src: htmlwidgets/lib/d3
+    script: d3.v3.min.js
+  - name: echarts_shapeFile
+    version: 3.2.2
+    src: htmlwidgets/lib/shapeFile
+    script: [china.js, provinceShape.js, world.js]

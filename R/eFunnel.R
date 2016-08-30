@@ -15,8 +15,6 @@
 #' testData <- read.csv(system.file("examples", "testDataForMap.csv", package = "recharts"),stringsAsFactors=FALSE,encoding = "UTF-8") 
 #' eFunnel(head(testData), ~province, ~data2)
 
-
-
 eFunnel = function(dat, namevar=NULL, valvar=NULL,  size = NULL, fix = TRUE,
                       theme = "default", title = NULL, subtitle = NULL, title.x = "center", title.y = "top", legend.data = NULL,
                       legend = TRUE, legend.x = "left", legend.y= "top", legend.orient="horizontal", 

@@ -16,7 +16,7 @@
 #' eRadar(dat)
 #' df2 <- data.frame(
 #'  saleNum=c(10,20,30,40,50,60,70,15,25,35,45,55,65,75,25,35,45,55,65,75,85),
-#' 	seller=c(rep("小黄",7), rep("小红",7), rep("小白",7)),
+#' 	seller=c(rep("小黄花",7), rep("小红",7), rep("小白",7)),
 #'	weekDay = c(rep(c("周一","周二","周三","周四","周五","周六","周日"),3))
 #' )
 #' dat <- df2
@@ -109,7 +109,6 @@ eRadar = function(dat, xvar=NULL, yvar=NULL, series=NULL, size = NULL, ymin=vect
     if(is.null(opt$series[[1]]$data)) {
         opt$series[[1]]$data = datList
     }
-	
 
 	opt$size = size
 	
@@ -118,5 +117,4 @@ eRadar = function(dat, xvar=NULL, yvar=NULL, series=NULL, size = NULL, ymin=vect
 		'echarts', opt, width = size[1], height = size[2], package = 'recharts'
 	)
 	chart
-	
 }

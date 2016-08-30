@@ -9,6 +9,10 @@
 #' @export
 #' @examples
 #' ePoints(iris[,3:5], theme=2)
+#' iris$Species <- as.character(iris$Species)
+#' iris[1:20, "Species"] ="小红花"
+#' ePoints(iris[,3:5], xvar=~Petal.Length, yvar=~Petal.Width, series=~Species, theme=2)
+#' 
 
 ePoints = function(dat, xvar=NULL, yvar=NULL, series=NULL, size = NULL,   power=2, precision=2,
 	theme = "default", title = NULL, subtitle = NULL, title.x = "center", title.y = "top", 
@@ -84,7 +88,6 @@ ePoints = function(dat, xvar=NULL, yvar=NULL, series=NULL, size = NULL,   power=
 	}else if(!namevar %in% colnames(dat)){
 		stop("wrong namevar input...")
 	}
-	
 
 	# if the xvar/yvar/namevar is null, will use the first column of dat as default.	And check the xvar in the dat colnames.
 	if (is.null(xvar) || !xvar %in% colnames(dat)) xvar = colnames(dat)[1]

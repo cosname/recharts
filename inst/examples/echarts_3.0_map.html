@@ -1,0 +1,73 @@
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <title>Demo Page</title>
+   <meta http-equiv="content-type" content="text/html;charset=utf-8" />
+
+<style type="text/css">
+    body {
+          color: #444444;
+          font-family: Arial,Helvetica,sans-serif;
+          font-size: 75%;
+    }
+    a {
+          color: #4D87C7;
+          text-decoration: none;
+    }
+	rect.frame {
+	  fill: #fff;
+	  fill-opacity: .7;
+	  stroke: #aaa;
+	}
+	.axis path{
+		fill:none;
+		stroke: black;
+	}
+	.axis {
+		font-size:9pt;
+		font-family:sans-serif;
+	}
+	.tick {
+		fill:none;
+		stroke:black;
+	}
+	.modelSelectDiv{
+		position: absolute;
+		margin-top:-30px
+	}
+</style>
+</head>
+<body>
+
+
+<script src="./public/js/echarts3.1.min.js"></script>
+<script src="./public/js/map/js/china.js"></script>
+<script src="./public/js/map/js/province_integrated.js"></script>
+
+<script src="./public/js/d3.v3.min.js" charset="utf-8"></script>
+
+<!-- jsHeader -->
+<!-- divChart -->
+<div style='float:left;width:60%;'>
+	<div id='mainMap' style='height:800px; border:0px solid #ccc;padding:10px;border:solid 0px'></div>
+</div>
+<div id='subGraph' style='float:left;width:35%;'>
+	<div id='provinceMap' style='height:500px; border:0px solid #ccc;padding:10px; border:solid 0px'></div>
+	<div id='provinceBar' style='height:300px;  border:0px solid #ccc;padding:10px; border:solid 0px'></div>
+</div>
+<!-- jsChart -->
+
+
+<script src="./public/data/provinceInfo.json" charset="utf-8"></script>
+<script src="./public/data/provinceInfo.js" charset="utf-8"></script>
+
+
+</body>
+
+
+</html>
+
+

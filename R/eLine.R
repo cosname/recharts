@@ -40,8 +40,8 @@ eLine = function(dat, xvar=NULL, yvar=NULL, series=NULL, size = NULL, horiz = FA
 		# Mode 2. all of xvar, yvar and series are valid...
 		xvar = as.factor(as.character(xvar))
 		dat <- with(dat, {
-			out <- matrix(nrow=nlevels(series), ncol=nlevels(xvar),
-						dimnames=list(levels(series), levels(xvar)))
+			out <- matrix(nrow=nlevels(series), ncol=nlevels(as.factor(xvar)),
+						dimnames=list(unique(series), unique(xvar)))
 			out[cbind(series, xvar)] <- yvar
 			out
 		})
@@ -119,11 +119,13 @@ eLine = function(dat, xvar=NULL, yvar=NULL, series=NULL, size = NULL, horiz = FA
 	}
 	opt$size = size
 	
-	### output list format
-	chart = htmlwidgets::createWidget(
-		'echarts', opt, width = size[1], height = size[2], package = 'recharts'
+	htmlwidgets::createWidget(
+		'echarts', opt,
+		package = 'recharts', width = size[1], height = size[2],
+		preRenderHook = function(instance) {
+			instance
+		}
 	)
-	chart
 
 }
 
@@ -168,8 +170,8 @@ eArea = function(dat, xvar=NULL, yvar=NULL, series=NULL, size = NULL, horiz = FA
 		# Mode 2. all of xvar, yvar and series are valid...
 		xvar = as.factor(as.character(xvar))
 		dat <- with(dat, {
-			out <- matrix(nrow=nlevels(series), ncol=nlevels(xvar),
-						dimnames=list(levels(series), levels(xvar)))
+			out <- matrix(nrow=nlevels(series), ncol=nlevels(as.factor(xvar)),
+						dimnames=list(unique(series), unique(xvar)))
 			out[cbind(series, xvar)] <- yvar
 			out
 		})
@@ -258,10 +260,13 @@ eArea = function(dat, xvar=NULL, yvar=NULL, series=NULL, size = NULL, horiz = FA
 	
 	opt$size = size
 	
-	### output list format
-	chart = htmlwidgets::createWidget(
-		'echarts', opt, width = size[1], height = size[2], package = 'recharts'
+	displayOutput(opt)
+	htmlwidgets::createWidget(
+		'echarts', opt,
+		package = 'recharts', width = opt$size[1], height = opt$size[2],
+		preRenderHook = function(instance) {
+			instance
+		}
 	)
-	chart
 
 }
