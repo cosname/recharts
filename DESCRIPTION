@@ -1,33 +1,45 @@
 Package: recharts
 Type: Package
-Title: A R Interface to ECharts
-Version: 0.01
-Author: Taiyun WEI, Yang ZHOU
-Depends:
-    RJSONIO,
-	shiny(>= 0.9.1),
-    tools
+Title: An R Interface to ECharts
+Version: 0.0.302
+Date: 2014-12-18
+Authors@R: c(
+    person("Taiyun", "Wei", role = c("aut", "cre"), email = "weitaiyun@gmail.com"),
+    person("Yihui", "Xie", role = "aut"),
+    person("Yang", "Zhou", role = "aut"),
+    person("Baidu Inc", role = c("ctb", "cph"), comment = "the ECharts library under htmlwidgets/lib")
+    )
+Description: Provides an R interface to the JavaScript library ECharts for
+    interactive data visualization.
+Imports:
+    htmltools,
+    htmlwidgets (>= 0.6),
+    magrittr
 Suggests:
     plyr,
-    knitr
-Maintainer: Taiyun Wei <weitaiyun@gmail.com>
-Description: A R Interface to ECharts
-License: MIT
-URL: https://github.com/taiyun/recharts
-BugReports: https://github.com/taiyun/recharts/issues
-VignetteBuilder: knitr
+    knitr,
+    rmarkdown,
+    shiny (> 0.11.1)
 Collate:
+    'chartOpt.R'
     'config.R'
+    'data.R'
     'eBar.R'
     'eForce.R'
+    'eFunnel.R'
     'eLine.R'
     'eMap.R'
     'ePie.R'
     'ePoints.R'
     'eRadar.R'
+    'eWordcloud.R'
+    'lazyPlot.R'
+    'optSetUtils.R'
     'plot.recharts.R'
-	'optSetUtils.R'
+    'shiny.R'
     'utils.R'
     'zzz.R'
-    'chartOpt.R'
-    'lazyPlot.R'
+License: MIT + file LICENSE
+LazyData: TRUE
+VignetteBuilder: knitr
+RoxygenNote: 5.0.1

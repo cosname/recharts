@@ -19,3 +19,4 @@ lazyPlot <- function(e1){
 		}
 	}
 }
+

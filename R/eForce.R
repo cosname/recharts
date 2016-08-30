@@ -1,18 +1,18 @@
 #' Force network graph
 #'
-#' ECharts style Force network graph visulize the social network matrix data.
+#' ECharts style 力导向图 graph visulize the social network matrix data.
 #'
 #' @param networkMatrix   required, a symmetric matrix, each cell value indicates 
 #' the weight of the two nodes and the 0 or NA cell would not be counted in. 
 #' The matrix should have colnames or rownames.
 #' @param propertyDf   optional, dataframe which contain the metadata for the nodes. 
 #' It could contain category, value and color columns. The colnames and rownames are required.
-#' @param opt option of ECharts.
+#' @param opt 力导向图选项.
 #' @return The HTML code as a character string.
 #' @export
 #' @examples
-#' testData <- matrix(1:25, nrow=5)
-#' plot(eForce(testData))
+#' testData <- matrix(1:25, nrow=5) #测试中文
+#' eForce(testData)
 
 
 
@@ -69,9 +69,9 @@
 # eForce(networkMatrix=networkMatrix, propertyDf=propertyDf)
 
 
-eForce = function(networkMatrix, propertyDf=NULL, size = c(1024, 768),
+eForce = function(networkMatrix, propertyDf=NULL, size = NULL,
 	maxR=25, minR=15, density=0.05, attractiveness=1.2, showLabel=TRUE, 
-	title = NULL, subtitle = NULL, title.x = "center", title.y = "top", 
+	theme = "default", title = NULL, subtitle = NULL, title.x = "center", title.y = "top", 
 	legend = TRUE, legend.x = "left", legend.y= "top", legend.orient="horizontal", 
 	toolbox = TRUE, toolbox.orient = "horizontal", toolbox.x = "right", toolbox.y = "top", 
 	dataView = FALSE, readOnly = TRUE, mark=TRUE, dataZoom=FALSE,
@@ -86,6 +86,7 @@ eForce = function(networkMatrix, propertyDf=NULL, size = c(1024, 768),
 	
 
 	opt$calculable = calculableSet(calculable = calculable)
+	opt$theme = themeSet(theme = theme)
 
 	# opt$tooltip format, not open to user now.
 	opt$tooltip = tooltipSet( tooltip=tooltip,trigger=tooltip.trigger,
@@ -292,7 +293,7 @@ eForce = function(networkMatrix, propertyDf=NULL, size = c(1024, 768),
 	#	)
 	#}
 	
-	opt$legend = legendSet( legend=legend, data=categoryList, legend.x=legend.x, legend.y=legend.y, orient=legend.orient)
+	opt$legend = legendSet( show=legend, data=categoryList, legend.x=legend.x, legend.y=legend.y, orient=legend.orient)
 
 	
 	opt$series$itemStyle = itemStyleOutput
@@ -301,14 +302,13 @@ eForce = function(networkMatrix, propertyDf=NULL, size = c(1024, 768),
 	opt$series$links = linksOutput
 	opt$series = list(opt$series)
 
-	jsonStr <- toJSON(opt, pretty=TRUE)
-	outList <- .rechartsOutput(jsonStr, charttype="eForce", size=size)
 	opt$size = size
-	output <- list(outList=outList, opt=opt)
-	class(output) <- c("recharts", "eForce", "list")
 	
 	### output list format
-	return(output)
+	chart = htmlwidgets::createWidget(
+		'echarts', opt, width = size[1], height = size[2], package = 'recharts'
+	)
+	chart
 }
 	
 	

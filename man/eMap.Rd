@@ -16,10 +16,7 @@
   ECharts style map charts. Only support CHINA now.
 }
 \examples{
-options(encoding="UTF-8")
-Sys.setlocale("LC_CTYPE","chs")
-load(url('http://yzhou.org/recharts/ChinaGDP.RData'))
-ChinaGDP
-plot(eMap(ChinaGDP))
+testData <- read.csv(system.file("examples", "testDataForMap.csv", package = "recharts"),stringsAsFactors=FALSE) 
+eMap(testData, namevar="province")
 }
 

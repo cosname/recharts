@@ -16,6 +16,6 @@
   ECharts style line charts.
 }
 \examples{
-plot(eLine(WorldPhones))
+eLine(WorldPhones)
 }
 

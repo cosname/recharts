@@ -30,8 +30,7 @@
 	recharts.tags <- c("type",  "chartid", "html", "header", "chart", "jsHeader", "jsData", "jsDrawChart", 
 			"jsDisplayChart", "jsFooter", "jsChart", "divChart", "caption", "footer")
 	options(recharts.tags = recharts.tags)
-	
-	jsLoaderFlag <<- FALSE
+
 	
 }
 

@@ -7,15 +7,15 @@
 #' @return The HTML code as a character string.
 #' @export
 #' @examples
-#' plot(eLine(WorldPhones))
+#' eLine(WorldPhones, theme=1)
 
 
-eLine = function(dat, size = c(1024, 768), horiz = FALSE,
-	title = NULL, subtitle = NULL, title.x = "center", title.y = "top", 
+eLine = function(dat, xvar=NULL, yvar=NULL, series=NULL, size = NULL, horiz = FALSE,
+	theme = "default", title = NULL, subtitle = NULL, title.x = "center", title.y = "top", 
 	legend = TRUE, legend.x = "left", legend.y= "top", legend.orient="horizontal", 
 	toolbox = TRUE, toolbox.orient = "horizontal", toolbox.x = "right", toolbox.y = "top", 
 	dataView = TRUE, readOnly = FALSE, mark=TRUE, dataZoom=FALSE, magicType=TRUE,
-	tooltip = TRUE, tooltip.trigger="item", formatter="", axis.scale=TRUE,
+	tooltip = TRUE, tooltip.trigger="axis", formatter="", axis.scale=TRUE,
 	axis.line=TRUE, axis.tick=FALSE, axis.lable=TRUE, axis.splitLine=TRUE, axis.splitArea=FALSE, axis.boundaryGap=TRUE,
 	xlab=TRUE, xlab.type="category", xlab.data=NULL, xlab.position="bottom",
 	xlab.name = "", xlab.namePosition="start", xlim=NULL,
@@ -23,13 +23,48 @@ eLine = function(dat, size = c(1024, 768), horiz = FALSE,
 	ylab.name = "", ylab.namePosition="start", ylim=NULL,
 	calculable=TRUE, showLabel=TRUE, opt = list()) 
 {
-	if (class(dat) != "data.frame") dat <- as.data.frame(dat, stringsAsFactor=F)
+	xlabName = recharts:::autoArgLabel(xvar, deparse(substitute(xvar)))
+	ylabName = recharts:::autoArgLabel(yvar, deparse(substitute(yvar)))
 
+	xvar = as.factor(recharts:::evalFormula(xvar, dat))
+	yvar = recharts:::evalFormula(yvar, dat)
+
+	series = as.factor(recharts:::evalFormula(series, dat))
+
+	# if series is null, we will use the xvar and yvar to construct the bar plot..
+	if(is.null(xvar) & is.null(yvar) & !is.factor(dat)){
+		# Mode 1. use default data.frame as input...
+		dat <- as.data.frame(dat, stringsAsFactor=F)
+	}else if(!is.null(xvar) & !is.null(yvar) & !is.null(series)){
+		#print("Mode1")
+		# Mode 2. all of xvar, yvar and series are valid...
+		xvar = as.factor(as.character(xvar))
+		dat <- with(dat, {
+			out <- matrix(nrow=nlevels(series), ncol=nlevels(as.factor(xvar)),
+						dimnames=list(unique(series), unique(xvar)))
+			out[cbind(series, xvar)] <- yvar
+			out
+		})
+		dat <- as.data.frame(dat)
+	}else if(!is.null(xvar) & !is.null(yvar) & is.null(series)){
+		# Mode 3. format dat with only x and y variable.
+		dat <- data.frame(val = yvar)
+		colnames(dat) <- ylabName
+		rownames(dat) <- xvar
+	}else if(is.null(xvar) & is.null(yvar) & is.factor(dat)){
+		# Mode 4. factor
+		tempD <- as.data.frame(table(dat))
+		dat <- data.frame(val = tempD[,"Freq"])
+		colnames(dat) <- "Frequency"
+		rownames(dat) <- tempD[,1]
+	}
+	
 	# option$title format.
 	opt$title = tilteSet(title = title, subtitle=subtitle,
 			title.x = title.x, title.y = title.y)
 	
 	opt$calculable = calculableSet(calculable = calculable)
+	opt$theme = themeSet(theme = theme)
 
 	# opt$tooltip format, not open to user now.
 	opt$tooltip = tooltipSet( tooltip=tooltip,trigger=tooltip.trigger,
@@ -39,8 +74,8 @@ eLine = function(dat, size = c(1024, 768), horiz = FALSE,
 				dataView=dataView, mark=mark, dataZoom = dataZoom, magicType = magicType, restore = TRUE, readOnly = readOnly,
 				saveAsImage=TRUE)
 
-				
-	opt$legend = legendSet( legend=legend, data=colnames(dat), legend.x=legend.x, legend.y=legend.y, orient=legend.orient)
+
+	opt$legend = legendSet( show=legend, data=colnames(dat), legend.x=legend.x, legend.y=legend.y, orient=legend.orient)
 	
 	if(match.arg(xlab.type, c("category" , "value")) == "category" & is.null(xlab.data)){
 		xlab.data = rownames(dat)
@@ -64,7 +99,6 @@ eLine = function(dat, size = c(1024, 768), horiz = FALSE,
         if(is.null(opt$series[[i]]$type)) {
             opt$series[[i]]$type = 'line'
         }
-
         if(is.null(opt$series[[i]]$name)) {
             opt$series[[i]]$name = colnames(dat)[i]
         } else {
@@ -83,14 +117,15 @@ eLine = function(dat, size = c(1024, 768), horiz = FALSE,
 		opt$xAxis = opt$yAxis
 		opt$yAxis = tmp
 	}
-	jsonStr <- toJSON(opt, pretty=TRUE)
-	outList <- .rechartsOutput(jsonStr, charttype="eLine", size=size)
 	opt$size = size
-	output <- list(outList=outList, opt=opt)
-	class(output) <- c("recharts", "eLine", "list")
 	
-	### output list format
-	return(output)
+	htmlwidgets::createWidget(
+		'echarts', opt,
+		package = 'recharts', width = size[1], height = size[2],
+		preRenderHook = function(instance) {
+			instance
+		}
+	)
 
 }
 
@@ -103,10 +138,10 @@ eLine = function(dat, size = c(1024, 768), horiz = FALSE,
 #' @return The HTML code as a character string.
 #' @export
 #' @examples
-#' plot(eArea(WorldPhones))
+#' eArea(WorldPhones)
 
-eArea = function(dat, size = c(1024, 768), horiz = FALSE, stack="SUM",
-	title = NULL, subtitle = NULL, title.x = "center", title.y = "top", 
+eArea = function(dat, xvar=NULL, yvar=NULL, series=NULL, size = NULL, horiz = FALSE, stack="SUM",
+	theme = "default", title = NULL, subtitle = NULL, title.x = "center", title.y = "top", 
 	legend = TRUE, legend.x = "left", legend.y= "top", legend.orient="horizontal", 
 	toolbox = TRUE, toolbox.orient = "horizontal", toolbox.x = "right", toolbox.y = "top", 
 	dataView = TRUE, readOnly = FALSE, mark=TRUE, dataZoom=FALSE, magicType=TRUE,
@@ -118,8 +153,42 @@ eArea = function(dat, size = c(1024, 768), horiz = FALSE, stack="SUM",
 	ylab.name = "", ylab.namePosition="start", ylim=NULL,
 	calculable=TRUE, showLabel=TRUE, opt = list()) 
 {
-	if (class(dat) != "data.frame") dat <- as.data.frame(dat, stringsAsFactor=F)
+	xlabName = recharts:::autoArgLabel(xvar, deparse(substitute(xvar)))
+	ylabName = recharts:::autoArgLabel(yvar, deparse(substitute(yvar)))
 
+	xvar = as.factor(recharts:::evalFormula(xvar, dat))
+	yvar = recharts:::evalFormula(yvar, dat)
+
+	series = as.factor(recharts:::evalFormula(series, dat))
+
+	# if series is null, we will use the xvar and yvar to construct the bar plot..
+	if(is.null(xvar) & is.null(yvar) & !is.factor(dat)){
+		# Mode 1. use default data.frame as input...
+		dat <- as.data.frame(dat, stringsAsFactor=F)
+	}else if(!is.null(xvar) & !is.null(yvar) & !is.null(series)){
+		#print("Mode1")
+		# Mode 2. all of xvar, yvar and series are valid...
+		xvar = as.factor(as.character(xvar))
+		dat <- with(dat, {
+			out <- matrix(nrow=nlevels(series), ncol=nlevels(as.factor(xvar)),
+						dimnames=list(unique(series), unique(xvar)))
+			out[cbind(series, xvar)] <- yvar
+			out
+		})
+		dat <- as.data.frame(dat)
+	}else if(!is.null(xvar) & !is.null(yvar) & is.null(series)){
+		# Mode 3. format dat with only x and y variable.
+		dat <- data.frame(val = yvar)
+		colnames(dat) <- ylabName
+		rownames(dat) <- xvar
+	}else if(is.null(xvar) & is.null(yvar) & is.factor(dat)){
+		# Mode 4. factor
+		tempD <- as.data.frame(table(dat))
+		dat <- data.frame(val = tempD[,"Freq"])
+		colnames(dat) <- "Frequency"
+		rownames(dat) <- tempD[,1]
+	}
+	
 	# option$title format.
 	opt$title = tilteSet(title = title, subtitle=subtitle,
 			title.x = title.x, title.y = title.y)
@@ -135,7 +204,7 @@ eArea = function(dat, size = c(1024, 768), horiz = FALSE, stack="SUM",
 				saveAsImage=TRUE)
 
 				
-	opt$legend = legendSet( legend=legend, data=colnames(dat), legend.x=legend.x, legend.y=legend.y, orient=legend.orient)
+	opt$legend = legendSet( show=legend, data=colnames(dat), legend.x=legend.x, legend.y=legend.y, orient=legend.orient)
 	
 	if(match.arg(xlab.type, c("category" , "value")) == "category" & is.null(xlab.data)){
 		xlab.data = rownames(dat)
@@ -188,13 +257,16 @@ eArea = function(dat, size = c(1024, 768), horiz = FALSE, stack="SUM",
 		opt$xAxis = opt$yAxis
 		opt$yAxis = tmp
 	}
-	jsonStr <- toJSON(opt, pretty=TRUE)
-	outList <- .rechartsOutput(jsonStr, charttype="eArea", size=size)
-	opt$size = size
-	output <- list(outList=outList, opt=opt)
-	class(output) <- c("recharts", "eArea", "list")
 	
-	### output list format
-	return(output)
+	opt$size = size
+	
+	displayOutput(opt)
+	htmlwidgets::createWidget(
+		'echarts', opt,
+		package = 'recharts', width = opt$size[1], height = opt$size[2],
+		preRenderHook = function(instance) {
+			instance
+		}
+	)
 
 }

@@ -1,3 +1,15 @@
+require(recharts)
+
+df2 <- data.frame(
+	saleNum=c(10,20,30,40,50,60,70,15,25,35,45,55,65,75,25,35,45,55,65,75,85),
+	seller=c(rep("小黄",7), rep("小红",7), rep("小白",7)),
+	weekDay = c(rep(c("周一","周二","周三","周四","周五","周六","周日"),3))
+)
+
+eBar(df2, ~weekDay, ~saleNum, ~seller)
+
+
+
 
 # Line Plot
 require(recharts)
@@ -58,14 +70,6 @@ recharts.eRadar <-  eRadar(dat)
 plot(recharts.eRadar)
 pause()
 
-# Map
-recharts_oldLocal <- Sys.getlocale("LC_CTYPE")
-Sys.setlocale("LC_CTYPE","chs")
-cityDF = read.csv(system.file( "tooltip", "cityDF.csv", package="recharts"), stringsAsFactor=F)
-recharts.eMap <- eMap(cityDF, namevar=1, datavar = 2, title='2008~2010 GDP Data Visulization')
-plot(recharts.eMap)
-Sys.setlocale("LC_CTYPE", recharts_oldLocal)
-pause()
 
 ## recharts demo
 pause <- function(){  

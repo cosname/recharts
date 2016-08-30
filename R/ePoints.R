@@ -8,13 +8,17 @@
 #' @return The HTML code as a character string.
 #' @export
 #' @examples
-#' plot(ePoints(iris[,3:5]))
+#' ePoints(iris[,3:5], theme=2)
+#' iris$Species <- as.character(iris$Species)
+#' iris[1:20, "Species"] ="小红花"
+#' ePoints(iris[,3:5], xvar=~Petal.Length, yvar=~Petal.Width, series=~Species, theme=2)
+#' 
 
-ePoints = function(dat, size = c(1024, 768), xvar=NULL, yvar=NULL, namevar=NULL, power=2, precision=2,
-	title = NULL, subtitle = NULL, title.x = "center", title.y = "top", 
+ePoints = function(dat, xvar=NULL, yvar=NULL, series=NULL, size = NULL,   power=2, precision=2,
+	theme = "default", title = NULL, subtitle = NULL, title.x = "center", title.y = "top", 
 	legend = TRUE, legend.data=NULL, legend.x = "left", legend.y= "top", legend.orient="horizontal", 
 	toolbox = TRUE, toolbox.orient = "horizontal", toolbox.x = "right", toolbox.y = "top", 
-	dataView = TRUE, readOnly = FALSE, mark=TRUE, dataZoom=TRUE, magicType=TRUE,
+	dataView = TRUE, readOnly = FALSE, mark=TRUE, dataZoom=TRUE, magicType=FALSE,
 	tooltip = TRUE, tooltip.trigger="item", formatter="", axis.scale=TRUE,
 	axis.line=TRUE, axis.tick=FALSE, axis.lable=TRUE, axis.splitLine=TRUE, axis.splitArea=FALSE, axis.boundaryGap=TRUE,
 	xlab=TRUE, xlab.type="value", xlab.data=NULL, xlab.position="bottom",
@@ -23,9 +27,22 @@ ePoints = function(dat, size = c(1024, 768), xvar=NULL, yvar=NULL, namevar=NULL,
 	ylab.name = "", ylab.namePosition="start", ylim=NULL,
 	calculable=FALSE, showLabel=TRUE, opt = list())
 {
+
 	### ePoint data setting,
-	# preprocess data to xvar, yvar, namevar.
-		
+	# preprocess data to xvar, yvar, serieslab.
+	xvar = recharts:::autoArgLabel(xvar, deparse(substitute(xvar)))
+	yvar = recharts:::autoArgLabel(yvar, deparse(substitute(yvar)))
+	namevar = recharts:::autoArgLabel(series, deparse(substitute(series)))
+	
+	if(missing(xvar) | is.null(xvar) | xvar=="") xvar = colnames(dat)[1]
+	if(missing(yvar) | is.null(yvar) | yvar=="" ) yvar = colnames(dat)[2]
+	if(missing(namevar) | is.null(namevar)| namevar==""){
+		namevar = "defaultName"
+		dat[,"defaultName"] = "default"
+	}
+	dat <- dat[,c(xvar, yvar, namevar)]
+	
+	
 	# format the dat to data.frame
 	if (class(dat) != "data.frame") dat <- as.data.frame(dat, stringsAsFactor=F)
 	
@@ -37,12 +54,7 @@ ePoints = function(dat, size = c(1024, 768), xvar=NULL, yvar=NULL, namevar=NULL,
 		namevar = "name"
 	}
 
-	if(missing(xvar) | is.null(xvar)) xvar = colnames(dat)[1]
-	if(missing(yvar) | is.null(yvar)) yvar = colnames(dat)[2]
-	if(missing(namevar) | is.null(namevar)){
-		namevar = "defaultName"
-		dat[,"defaultName"] = "default"
-	}
+
 	
 	if(length(xvar) > 1) xvar = xvar[1]
 	if(class(xvar) == "integer" | class(xvar) == "numeric"){
@@ -76,8 +88,6 @@ ePoints = function(dat, size = c(1024, 768), xvar=NULL, yvar=NULL, namevar=NULL,
 	}else if(!namevar %in% colnames(dat)){
 		stop("wrong namevar input...")
 	}
-	
-	
 
 	# if the xvar/yvar/namevar is null, will use the first column of dat as default.	And check the xvar in the dat colnames.
 	if (is.null(xvar) || !xvar %in% colnames(dat)) xvar = colnames(dat)[1]
@@ -93,6 +103,7 @@ ePoints = function(dat, size = c(1024, 768), xvar=NULL, yvar=NULL, namevar=NULL,
 			title.x = title.x, title.y = title.y)
 	
 	opt$calculable = calculableSet(calculable = calculable)
+	opt$theme = themeSet(theme = theme)
 
 	# opt$tooltip format, not open to user now.
 	opt$tooltip = tooltipSet( tooltip=tooltip,trigger=tooltip.trigger,
@@ -105,7 +116,7 @@ ePoints = function(dat, size = c(1024, 768), xvar=NULL, yvar=NULL, namevar=NULL,
 	if(missing(legend.data) | is.null(legend.data)){legendData = group
 	}else{legendData = legend.data}
 	
-	opt$legend = legendSet( legend=legend, data=legendData, legend.x=legend.x, legend.y=legend.y, orient=legend.orient)
+	opt$legend = legendSet( show=legend, data=legendData, legend.x=legend.x, legend.y=legend.y, orient=legend.orient)
 
 	opt$xAxis = xAxisSet(axisShow=xlab, type=xlab.type, data=xlab.data, position=xlab.position,
 				labelName=xlab.name, label.namePosition=xlab.namePosition, lim=xlim,
@@ -145,13 +156,14 @@ ePoints = function(dat, size = c(1024, 768), xvar=NULL, yvar=NULL, namevar=NULL,
         }
     }
 
-	jsonStr <- toJSON(opt, pretty=TRUE)
-	outList <- .rechartsOutput(jsonStr, charttype="ePoints", size=size)
+	#jsonStr <- toJSON(opt, pretty=TRUE)
+	#outList <- .rechartsOutput(jsonStr, charttype="ePoints", size=size)
 	opt$size = size
-	output <- list(outList=outList, opt=opt)
-	class(output) <- c("recharts", "ePoints", "list")
 	
 	### output list format
-	return(output)
+	chart = htmlwidgets::createWidget(
+		'echarts', opt, width = size[1], height = size[2], package = 'recharts'
+	)
+	chart
 }
 

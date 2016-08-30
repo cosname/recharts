@@ -42,7 +42,21 @@ tilteSet = function(title=NULL, link=NULL, subtitle=NULL, sublink=NULL,
 
 calculableSet = function(calculable)
 {
-	return(ifelse(calculable, "true", "false") )
+	return(ifelse(calculable, TRUE, FALSE) )
+}
+
+themeSet = function(theme="default")
+{
+	themeArray <- c("macarons","infographic","shiny","dark","blue","green","red","gray","helianthus","roma","mint","macarons2","sakura","default")
+	if (is.numeric(theme)){
+		return_theme = themeArray[theme]
+		
+	}else if(length(which(themeArray == theme)) >0){
+		return_theme = theme
+	}else{
+		return_theme = "default"
+	}
+	return(return_theme)
 }
 
 tooltipSet = function(tooltip, trigger=c("item","axis"), formatter="", islandFormatter="islandPoint")
@@ -50,7 +64,7 @@ tooltipSet = function(tooltip, trigger=c("item","axis"), formatter="", islandFor
 	if (formatter == "") formatter <- NULL
 	if (islandFormatter == "") islandFormatter <- NULL
 	returnList <- list(
-			show=ifelse(tooltip, "true", "false"),
+			show=ifelse(tooltip, TRUE, FALSE),
 			trigger=match.arg(trigger))
 
 	returnList$formatter = formatter
@@ -62,38 +76,38 @@ toolboxSet = function(toolbox=TRUE, toolbox.x="left", toolbox.y="top", orient=c(
 		dataView=TRUE, readOnly=TRUE, mark = TRUE, restore=TRUE, dataZoom=FALSE, saveAsImage=TRUE, magicType=FALSE)
 {
 	if (magicType){
-		magicType = list( show = "true", type = c("line", "bar", "stack", "tiled"))
+		magicType = list( show = TRUE, type = c("line", "bar", "stack", "tiled"))
 	}else{
-		magicType <- list( show  = "false")
+		magicType <- list()
 	}
 	
 	if (!dataView){
 		returnList <- list(
-			show = ifelse(toolbox, "true", "false"),
+			show = ifelse(toolbox, TRUE, FALSE),
 			x = matchPos.x(toolbox.x), 
 			y = matchPos.y(toolbox.y),
 			orient = match.arg(orient),
 			feature = list(
-				mark = list( show = ifelse(mark, "true", "false")),
-				dataZoom = list( show = ifelse(dataZoom, "true", "false")),
+				mark = list( show = ifelse(mark, TRUE, FALSE)),
+				dataZoom = list( show = ifelse(dataZoom, TRUE, FALSE)),
 				magicType = magicType,
-				restore = list( show =ifelse(restore, "true", "false")),
-				saveAsImage = list( show =ifelse(saveAsImage, "true", "false"))
+				restore = list( show =ifelse(restore, TRUE, FALSE)),
+				saveAsImage = list( show =ifelse(saveAsImage, TRUE, FALSE))
 			)
 		)
 	}else{
 		returnList <- list(
-			show = ifelse(toolbox, "true", "false"),
+			show = ifelse(toolbox, TRUE, FALSE),
 			x = matchPos.x(toolbox.x), 
 			y = matchPos.y(toolbox.y),
 			orient = match.arg(orient),
 			feature = list(
-				mark = list( show =ifelse(mark, "true", "false")),
-				dataZoom = list( show =ifelse(dataZoom, "true", "false")),
+				mark = list( show =ifelse(mark, TRUE, FALSE)),
+				dataZoom = list( show =ifelse(dataZoom, TRUE, FALSE)),
 				magicType = magicType,
-				restore = list( show =ifelse(restore, "true", "false")),
-				dataView = list( show =list(readOnly = ifelse(readOnly, "true", "false"))),
-				saveAsImage = list( show =ifelse(saveAsImage, "true", "false"))
+				restore = list( show =ifelse(restore, TRUE, FALSE)),
+				dataView = list( show =list(readOnly = ifelse(readOnly, TRUE, FALSE))),
+				saveAsImage = list( show =ifelse(saveAsImage, TRUE, FALSE))
 			)
 		)
 	}
@@ -103,11 +117,11 @@ toolboxSet = function(toolbox=TRUE, toolbox.x="left", toolbox.y="top", orient=c(
 	
 }
 
-legendSet = function(legend=TRUE, data=NULL, orient = c("horizontal", "vertical"), legend.x="left", legend.y="top"){
-	if(is.null(data)){legend=FALSE}
-	if(legend){
+legendSet = function(show=TRUE, data=NULL, orient = c("horizontal", "vertical"), legend.x="left", legend.y="top"){
+	if(is.null(data)){show=FALSE}
+	if(show){
 		returnList <- list(
-			show="true",
+			show=TRUE,
 			orient = match.arg(orient),
 			x = matchPos.x(legend.x),
 			y = matchPos.y(legend.y),
@@ -116,10 +130,10 @@ legendSet = function(legend=TRUE, data=NULL, orient = c("horizontal", "vertical"
 		return(returnList)
 	}else{
 		return(list(
-			show="false"
+			show=FALSE,
+			data = as.list(data)
 		))
 	}
-
 }
 	
 dataRangeSet = function(dataRange=TRUE, max=NULL, min=NULL, dataRange.text=c("high","low"), dataRange.x="left", dataRange.y="bottom",
@@ -139,11 +153,11 @@ dataRangeSet = function(dataRange=TRUE, max=NULL, min=NULL, dataRange.text=c("hi
 	}
 
 	returnList <- list(
-		show = ifelse(dataRange, "true", "false"),
+		show = ifelse(dataRange, TRUE, FALSE),
 		text = dataRange.text,
 		x = matchPos.x( dataRange.x),
 		y = matchPos.y( dataRange.y),
-		calculable = ifelse(calculable, "true", "false"),
+		calculable = ifelse(calculable, TRUE, FALSE),
 		color = color,
 		precision = precision,
 		orient = match.arg(orient)
@@ -166,14 +180,14 @@ xAxisSet = function(axisShow=TRUE, type=c("value", "category"), position=c("bott
 			position = match.arg(position),
 			name = labelName,
 			nameLocation = match.arg(label.namePosition),
-			scale = ifelse(scale, "true", "false"),
+			scale = ifelse(scale, TRUE, FALSE),
 			precision = precision,
 			power = power,
-			axisLine = list(show = ifelse(axisLine, "true", "false")),
-			axisTick = list(show = ifelse(axisTick, "true", "false")),
-			axisLable = list(show = ifelse(axisLable, "true", "false"), textStyle=list(color=color)),
-			splitLine = list(show = ifelse(splitLine, "true", "false")),
-			splitArea = list(show = ifelse(splitArea, "true", "false"))
+			axisLine = list(show = ifelse(axisLine, TRUE, FALSE)),
+			axisTick = list(show = ifelse(axisTick, TRUE, FALSE)),
+			axisLable = list(show = ifelse(axisLable, TRUE, FALSE), textStyle=list(color=color)),
+			splitLine = list(show = ifelse(splitLine, TRUE, FALSE)),
+			splitArea = list(show = ifelse(splitArea, TRUE, FALSE))
 		)
 	
 	if(is.null(lim)){
@@ -195,7 +209,7 @@ xAxisSet = function(axisShow=TRUE, type=c("value", "category"), position=c("bott
 		}
 		returnList$type = "category"
 		returnList$data = data
-		returnList$boundaryGap = ifelse(boundaryGap, "true", "false")	
+		returnList$boundaryGap = ifelse(boundaryGap, TRUE, FALSE)	
 
 	}
 
@@ -215,14 +229,14 @@ yAxisSet = function(axisShow=TRUE, type=c("value", "category"), position=c("left
 			position = match.arg(position),
 			name = labelName,
 			nameLocation = match.arg(label.namePosition),
-			scale = ifelse(scale, "true", "false"),
+			scale = ifelse(scale, TRUE, FALSE),
 			precision = precision,
 			power = power,
-			axisLine = list(show = ifelse(axisLine, "true", "false")),
-			axisTick = list(show = ifelse(axisTick, "true", "false")),
-			axisLable = list(show = ifelse(axisLable, "true", "false")),
-			splitLine = list(show = ifelse(splitLine, "true", "false")),
-			splitArea = list(show = ifelse(splitArea, "true", "false"))
+			axisLine = list(show = ifelse(axisLine, TRUE, FALSE)),
+			axisTick = list(show = ifelse(axisTick, TRUE, FALSE)),
+			axisLable = list(show = ifelse(axisLable, TRUE, FALSE)),
+			splitLine = list(show = ifelse(splitLine, TRUE, FALSE)),
+			splitArea = list(show = ifelse(splitArea, TRUE, FALSE))
 		)
 		
 	if(is.null(lim)){
@@ -244,7 +258,7 @@ yAxisSet = function(axisShow=TRUE, type=c("value", "category"), position=c("left
 		}
 		returnList$type = "category"
 		returnList$data = data
-		returnList$boundaryGap = ifelse(boundaryGap, "true", "false")	
+		returnList$boundaryGap = ifelse(boundaryGap, TRUE, FALSE)	
 
 	}
 	return(returnList)
@@ -298,10 +312,10 @@ dataZoomSet = function(show=FALSE, realtime=TRUE, orient=c("horizontal", "vertic
 	# type = match.arg(type)
 	
 	returnList <- list(
-			show = ifelse(show, "true", "false"),
-			realtime = ifelse(realtime, "true", "false"),
+			show = ifelse(show, TRUE, FALSE),
+			realtime = ifelse(realtime, TRUE, FALSE),
 			orient = match.arg(orient),
-			zoomLock = ifelse(zoomLock, "true", "false"),
+			zoomLock = ifelse(zoomLock, TRUE, FALSE),
 			start = as.numeric(start),
 			end = as.numeric(end),
 			backgroundColor = backgroundColor,
