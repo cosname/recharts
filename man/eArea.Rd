@@ -1,6 +1,6 @@
 \name{eArea}
 \alias{eArea}
-\title{Line charts}
+\title{eArea charts}
 \usage{
   eArea(dat, opt = list())
 }
@@ -16,6 +16,6 @@
   ECharts style area charts.
 }
 \examples{
-plot(eArea(WorldPhones))
+eArea(WorldPhones)
 }
 

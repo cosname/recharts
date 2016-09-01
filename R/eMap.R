@@ -7,13 +7,11 @@
 #' @return The HTML code as a character string.
 #' @export
 #' @examples
-#' testData <- read.csv(system.file("examples", "testDataForMap.csv", package = "recharts"),stringsAsFactors=FALSE) 
 #' 
 #' mapData <- data.frame(province=c("上海", "江苏", "广东", "黑龙江"), "value"=c(100, 200, 300, 500), "val2"=c(200,300,400,200), val3=c(1,2,3,5), stringsAsFactors=F)
 #' eMap(mapData, namevar=~province, datavar = ~value+val2)
 #' provinceMapData <- data.frame(city=c("盐城市", "南京市", "苏州市"), value=c(100, 200, 300), val2=c(200,300,400), val3=c(1,2,3), stringsAsFactors=F)
 #' eMap(provinceMapData, namevar=~city, datavar = ~value+val2, region="江苏")
-#' eMap(testData, namevar="province")
 
 
 eMap = function(dat, namevar=NULL, datavar=NULL, size = NULL, region="china", color=c("#1e90ff", "#f0ffff"),

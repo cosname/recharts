@@ -30,7 +30,6 @@
 #' eBar(dat, ~weekDay, ~saleNum)
 #' dat <- cut(rnorm(1000), -4:4)
 #' eBar(dat)
-#' xvar=NULL; yvar=NULL; series=NULL
 
 
 eBar = function(dat, xvar=NULL, yvar=NULL, series=NULL, size = NULL, horiz = FALSE, stackGroup = NULL,

@@ -26,6 +26,6 @@
 }
 \examples{
 testData <- matrix(1:25, nrow=5)
-plot(eForce(testData))
+eForce(testData)
 }
 

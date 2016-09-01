@@ -16,7 +16,7 @@
   ECharts style map charts. Only support CHINA now.
 }
 \examples{
-testData <- read.csv(system.file("examples", "testDataForMap.csv", package = "recharts"),stringsAsFactors=FALSE) 
-eMap(testData, namevar="province")
+dataDf <- data.frame(province=c("jiangsu", "beijing", "guangdong"), value=c(100, 200, 300), stringsAsFactors=FALSE)
+eMap(dataDf, ~province, ~value)
 }
 

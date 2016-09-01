@@ -26,7 +26,7 @@ dat = ddply(iris, .(Species), colwise(mean))
 rownames(dat) = dat[,1]
 dat = dat[, -1]
 dat
-plot(eBar(dat))
-plot(eBar(dat, horiz = TRUE))
+eBar(dat)
+eBar(dat, horiz = TRUE)
 }
 

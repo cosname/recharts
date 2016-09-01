@@ -18,6 +18,6 @@
   ECharts style scatter charts.
 }
 \examples{
-plot(ePoints(iris[,3:5]))
+ePoints(iris[,3:5])
 }
 
