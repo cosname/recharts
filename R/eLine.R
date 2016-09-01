@@ -26,7 +26,7 @@ eLine = function(dat, xvar=NULL, yvar=NULL, series=NULL, size = NULL, horiz = FA
 	xlabName = recharts:::autoArgLabel(xvar, deparse(substitute(xvar)))
 	ylabName = recharts:::autoArgLabel(yvar, deparse(substitute(yvar)))
 
-	xvar = as.factor(recharts:::evalFormula(xvar, dat))
+	xvar = recharts:::evalFormula(xvar, dat)
 	yvar = recharts:::evalFormula(yvar, dat)
 
 	series = as.factor(recharts:::evalFormula(series, dat))
@@ -34,29 +34,25 @@ eLine = function(dat, xvar=NULL, yvar=NULL, series=NULL, size = NULL, horiz = FA
 	# if series is null, we will use the xvar and yvar to construct the bar plot..
 	if(is.null(xvar) & is.null(yvar) & !is.factor(dat)){
 		# Mode 1. use default data.frame as input...
-		dat <- as.data.frame(dat, stringsAsFactor=F)
+		plotData <- as.data.frame(dat, stringsAsFactor=F)
 	}else if(!is.null(xvar) & !is.null(yvar) & !is.null(series)){
 		#print("Mode1")
 		# Mode 2. all of xvar, yvar and series are valid...
-		xvar = as.factor(as.character(xvar))
-		dat <- with(dat, {
-			out <- matrix(nrow=nlevels(series), ncol=nlevels(as.factor(xvar)),
-						dimnames=list(unique(series), unique(xvar)))
-			out[cbind(series, xvar)] <- yvar
-			out
-		})
-		dat <- as.data.frame(dat)
+		xvarArray = unique(as.character(xvar))
+		seriesArray = unique(as.character(series))
+		dataMatrix = xtabs(as.formula(paste0(ylabName, "~", xlabName , "+",  seriesName)), dat)
+		plotData <- as.data.frame.matrix(dataMatrix[xvarArray,seriesArray])
 	}else if(!is.null(xvar) & !is.null(yvar) & is.null(series)){
 		# Mode 3. format dat with only x and y variable.
-		dat <- data.frame(val = yvar)
-		colnames(dat) <- ylabName
-		rownames(dat) <- xvar
+		plotData <- data.frame(val = yvar)
+		colnames(plotData) <- ylabName
+		rownames(plotData) <- xvar
 	}else if(is.null(xvar) & is.null(yvar) & is.factor(dat)){
 		# Mode 4. factor
 		tempD <- as.data.frame(table(dat))
-		dat <- data.frame(val = tempD[,"Freq"])
-		colnames(dat) <- "Frequency"
-		rownames(dat) <- tempD[,1]
+		plotData <- data.frame(val = tempD[,"Freq"])
+		colnames(plotData) <- "Frequency"
+		rownames(plotData) <- tempD[,1]
 	}
 	
 	# option$title format.
@@ -75,13 +71,13 @@ eLine = function(dat, xvar=NULL, yvar=NULL, series=NULL, size = NULL, horiz = FA
 				saveAsImage=TRUE)
 
 
-	opt$legend = legendSet( show=legend, data=colnames(dat), legend.x=legend.x, legend.y=legend.y, orient=legend.orient)
+	opt$legend = legendSet( show=legend, data=colnames(plotData), legend.x=legend.x, legend.y=legend.y, orient=legend.orient)
 	
 	if(match.arg(xlab.type, c("category" , "value")) == "category" & is.null(xlab.data)){
-		xlab.data = rownames(dat)
+		xlab.data = rownames(plotData)
 	}
 	if(match.arg(ylab.type, c("category" , "value")) == "category" & is.null(ylab.data)){
-		ylab.data = colnames(dat)
+		ylab.data = colnames(plotData)
 	}
 	opt$xAxis = xAxisSet(axisShow=xlab, type=xlab.type, data=xlab.data, position=xlab.position,
 				labelName=xlab.name, label.namePosition=xlab.namePosition, lim=xlim,
@@ -94,19 +90,19 @@ eLine = function(dat, xvar=NULL, yvar=NULL, series=NULL, size = NULL, horiz = FA
 				splitArea=axis.splitArea, boundaryGap=axis.boundaryGap, scale=axis.scale)
 
 	# data set...
-	opt$series =  vector("list", ncol(dat))
-    for(i in 1:ncol(dat)) {
+	opt$series =  vector("list", ncol(plotData))
+    for(i in 1:ncol(plotData)) {
         if(is.null(opt$series[[i]]$type)) {
             opt$series[[i]]$type = 'line'
         }
         if(is.null(opt$series[[i]]$name)) {
-            opt$series[[i]]$name = colnames(dat)[i]
+            opt$series[[i]]$name = colnames(plotData)[i]
         } else {
             warning('You can set series:name with colnames(dat).')
         }
 
         if(is.null(opt$series[[i]]$data)) {
-            opt$series[[i]]$data = unnames(dat[,i])
+            opt$series[[i]]$data = unnames(plotData[,i])
         } else {
             warning('You can set series:data with dat.')
         }
@@ -153,41 +149,38 @@ eArea = function(dat, xvar=NULL, yvar=NULL, series=NULL, size = NULL, horiz = FA
 	ylab.name = "", ylab.namePosition="start", ylim=NULL,
 	calculable=TRUE, showLabel=TRUE, opt = list()) 
 {
+	
 	xlabName = recharts:::autoArgLabel(xvar, deparse(substitute(xvar)))
 	ylabName = recharts:::autoArgLabel(yvar, deparse(substitute(yvar)))
 
-	xvar = as.factor(recharts:::evalFormula(xvar, dat))
+	xvar = recharts:::evalFormula(xvar, dat)
 	yvar = recharts:::evalFormula(yvar, dat)
 
 	series = as.factor(recharts:::evalFormula(series, dat))
-
 	# if series is null, we will use the xvar and yvar to construct the bar plot..
 	if(is.null(xvar) & is.null(yvar) & !is.factor(dat)){
 		# Mode 1. use default data.frame as input...
-		dat <- as.data.frame(dat, stringsAsFactor=F)
+		plotData = as.data.frame(dat, stringsAsFactor=F)
 	}else if(!is.null(xvar) & !is.null(yvar) & !is.null(series)){
 		#print("Mode1")
 		# Mode 2. all of xvar, yvar and series are valid...
-		xvar = as.factor(as.character(xvar))
-		dat <- with(dat, {
-			out <- matrix(nrow=nlevels(series), ncol=nlevels(as.factor(xvar)),
-						dimnames=list(unique(series), unique(xvar)))
-			out[cbind(series, xvar)] <- yvar
-			out
-		})
-		dat <- as.data.frame(dat)
+		xvarArray = unique(as.character(xvar))
+		seriesArray = unique(as.character(series))
+		dataMatrix = xtabs(as.formula(paste0(ylabName, "~", xlabName , "+",  seriesName)), dat)
+		plotData <- as.data.frame.matrix(dataMatrix[xvarArray,seriesArray])
 	}else if(!is.null(xvar) & !is.null(yvar) & is.null(series)){
 		# Mode 3. format dat with only x and y variable.
-		dat <- data.frame(val = yvar)
-		colnames(dat) <- ylabName
-		rownames(dat) <- xvar
+		plotData = data.frame(val = yvar)
+		colnames(plotData) = ylabName
+		rownames(plotData) = xvar
 	}else if(is.null(xvar) & is.null(yvar) & is.factor(dat)){
 		# Mode 4. factor
-		tempD <- as.data.frame(table(dat))
-		dat <- data.frame(val = tempD[,"Freq"])
-		colnames(dat) <- "Frequency"
-		rownames(dat) <- tempD[,1]
+		tempD = as.data.frame(table(dat))
+		plotData = data.frame(val = tempD[,"Freq"])
+		colnames(plotData) = "Frequency"
+		rownames(plotData) = tempD[,1]
 	}
+
 	
 	# option$title format.
 	opt$title = tilteSet(title = title, subtitle=subtitle,
@@ -204,13 +197,13 @@ eArea = function(dat, xvar=NULL, yvar=NULL, series=NULL, size = NULL, horiz = FA
 				saveAsImage=TRUE)
 
 				
-	opt$legend = legendSet( show=legend, data=colnames(dat), legend.x=legend.x, legend.y=legend.y, orient=legend.orient)
+	opt$legend = legendSet( show=legend, data=colnames(plotData), legend.x=legend.x, legend.y=legend.y, orient=legend.orient)
 	
 	if(match.arg(xlab.type, c("category" , "value")) == "category" & is.null(xlab.data)){
-		xlab.data = rownames(dat)
+		xlab.data = rownames(plotData)
 	}
 	if(match.arg(ylab.type, c("category" , "value")) == "category" & is.null(ylab.data)){
-		ylab.data = colnames(dat)
+		ylab.data = colnames(plotData)
 	}
 	opt$xAxis = xAxisSet(axisShow=xlab, type=xlab.type, data=xlab.data, position=xlab.position,
 				labelName=xlab.name, label.namePosition=xlab.namePosition, lim=xlim,
@@ -223,21 +216,21 @@ eArea = function(dat, xvar=NULL, yvar=NULL, series=NULL, size = NULL, horiz = FA
 				splitArea=axis.splitArea, boundaryGap=axis.boundaryGap, scale=axis.scale)
 
 	# data set...
-	opt$series =  vector("list", ncol(dat))
+	opt$series =  vector("list", ncol(plotData))
 
-    for(i in 1:ncol(dat)) {
+    for(i in 1:ncol(plotData)) {
         if(is.null(opt$series[[i]]$type)) {
             opt$series[[i]]$type = 'line'
         }
 
         if(is.null(opt$series[[i]]$name)) {
-            opt$series[[i]]$name = colnames(dat)[i]
+            opt$series[[i]]$name = colnames(plotData)[i]
         } else {
             warning('You can set series:name with dat.')
         }
         
         if(is.null(opt$series[[i]]$data)) {
-            opt$series[[i]]$data = unnames(dat[,i])
+            opt$series[[i]]$data = unnames(plotData[,i])
         } else {
             warning('You can set series:data with dat.')
         }
@@ -260,7 +253,6 @@ eArea = function(dat, xvar=NULL, yvar=NULL, series=NULL, size = NULL, horiz = FA
 	
 	opt$size = size
 	
-	displayOutput(opt)
 	htmlwidgets::createWidget(
 		'echarts', opt,
 		package = 'recharts', width = opt$size[1], height = opt$size[2],

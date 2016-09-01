@@ -1,7 +1,7 @@
 Package: recharts
 Type: Package
 Title: An R Interface to ECharts
-Version: 0.0.302
+Version: 0.0.4
 Date: 2014-12-18
 Authors@R: c(
     person("Taiyun", "Wei", role = c("aut", "cre"), email = "weitaiyun@gmail.com"),
@@ -22,7 +22,6 @@ Suggests:
     shiny (> 0.11.1)
 Collate:
     'chartOpt.R'
-    'config.R'
     'data.R'
     'eBar.R'
     'eForce.R'

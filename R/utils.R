@@ -84,6 +84,7 @@ df2List = function(valDf){
 		names(tmpOut) <- nameArray
 		return(tmpOut)
 	})
+	return(outputList)
 }
 
 #  recharts:::regionFormat(region)
@@ -364,3 +365,7 @@ strstrip <- function(string, side = c("both", "left", "right")) {
 	return(output)
 }
 
+unnames = function(x){
+	names(x) = NULL
+	return(x)
+}

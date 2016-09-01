@@ -5,8 +5,6 @@
 #' @export 
 
 lazyPlot <- function(e1){
-	recharts_oldLocal <<- Sys.getlocale("LC_CTYPE")
-	Sys.setlocale("LC_CTYPE", "uk")
 	if ("recharts" %in% class(e1)){
 		assign("tempEchartsObject", e1, env=.GlobalEnv)
 		library(shiny)

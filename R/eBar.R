@@ -20,11 +20,12 @@
 #' df2 <- data.frame(
 #'  saleNum=c(10,20,30,40,50,60,70,15,25,35,45,55,65,75,25,35,45,55,65,75,85),
 #' 	seller=c(rep("小黄",7), rep("小红",7), rep("小白",7)),
-#'	weekDay = c(rep(c("周一","周二","周三","周四","周五","周六","周日"),3))
+#'	weekDay = c(rep(c("周一","周二","周三","周四","周五","周六","周日"),3)),
+#'  stringsAsFactors =FALSE
 #' )
 #' dat <- df2
 #' xvar=~weekDay; yvar= ~saleNum; series=~seller
-#' eBar(df2, ~weekDay, ~saleNum, ~seller)
+#' eBar(df2, xvar = ~seller, ~saleNum, ~weekDay )
 #' dat <- df2[1:7,]
 #' eBar(dat, ~weekDay, ~saleNum)
 #' dat <- cut(rnorm(1000), -4:4)
@@ -32,7 +33,7 @@
 #' xvar=NULL; yvar=NULL; series=NULL
 
 
-eBar = function(dat, xvar=NULL, yvar=NULL, series=NULL, size = NULL, horiz = FALSE,
+eBar = function(dat, xvar=NULL, yvar=NULL, series=NULL, size = NULL, horiz = FALSE, stackGroup = NULL,
 	theme = "default", title = NULL, subtitle = NULL, title.x = "center", title.y = "top", 
 	legend = TRUE, legend.x = "left", legend.y= "top", legend.orient="horizontal", 
 	toolbox = TRUE, toolbox.orient = "horizontal", toolbox.x = "right", toolbox.y = "top", 
@@ -44,10 +45,10 @@ eBar = function(dat, xvar=NULL, yvar=NULL, series=NULL, size = NULL, horiz = FAL
 	ylab=TRUE, ylab.type="value", ylab.data=NULL, ylab.position="left", 
 	ylab.name = "", ylab.namePosition="start", ylim=NULL,
 	calculable=TRUE, showLabel=TRUE, opt = list()) 
-{	
-	
-	# dat <- data.frame( saleNum=c(10,20,30,40,50,60,70,15,25,35,45,55,65,75,25,35,45,55,65,75,85), seller=c(rep("小黄",7), rep("小红",7), rep("小白",7)), weekDay = c(rep(c("周一","周二","周三","周四","周五","周六","周日"),3)))
+{
+	# dat <- data.frame( saleNum=c(10,20,30,40,50,60,70,15,25,35,45,55,65,75,25,35,45,55,65,75,85), seller=c(rep("小黄",7), rep("小红",7), rep("小白",7)), weekDay = c(rep(c("周一","周二","周三","周四","周五","周六","周日"),3)), stringsAsFactors =FALSE)
 	# xvar=~weekDay; yvar= ~saleNum; series=~seller
+	# stackGroup = list(c("周一", "周二"), c("周六", "周日"))
 	xlabName = recharts:::autoArgLabel(xvar, deparse(substitute(xvar)))
 	ylabName = recharts:::autoArgLabel(yvar, deparse(substitute(yvar)))
 
@@ -55,33 +56,29 @@ eBar = function(dat, xvar=NULL, yvar=NULL, series=NULL, size = NULL, horiz = FAL
 	yvar = recharts:::evalFormula(yvar, dat)
 	seriesName = recharts:::autoArgLabel(series, deparse(substitute(series)))
 	if (!is.null(series)) series = as.factor(as.character(recharts:::evalFormula(series, dat)))
-
+	
 	# if series is null, we will use the xvar and yvar to construct the bar plot..
 	if(is.null(xvar) & is.null(yvar) & !is.factor(dat)){
 		# Mode 1. use default data.frame as input...
-		dat <- as.data.frame(dat, stringsAsFactor=F)
+		plotData <- as.data.frame(dat, stringsAsFactor=F)
 	}else if(!is.null(xvar) & !is.null(yvar) & !is.null(series)){
 		# print("Mode1")
 		# Mode 2. all of xvar, yvar and series are valid...
-		xvar = as.factor(as.character(xvar))
-		dat <- with(dat, {
-			out <- matrix(nrow=nlevels(series), ncol=nlevels(as.factor(xvar)),
-						dimnames=list(unique(series), unique(xvar)))
-			out[cbind(series, xvar)] <- yvar
-			out
-		})
-		dat <- as.data.frame(dat)
+		xvarArray = unique(as.character(xvar))
+		seriesArray = unique(as.character(series))
+		dataMatrix = xtabs(as.formula(paste0(ylabName, "~", xlabName , "+",  seriesName)), dat)
+		plotData <- as.data.frame.matrix(dataMatrix[xvarArray,seriesArray])
 	}else if(!is.null(xvar) & !is.null(yvar) & is.null(series)){
 		# Mode 3. format dat with only x and y variable.
-		dat <- data.frame(val = yvar)
-		colnames(dat) <- ylabName
-		rownames(dat) <- xvar
+		plotData <- data.frame(val = yvar)
+		colnames(plotData) <- ylabName
+		rownames(plotData) <- xvar
 	}else if(is.null(xvar) & is.null(yvar) & is.factor(dat)){
 		# Mode 4. factor
 		tempD <- as.data.frame(table(dat))
-		dat <- data.frame(val = tempD[,"Freq"])
-		colnames(dat) <- "Frequency"
-		rownames(dat) <- tempD[,1]
+		plotData <- data.frame(val = tempD[,"Freq"])
+		colnames(plotData) <- "Frequency"
+		rownames(plotData) <- tempD[,1]
 	}
 
 
@@ -102,14 +99,15 @@ eBar = function(dat, xvar=NULL, yvar=NULL, series=NULL, size = NULL, horiz = FAL
 				dataView=dataView, mark=mark, dataZoom = dataZoom, magicType = magicType, restore = TRUE, readOnly = readOnly,
 				saveAsImage=TRUE)
 
-	opt$legend = recharts:::legendSet( show=legend, data=colnames(dat), legend.x=legend.x, legend.y=legend.y, orient=legend.orient)
+	opt$legend = recharts:::legendSet( show=legend, data=colnames(plotData), legend.x=legend.x, legend.y=legend.y, orient=legend.orient)
 
 	if(match.arg(xlab.type, c("category" , "value")) == "category" & is.null(xlab.data)){
-		xlab.data = rownames(dat)
+		xlab.data = rownames(plotData)
 	}
 	if(match.arg(ylab.type, c("category" , "value")) == "category" & is.null(ylab.data)){
-		ylab.data = colnames(dat)
+		ylab.data = colnames(plotData)
 	}
+
 	opt$xAxis = recharts:::xAxisSet(axisShow=xlab, type=xlab.type, data=xlab.data, position=xlab.position,
 				labelName=xlab.name, label.namePosition=xlab.namePosition, lim=xlim,
 				axisLine=axis.line, axisTick=axis.tick, axisLable=axis.lable, splitLine=axis.splitLine, 
@@ -121,20 +119,20 @@ eBar = function(dat, xvar=NULL, yvar=NULL, series=NULL, size = NULL, horiz = FAL
 				splitArea=axis.splitArea, boundaryGap=axis.boundaryGap, scale=axis.scale)
 
 	# data set...
-	opt$series =  vector("list", ncol(dat))
-    for(i in 1:dim(dat)[2]) {
+	opt$series =  vector("list", ncol(plotData))
+    for(i in 1:dim(plotData)[2]) {
         if(is.null(opt$series[[i]]$type)) {
             opt$series[[i]]$type = 'bar'
         }
 
         if(is.null(opt$series[[i]]$name)) {
-            opt$series[[i]]$name = colnames(dat)[i]
+            opt$series[[i]]$name = colnames(plotData)[i]
         } else {
             warning('You can set series:name with colnames(dat).')
         }
 
         if(is.null(opt$series[[i]]$data)) {
-            opt$series[[i]]$data = unname(dat[,i])
+            opt$series[[i]]$data = unname(plotData[,i])
         } else {
             warning('You can set series:data with dat.')
         }
@@ -163,14 +161,5 @@ eBar = function(dat, xvar=NULL, yvar=NULL, series=NULL, size = NULL, horiz = FAL
 	# )
 	# chart
 }
-
-
-
-
-
-
-
-
-
 
 

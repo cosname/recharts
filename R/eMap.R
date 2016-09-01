@@ -9,7 +9,7 @@
 #' @examples
 #' testData <- read.csv(system.file("examples", "testDataForMap.csv", package = "recharts"),stringsAsFactors=FALSE) 
 #' 
-#' mapData <- data.frame(province=c("上海", "江苏", "广东", "黑龙江"), "数据1"=c(100, 200, 300, 500), "数据测2"=c(200,300,400,200), val3=c(1,2,3,5), stringsAsFactors=F)
+#' mapData <- data.frame(province=c("上海", "江苏", "广东", "黑龙江"), "value"=c(100, 200, 300, 500), "val2"=c(200,300,400,200), val3=c(1,2,3,5), stringsAsFactors=F)
 #' eMap(mapData, namevar=~province, datavar = ~value+val2)
 #' provinceMapData <- data.frame(city=c("盐城市", "南京市", "苏州市"), value=c(100, 200, 300), val2=c(200,300,400), val3=c(1,2,3), stringsAsFactors=F)
 #' eMap(provinceMapData, namevar=~city, datavar = ~value+val2, region="江苏")
@@ -28,7 +28,7 @@ eMap = function(dat, namevar=NULL, datavar=NULL, size = NULL, region="china", co
 	showLabel=TRUE, opt = list()) {
 	# config the province/city should be display...
 	# Only one arguement could be supported.
-	# dat=mapData;namevar = ~province; datavar = ~value+val2
+	# dat=mapData;namevar = ~province; datavar = ~value + val2
 	placeName = recharts:::autoArgLabel(namevar, deparse(substitute(namevar)))
 	
 	# allow multiple variable input
@@ -37,8 +37,14 @@ eMap = function(dat, namevar=NULL, datavar=NULL, size = NULL, region="china", co
 	
 	# generate provinceVariable and dataVariable
 	placeVariable = recharts:::evalFormula(namevar, dat)
-	valueDf = recharts:::evalFormula(datavar, dat)
-
+	if(length(dataName) == 1){
+		valueDf = data.frame(value = recharts:::evalFormula(datavar, dat))
+		colnames(valueDf)[1] <- dataName
+	}else{
+		valueDf = recharts:::evalFormula(datavar, dat)
+	}
+	
+	
 	# legendData set
 	opt$legend = recharts:::legendSet(show=legend, data=dataName, legend.x=legend.x, legend.y=legend.y, orient=legend.orient)
 
@@ -76,7 +82,7 @@ eMap = function(dat, namevar=NULL, datavar=NULL, size = NULL, region="china", co
 		# generate template data frame for each placevar and valuevar;
 		valDf = data.frame(name = placeVariable, value = valueDf[,tmpVar], stringsAsFactors=F)
 		# use df2List realize the function: unname(alply(valDf, 1, unlist))
-		seriesData = recharts:::df2List(valDf)
+		# seriesData = recharts:::df2List(valDf)
 		return(list(
 			name = tmpVar,
 			type = "map",
@@ -86,17 +92,17 @@ eMap = function(dat, namevar=NULL, datavar=NULL, size = NULL, region="china", co
 					label = list(show=showLabel)
 				)
 			),
-			data = seriesData
+			data = valDf
 		))
 	})
 	
 	opt$size = size
-	# mapOption <<- opt
+	mapOption <<- opt
 	
 	# render echarts by front-end browser.
 	htmlwidgets::createWidget(
 		'echarts', opt,
-		package = 'recharts', width = size[1], height = size[2],
+		package = 'recharts', width = opt$size[1], height = opt$size[2],
 		preRenderHook = function(instance) {
 			instance
 		}
