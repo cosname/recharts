@@ -41,8 +41,7 @@ ePoints = function(dat, xvar=NULL, yvar=NULL, series=NULL, size = NULL,   power=
 		dat[,"defaultName"] = "default"
 	}
 	dat <- dat[,c(xvar, yvar, namevar)]
-	
-	
+
 	# format the dat to data.frame
 	if (class(dat) != "data.frame") dat <- as.data.frame(dat, stringsAsFactor=F)
 	
@@ -54,8 +53,6 @@ ePoints = function(dat, xvar=NULL, yvar=NULL, series=NULL, size = NULL,   power=
 		namevar = "name"
 	}
 
-
-	
 	if(length(xvar) > 1) xvar = xvar[1]
 	if(class(xvar) == "integer" | class(xvar) == "numeric"){
 		if (xvar > ncol(dat)){
@@ -66,7 +63,7 @@ ePoints = function(dat, xvar=NULL, yvar=NULL, series=NULL, size = NULL,   power=
 	}else if(!xvar %in% colnames(dat)){
 		stop("wrong xvar input...")
 	}
-	
+
 	if(length(yvar) > 1) yvar = yvar[1]
 	if(class(yvar) == "integer" | class(yvar) == "numeric"){
 		if (yvar > ncol(dat)){
@@ -162,8 +159,13 @@ ePoints = function(dat, xvar=NULL, yvar=NULL, series=NULL, size = NULL,   power=
 	
 	### output list format
 	chart = htmlwidgets::createWidget(
-		'echarts', opt, width = size[1], height = size[2], package = 'recharts'
+		'echarts', opt,
+		package = 'recharts', width = size[1], height = size[2],
+		preRenderHook = function(instance) {
+			instance
+		}
 	)
+	chart = .addClass(chart, "ePoints")
 	chart
 }
 

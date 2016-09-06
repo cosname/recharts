@@ -858,5 +858,12 @@ optionSet <- function(chart, ...){
 			chart$x$series[[i]]$mapType = newRegion
 		}
 	}
+	chart = htmlwidgets::createWidget(
+		'echarts', chart$x,
+		package = 'recharts', width = chart$x$size[1], height = chart$x$size[2],
+		preRenderHook = function(instance) {
+			instance
+		}
+	)
 	chart
 }

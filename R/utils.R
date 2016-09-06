@@ -364,6 +364,12 @@ strstrip <- function(string, side = c("both", "left", "right")) {
 	class(output) <- classArray
 	return(output)
 }
+.addClass <- function(chart, className){
+	class(chart) <- c(class(chart), className )
+	return(chart)
+}
+
+
 
 unnames = function(x){
 	names(x) = NULL

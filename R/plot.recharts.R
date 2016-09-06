@@ -179,3 +179,29 @@ eTheme = function(...){
 
 
 
+
+
+#' Merge the two ECharts into one output .
+#' 
+#' @param e1 An object of class \code{recharts}
+#' @param e2 An object of class \code{recharts}
+#'
+#' @export
+#'
+#' @seealso \code{\link{set}}
+#' @method >& recharts
+"&.echarts" <- function(e1, e2){
+	if(!(inherits(e1, "echarts") & inherits(e2, "echarts")))
+		stop("only echarts object can be merged into one widgets...")
+	
+	chart = htmlwidgets::appendContent(e1, e2)
+	class(chart)[3] = "multi-ecahrts"
+	return(chart)
+}
+
+
+#' @export
+"%&%" <- `&.echarts`
+
+
+

@@ -55,7 +55,7 @@ eBar = function(dat, xvar=NULL, yvar=NULL, series=NULL, size = NULL, horiz = FAL
 	yvar = recharts:::evalFormula(yvar, dat)
 	seriesName = recharts:::autoArgLabel(series, deparse(substitute(series)))
 	if (!is.null(series)) series = as.factor(as.character(recharts:::evalFormula(series, dat)))
-	
+
 	# if series is null, we will use the xvar and yvar to construct the bar plot..
 	if(is.null(xvar) & is.null(yvar) & !is.factor(dat)){
 		# Mode 1. use default data.frame as input...
@@ -79,7 +79,6 @@ eBar = function(dat, xvar=NULL, yvar=NULL, series=NULL, size = NULL, horiz = FAL
 		colnames(plotData) <- "Frequency"
 		rownames(plotData) <- tempD[,1]
 	}
-
 
 	#opt = list()
 
@@ -144,16 +143,17 @@ eBar = function(dat, xvar=NULL, yvar=NULL, series=NULL, size = NULL, horiz = FAL
 	#jsonStr <- toJSON(opt, pretty=TRUE)
 	#outList <- .rechartsOutput(jsonStr, charttype="ePoints", size=size)
 	opt$size = size
-	
-	
-	
-	htmlwidgets::createWidget(
+
+
+	chart = htmlwidgets::createWidget(
 		'echarts', opt,
 		package = 'recharts', width = size[1], height = size[2],
 		preRenderHook = function(instance) {
 			instance
 		}
 	)
+	chart = .addClass(chart, "eBar")
+	chart
 	##### output list format
 	# chart = htmlwidgets::createWidget(
 	# 	'echarts', opt, width = size[1], height = size[2], package = 'recharts'

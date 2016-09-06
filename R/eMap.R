@@ -95,14 +95,16 @@ eMap = function(dat, namevar=NULL, datavar=NULL, size = NULL, region="china", co
 	})
 	
 	opt$size = size
-	mapOption <<- opt
+	# mapOption <<- opt
 	
 	# render echarts by front-end browser.
-	htmlwidgets::createWidget(
+	chart = htmlwidgets::createWidget(
 		'echarts', opt,
-		package = 'recharts', width = opt$size[1], height = opt$size[2],
+		package = 'recharts', width = size[1], height = size[2],
 		preRenderHook = function(instance) {
 			instance
 		}
 	)
+	chart = .addClass(chart, "eMap")
+	chart
 }

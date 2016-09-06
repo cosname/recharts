@@ -115,14 +115,15 @@ eLine = function(dat, xvar=NULL, yvar=NULL, series=NULL, size = NULL, horiz = FA
 	}
 	opt$size = size
 	
-	htmlwidgets::createWidget(
+	chart = htmlwidgets::createWidget(
 		'echarts', opt,
 		package = 'recharts', width = size[1], height = size[2],
 		preRenderHook = function(instance) {
 			instance
 		}
 	)
-
+	chart = .addClass(chart, "eLine")
+	chart
 }
 
 #' Area charts
@@ -135,7 +136,6 @@ eLine = function(dat, xvar=NULL, yvar=NULL, series=NULL, size = NULL, horiz = FA
 #' @export
 #' @examples
 #' eArea(WorldPhones)
-
 eArea = function(dat, xvar=NULL, yvar=NULL, series=NULL, size = NULL, horiz = FALSE, stack="SUM",
 	theme = "default", title = NULL, subtitle = NULL, title.x = "center", title.y = "top", 
 	legend = TRUE, legend.x = "left", legend.y= "top", legend.orient="horizontal", 
@@ -253,12 +253,14 @@ eArea = function(dat, xvar=NULL, yvar=NULL, series=NULL, size = NULL, horiz = FA
 	
 	opt$size = size
 	
-	htmlwidgets::createWidget(
+	chart = htmlwidgets::createWidget(
 		'echarts', opt,
 		package = 'recharts', width = opt$size[1], height = opt$size[2],
 		preRenderHook = function(instance) {
 			instance
 		}
 	)
+	chart = .addClass(chart, "eArea")
+	chart
 
 }

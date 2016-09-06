@@ -93,7 +93,7 @@ ePie = function(dat, namevar=NULL, valvar=NULL, size = NULL,  type=c("pie", "ros
 					labelLine = list( show = !showLabel)
 				)
 			),
-			data = datList   
+			data = datList
 		)
 	)
 	
@@ -105,6 +105,7 @@ ePie = function(dat, namevar=NULL, valvar=NULL, size = NULL,  type=c("pie", "ros
 	chart = htmlwidgets::createWidget(
 		'echarts', opt, width = size[1], height = size[2], package = 'recharts'
 	)
+	chart = .addClass(chart, "ePie")
 	chart
 }
 

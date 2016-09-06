@@ -114,7 +114,12 @@ eRadar = function(dat, xvar=NULL, yvar=NULL, series=NULL, size = NULL, ymin=vect
 	
 	### output list format
 	chart = htmlwidgets::createWidget(
-		'echarts', opt, width = size[1], height = size[2], package = 'recharts'
+		'echarts', opt,
+		package = 'recharts', width = size[1], height = size[2],
+		preRenderHook = function(instance) {
+			instance
+		}
 	)
+	chart = .addClass(chart, "eRadar")
 	chart
 }
