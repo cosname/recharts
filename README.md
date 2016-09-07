@@ -19,7 +19,7 @@ recharts包的源代码在[Github/taiyun/recharts](https://github.com/taiyun/rec
 
 ```s
 require(devtools)
-install_github('recharts', 'taiyun')
+devtools::install_github('taiyun/recharts')
 ```
 
 
