@@ -80,7 +80,7 @@ eMap = function(dat, namevar=NULL, datavar=NULL, size = NULL, region="china", co
 		# generate template data frame for each placevar and valuevar;
 		valDf = data.frame(name = placeVariable, value = valueDf[,tmpVar], stringsAsFactors=F)
 		# use df2List realize the function: unname(alply(valDf, 1, unlist))
-		# seriesData = recharts:::df2List(valDf)
+		seriesData = recharts:::df2List(valDf)
 		return(list(
 			name = tmpVar,
 			type = "map",
@@ -90,7 +90,7 @@ eMap = function(dat, namevar=NULL, datavar=NULL, size = NULL, region="china", co
 					label = list(show=showLabel)
 				)
 			),
-			data = valDf
+			data = seriesData
 		))
 	})
 	

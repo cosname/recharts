@@ -17,7 +17,7 @@ evalFormula = function(x, data) {
 	as.data.frame(sapply(attr(x_formula, "term.labels"),function(tmpTerm){
 		return(eval(as.name(tmpTerm), data, environment(x)))
 	}),stringsAsFactors=F)
-  }  
+  }
 }
 
 
@@ -77,12 +77,11 @@ autoArgLabel = function(arg, auto) {
 
 # df2List function to realize unname(alply(valDf, 1, unlist))
 df2List = function(valDf){
+	#
 	nameArray = colnames(valDf)
 	outputList = lapply(1:length(valDf[,1]), FUN=function(tmpIndex){
 		# tmpIndex = 1
-		tmpOut = as.character(valDf[tmpIndex,])
-		names(tmpOut) <- nameArray
-		return(tmpOut)
+		return(as.list( valDf[tmpIndex,]))
 	})
 	return(outputList)
 }

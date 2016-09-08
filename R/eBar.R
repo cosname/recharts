@@ -43,7 +43,7 @@ eBar = function(dat, xvar=NULL, yvar=NULL, series=NULL, size = NULL, horiz = FAL
 	xlab.name = "", xlab.namePosition="start", xlim=NULL, 
 	ylab=TRUE, ylab.type="value", ylab.data=NULL, ylab.position="left", 
 	ylab.name = "", ylab.namePosition="start", ylim=NULL,
-	calculable=TRUE, showLabel=TRUE, opt = list()) 
+	calculable=TRUE, showLabel=TRUE, opt = list())
 {
 	# dat <- data.frame( saleNum=c(10,20,30,40,50,60,70,15,25,35,45,55,65,75,25,35,45,55,65,75,85), seller=c(rep("小黄",7), rep("小红",7), rep("小白",7)), weekDay = c(rep(c("周一","周二","周三","周四","周五","周六","周日"),3)), stringsAsFactors =FALSE)
 	# xvar=~weekDay; yvar= ~saleNum; series=~seller

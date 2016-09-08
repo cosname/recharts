@@ -32,7 +32,6 @@ eRadar = function(dat, xvar=NULL, yvar=NULL, series=NULL, size = NULL, ymin=vect
 	tooltip = TRUE, tooltip.trigger="item", formatter="", axis.scale=TRUE,
 	xlab=FALSE, ylab=FALSE,	calculable=TRUE, showLabel=TRUE, opt = list())
 {
-	
 	xlabName = recharts:::autoArgLabel(xvar, deparse(substitute(xvar)))
 	ylabName = recharts:::autoArgLabel(yvar, deparse(substitute(yvar)))
 
@@ -40,7 +39,8 @@ eRadar = function(dat, xvar=NULL, yvar=NULL, series=NULL, size = NULL, ymin=vect
 	yvar = recharts:::evalFormula(yvar, dat)
 
 	series = as.factor(recharts:::evalFormula(series, dat))
-
+	
+	# data flow format..
 	# if series is null, we will use the xvar and yvar to construct the bar plot..
 	if(is.null(xvar) & is.null(yvar) & !is.factor(dat)){
 		# Mode 1. use default data.frame as input...
@@ -67,8 +67,8 @@ eRadar = function(dat, xvar=NULL, yvar=NULL, series=NULL, size = NULL, ymin=vect
 		colnames(dat) <- "Frequency"
 		rownames(dat) <- tempD[,1]
 	}
-	
-	
+
+
 	# option$title format.
 	opt$title = tilteSet(title = title, subtitle=subtitle,
 			title.x = title.x, title.y = title.y)
@@ -83,12 +83,12 @@ eRadar = function(dat, xvar=NULL, yvar=NULL, series=NULL, size = NULL, ymin=vect
 	opt$toolbox = toolboxSet(toolbox=toolbox, toolbox.x=toolbox.x, toolbox.y=toolbox.y, orient=toolbox.orient,
 				dataView=dataView, mark=mark, dataZoom = dataZoom, magicType = magicType, restore = TRUE, readOnly = readOnly,
 				saveAsImage=TRUE)
-			
+
 	if(missing(legend.data) | is.null(legend.data)){legendData = rownames(dat)
 	}else{legendData = legend.data}
-	
+
 	opt$legend = legendSet( show=legend, data=legendData, legend.x=legend.x, legend.y=legend.y, orient=legend.orient)
-	
+
 	opt$polar = list(polarSet(name=colnames(dat), ymin=ymin, ymax=ymax))
 
 	datList = vector("list", nrow(dat))
