@@ -19,3 +19,11 @@
 #' @source
 #' \url{http://www.justice.gov/dea/resource-center/stride-data.shtml}
 "mapInfoDf"
+
+#' mapTestData_chs use for eMap chart generation.
+#'
+#' This dataset comes from geo infomation.
+#' @format Data frame with 3380 observations of 5 variables.
+#' @source
+#' \url{http://www.justice.gov/dea/resource-center/stride-data.shtml}
+"mapTestData_chs"

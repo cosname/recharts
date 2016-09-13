@@ -91,7 +91,7 @@ eTheme = function(...){
 #' @export
 #'
 #' @seealso \code{\link{set}}
-#' @method + recharts
+#' @method + echarts
 "+.echarts" <- function(e1, e2){
 
 	e2name <- deparse(substitute(e2))
@@ -189,7 +189,7 @@ eTheme = function(...){
 #' @export
 #'
 #' @seealso \code{\link{set}}
-#' @method >& recharts
+#' @method & echarts
 "&.echarts" <- function(e1, e2){
 	if(!(inherits(e1, "echarts") & inherits(e2, "echarts")))
 		stop("only echarts object can be merged into one widgets...")

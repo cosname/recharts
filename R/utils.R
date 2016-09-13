@@ -21,7 +21,7 @@ evalFormula = function(x, data) {
 }
 
 
-#' @importFrom DT convertIdx
+#' importFrom DT convertIdx
 convertIdx = function (i, names, n = length(names), invert = FALSE) 
 {
     if (!is.character(i)) 
@@ -43,7 +43,7 @@ convertIdx = function (i, names, n = length(names), invert = FALSE)
     else i
 }
 
-#' @importFrom DT escapeData
+#' importFrom DT escapeData
 escapeData <- function (data, i, colnames) 
 {
 	if (is.null(data) || prod(dim(data)) == 0 || identical(i, 
