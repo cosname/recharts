@@ -26,6 +26,7 @@ Collate:
     'data.R'
     'eBar.R'
     'eForce.R'
+    'eFunnel.R'
     'eLine.R'
     'eMap.R'
     'ePie.R'
