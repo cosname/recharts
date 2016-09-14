@@ -39,67 +39,67 @@ supported theme: \code{c("default", "vintage", "dark", "westeros", "essos", "won
 "chalk", "infographic", "macarons", "roma", "shine", "purple-passion")}}
 
 \item{title}{an overall title for the plot. you can modify title widget after chart has been
-generated: lineEchart + eTitle(title = "your title.")}
+generated: Echart + eTitle(title = "your title.")}
 
 \item{title.x, title.y}{the xy coordinates of main title, besides the excat exact pixels value, 
 x accept c("left", "right", "center") and y accept c("top", "bottom", "center") as legal input. 
 you can modify title widget after chart has been generated: 
-\code{lineEchart + eTitle(title="main title", x = "left", y=10)}}
+\code{Echart + eTitle(title="main title", x = "left", y=10)}}
 
 \item{legend}{logical whether the legend widget show or not, default is TRUE.
 you can modify legend widget after chart has been generated, the legend position and 
 legend orientation are available at present.
-\code{lineEchart + eLegend(show = TRUE)}}
+\code{Echart + eLegend(show = TRUE)}}
 
 \item{legend.x, legend.y}{the xy coordinates of legend, besides the excat exact pixels value, 
 x accept c("left", "right", "center") and y accept c("top", "bottom", "center") as legal input. 
 you can modify legend widget after chart has been generated: 
-\code{lineEchart + eLegend(x = "right", y="top")}}
+\code{Echart + eLegend(x = "right", y="top")}}
 
 \item{legend.orient}{an element of c("horizontal", "vertical"), default is "horizontal"
 you can modify legend widget after chart has been generated: 
-\code{lineEchart + eLegend(orient = "vertical")}}
+\code{Echart + eLegend(orient = "vertical")}}
 
 \item{toolbox}{logical whether the toolbox widget show or not, default is TRUE.
 you can modify toolbox widget after cahart has been generated, the toolbox position, toolbox 
 element and toolbox orientation are available at present.  
-\code{lineEchart + eToolbox(show = TRUE)}}
+\code{Echart + eToolbox(show = TRUE)}}
 
 \item{toolbox.orient}{an element of c("horizontal", "vertical"), default is "horizontal"
 you can modify toolbox widget after chart has been generated: 
-\code{lineEchart + eToolbox(orient = "vertical")}}
+\code{Echart + eToolbox(orient = "vertical")}}
 
 \item{toolbox.x, toolbox.y}{the xy coordinates of toolbox, besides the excat exact pixels value, 
 x accept c("left", "right", "center") and y accept c("top", "bottom", "center") as legal input. 
 you can modify toolbox widget after chart has been generated: 
-\code{lineEchart + eToolbox(x = "right", y="top")}}
+\code{Echart + eToolbox(x = "right", y="top")}}
 
 \item{tooltip}{logical whether the tooltip widget for front-end interactive chart
 show or not. default is TRUE. you can modify tooltip widget after chart has been generated, 
 the tooltip trigger and tooltip formatter is available at present.  
-\code{lineEchart + eTooltip(show = FALSE)}}
+\code{Echart + eTooltip(show = FALSE)}}
 
 \item{tooltip.trigger}{an element of c("axis", "item"), default is "axis" for line chart.
 "axis" option for trigger will show all the information of mouse;
 "item" option for tirgger will only show the given item information of mouse.
 you can modify tooltip widget after chart has been generated: 
-\code{lineEchart + eTooltip(trigger = "axis")}}
+\code{Echart + eTooltip(trigger = "axis")}}
 
 \item{calculable}{logical whether the front-end interactive chart will 
 support the drag-recalculable feature.
 the size and calculable option can be setted after line chart has been 
-generated through eOption: \code{lineEchart + eOption(calculable = TRUE)}}
+generated through eOption: \code{Echart + eOption(calculable = TRUE)}}
 
 \item{dataview, mark, restore, dataZoom, magicType}{logical variable whether the dataview
 , mark, restore, dataZoom or magicType tool in toolbox widget show or not, 
 default is TRUE. you can modify toolbox widget after chart has been generated, 
 the toolbox position, toolbox element and toolbox orientation are available at present.  
-\code{lineEchart + eToolbox(dataView = FALSE)}}
+\code{Echart + eToolbox(dataView = FALSE)}}
 
 \item{tooltip.formatter}{the information formatter for tooltip widget, 
 default is "<a>:<b><c>" for line chart.
 you can modify tooltip widget after chart has been generated: 
-\code{lineEchart + eTooltip(formatter = "<a><b>:<c>")}}
+\code{Echart + eTooltip(formatter = "<a><b>:<c>")}}
 }
 \description{
 This function creates an HTML widget to display matrix, data.frame and 

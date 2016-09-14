@@ -106,7 +106,7 @@ you can modify tooltip widget after chart has been generated:
 }
 \description{
 This function creates an HTML widget to display data.frame and 
-factor array, using the JavaScript library ECharts3.
+numeric array with name, using the JavaScript library ECharts3.
 }
 \note{
 You are recommended to use lazyPlot function for interactive chart

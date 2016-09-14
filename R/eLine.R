@@ -15,55 +15,55 @@
 #'   supported theme: \code{c("default", "vintage", "dark", "westeros", "essos", "wonderland", "walden",
 #'   "chalk", "infographic", "macarons", "roma", "shine", "purple-passion")}
 #' @param title an overall title for the plot. you can modify title widget after chart has been
-#'   generated: lineEchart + eTitle(title = "your title.")
+#'   generated: Echart + eTitle(title = "your title.")
 #' @param title.x,title.y the xy coordinates of main title, besides the excat exact pixels value, 
 #'   x accept c("left", "right", "center") and y accept c("top", "bottom", "center") as legal input. 
 #'   you can modify title widget after chart has been generated: 
-#'   \code{lineEchart + eTitle(title="main title", x = "left", y=10)}
+#'   \code{Echart + eTitle(title="main title", x = "left", y=10)}
 #' @param legend logical whether the legend widget show or not, default is TRUE.
 #'   you can modify legend widget after chart has been generated, the legend position and 
 #'   legend orientation are available at present.
-#'   \code{lineEchart + eLegend(show = TRUE)} 
+#'   \code{Echart + eLegend(show = TRUE)} 
 #' @param legend.x,legend.y the xy coordinates of legend, besides the excat exact pixels value, 
 #'   x accept c("left", "right", "center") and y accept c("top", "bottom", "center") as legal input. 
 #'   you can modify legend widget after chart has been generated: 
-#'   \code{lineEchart + eLegend(x = "right", y="top")}
+#'   \code{Echart + eLegend(x = "right", y="top")}
 #' @param legend.orient an element of c("horizontal", "vertical"), default is "horizontal"
 #'   you can modify legend widget after chart has been generated: 
-#'   \code{lineEchart + eLegend(orient = "vertical")}
+#'   \code{Echart + eLegend(orient = "vertical")}
 #' @param toolbox logical whether the toolbox widget show or not, default is TRUE.
 #'   you can modify toolbox widget after cahart has been generated, the toolbox position, toolbox 
 #'   element and toolbox orientation are available at present.  
-#'   \code{lineEchart + eToolbox(show = TRUE)}
+#'   \code{Echart + eToolbox(show = TRUE)}
 #' @param toolbox.x,toolbox.y the xy coordinates of toolbox, besides the excat exact pixels value, 
 #'   x accept c("left", "right", "center") and y accept c("top", "bottom", "center") as legal input. 
 #'   you can modify toolbox widget after chart has been generated: 
-#'   \code{lineEchart + eToolbox(x = "right", y="top")}
+#'   \code{Echart + eToolbox(x = "right", y="top")}
 #' @param toolbox.orient an element of c("horizontal", "vertical"), default is "horizontal"
 #'   you can modify toolbox widget after chart has been generated: 
-#'   \code{lineEchart + eToolbox(orient = "vertical")}
+#'   \code{Echart + eToolbox(orient = "vertical")}
 #' @param dataview,mark,restore,dataZoom,magicType logical variable whether the dataview
 #'   , mark, restore, dataZoom or magicType tool in toolbox widget show or not, 
 #'   default is TRUE. you can modify toolbox widget after chart has been generated, 
 #'   the toolbox position, toolbox element and toolbox orientation are available at present.  
-#'   \code{lineEchart + eToolbox(dataView = FALSE)}
+#'   \code{Echart + eToolbox(dataView = FALSE)}
 #' @param tooltip logical whether the tooltip widget for front-end interactive chart
 #'   show or not. default is TRUE. you can modify tooltip widget after chart has been generated, 
 #'   the tooltip trigger and tooltip formatter is available at present.  
-#'   \code{lineEchart + eTooltip(show = FALSE)}
+#'   \code{Echart + eTooltip(show = FALSE)}
 #' @param tooltip.trigger an element of c("axis", "item"), default is "axis" for line chart.
 #'   "axis" option for trigger will show all the information of mouse;
 #'   "item" option for tirgger will only show the given item information of mouse.
 #'   you can modify tooltip widget after chart has been generated: 
-#'   \code{lineEchart + eTooltip(trigger = "axis")}
+#'   \code{Echart + eTooltip(trigger = "axis")}
 #' @param tooltip.formatter the information formatter for tooltip widget, 
 #'   default is "<a>:<b><c>" for line chart.
 #'   you can modify tooltip widget after chart has been generated: 
-#'   \code{lineEchart + eTooltip(formatter = "<a><b>:<c>")}
+#'   \code{Echart + eTooltip(formatter = "<a><b>:<c>")}
 #' @param calculable logical whether the front-end interactive chart will 
 #'   support the drag-recalculable feature.
 #'   the size and calculable option can be setted after line chart has been 
-#'   generated through eOption: \code{lineEchart + eOption(calculable = TRUE)}
+#'   generated through eOption: \code{Echart + eOption(calculable = TRUE)}
 #' @note You are recommended to use lazyPlot function for interactive chart
 #'   option set through "shiny" server.
 #' @export
@@ -96,13 +96,14 @@ eLine = function(dat, xvar=NULL, yvar=NULL, series=NULL, size = NULL, horiz = FA
 	ylab.name = "", ylab.namePosition="start", ylim=NULL,
 	calculable=TRUE, showLabel=TRUE, opt = list()) 
 {
-	xlabName = recharts:::autoArgLabel(xvar, deparse(substitute(xvar)))
-	ylabName = recharts:::autoArgLabel(yvar, deparse(substitute(yvar)))
+	xlabName = autoArgLabel(xvar, deparse(substitute(xvar)))
+	ylabName = autoArgLabel(yvar, deparse(substitute(yvar)))
+	seriesName = autoArgLabel(series, deparse(substitute(series)))
 
-	xvar = recharts:::evalFormula(xvar, dat)
-	yvar = recharts:::evalFormula(yvar, dat)
+	xvar = evalFormula(xvar, dat)
+	yvar = evalFormula(yvar, dat)
 
-	series = as.factor(recharts:::evalFormula(series, dat))
+	series = as.factor(evalFormula(series, dat))
 
 	# if series is null, we will use the xvar and yvar to construct the line plot..
 	if(is.null(xvar) & is.null(yvar) & !is.factor(dat)){
@@ -113,7 +114,7 @@ eLine = function(dat, xvar=NULL, yvar=NULL, series=NULL, size = NULL, horiz = FA
 		# Mode 2. all of xvar, yvar and series are valid...
 		xvarArray = unique(as.character(xvar))
 		seriesArray = unique(as.character(series))
-		dataMatrix = xtabs(as.formula(paste0(ylabName, "~", xlabName , "+",  seriesName)), dat)
+		dataMatrix = xtabs(as.formula(paste0(ylabName, "~", xlabName , "+",  series)), dat)
 		plotData <- as.data.frame.matrix(dataMatrix[xvarArray,seriesArray])
 	}else if(!is.null(xvar) & !is.null(yvar) & is.null(series)){
 		# Mode 3. format dat with only x and y variable.
@@ -199,16 +200,90 @@ eLine = function(dat, xvar=NULL, yvar=NULL, series=NULL, size = NULL, horiz = FA
 	chart
 }
 
-#' Area charts
-#'
-#' ECharts style area charts.
-#'
-#' @param dat    data.frame or matrix
-#' @param opt    option of ECharts.
-#' @return The HTML code as a character string.
+#' Create an HTML area charts widget using the ECharts(version:3.2.2) library
+#' 
+#' This function creates an HTML widget to display matrix, data.frame and 
+#' factor array, using the JavaScript library ECharts3.
+#' @param dat a data object (a matrix, a data frame or a factor array)
+#' @param xvar,yvar objects of class "formula" (or one that can be coerced 
+#'   to that class):  x,y coordinates of the given data.frame colnames, e.g. 
+#'   \code{xvar = ~xAxisName}; \code{yvar = ~yAxisName}. xvar, yvar only needed for the 
+#'   data.frame data input.
+#' @param series an "formula" object: Associates the levels of variable
+#'   with symbol color, e.g. \code{series = ~groupName}
+#' @param size an array of html widget width and height(either numeric pixels 
+#'   or percentage could be accepted): e.g. size = c(1024, 768).
+#' @param theme an object of theme name. see(\url{http://datatables.net/extensions/index}) for detail.
+#'   supported theme: \code{c("default", "vintage", "dark", "westeros", "essos", "wonderland", "walden",
+#'   "chalk", "infographic", "macarons", "roma", "shine", "purple-passion")}
+#' @param title an overall title for the plot. you can modify title widget after chart has been
+#'   generated: Echart + eTitle(title = "your title.")
+#' @param title.x,title.y the xy coordinates of main title, besides the excat exact pixels value, 
+#'   x accept c("left", "right", "center") and y accept c("top", "bottom", "center") as legal input. 
+#'   you can modify title widget after chart has been generated: 
+#'   \code{Echart + eTitle(title="main title", x = "left", y=10)}
+#' @param legend logical whether the legend widget show or not, default is TRUE.
+#'   you can modify legend widget after chart has been generated, the legend position and 
+#'   legend orientation are available at present.
+#'   \code{Echart + eLegend(show = TRUE)} 
+#' @param legend.x,legend.y the xy coordinates of legend, besides the excat exact pixels value, 
+#'   x accept c("left", "right", "center") and y accept c("top", "bottom", "center") as legal input. 
+#'   you can modify legend widget after chart has been generated: 
+#'   \code{Echart + eLegend(x = "right", y="top")}
+#' @param legend.orient an element of c("horizontal", "vertical"), default is "horizontal"
+#'   you can modify legend widget after chart has been generated: 
+#'   \code{Echart + eLegend(orient = "vertical")}
+#' @param toolbox logical whether the toolbox widget show or not, default is TRUE.
+#'   you can modify toolbox widget after cahart has been generated, the toolbox position, toolbox 
+#'   element and toolbox orientation are available at present.  
+#'   \code{Echart + eToolbox(show = TRUE)}
+#' @param toolbox.x,toolbox.y the xy coordinates of toolbox, besides the excat exact pixels value, 
+#'   x accept c("left", "right", "center") and y accept c("top", "bottom", "center") as legal input. 
+#'   you can modify toolbox widget after chart has been generated: 
+#'   \code{Echart + eToolbox(x = "right", y="top")}
+#' @param toolbox.orient an element of c("horizontal", "vertical"), default is "horizontal"
+#'   you can modify toolbox widget after chart has been generated: 
+#'   \code{Echart + eToolbox(orient = "vertical")}
+#' @param dataview,mark,restore,dataZoom,magicType logical variable whether the dataview
+#'   , mark, restore, dataZoom or magicType tool in toolbox widget show or not, 
+#'   default is TRUE. you can modify toolbox widget after chart has been generated, 
+#'   the toolbox position, toolbox element and toolbox orientation are available at present.  
+#'   \code{Echart + eToolbox(dataView = FALSE)}
+#' @param tooltip logical whether the tooltip widget for front-end interactive chart
+#'   show or not. default is TRUE. you can modify tooltip widget after chart has been generated, 
+#'   the tooltip trigger and tooltip formatter is available at present.  
+#'   \code{Echart + eTooltip(show = FALSE)}
+#' @param tooltip.trigger an element of c("axis", "item"), default is "axis" for area chart.
+#'   "axis" option for trigger will show all the information of mouse;
+#'   "item" option for tirgger will only show the given item information of mouse.
+#'   you can modify tooltip widget after chart has been generated: 
+#'   \code{Echart + eTooltip(trigger = "axis")}
+#' @param tooltip.formatter the information formatter for tooltip widget, 
+#'   default is "<a>:<b><c>" for area chart.
+#'   you can modify tooltip widget after chart has been generated: 
+#'   \code{Echart + eTooltip(formatter = "<a><b>:<c>")}
+#' @param calculable logical whether the front-end interactive chart will 
+#'   support the drag-recalculable feature.
+#'   the size and calculable option can be setted after area chart has been 
+#'   generated through eOption: \code{Echart + eOption(calculable = TRUE)}
+#' @note You are recommended to use lazyPlot function for interactive chart
+#'   option set through "shiny" server.
 #' @export
 #' @examples
-#' eArea(WorldPhones)
+#'   eArea(WorldPhones, theme=1)
+#'   #mode 2 input.
+#'   df2 <- data.frame(
+#'     saleNum=c(10,20,30,40,50,60,70,15,25,35,45,55,65,75,25,35,45,55,65,75,85),
+#'     seller=c(rep("Yellow",7), rep("Red",7), rep("White",7)),
+#'   	 weekDay = c(rep(c("Mon","Tue","Wed","Thu","Fri","Sat","Sun"),3)),
+#'     stringsAsFactors =FALSE
+#'   )
+#'   eArea(df2, xvar=~weekDay, yvar= ~saleNum, series=~seller)
+#'
+#'  dat <- cut(rnorm(1000), -4:4)
+#'  eArea(dat)
+#'
+#' 
 eArea = function(dat, xvar=NULL, yvar=NULL, series=NULL, size = NULL, horiz = FALSE, stack="SUM",
 	theme = "default", title = NULL, subtitle = NULL, title.x = "center", title.y = "top", 
 	legend = TRUE, legend.x = "left", legend.y= "top", legend.orient="horizontal", 
@@ -223,14 +298,16 @@ eArea = function(dat, xvar=NULL, yvar=NULL, series=NULL, size = NULL, horiz = FA
 	calculable=TRUE, showLabel=TRUE, opt = list()) 
 {
 	
-	xlabName = recharts:::autoArgLabel(xvar, deparse(substitute(xvar)))
-	ylabName = recharts:::autoArgLabel(yvar, deparse(substitute(yvar)))
+	xlabName = autoArgLabel(xvar, deparse(substitute(xvar)))
+	ylabName = autoArgLabel(yvar, deparse(substitute(yvar)))
+	seriesName = autoArgLabel(series, deparse(substitute(series)))
 
-	xvar = recharts:::evalFormula(xvar, dat)
-	yvar = recharts:::evalFormula(yvar, dat)
+	xvar = evalFormula(xvar, dat)
+	
+	yvar = evalFormula(yvar, dat)
 
-	series = as.factor(recharts:::evalFormula(series, dat))
-	# if series is null, we will use the xvar and yvar to construct the line plot..
+	series = as.factor(evalFormula(series, dat))
+	# if series is null, we will use the xvar and yvar to construct the area plot..
 	if(is.null(xvar) & is.null(yvar) & !is.factor(dat)){
 		# Mode 1. use default data.frame as input...
 		plotData = as.data.frame(dat, stringsAsFactor=F)

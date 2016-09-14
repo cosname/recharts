@@ -115,36 +115,36 @@ eMap = function(dat, namevar=NULL, datavar=NULL, size = NULL, region="china", co
 	# config the province/city should be display...
 	# Only one arguement could be supported.
 	# dat=mapData;namevar = ~province; datavar = ~value + val2
-	placeName = recharts:::autoArgLabel(namevar, deparse(substitute(namevar)))
+	placeName = autoArgLabel(namevar, deparse(substitute(namevar)))
 	
 	# allow multiple variable input
 	# support format: ~value+val2, c("value", "val2")
-	dataName = recharts:::autoArgLabel(datavar, deparse(substitute(datavar)))
+	dataName = autoArgLabel(datavar, deparse(substitute(datavar)))
 	
 	# generate provinceVariable and dataVariable
-	placeVariable = recharts:::evalFormula(namevar, dat)
+	placeVariable = evalFormula(namevar, dat)
 	if(length(dataName) == 1){
-		valueDf = data.frame(value = recharts:::evalFormula(datavar, dat))
+		valueDf = data.frame(value = evalFormula(datavar, dat))
 		colnames(valueDf)[1] <- dataName
 	}else{
-		valueDf = recharts:::evalFormula(datavar, dat)
+		valueDf = evalFormula(datavar, dat)
 	}
 	
 	
 	# legendData set
-	opt$legend = recharts:::legendSet(show=legend, data=dataName, legend.x=legend.x, legend.y=legend.y, orient=legend.orient)
+	opt$legend = legendSet(show=legend, data=dataName, legend.x=legend.x, legend.y=legend.y, orient=legend.orient)
 
 	# option$title format.
-	opt$title = recharts:::tilteSet(title = title, subtitle=subtitle,
+	opt$title = tilteSet(title = title, subtitle=subtitle,
 			title.x = title.x, title.y = title.y)
 	opt$theme = themeSet(theme = theme)
-	opt$calculable = recharts:::calculableSet(calculable = calculable)
+	opt$calculable = calculableSet(calculable = calculable)
 
 	# opt$tooltip format, not open to user now.
-	opt$tooltip = recharts:::tooltipSet( tooltip=tooltip,trigger=tooltip.trigger,
+	opt$tooltip = tooltipSet( tooltip=tooltip,trigger=tooltip.trigger,
 			formatter = "", islandFormatter="")
 
-	opt$toolbox = recharts:::toolboxSet(toolbox=toolbox, toolbox.x=toolbox.x, toolbox.y=toolbox.y, orient=toolbox.orient,
+	opt$toolbox = toolboxSet(toolbox=toolbox, toolbox.x=toolbox.x, toolbox.y=toolbox.y, orient=toolbox.orient,
 				dataView=dataView, mark=mark, dataZoom = dataZoom, magicType=FALSE, restore = TRUE, readOnly = readOnly,
 				saveAsImage=TRUE)
 
@@ -156,11 +156,11 @@ eMap = function(dat, namevar=NULL, datavar=NULL, size = NULL, region="china", co
 		dataRange.max=max(valueDf[,dataName], na.rm = TRUE)
 	}
 
-	opt$dataRange = recharts:::dataRangeSet(dataRange=dataRange, calculable=dataRange.calculable, dataRange.x=dataRange.x, dataRange.y=dataRange.y,
+	opt$dataRange = dataRangeSet(dataRange=dataRange, calculable=dataRange.calculable, dataRange.x=dataRange.x, dataRange.y=dataRange.y,
 		dataRange.text = dataRange.text, color=color, precision=1, orient=dataRange.orient, min=dataRange.min, max=dataRange.max)		
 	
 	# regionFormat(region)
-	#displayRegion = recharts:::regionFormat(region)
+	#displayRegion = regionFormat(region)
 	#print(displayRegion)
 	# opt$series =  vector("list", length(dataName))
 	opt$series = lapply(dataName, FUN=function(tmpVar){
@@ -168,7 +168,7 @@ eMap = function(dat, namevar=NULL, datavar=NULL, size = NULL, region="china", co
 		# generate template data frame for each placevar and valuevar;
 		valDf = data.frame(name = placeVariable, value = valueDf[,tmpVar], stringsAsFactors=F)
 		# use df2List realize the function: unname(alply(valDf, 1, unlist))
-		seriesData = recharts:::df2List(valDf)
+		seriesData = df2List(valDf)
 		return(list(
 			name = tmpVar,
 			type = "map",

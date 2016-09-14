@@ -37,6 +37,17 @@ or percentage could be accepted): e.g. size = c(1024, 768).}
 \item{horiz}{logical. If FALSE, the bars are drawn vertically with the 
 first bar to the left.}
 
+\item{stackGroup}{list object, used to make series pre-stacked before rendering
+whole bar chart, if \code{unique(df[["groupName"]])} = c("a", "b", "c", "d", 
+"e", "f") and an example legal input for stackGroup should be: 
+\code{stackGroup = list(c("a","b"), c("e","f"))}. And the c("a","b") and 
+c("e","f") will be stacked into two bar, and the "c" and "d" will account 
+two seperated bars.}
+
+\item{theme}{an object of theme name. see(\url{http://datatables.net/extensions/index}) for detail.
+supported theme: \code{c("default", "vintage", "dark", "westeros", "essos", "wonderland", "walden",
+"chalk", "infographic", "macarons", "roma", "shine", "purple-passion")}}
+
 \item{title}{an overall title for the plot. you can modify title widget after chart has been
 generated: barEchart + eTitle(title = "your title.")}
 

@@ -14,11 +14,12 @@
 #' @param horiz logical. If FALSE, the bars are drawn vertically with the 
 #'   first bar to the left. 
 #' @param stackGroup list object, used to make series pre-stacked before rendering
-#'   whole bar chart, if \code{unique(df[["groupName"]])} = c("a", "b", "c", "d", "e", "f")
-#'   and an example legal input for stackGroup should be:\code{stackGroup = list(c("a", 
-#'   "b"), c("e","f")). And the c("a","b") and c("e","f") will be stacked into two bar,
-#'   and the "c" and "d" will account two seperated bars.  
-#'  @param  theme an object of theme name. see(\url{http://datatables.net/extensions/index}) for detail.
+#'   whole bar chart, if \code{unique(df[["groupName"]])} = c("a", "b", "c", "d", 
+#'   "e", "f") and an example legal input for stackGroup should be: 
+#'   \code{stackGroup = list(c("a","b"), c("e","f"))}. And the c("a","b") and 
+#'   c("e","f") will be stacked into two bar, and the "c" and "d" will account 
+#'   two seperated bars.  
+#' @param  theme an object of theme name. see(\url{http://datatables.net/extensions/index}) for detail.
 #'   supported theme: \code{c("default", "vintage", "dark", "westeros", "essos", "wonderland", "walden",
 #'   "chalk", "infographic", "macarons", "roma", "shine", "purple-passion")}
 #' @param title an overall title for the plot. you can modify title widget after chart has been
@@ -110,13 +111,13 @@ eBar = function(dat, xvar=NULL, yvar=NULL, series=NULL, size = NULL, horiz = FAL
 	ylab.name = "", ylab.namePosition="start", ylim=NULL,
 	calculable=TRUE, showLabel=TRUE, opt = list())
 {
-	xlabName = recharts:::autoArgLabel(xvar, deparse(substitute(xvar)))
-	ylabName = recharts:::autoArgLabel(yvar, deparse(substitute(yvar)))
+	xlabName = autoArgLabel(xvar, deparse(substitute(xvar)))
+	ylabName = autoArgLabel(yvar, deparse(substitute(yvar)))
 
-	xvar = recharts:::evalFormula(xvar, dat)
-	yvar = recharts:::evalFormula(yvar, dat)
-	seriesName = recharts:::autoArgLabel(series, deparse(substitute(series)))
-	if (!is.null(series)) series = as.factor(as.character(recharts:::evalFormula(series, dat)))
+	xvar = evalFormula(xvar, dat)
+	yvar = evalFormula(yvar, dat)
+	seriesName = autoArgLabel(series, deparse(substitute(series)))
+	if (!is.null(series)) series = as.factor(as.character(evalFormula(series, dat)))
 
 	# if series is null, we will use the xvar and yvar to construct the bar plot..
 	if(is.null(xvar) & is.null(yvar) & !is.factor(dat)){
@@ -145,21 +146,21 @@ eBar = function(dat, xvar=NULL, yvar=NULL, series=NULL, size = NULL, horiz = FAL
 	#opt = list()
 
 	# option$title format.
-	opt$title = recharts:::tilteSet(title = title, subtitle=subtitle,
+	opt$title = tilteSet(title = title, subtitle=subtitle,
 			title.x = title.x, title.y = title.y)
 
-	opt$calculable = recharts:::calculableSet(calculable = calculable)
-	opt$theme = recharts:::themeSet(theme = theme)
+	opt$calculable = calculableSet(calculable = calculable)
+	opt$theme = themeSet(theme = theme)
 
 	# opt$tooltip format, not open to user now.
-	opt$tooltip = recharts:::tooltipSet(tooltip=tooltip,trigger=tooltip.trigger,
+	opt$tooltip = tooltipSet(tooltip=tooltip,trigger=tooltip.trigger,
 			formatter = tooltip.formatter, islandFormatter="")
 
-	opt$toolbox = recharts:::toolboxSet(toolbox=toolbox, toolbox.x=toolbox.x, toolbox.y=toolbox.y, orient=toolbox.orient,
+	opt$toolbox = toolboxSet(toolbox=toolbox, toolbox.x=toolbox.x, toolbox.y=toolbox.y, orient=toolbox.orient,
 				dataView=dataView, mark=mark, dataZoom = dataZoom, magicType = magicType, restore = TRUE, readOnly = readOnly,
 				saveAsImage=TRUE)
 
-	opt$legend = recharts:::legendSet( show=legend, data=colnames(plotData), legend.x=legend.x, legend.y=legend.y, orient=legend.orient)
+	opt$legend = legendSet( show=legend, data=colnames(plotData), legend.x=legend.x, legend.y=legend.y, orient=legend.orient)
 
 	if(match.arg(xlab.type, c("category" , "value")) == "category" & is.null(xlab.data)){
 		xlab.data = rownames(plotData)
@@ -168,12 +169,12 @@ eBar = function(dat, xvar=NULL, yvar=NULL, series=NULL, size = NULL, horiz = FAL
 		ylab.data = colnames(plotData)
 	}
 
-	opt$xAxis = recharts:::xAxisSet(axisShow=xlab, type=xlab.type, data=xlab.data, position=xlab.position,
+	opt$xAxis = xAxisSet(axisShow=xlab, type=xlab.type, data=xlab.data, position=xlab.position,
 				labelName=xlab.name, label.namePosition=xlab.namePosition, lim=xlim,
 				axisLine=axis.line, axisTick=axis.tick, axisLable=axis.lable, splitLine=axis.splitLine, 
 				splitArea=axis.splitArea, boundaryGap=axis.boundaryGap, scale=axis.scale)	
 
-	opt$yAxis = recharts:::yAxisSet(axisShow=ylab, type=ylab.type, data=ylab.data, position=ylab.position,
+	opt$yAxis = yAxisSet(axisShow=ylab, type=ylab.type, data=ylab.data, position=ylab.position,
 				labelName=ylab.name, label.namePosition=ylab.namePosition, lim=ylim,
 				axisLine=axis.line, axisTick=axis.tick, axisLable=axis.lable, splitLine=axis.splitLine, 
 				splitArea=axis.splitArea, boundaryGap=axis.boundaryGap, scale=axis.scale)

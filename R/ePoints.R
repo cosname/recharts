@@ -69,44 +69,13 @@
 #' @note You are recommended to use lazyPlot function for interactive chart
 #'   option set through "shiny" server.
 #' @export
-#' @examples require(plyr)
-#' dat = ddply(iris, .(Species), colwise(mean))  
-#' rownames(dat) = dat[,1]
-#' dat = dat[, -1]
-#' dat
-#' eBar(dat)
-#' eBar(dat, horiz = TRUE)
-#' #mode 2 input.
-#' df2 <- data.frame(
-#'  saleNum=c(10,20,30,40,50,60,70,15,25,35,45,55,65,75,25,35,45,55,65,75,85),
-#'  seller=c(rep("Yellow",7), rep("Red",7), rep("White",7)),
-#'	 weekDay = c(rep(c("Mon","Tue","Wed","Thu","Fri","Sat","Sun"),3)),
-#'  stringsAsFactors =FALSE
-#' )
-#' dat <- df2
-#' xvar=~weekDay; yvar= ~saleNum; series=~seller
-#' eBar(df2, xvar = ~seller, ~saleNum, ~weekDay )
-#' dat <- df2[1:7,]
-#' eBar(dat, ~weekDay, ~saleNum)
-#' dat <- cut(rnorm(1000), -4:4)
-#' eBar(dat)
-#'
-
-#' Points charts
-#'
-#' ECharts style scatter charts. 
-#'
-#' @param dat    data.frame, should have two column or three colume. 
-#' If three, the third colume should be factor or character, it will be treated as category labels.
-#' @param opt    option of ECharts.
-#' @return The HTML code as a character string.
-#' @export
 #' @examples
 #' ePoints(iris[,3:5], theme=2)
 #' iris$Species <- as.character(iris$Species)
-#' iris[1:20, "Species"] ="小红花"
+#' iris[1:20, "Species"] ="redFlower"
 #' ePoints(iris[,3:5], xvar=~Petal.Length, yvar=~Petal.Width, series=~Species, theme=2)
 #' 
+
 
 ePoints = function(dat, xvar=NULL, yvar=NULL, series=NULL, size = NULL,   power=2, precision=2,
 	theme = "default", title = NULL, subtitle = NULL, title.x = "center", title.y = "top", 
@@ -124,9 +93,9 @@ ePoints = function(dat, xvar=NULL, yvar=NULL, series=NULL, size = NULL,   power=
 
 	### ePoint data setting,
 	# preprocess data to xvar, yvar, serieslab.
-	xvar = recharts:::autoArgLabel(xvar, deparse(substitute(xvar)))
-	yvar = recharts:::autoArgLabel(yvar, deparse(substitute(yvar)))
-	namevar = recharts:::autoArgLabel(series, deparse(substitute(series)))
+	xvar = autoArgLabel(xvar, deparse(substitute(xvar)))
+	yvar = autoArgLabel(yvar, deparse(substitute(yvar)))
+	namevar = autoArgLabel(series, deparse(substitute(series)))
 	
 	if(missing(xvar) | is.null(xvar) | xvar=="") xvar = colnames(dat)[1]
 	if(missing(yvar) | is.null(yvar) | yvar=="" ) yvar = colnames(dat)[2]

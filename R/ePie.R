@@ -1,7 +1,7 @@
 #' Create an HTML pie charts widget using the ECharts(version:3.2.2) library
 #'
 #' This function creates an HTML widget to display data.frame and 
-#' factor array, using the JavaScript library ECharts3.
+#' numeric array with name, using the JavaScript library ECharts3.
 #' @param dat a data object (a data frame or a factor array)
 #' @param namevar objects of class "formula" (or one that can be coerced 
 #'   to that class):  the pie name of the given data.frame colnames, e.g. 

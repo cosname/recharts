@@ -91,8 +91,6 @@ support the drag-recalculable feature.
 the size and calculable option can be setted after scatter chart has been 
 generated through eOption: \code{Echart + eOption(calculable = TRUE)}}
 
-\item{opt}{option of ECharts.}
-
 \item{powers, precision}{the precision and powers of value display setting.
 default: \code{power = 2; precision = 2}}
 
@@ -106,12 +104,6 @@ the toolbox position, toolbox element and toolbox orientation are available at p
 default is "<a>:<b><c>" for scatter chart.
 you can modify tooltip widget after chart has been generated: 
 \code{Echart + eTooltip(formatter = "<a><b>:<c>")}}
-
-\item{dat}{data.frame, should have two column or three colume. 
-If three, the third colume should be factor or character, it will be treated as category labels.}
-}
-\value{
-The HTML code as a character string.
 }
 \description{
 This function creates an HTML widget to display data.frame using the JavaScript
@@ -122,31 +114,10 @@ You are recommended to use lazyPlot function for interactive chart
   option set through "shiny" server.
 }
 \examples{
-require(plyr)
-dat = ddply(iris, .(Species), colwise(mean))  
-rownames(dat) = dat[,1]
-dat = dat[, -1]
-dat
-eBar(dat)
-eBar(dat, horiz = TRUE)
-#mode 2 input.
-df2 <- data.frame(
- saleNum=c(10,20,30,40,50,60,70,15,25,35,45,55,65,75,25,35,45,55,65,75,85),
- seller=c(rep("Yellow",7), rep("Red",7), rep("White",7)),
- weekDay = c(rep(c("Mon","Tue","Wed","Thu","Fri","Sat","Sun"),3)),
- stringsAsFactors =FALSE
-)
-dat <- df2
-xvar=~weekDay; yvar= ~saleNum; series=~seller
-eBar(df2, xvar = ~seller, ~saleNum, ~weekDay )
-dat <- df2[1:7,]
-eBar(dat, ~weekDay, ~saleNum)
-dat <- cut(rnorm(1000), -4:4)
-eBar(dat)
-
-Points charts
-
-ECharts style scatter charts. 
+ePoints(iris[,3:5], theme=2)
+iris$Species <- as.character(iris$Species)
+iris[1:20, "Species"] ="redFlower"
+ePoints(iris[,3:5], xvar=~Petal.Length, yvar=~Petal.Width, series=~Species, theme=2)
 
 }
 
