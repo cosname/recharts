@@ -114,7 +114,7 @@ eLine = function(dat, xvar=NULL, yvar=NULL, series=NULL, size = NULL, horiz = FA
 		# Mode 2. all of xvar, yvar and series are valid...
 		xvarArray = unique(as.character(xvar))
 		seriesArray = unique(as.character(series))
-		dataMatrix = xtabs(as.formula(paste0(ylabName, "~", xlabName , "+",  series)), dat)
+		dataMatrix = xtabs(as.formula(paste0(ylabName, "~", xlabName , "+",  seriesName)), dat)
 		plotData <- as.data.frame.matrix(dataMatrix[xvarArray,seriesArray])
 	}else if(!is.null(xvar) & !is.null(yvar) & is.null(series)){
 		# Mode 3. format dat with only x and y variable.

@@ -15,7 +15,7 @@ option <- function(...) {
 
 }
 
-#' Set recharts option
+#' Set recharts title option
 #' 
 #' @export
 #'
@@ -23,46 +23,92 @@ eTitle = function(...){
 	elements <- list(...)
 	structure(elements, class ="option")
 }
+#' Set recharts general option
+#' 
+#' @export
+#'
 eOption = function(...){
 	elements <- list(...)
 	structure(elements, class ="option")
 }
+#' Set recharts toolbox option
+#' 
+#' @export
+#'
 eToolbox = function(...){
 	elements <- list(...)
 	structure(elements, class ="option")
 }
+#' Set recharts drag-recaluculation option
+#' 
+#' @export
+#'
 eCalculable = function(...){
 	elements <- list(...)
 	structure(elements, class ="option")
 }
+#' Set recharts legend option
+#' 
+#' @export
+#'
 eLegend = function(...){
 	elements <- list(...)
 	structure(elements, class ="option")
 }
+#' Set recharts tooltip option
+#' 
+#' @export
+#'
 eTooltip = function(...){
 	elements <- list(...)
 	structure(elements, class ="option")
 }
+#' Set recharts dataRange option
+#' 
+#' @export
+#'
 eDataRange = function(...){
 	elements <- list(...)
 	structure(elements, class ="option")
 }
+
+#' Set recharts x Axis option
+#' 
+#' @export
+#'
 eAxis.X = function(...){
 	elements <- list(...)
 	structure(elements, class ="option")
 }
+
+#' Set recharts y Axis option
+#' 
+#' @export
+#'
 eAxis.Y = function(...){
 	elements <- list(...)
 	structure(elements, class ="option")
 }
+#' Set recharts polar option
+#' 
+#' @export
+#'
 ePolar = function(...){
 	elements <- list(...)
 	structure(elements, class ="option")
 }
+#' Set recharts x dataZoom option
+#' 
+#' @export
+#'
 eDataZoom = function(...){
 	elements <- list(...)
 	structure(elements, class ="option")
 }
+#' Set recharts theme option
+#' 
+#' @export
+#'
 eTheme = function(...){
 	elements <- list(...)
 	structure(elements, class ="option")
