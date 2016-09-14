@@ -1,16 +1,13 @@
 require(recharts)
 
 # eMap plot
-# province Name = c("北京", "江苏", "上海")
 mapData <- data.frame(province=c("\u5317\u4EAC", "\u6C5F\u82CF",  "\u4E0A\u6D77"), "value"=c(100, 200,  500), "val2"=c(200,300,200), val3=c(1,2,5), stringsAsFactors=F)
 # China Map
 eMap(mapData, namevar=~province, datavar = ~value+val2)
 pause()
 
 # ProvinceMap
-# city Name = c("扬州市", "苏州市", "南京市")
 provinceMapData <- data.frame(city=c("\u626C\u5DDE\u5E02", "\u5357\u4EAC\u5E02", "\u82CF\u5DDE\u5E02"), value=c(100, 200, 300), val2=c(200,300,400), val3=c(1,2,3), stringsAsFactors=F)
-# region = "江苏"
 eMap(provinceMapData, namevar=~city, datavar = ~value+val2, region="\u6C5F\u82CF")
 pause()
 
