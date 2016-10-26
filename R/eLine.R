@@ -98,13 +98,13 @@ eLine = function(dat, xvar=NULL, yvar=NULL, series=NULL, size = NULL, horiz = FA
 {
 	xlabName = autoArgLabel(xvar, deparse(substitute(xvar)))
 	ylabName = autoArgLabel(yvar, deparse(substitute(yvar)))
-	seriesName = autoArgLabel(series, deparse(substitute(series)))
 
 	xvar = evalFormula(xvar, dat)
 	yvar = evalFormula(yvar, dat)
+	seriesName = autoArgLabel(series, deparse(substitute(series)))
+	if (!is.null(series)) series = as.factor(as.character(evalFormula(series, dat)))
 
-	series = as.factor(evalFormula(series, dat))
-
+	
 	# if series is null, we will use the xvar and yvar to construct the line plot..
 	if(is.null(xvar) & is.null(yvar) & !is.factor(dat)){
 		# Mode 1. use default data.frame as input...
