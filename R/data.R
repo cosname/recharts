@@ -27,3 +27,22 @@
 #' @source
 #' \url{http://www.justice.gov/dea/resource-center/stride-data.shtml}
 "mapTestData_chs"
+
+#' parallelDf use for eParallel chart generation.
+#'
+#' This dataset comes from  infomation.
+#' @format Data frame with 1140 observations of 6 variables.
+"parallelDf"
+
+#' wordFreqDf for eWordcloud chart generation.
+#'
+#' This dataset comes from ECharts original data.
+#' @format Data frame with 337 observations of 2 variables.
+"wordFreqDf"
+
+#' wordFreqDf_chs for eWordcloud chart generation.
+#'
+#' This dataset comes from published articles of cos.name.
+#' And use the Chinese word segmentation package(jiebaR) to generate the word data.frame.
+#' @format Data frame with 996 observations of 2 variables.
+"wordFreqDf_chs"

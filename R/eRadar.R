@@ -163,7 +163,7 @@ eRadar = function(dat, xvar=NULL, yvar=NULL, series=NULL, size = NULL, ymin=vect
 		datList[[i]]$value = unnames(unlist(dat[i,]))
 	}
 	names(datList) = NULL
-
+	
 	
 	if(is.null(opt$series)) {
         opt$series = vector("list", 1)

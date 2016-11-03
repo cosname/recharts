@@ -1,4 +1,4 @@
-#' Create an HTML bar charts widget using the ECharts(version:3.2.2) library
+#' Create an HTML parallel charts widget using the ECharts(version:3.2.2) library
 #'
 #' This function creates an HTML widget to display matrix, data.frame and 
 #' factor array, using the JavaScript library ECharts3.
@@ -76,133 +76,149 @@
 #'   option set through "shiny" server.
 #' @export
 #' @examples require(plyr)
-#' dat = ddply(iris, .(Species), colwise(mean))  
-#' rownames(dat) = dat[,1]
-#' dat = dat[, -1]
-#' dat
-#' eBar(dat)
-#' eBar(dat, horiz = TRUE)
-#' #mode 2 input.
-#' df2 <- data.frame(
-#'  saleNum=c(10,20,30,40,50,60,70,15,25,35,45,55,65,75,25,35,45,55,65,75,85),
-#'  seller=c(rep("Yellow",7), rep("Red",7), rep("White",7)),
-#'	 weekDay = c(rep(c("Mon","Tue","Wed","Thu","Fri","Sat","Sun"),3)),
-#'  stringsAsFactors =FALSE
+#' 
+#' axisList = list(
+#' 	list(index=7, type="category", data = c("low", "middle", "high")), 
+#' 	list(index=6, inverse=TRUE, max=50, nameLocation="start")
 #' )
-#' dat <- df2
-#' xvar=~weekDay; yvar= ~saleNum; series=~seller
-#' eBar(df2, xvar = ~seller, ~saleNum, ~weekDay )
-#' dat <- df2[1:7,]
-#' eBar(dat, ~weekDay, ~saleNum)
-#' dat <- cut(rnorm(1000), -4:4)
-#' eBar(dat)
+#' eParallel(head(parallelDf, 20), series=~groupName, axisList = axisList)
 #'
 
-eBar = function(dat, xvar=NULL, yvar=NULL, series=NULL, size = NULL, horiz = FALSE, stackGroup = NULL,
-	theme = "default", title = NULL, subtitle = NULL, title.x = "center", title.y = "top", 
+eParallel = function(dat, series=NULL, axisList = list(), size = NULL, colorStyle = "black", 
+	layout="horizontal", left = "5%", right="18%", bottom=100, top = 100, theme = "default",
+	title = NULL, subtitle = NULL, title.x = "center", title.y = "top", 
 	legend = TRUE, legend.x = "left", legend.y= "top", legend.orient="horizontal", 
-	toolbox = TRUE, toolbox.orient = "horizontal", toolbox.x = "right", toolbox.y = "top", 
-	dataView = TRUE, readOnly = FALSE, mark=TRUE, dataZoom=FALSE, magicType=TRUE,
-	tooltip = TRUE, tooltip.trigger="axis", tooltip.formatter="", axis.scale=TRUE,
+	axis.scale=TRUE, axis.nameGap = 20, axis.nameLocation = "end", axis.nameColor = NULL,
+	line.width = 1, line.opacity = 0.8,
 	axis.line=TRUE, axis.tick=FALSE, axis.lable=TRUE, axis.splitLine=TRUE, axis.splitArea=FALSE, axis.boundaryGap=TRUE,
-	xlab=TRUE, xlab.type="category", xlab.data=NULL, xlab.position="bottom",
-	xlab.name = "", xlab.namePosition="start", xlim=NULL, 
-	ylab=TRUE, ylab.type="value", ylab.data=NULL, ylab.position="left", 
-	ylab.name = "", ylab.namePosition="start", ylim=NULL,
 	calculable=TRUE, showLabel=TRUE, opt = list())
 {
-	xlabName = autoArgLabel(xvar, deparse(substitute(xvar)))
-	ylabName = autoArgLabel(yvar, deparse(substitute(yvar)))
-
-	xvar = evalFormula(xvar, dat)
-	yvar = evalFormula(yvar, dat)
-	seriesName = autoArgLabel(series, deparse(substitute(series)))
-	if (!is.null(series)) series = as.factor(as.character(evalFormula(series, dat)))
-
-	# if series is null, we will use the xvar and yvar to construct the bar plot..
-	if(is.null(xvar) & is.null(yvar) & !is.factor(dat)){
-		# Mode 1. use default data.frame as input...
-		plotData <- as.data.frame(dat, stringsAsFactor=F)
-	}else if(!is.null(xvar) & !is.null(yvar) & !is.null(series)){
-		# print("Mode1")
-		# Mode 2. all of xvar, yvar and series are valid...
-		xvarArray = unique(as.character(xvar))
-		seriesArray = unique(as.character(series))
-		dataMatrix = xtabs(as.formula(paste0(ylabName, "~", xlabName , "+",  seriesName)), dat)
-		plotData <- as.data.frame.matrix(dataMatrix[xvarArray,seriesArray])
-	}else if(!is.null(xvar) & !is.null(yvar) & is.null(series)){
-		# Mode 3. format dat with only x and y variable.
-		plotData <- data.frame(val = yvar)
-		colnames(plotData) <- ylabName
-		rownames(plotData) <- xvar
-	}else if(is.null(xvar) & is.null(yvar) & is.factor(dat)){
-		# Mode 4. factor
-		tempD <- as.data.frame(table(dat))
-		plotData <- data.frame(val = tempD[,"Freq"])
-		colnames(plotData) <- "Frequency"
-		rownames(plotData) <- tempD[,1]
+	# dat = parallelDf; series = ~groupName
+	seriesName = recharts:::autoArgLabel(series, deparse(substitute(series)))
+	if (!is.null(series)){
+		series = as.factor(as.character(recharts:::evalFormula(series, dat)))
+		colnames(dat)[ colnames(dat) ==  seriesName] = "seriesName"
 	}
-
-	#opt = list()
+	
+	
+	# if series is null, we will use the data.frame to construct the bar plot..
 
 	# option$title format.
 	opt$title = tilteSet(title = title, subtitle=subtitle,
 			title.x = title.x, title.y = title.y)
 
-	opt$calculable = calculableSet(calculable = calculable)
+	# opt$calculable = calculableSet(calculable = calculable)
 	opt$theme = themeSet(theme = theme)
-
-	# opt$tooltip format, not open to user now.
-	opt$tooltip = tooltipSet(tooltip=tooltip,trigger=tooltip.trigger,
-			formatter = tooltip.formatter, islandFormatter="")
-
-	opt$toolbox = toolboxSet(toolbox=toolbox, toolbox.x=toolbox.x, toolbox.y=toolbox.y, orient=toolbox.orient,
-				dataView=dataView, mark=mark, dataZoom = dataZoom, magicType = magicType, restore = TRUE, readOnly = readOnly,
-				saveAsImage=TRUE)
-
-	opt$legend = legendSet( show=legend, data=colnames(plotData), legend.x=legend.x, legend.y=legend.y, orient=legend.orient)
-
-	if(match.arg(xlab.type, c("category" , "value")) == "category" & is.null(xlab.data)){
-		xlab.data = rownames(plotData)
+	displayAxixName = colnames(dat)
+	if(is.null(series)){
+		opt$legend = recharts:::legendSet( show=FALSE, data=c(), legend.x=legend.x, legend.y=legend.y, orient=legend.orient)
+	}else{
+		opt$legend = recharts:::legendSet( show=legend, data=levels(series), legend.x=legend.x, legend.y=legend.y, orient=legend.orient)
+		# displayName should delete the groupName 
+		displayAxixName = displayAxixName[displayAxixName!="seriesName"]
 	}
-	if(match.arg(ylab.type, c("category" , "value")) == "category" & is.null(ylab.data)){
-		ylab.data = colnames(plotData)
+	
+	# parallelAxis set...
+	parallelAxisList = lapply(1:length(displayAxixName), FUN=function(X){return(list(dim=X-1, name = displayAxixName[X]))})
+
+	if(length(axisList) > 0){
+		for (axisIndex in 1:length(axisList)){
+			modifyList = axisList[[axisIndex]]
+			modifyIndex = as.numeric(axisList[[axisIndex]]$index)
+			parallelAxisList[[modifyIndex]] = mergeList(parallelAxisList[[modifyIndex]] , modifyList)
+		}		
+	}
+	opt$parallelAxis = parallelAxisList
+	
+	# parallel setting...
+
+	
+	# set Legend and title text color
+	if(colorStyle == "white"){
+		# default white 
+		
+		opt$backgroundColor = '#eee'
+		parallelList = list(
+			left = left,
+			right=right,
+			bottom = bottom,
+			top = top,
+			parallelAxisDefault=list(
+				type="value",
+				name="parallelAxis",
+				nameLocation = axis.nameLocation,
+				nameGap = axis.nameGap,
+				axisLine = list(lineStyle = list(color="#000")),
+				axisTick = list(lineStyle = list(color="#000")),
+				splitLine = list(lineStyle = list(color="#000")),
+				axisLabel = list(textStyle = list(color="#000"))
+			)
+		)
+		
+		opt$title$textStyle$color = "#000"
+		opt$legend$textStyle$color = "#000"
+	}else {
+		# else the color will be set to blackColor ...
+
+		opt$backgroundColor = '#333'
+		parallelList = list(
+			left = left,
+			right=right,
+			bottom = bottom,
+			top = top,
+			parallelAxisDefault=list(
+				type="value",
+				name="parallelAxis",
+				nameLocation = axis.nameLocation,
+				nameGap = axis.nameGap,
+				axisLine = list(lineStyle = list(color="#fff")),
+				axisTick = list(lineStyle = list(color="#fff")),
+				splitLine = list(lineStyle = list(color="#fff")),
+				axisLabel = list(textStyle = list(color="#fff"))
+			)
+		)
+		opt$title$textStyle$color = "#fff"
+		opt$legend$textStyle$color = "#fff"
+	}
+	opt$parallel = parallelList
+	
+	
+	# parallel chart lineStyle setting...
+	lineStyleList = list(
+		normal=list(
+			width=line.width,
+			opacity= line.opacity
+		)
+	)
+	
+	# data series set...
+	if(is.null(levels(series))){
+		seriesList = list(list(
+			name = "parallel",
+			type= "parallel",
+			lineStyle = lineStyleList,
+			data = jsonlite::toJSON(unname(dat))
+		))
+	}else{
+		seriesList = lapply(levels(series), FUN=function(tempSeries){
+			tempPlotData = subset(dat, seriesName ==  tempSeries)
+			tempPlotData$seriesName = NULL
+			return(list(
+				name = tempSeries,
+				type= "parallel",
+				lineStyle = lineStyleList,
+				data = jsonlite::toJSON(unname(tempPlotData))
+			))
+		})
 	}
 
-	opt$xAxis = xAxisSet(axisShow=xlab, type=xlab.type, data=xlab.data, position=xlab.position,
-				labelName=xlab.name, label.namePosition=xlab.namePosition, lim=xlim,
-				axisLine=axis.line, axisTick=axis.tick, axisLable=axis.lable, splitLine=axis.splitLine, 
-				splitArea=axis.splitArea, boundaryGap=axis.boundaryGap, scale=axis.scale)	
-
-	opt$yAxis = yAxisSet(axisShow=ylab, type=ylab.type, data=ylab.data, position=ylab.position,
-				labelName=ylab.name, label.namePosition=ylab.namePosition, lim=ylim,
-				axisLine=axis.line, axisTick=axis.tick, axisLable=axis.lable, splitLine=axis.splitLine, 
-				splitArea=axis.splitArea, boundaryGap=axis.boundaryGap, scale=axis.scale)
-
-	# data set...
-	opt$series =  vector("list", ncol(plotData))
-    for(i in 1:dim(plotData)[2]) {
-        if(is.null(opt$series[[i]]$type)) {
-            opt$series[[i]]$type = 'bar'
-        }
-
-        if(is.null(opt$series[[i]]$name)) {
-            opt$series[[i]]$name = colnames(plotData)[i]
-        } else {
-            warning('You can set series:name with colnames(dat).')
-        }
-
-        if(is.null(opt$series[[i]]$data)) {
-            opt$series[[i]]$data = unname(plotData[,i])
-        } else {
-            warning('You can set series:data with dat.')
-        }
-    }
-	if(horiz==TRUE) {
-		tmp = opt$xAxis
-		opt$xAxis = opt$yAxis
-		opt$yAxis = tmp
+	if(length(seriesList) == 0){
+		stop("invalid series data generated")
+	}else{
+		opt$series = seriesList
 	}
+	
+	
 	#jsonStr <- toJSON(opt, pretty=TRUE)
 	#outList <- .rechartsOutput(jsonStr, charttype="ePoints", size=size)
 	opt$size = size
@@ -215,7 +231,7 @@ eBar = function(dat, xvar=NULL, yvar=NULL, series=NULL, size = NULL, horiz = FAL
 			instance
 		}
 	)
-	chart = .addClass(chart, "eBar")
+	chart = .addClass(chart, "eParallel")
 	chart
 	##### output list format
 	# chart = htmlwidgets::createWidget(

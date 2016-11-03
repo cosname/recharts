@@ -57,38 +57,14 @@ pause()
 ePie(x) + eOption(size=c(500,400))
 
 pause()
-# force Chart # need to updates
-# networkMatrix <- matrix(c(
-# 	c(0, 1, 2, 1, 2, 3, 6, 6, 1, 1, 1 ),
-# 	c(1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ),
-# 	c(2, 0, 0, 1, 0, 0, 1, 0, 0, 0, 0 ),
-# 	c(1, 0, 1, 0, 0, 0, 1, 1, 0, 0, 0 ),
-# 	c(2, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0 ),
-# 	c(3, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0 ),
-# 	c(6, 0, 1, 1, 1, 1, 0, 6, 0, 1, 0 ),
-# 	c(6, 0, 0, 1, 0, 0, 6, 0, 0, 0, 0 ),
-# 	c(1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ),
-# 	c(1, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0 ),
-# 	c(1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 )
-# 	), ncol=11
-# )
-# 
-# propertyDf <- data.frame(
-# 	category = c("A", "B", "B", "B", "B", "C", 
-# 					"C", "C", "C", "C", "C"),
-# 	name = c("Steven Jobs", "Lisa Jobs", "Paul Jobs", " Kalala Jobs",
-# 			"Lauren Powell", "Steve woz Ike", "Obama", "Bill Gates", 
-# 			"Jonathan", "Tim Cook", "Wayne"),
-# 	value = c(10, 2, 3, 3, 7, 5, 8, 9, 4, 4, 0)
-#  )
-# 
-# rownames(propertyDf) = propertyDf$name
-# 
-# eForce(networkMatrix=networkMatrix, propertyDf=propertyDf)
 
-# force lite demo
-# testData <- matrix(1:25, nrow=5)
-# recharts.eForceLite  <- eForce(testData)
-# 
-# recharts.eForceLite
+axisList = list(
+	list(index=7, type="category", data = c("low", "middle", "high")), 
+	list(index=6, inverse=T, max=50, nameLocation="start")
+)
+eParallel(head(parallelDf, 20), series=~groupName, axisList = axisList)&
+eWordcloud(wordFreqDf_chs, namevar = ~Word, datavar = ~Freq) 
+
+eWordcloud(wordFreqDf_chs, namevar = ~Word, datavar = ~Freq) 
+
 

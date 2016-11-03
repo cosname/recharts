@@ -1,4 +1,16 @@
 
+#' set multiple echarts layout 
+#' 
+#' Use the same layout orgnization as original grDevice layout function.
+#' 
+#' 
+#' @param multiEcharts A multiple echarts object to set the layout.
+#' @export
+echartsLayout <- function(multiEcharts){
+	print(class(multiEcharts))
+}
+
+
 #' Reports whether x is a option object
 #' @param x An object to test
 #' @export
