@@ -121,7 +121,7 @@ eWordcloud = function(dat, namevar=NULL, datavar=NULL,  size = c(1024, 768),
 				gridSize = gridSize,
 				shape = shape,
 				textStyle=list(normal=list(
-					color= JS( paste("function () { return 'rgb(' + [ Math.round(Math.random() * 160), ",
+					color= htmlwidgets::JS( paste("function () { return 'rgb(' + [ Math.round(Math.random() * 160), ",
 						"Math.round(Math.random() * 160),Math.round(Math.random() * 160)].join(',') + ')';}")
 				)
 			)),
