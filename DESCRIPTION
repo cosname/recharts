@@ -40,6 +40,7 @@ Collate:
     'shiny.R'
     'utils.R'
     'zzz.R'
+    'ePlot.R'
 License: MIT + file LICENSE
 LazyData: TRUE
 VignetteBuilder: knitr
