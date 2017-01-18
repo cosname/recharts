@@ -87,7 +87,7 @@ ePlot = function(series, ext = NULL, size = NULL, fixed = TRUE,
   opt$theme = themeSet(theme = theme)
   # opt$tooltip format, not open to user now.
   opt$tooltip = tooltipSet( tooltip=tooltip,trigger=tooltip.trigger,
-                            formatter = "{a} <br/>{b} : {c}%", islandFormatter="")
+                            formatter = "{a} <br/>{b} : {c}", islandFormatter="")
   
   
  
@@ -99,7 +99,8 @@ ePlot = function(series, ext = NULL, size = NULL, fixed = TRUE,
     if(!is.null(ext$xAxis)) opt$xAxis = ext$xAxis
     if(!is.null(ext$yAxis)) opt$yAxis = ext$yAxis
     if(!is.null(ext$tooltip)) opt$tooltip = ext$tooltip
-    if(!is.null(ext$tooltip)) opt$toolbox = ext$toolbox
+    if(!is.null(ext$toolbox)) opt$toolbox = ext$toolbox
+    if(!is.null(ext$timeline)) opt$timeline = ext$timeline
   }
   
   
