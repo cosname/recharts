@@ -7,15 +7,6 @@ env:
     - R_PKG="$(basename $TRAVIS_REPO_SLUG)"
   global:
     - secure: "CwEV0N2IeRQBqD7T6uiZmqpw4orE34RDSsouoqmbyb1mWDFYXXPYofdb67YgGXchcgtlC90VhtVVJ2ea57wXpumHebFjPG5lp1OJm3S4p4O1iXiTS/33PE7sLUkotzL2aOiI5p/yYQfoF9uFoO6dFuxWxFTa0oU8OnAB46YoLWA="
-    - secure2: "InF/z62wD/4enP/GKotyZp399PsOMpO+Gn8lc7AH7+4drYLU+u/hAfH56Qm4PpPtY9kdK3ZCYAmFnfP0Tnbi3mGyfeT2InqCPe6p3EDGwVI+l5QJ+dJU5RyBdnJ18Big4wYJ9osybQTmuHDzjH5sI15ozUMsXoxmanZlvFK+Xj3H0objDRiCaY3CsDZ8KutRoXuXL/ODD/h2Au5JM2UG8QSBdsYil5DTRl6gYKDj3yGl+52jb7QVrEpkMZECzgRvep+KApQPTU0jPAJmSPvKKAo2gm3C5C+ZAeKORzJpS3N1USjI8buxXdDAK49bFIfbLYMgJk2pjuKbDQ3WAaJVo7pgVNq/foXH913/jJQoS/0/VBKZlr+ZtwNjHRq12asGX7L8U5i21ENky5wQp/GnJYU6GP1bMA7gxnJMFcHD0Jb8V805iPrJWzj07gkkZ4nnv44IDzDuNBEp+psI01r/rrJ2oqUzkiOnESthCT50UG4qDDdKyQIVgh7kLKzyB6psgdsi+ntXvQbHEnrk1gCW2jxYlSxqmhiKL1FqeUNFPWINcQ7RQbXtSIfcFa4PQi/J5as0dYv2JlmWjjnTr1i2V6Z7iiROOrJzypGuxPn6hrE2cQcCG6/3cfQP5CikodCgBRLX+9rrMML8mgc/QXcV4TxCpGgLnV6E7vFCSlThg6M="
-
-docs:
-  before_script:
-    - chmod +x ./docs/_build.sh
-    - chmod +x ./docs/_deploy.sh
-  script:
-    - ./docs/_build.sh
-    - ./docs/_deploy.sh
 
 addons:
   apt:
@@ -30,6 +21,8 @@ install:
   - Rscript -e "if (!require('devtools')) install.packages('devtools')"
   - Rscript -e "devtools::install_deps(dep = TRUE)"
 
+
+
 cache:
   directories:
   - $HOME/R
@@ -43,3 +36,19 @@ script:
 after_success:
   - set -e
   - "(wget -q -O - http://yihui.name/xran/r-xran | bash)"
+  - pwd
+
+docs:
+  - cd ../../docs
+  - Rscript -e "if (!require('devtools')) install.packages('devtools')"
+  - Rscript -e "devtools::install_github('rstudio/bookdown')"
+  - pwd
+  - Rscript -e "bookdown::render_book('index.Rmd', 'bookdown::gitbook')"
+  - git config --global user.email "happy@langdawei.com"
+  - git config --global user.name "Dawei Lang"
+  - git clone -b gh-pages https://${GITHUB_PAT}@github.com/taiyun/recharts.git book-output
+  - cd book-output
+  - cp -r ../_book/* ./
+  - git add --all *
+  - git commit -m"Update the book" || true
+  - git push -q origin gh-pages
