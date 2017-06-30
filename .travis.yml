@@ -26,7 +26,8 @@ cache:
 
 script:
   - # docs
-  - cd /docs
+  - pwd
+  - cd ./docs
   - Rscript -e "devtools::install_github('rstudio/bookdown')"
   - pwd
   - Rscript -e "bookdown::render_book('index.Rmd', 'bookdown::gitbook')"
