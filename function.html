@@ -32,8 +32,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black">
   
   
-
-<link rel="next" href="intro.html">
+<link rel="prev" href="intro.html">
+<link rel="next" href="help.html">
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
@@ -138,27 +138,27 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="header">
-<h1 class="title">A Minimal Book Example</h1>
-<h4 class="author"><em>Yihui Xie</em></h4>
-<h4 class="date"><em>2017-06-30</em></h4>
+<div id="function" class="section level1">
+<h1><span class="header-section-number">章节 3</span> 基本函数部分</h1>
+<div id="section-3.1" class="section level2">
+<h2><span class="header-section-number">3.1</span> 线图</h2>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(recharts)
+<span class="kw">eLine</span>(WorldPhones, <span class="dt">theme=</span><span class="dv">1</span>)</code></pre></div>
+<div id="htmlwidget-7a2dd74de08e92d052e6" style="width:672px;height:480px;" class="echarts html-widget"></div>
+<script type="application/json" data-for="htmlwidget-7a2dd74de08e92d052e6">{"x":{"title":{"text":"","subtext":"","x":"center","y":"top"},"calculable":true,"theme":"macarons","tooltip":{"show":true,"trigger":"axis"},"toolbox":{"show":true,"x":"right","y":"top","orient":"horizontal","feature":{"mark":{"show":true},"dataZoom":{"show":false},"magicType":{"show":true,"type":["line","bar","stack","tiled"]},"restore":{"show":true},"dataView":{"show":{"readOnly":false}},"saveAsImage":{"show":true}}},"legend":{"show":true,"orient":"horizontal","x":"left","y":"top","data":["N.Amer","Europe","Asia","S.Amer","Oceania","Africa","Mid.Amer"]},"xAxis":{"position":"bottom","name":"","nameLocation":"start","scale":true,"precision":2,"power":2,"axisLine":{"show":true},"axisTick":{"show":false},"axisLable":{"show":true,"textStyle":{"color":"black"}},"splitLine":{"show":true},"splitArea":{"show":false},"type":"category","data":["1951","1956","1957","1958","1959","1960","1961"],"boundaryGap":true},"yAxis":{"position":"left","name":"","nameLocation":"start","scale":true,"precision":2,"power":2,"axisLine":{"show":true},"axisTick":{"show":false},"axisLable":{"show":true},"splitLine":{"show":true},"splitArea":{"show":false},"type":"value","boundaryGap":[0,0]},"series":[{"type":"line","name":"N.Amer","data":[45939,60423,64721,68484,71799,76036,79831]},{"type":"line","name":"Europe","data":[21574,29990,32510,35218,37598,40341,43173]},{"type":"line","name":"Asia","data":[2876,4708,5230,6662,6856,8220,9053]},{"type":"line","name":"S.Amer","data":[1815,2568,2695,2845,3000,3145,3338]},{"type":"line","name":"Oceania","data":[1646,2366,2526,2691,2868,3054,3224]},{"type":"line","name":"Africa","data":[89,1411,1546,1663,1769,1905,2005]},{"type":"line","name":"Mid.Amer","data":[555,733,773,836,911,1008,1076]}]},"evals":[],"jsHooks":[]}</script>
 </div>
-<div id="prerequisites" class="section level1">
-<h1><span class="header-section-number">章节 1</span> Prerequisites</h1>
-<p>This is a <em>sample</em> book written in <strong>Markdown</strong>. You can use anything that Pandoc’s Markdown supports, e.g., a math equation <span class="math inline">\(a^2 + b^2 = c^2\)</span>.</p>
-<p>For now, you have to install the development versions of <strong>bookdown</strong> from Github:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">devtools::<span class="kw">install_github</span>(<span class="st">&quot;rstudio/bookdown&quot;</span>)</code></pre></div>
-<p>Remember each Rmd file contains one and only one chapter, and a chapter is defined by the first-level heading <code>#</code>.</p>
-<p>To compile this example to PDF, you need to install XeLaTeX.</p>
+<div id="section-3.2" class="section level2">
+<h2><span class="header-section-number">3.2</span> 柱状图</h2>
 
+</div>
 </div>
             </section>
 
           </div>
         </div>
       </div>
-
-<a href="intro.html" class="navigation navigation-next navigation-unique" aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="intro.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="help.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
@@ -187,7 +187,7 @@ gitbook.start({
 "size": 2
 },
 "edit": {
-"link": "https://github.com/rstudio/bookdown-demo/edit/master/index.Rmd",
+"link": "https://github.com/rstudio/bookdown-demo/edit/master/02-基本函数部分.Rmd",
 "text": "Edit"
 },
 "download": null,
