@@ -5,3 +5,5 @@ NEWS.md
 FAQ.md
 Makefile
 ^\.travis\.yml$
+screenshots/
+docs/

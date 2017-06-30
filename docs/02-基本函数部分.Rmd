@@ -1,0 +1,10 @@
+# 基本函数部分 {#function}
+
+## 线图
+
+```{r}
+library(recharts)
+eLine(WorldPhones, theme=1)
+```
+
+## 柱状图
