@@ -17,14 +17,15 @@ addons:
     - r-recommended
 
 install:
-  - "wget -q -O - http://yihui.name/xran/r-config | bash"
+  - # "wget -q -O - http://yihui.name/xran/r-config | bash"
   - Rscript -e "if (!require('devtools')) install.packages('devtools')"
 
 cache:
   directories:
   - $HOME/R
 
-before_script:
+script:
+  - # docs
   - cd /docs
   - Rscript -e "devtools::install_github('rstudio/bookdown')"
   - pwd
@@ -38,9 +39,7 @@ before_script:
   - git commit -m"Update the book" || true
   - git push -q origin gh-pages
   - cd ../..
-
-
-script:
+  - # buid & check
   - Rscript -e "devtools::install_deps(dep = TRUE)"
   - cd ..; rm -f *.tar.gz; R CMD build $R_PKG
   - R CMD check $R_PKG*.tar.gz --no-manual
@@ -48,6 +47,6 @@ script:
 
 # deploy to XRAN
 after_success:
-  - set -e
-  - "(wget -q -O - http://yihui.name/xran/r-xran | bash)"
+  - # set -e
+  - # "(wget -q -O - http://yihui.name/xran/r-xran | bash)"
   - pwd
