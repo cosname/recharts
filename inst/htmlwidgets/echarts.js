@@ -13,6 +13,8 @@ HTMLWidgets.widget({
   },
 
   resize: function(el, width, height, instance) {
+    myCharts = echarts.getInstanceByDom(el);
+    myCharts.resize()
   }
 
 });

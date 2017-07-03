@@ -21,26 +21,6 @@ Suggests:
     knitr,
     rmarkdown,
     shiny (> 0.11.1)
-Collate:
-    'chartOpt.R'
-    'data.R'
-    'eBar.R'
-    'eForce.R'
-    'eFunnel.R'
-    'eParallel.R'
-    'eWordcloud.R'
-    'eLine.R'
-    'eMap.R'
-    'ePie.R'
-    'ePoints.R'
-    'eRadar.R'
-    'lazyPlot.R'
-    'optSetUtils.R'
-    'plot.recharts.R'
-    'shiny.R'
-    'utils.R'
-    'zzz.R'
-    'ePlot.R'
 License: MIT + file LICENSE
 LazyData: TRUE
 VignetteBuilder: knitr
