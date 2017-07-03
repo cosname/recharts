@@ -33,7 +33,7 @@
   
   
 <link rel="prev" href="index.html">
-<link rel="next" href="function.html">
+<link rel="next" href="interface.html">
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
@@ -116,15 +116,22 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li class="divider"></li>
 <li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> Prerequisites</a></li>
 <li class="chapter" data-level="2" data-path="intro.html"><a href="intro.html"><i class="fa fa-check"></i><b>2</b> recharts介绍</a></li>
-<li class="chapter" data-level="3" data-path="function.html"><a href="function.html"><i class="fa fa-check"></i><b>3</b> 基本函数部分</a><ul>
-<li class="chapter" data-level="3.1" data-path="function.html"><a href="function.html#echartsexample"><i class="fa fa-check"></i><b>3.1</b> 官网案例(echartsExample)</a><ul>
-<li class="chapter" data-level="3.1.1" data-path="function.html"><a href="function.html#section-3.1.1"><i class="fa fa-check"></i><b>3.1.1</b> 官网案例</a></li>
-<li class="chapter" data-level="3.1.2" data-path="function.html"><a href="function.html#js"><i class="fa fa-check"></i><b>3.1.2</b> JS代码案例</a></li>
+<li class="chapter" data-level="3" data-path="interface.html"><a href="interface.html"><i class="fa fa-check"></i><b>3</b> 案例及接口</a><ul>
+<li class="chapter" data-level="3.1" data-path="interface.html"><a href="interface.html#echartsexample"><i class="fa fa-check"></i><b>3.1</b> 官网案例(echartsExample)</a><ul>
+<li class="chapter" data-level="3.1.1" data-path="interface.html"><a href="interface.html#section-3.1.1"><i class="fa fa-check"></i><b>3.1.1</b> 官网案例</a></li>
+<li class="chapter" data-level="3.1.2" data-path="interface.html"><a href="interface.html#jscode"><i class="fa fa-check"></i><b>3.1.2</b> JS代码案例</a></li>
 </ul></li>
-<li class="chapter" data-level="3.2" data-path="function.html"><a href="function.html#section-3.2"><i class="fa fa-check"></i><b>3.2</b> 线图</a></li>
-<li class="chapter" data-level="3.3" data-path="function.html"><a href="function.html#section-3.3"><i class="fa fa-check"></i><b>3.3</b> 柱状图</a></li>
+<li class="chapter" data-level="3.2" data-path="interface.html"><a href="interface.html#replot"><i class="fa fa-check"></i><b>3.2</b> 从R对象中绘图(ePlot)</a><ul>
+<li class="chapter" data-level="3.2.1" data-path="interface.html"><a href="interface.html#section-3.2.1"><i class="fa fa-check"></i><b>3.2.1</b> 构建基本对象</a></li>
+<li class="chapter" data-level="3.2.2" data-path="interface.html"><a href="interface.html#section-3.2.2"><i class="fa fa-check"></i><b>3.2.2</b> 线柱混合</a></li>
 </ul></li>
-<li class="chapter" data-level="4" data-path="help.html"><a href="help.html"><i class="fa fa-check"></i><b>4</b> Introduction</a></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="baseFunction.html"><a href="baseFunction.html"><i class="fa fa-check"></i><b>4</b> 基本绘图函数</a><ul>
+<li class="chapter" data-level="4.1" data-path="baseFunction.html"><a href="baseFunction.html#section-4.1"><i class="fa fa-check"></i><b>4.1</b> 线图</a></li>
+<li class="chapter" data-level="4.2" data-path="baseFunction.html"><a href="baseFunction.html#section-4.2"><i class="fa fa-check"></i><b>4.2</b> 柱状图</a></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="nbFunction.html"><a href="nbFunction.html"><i class="fa fa-check"></i><b>5</b> 高级绘图函数</a></li>
+<li class="chapter" data-level="6" data-path="help.html"><a href="help.html"><i class="fa fa-check"></i><b>6</b> Introduction</a></li>
 <li class="divider"></li>
 <li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
 
@@ -147,6 +154,11 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
             <section class="normal" id="section-">
 <div id="intro" class="section level1">
 <h1><span class="header-section-number">章节 2</span> recharts介绍</h1>
+<p>安装:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">devtools::<span class="kw">install_github</span>(<span class="st">&quot;taiyun/recharts@dev&quot;</span>)</code></pre></div>
+<pre><code>## Using GitHub PAT from envvar GITHUB_PAT</code></pre>
+<pre><code>## Skipping install of &#39;recharts&#39; from a github remote, the SHA1 (ec66aa55) has not changed since last install.
+##   Use `force = TRUE` to force installation</code></pre>
 
 </div>
             </section>
@@ -155,7 +167,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
         </div>
       </div>
 <a href="index.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="function.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="interface.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
