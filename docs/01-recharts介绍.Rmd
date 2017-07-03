@@ -1,1 +1,7 @@
 # recharts介绍 {#intro}
+
+安装: 
+```{r}
+devtools::install_github("taiyun/recharts@dev")
+```
+
