@@ -1,5 +1,23 @@
 # 基本绘图函数 {#baseFunction}
 
+## 散点图
+
+散点图需要的输入是data.frame，需要指定`xvar`和`yvar`， `series`为可选的颜色分度参数，
+
+```{r echo = FALSE}
+library(recharts)
+```
+
+
+```{r}
+ePoints(iris[,3:5], theme=2)
+iris$Species <- as.character(iris$Species)
+iris[1:20, "Species"] ="redFlower"
+ePoints(iris[,3:5], xvar=~Petal.Length, yvar=~Petal.Width, series=~Species, theme=1)
+ePoints(iris[,3:5], xvar=~Petal.Length, yvar=~Petal.Width, series=~Species, theme=6)
+```
+
+
 
 
 ## 线图
