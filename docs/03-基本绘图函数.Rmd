@@ -10,11 +10,11 @@ library(recharts)
 
 
 ```{r}
-ePoints(iris[,3:5], theme=2)
+ePoints(iris[, 3:5], theme = 2)
 iris$Species <- as.character(iris$Species)
-iris[1:20, "Species"] ="redFlower"
-ePoints(iris[,3:5], xvar=~Petal.Length, yvar=~Petal.Width, series=~Species, theme=1)
-ePoints(iris[,3:5], xvar=~Petal.Length, yvar=~Petal.Width, series=~Species, theme=6)
+iris[1:20, "Species"] = "redFlower"
+ePoints(iris[,3:5], xvar = ~Petal.Length, yvar = ~Petal.Width, series = ~Species, theme = 1)
+ePoints(iris[,3:5], xvar = ~Petal.Length, yvar = ~Petal.Width, series = ~Species, theme = 6)
 ```
 
 
