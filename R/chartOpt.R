@@ -133,7 +133,7 @@ eCalculableSet = function(chart, ...)
 
 eThemeSet = function(chart, ...)
 {
-	themeArray <- c("macarons","infographic","shiny","dark","blue","green","red","gray","helianthus","roma","mint","macarons2","sakura","default")
+	themeArray <- c("dark","infographic","macarons","roma","shine","vintage","customed")
 
 	settings <- list(...)$optionList
 	#print(settings)
@@ -164,6 +164,17 @@ eThemeSet = function(chart, ...)
 		}
 	}
 	chart
+}
+
+themeDependencies = function(themeName){
+  list(
+    htmltools::htmlDependency(
+      themeName,
+      "0.0.4",
+      system.file("htmlwidgets/themes", package = "recharts"),
+      script = paste0(themeName, ".js")
+    )
+  )
 }
 
 eTooltipSet = function(chart, ...)
