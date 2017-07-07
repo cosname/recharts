@@ -19,6 +19,7 @@ addons:
 install:
   - # "wget -q -O - http://yihui.name/xran/r-config | bash"
   - Rscript -e "if (!require('devtools')) install.packages('devtools')"
+  - Rscript -e "if (!require('devtools')) install.packages('plyr')"
 
 cache:
   directories:

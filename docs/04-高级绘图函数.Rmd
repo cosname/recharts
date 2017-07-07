@@ -6,6 +6,7 @@ library(recharts)
 
 ## 堆砌区域图
 ```{r}
+require(plyr)
 eArea(WorldPhones, theme=1)
 #mode 2 input.
 df2 <- data.frame(
@@ -64,5 +65,13 @@ eRadar(df2, ~weekDay, ~saleNum, ~seller)
 ## 词云
 ```{r}
 eWordcloud(wordFreqDf_chs, namevar = ~Word, datavar = ~Freq)
+```
+
+## 地图
+```{r}
+mapData <- head(mapTestData_chs, 5)
+eMap(mapData, namevar=~stdName, datavar = ~val1 + val2)
+provinceMapData <- mapTestData_chs[6:15,]
+eMap(provinceMapData, namevar=~stdName, datavar = ~val1+val2, region=unique(provinceMapData$motherName)[1])
 ```
 
