@@ -230,11 +230,8 @@ ePoints = function(dat, xvar=NULL, yvar=NULL, series=NULL, size = NULL,   power=
 	)
 	chart = .addClass(chart, "ePoints")
 	
-	# set theme js
-	if(chart$x$theme != 'customed'){
-	  chart$dependencies <- c(chart$dependencies,
-	                            themeDependencies(chart$x$theme))
-	}
+	# add theme dependencies
+	chart = addThemeDependencies(chart)
 	
 	chart
 }

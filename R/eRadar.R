@@ -187,5 +187,7 @@ eRadar = function(dat, xvar=NULL, yvar=NULL, series=NULL, size = NULL, ymin=vect
 		}
 	)
 	chart = .addClass(chart, "eRadar")
+	# add theme dependencies
+	chart = addThemeDependencies(chart)
 	chart
 }

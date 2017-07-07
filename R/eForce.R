@@ -313,6 +313,8 @@ eForce = function(networkMatrix, propertyDf=NULL, size = NULL,
 		}
 	)
 	chart = .addClass(chart, "eForce")
+	# add theme dependencies
+	chart = addThemeDependencies(chart)
 	chart
 }
 	

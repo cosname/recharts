@@ -154,5 +154,7 @@ eFunnel = function(dat, namevar=NULL, datavar=NULL, size = NULL, fixed = TRUE,
       instance
     }
   )
+  # add theme dependencies
+  chart = addThemeDependencies(chart)
   chart
 }

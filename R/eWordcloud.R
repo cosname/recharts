@@ -85,7 +85,7 @@ eWordcloud = function(dat, namevar=NULL, datavar=NULL,  size = c(1024, 768),
 	sizeRange = c(10,100), rotationRange=c(-90,90), rotationStep = 45, gridSize=2,
 	shape="pentagon", maskImage=NULL, 
 	tooltip = TRUE, tooltip.trigger="item", formatter="", axis.scale=TRUE,
-	opt = list())
+	opt = list(), theme=NULL)
 {
 
 	# dat <- wordFreqDf_chs; namevar = ~Word; datavar = ~Freq
@@ -133,7 +133,7 @@ eWordcloud = function(dat, namevar=NULL, datavar=NULL,  size = c(1024, 768),
 	#jsonStr <- toJSON(opt, pretty=TRUE)
 	#outList <- .rechartsOutput(jsonStr, charttype="ePie", size=size)
 	opt$size = size
-
+	opt$theme = themeSet(theme = theme)
 
 	chart = htmlwidgets::createWidget(
 		'echarts', opt,
@@ -143,6 +143,8 @@ eWordcloud = function(dat, namevar=NULL, datavar=NULL,  size = c(1024, 768),
 		}
 	)
 	chart = .addClass(chart, "eWordcloud")
+	# add theme dependencies
+	chart = addThemeDependencies(chart)
 	chart
 	##### output list format
 	# chart = htmlwidgets::createWidget(

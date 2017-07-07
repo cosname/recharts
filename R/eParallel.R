@@ -232,6 +232,8 @@ eParallel = function(dat, series=NULL, axisList = list(), size = NULL, colorStyl
 		}
 	)
 	chart = .addClass(chart, "eParallel")
+	# add theme dependencies
+	chart = addThemeDependencies(chart)
 	chart
 	##### output list format
 	# chart = htmlwidgets::createWidget(

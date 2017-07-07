@@ -197,6 +197,10 @@ eLine = function(dat, xvar=NULL, yvar=NULL, series=NULL, size = NULL, horiz = FA
 		}
 	)
 	chart = .addClass(chart, "eLine")
+	
+	# add theme dependencies
+	chart = addThemeDependencies(chart)
+	
 	chart
 }
 
@@ -337,7 +341,8 @@ eArea = function(dat, xvar=NULL, yvar=NULL, series=NULL, size = NULL, horiz = FA
 			title.x = title.x, title.y = title.y)
 	
 	opt$calculable = calculableSet(calculable = calculable)
-
+	opt$theme = themeSet(theme = theme)
+	
 	# opt$tooltip format, not open to user now.
 	opt$tooltip = tooltipSet( tooltip=tooltip,trigger=tooltip.trigger,
 			formatter = "", islandFormatter="")
@@ -411,6 +416,9 @@ eArea = function(dat, xvar=NULL, yvar=NULL, series=NULL, size = NULL, horiz = FA
 		}
 	)
 	chart = .addClass(chart, "eArea")
+	# add theme dependencies
+	chart = addThemeDependencies(chart)
+	
 	chart
 
 }

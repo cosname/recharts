@@ -1,1 +1,68 @@
 # 高级绘图函数 {#nbFunction}
+
+```{r echo = FALSE}
+library(recharts)
+```
+
+## 堆砌区域图
+```{r}
+eArea(WorldPhones, theme=1)
+#mode 2 input.
+df2 <- data.frame(
+  saleNum=c(10,20,30,40,50,60,70,15,25,35,45,55,65,75,25,35,45,55,65,75,85),
+  seller=c(rep("Yellow",7), rep("Red",7), rep("White",7)),
+	 weekDay = c(rep(c("Mon","Tue","Wed","Thu","Fri","Sat","Sun"),3)),
+  stringsAsFactors =FALSE
+)
+eArea(df2, xvar=~weekDay, yvar= ~saleNum, series=~seller)
+
+dat <- cut(rnorm(1000), -4:4)
+eArea(dat)
+```
+
+
+## 漏斗图
+
+```{r}
+x = c("Exposure" = 100, "Click" = 80, "Visit" = 60, "Query"=40, "Buy"=20)
+eFunnel(x) +eTitle(title = "Funnel Plot")
+funnelDf <- data.frame(namevar = c("Exposure", "Click", "Visit", "Query", "Buy"), 
+   datavar = c(100, 80, 60, 40, 20), stringsAsFactors=FALSE)
+eFunnel(funnelDf, ~namevar, ~datavar, theme =1)
+```
+
+## 平行坐标
+```{r}
+require(plyr)
+
+axisList = list(
+	list(index=7, type="category", data = c("low", "middle", "high")), 
+	list(index=6, inverse=TRUE, max=50, nameLocation="start")
+)
+eParallel(head(parallelDf, 20), series=~groupName, axisList = axisList)
+```
+
+## 雷达图
+```{r}
+require(plyr)
+dat = ddply(iris, .(Species), colwise(mean))
+rownames(dat) = dat[,1]
+dat = dat[, -1]
+dat
+eRadar(dat)
+df2 <- data.frame(
+ saleNum=c(10,20,30,40,50,60,70,15,25,35,45,55,65,75,25,35,45,55,65,75,85),
+	seller=c(rep("Yellow",7), rep("Red",7), rep("White",7)),
+weekDay = c(rep(c("Mon","Tue","Wed","Thu","Fri","Sat","Sun"),3))
+)
+dat <- df2
+xvar=~weekDay; yvar= ~saleNum; series=~seller
+eRadar(df2, ~weekDay, ~saleNum, ~seller)
+```
+
+
+## 词云
+```{r}
+eWordcloud(wordFreqDf_chs, namevar = ~Word, datavar = ~Freq)
+```
+

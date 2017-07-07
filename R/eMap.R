@@ -194,5 +194,7 @@ eMap = function(dat, namevar=NULL, datavar=NULL, size = NULL, region="china", co
 		}
 	)
 	chart = .addClass(chart, "eMap")
+	# add theme dependencies
+	chart = addThemeDependencies(chart)
 	chart
 }

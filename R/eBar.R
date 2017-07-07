@@ -216,6 +216,8 @@ eBar = function(dat, xvar=NULL, yvar=NULL, series=NULL, size = NULL, horiz = FAL
 		}
 	)
 	chart = .addClass(chart, "eBar")
+	# add theme dependencies
+	chart = addThemeDependencies(chart)
 	chart
 	##### output list format
 	# chart = htmlwidgets::createWidget(

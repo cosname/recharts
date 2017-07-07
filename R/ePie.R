@@ -169,6 +169,8 @@ ePie = function(dat, namevar=NULL, datavar=NULL, size = NULL,  type=c("pie", "ro
 		'echarts', opt, width = size[1], height = size[2], package = 'recharts'
 	)
 	chart = .addClass(chart, "ePie")
+	# add theme dependencies
+	chart = addThemeDependencies(chart)
 	chart
 }
 
