@@ -98,7 +98,7 @@
 #' eBar(dat)
 #'
 
-eBar = function(dat, xvar=NULL, yvar=NULL, series=NULL, size = NULL, horiz = FALSE, stackGroup = NULL,
+eBar = function(dat, xvar=NULL, yvar=NULL, series=NULL, size = NULL, horiz = FALSE, stack = FALSE, stackGroup = NULL,
 	theme = "default", title = NULL, subtitle = NULL, title.x = "center", title.y = "top", 
 	legend = TRUE, legend.x = "left", legend.y= "top", legend.orient="horizontal", 
 	toolbox = TRUE, toolbox.orient = "horizontal", toolbox.x = "right", toolbox.y = "top", 
@@ -142,7 +142,7 @@ eBar = function(dat, xvar=NULL, yvar=NULL, series=NULL, size = NULL, horiz = FAL
 		colnames(plotData) <- "Frequency"
 		rownames(plotData) <- tempD[,1]
 	}
-
+  
 	#opt = list()
 
 	# option$title format.
@@ -179,6 +179,11 @@ eBar = function(dat, xvar=NULL, yvar=NULL, series=NULL, size = NULL, horiz = FAL
 				axisLine=axis.line, axisTick=axis.tick, axisLable=axis.lable, splitLine=axis.splitLine, 
 				splitArea=axis.splitArea, boundaryGap=axis.boundaryGap, scale=axis.scale)
 
+	# stack
+	if(stack & is.null(stackGroup)){
+	  stackGroup = list(colnames(plotData))
+	}
+	
 	# data set...
 	opt$series =  vector("list", ncol(plotData))
     for(i in 1:dim(plotData)[2]) {
@@ -191,7 +196,15 @@ eBar = function(dat, xvar=NULL, yvar=NULL, series=NULL, size = NULL, horiz = FAL
         } else {
             warning('You can set series:name with colnames(dat).')
         }
-
+        
+        if(!is.null(stackGroup)){
+          stackLabel = which(unlist(lapply(stackGroup,function(x) colnames(plotData)[i]%in% x)))
+          if(length(stackLabel)!=0){
+            opt$series[[i]]$stack = 
+              paste0('stack', stackLabel)
+          }
+        }
+      
         if(is.null(opt$series[[i]]$data)) {
             opt$series[[i]]$data = unname(plotData[,i])
         } else {

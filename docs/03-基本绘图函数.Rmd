@@ -60,6 +60,8 @@ df2 <- data.frame(
 dat <- df2
 xvar=~weekDay; yvar= ~saleNum; series=~seller
 eBar(df2, xvar = ~seller, ~saleNum, ~weekDay )
+eBar(df2, xvar = ~seller, ~saleNum, ~weekDay, stack=T)
+eBar(df2, xvar = ~seller, ~saleNum, ~weekDay, stackGroup = list(c('Sat','Sun')))
 dat <- df2[1:7,]
 eBar(dat, ~weekDay, ~saleNum)
 dat <- cut(rnorm(1000), -4:4)
