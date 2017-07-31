@@ -5,7 +5,7 @@
 \title{Create an HTML scatter charts widget using the ECharts(version:3.2.2) library}
 \usage{
 ePoints(dat, xvar = NULL, yvar = NULL, series = NULL, size = NULL,
-  power = 2, precision = 2, theme = "default", title = NULL,
+  power = 2, precision = 2, theme = "customed", title = NULL,
   subtitle = NULL, title.x = "center", title.y = "top", legend = TRUE,
   legend.data = NULL, legend.x = "left", legend.y = "top",
   legend.orient = "horizontal", toolbox = TRUE,
@@ -120,4 +120,3 @@ iris[1:20, "Species"] ="redFlower"
 ePoints(iris[,3:5], xvar=~Petal.Length, yvar=~Petal.Width, series=~Species, theme=2)
 
 }
-

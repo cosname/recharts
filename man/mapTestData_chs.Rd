@@ -15,4 +15,3 @@ mapTestData_chs
 This dataset comes from geo infomation.
 }
 \keyword{datasets}
-

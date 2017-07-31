@@ -127,4 +127,3 @@ dat <- df2
 xvar=~weekDay; yvar= ~saleNum; series=~seller
 eRadar(df2, ~weekDay, ~saleNum, ~seller)
 }
-

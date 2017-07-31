@@ -119,4 +119,3 @@ ePie(x) + eTitle("test")
 testData <- head(mapTestData_chs, 5)
 ePie(testData, ~stdName, ~val1)
 }
-

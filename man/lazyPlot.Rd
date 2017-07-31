@@ -23,4 +23,3 @@ You are recommended to use lazyPlot function for interactive chart
   echartObj <- eMap(mapData, namevar=~stdName, datavar = ~val1 + val2)
   lazyPlot(echartObj) # will launch the shiny server to
 }
-

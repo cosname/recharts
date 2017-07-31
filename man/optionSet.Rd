@@ -15,4 +15,3 @@ The output list of recharts as a list.
 \description{
 An shell function for setting arguments of the recharts object.
 }
-

@@ -9,4 +9,3 @@ eTheme(...)
 \description{
 Set recharts theme option
 }
-
