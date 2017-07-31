@@ -15,7 +15,7 @@
 # )
 # )
 # ePlot(series)
-# 
+#
 # series2 = list(
 #   list(
 #     name = '蒸发量',
@@ -26,17 +26,17 @@
 #     name = '降水量',
 #     type = 'bar',
 #     data = c(2.6, 5.9, 9.0, 26.4, 28.7, 70.7, 175.6, 182.2, 48.7, 18.8, 6.0, 2.3)
-#     
+#
 #   ),
 #   list(
 #     name = '平均温度',
 #     type = 'line',
 #     yAxisIndex = 1,
 #     data = c(2.0, 2.2, 3.3, 4.5, 6.3, 10.2, 20.3, 23.4, 23.0, 16.5, 12.0, 6.2)
-#     
+#
 #   )
 # )
-# 
+#
 # ext = list(
 #   xAxis = list(list(
 #     type = "category",
@@ -68,33 +68,33 @@
 #' @export
 ePlot = function(series, ext = NULL, size = NULL, fixed = TRUE,
                  theme = "default", title = NULL, subtitle = NULL, title.x = "center", title.y = "top", legend.data = NULL,
-                 legend = TRUE, legend.x = "left", legend.y= "top", legend.orient="horizontal", 
-                 toolbox = TRUE, toolbox.orient = "horizontal", toolbox.x = "right", toolbox.y = "top", 
+                 legend = TRUE, legend.x = "left", legend.y= "top", legend.orient="horizontal",
+                 toolbox = TRUE, toolbox.orient = "horizontal", toolbox.x = "right", toolbox.y = "top",
                  dataView = TRUE, readOnly = FALSE, mark=TRUE, dataZoom=FALSE, magicType=FALSE,
                  tooltip = TRUE, tooltip.trigger="item", formatter="", axis.scale=TRUE,
                  xlab=FALSE, ylab=FALSE, calculable=TRUE, showLabel=TRUE, opt = list())
 {
   if(missing(legend.data) | is.null(legend.data)){legendData = sapply(series, function(x) x[['name']])
   }else{legendData = legend.data}
-  
+
   opt$legend = legendSet( show=legend, data=legendData, legend.x=legend.x, legend.y=legend.y, orient=legend.orient)
-  
+
   # option$title format.
   opt$title = tilteSet(title = title, subtitle=subtitle,
                        title.x = title.x, title.y = title.y)
-  
+
   opt$calculable = calculableSet(calculable = calculable)
   opt$theme = themeSet(theme = theme)
   # opt$tooltip format, not open to user now.
   opt$tooltip = tooltipSet( tooltip=tooltip,trigger=tooltip.trigger,
                             formatter = "{a} <br/>{b} : {c}", islandFormatter="")
-  
-  
- 
+
+
+
   #showLabelLine=showLabel
   #now we don't support the multiple graph in one canvas
-  opt$series = series
-  
+  opt$series = series 
+
   if(!is.null(ext)){
     if(!is.null(ext$xAxis)) opt$xAxis = ext$xAxis
     if(!is.null(ext$yAxis)) opt$yAxis = ext$yAxis
@@ -102,11 +102,11 @@ ePlot = function(series, ext = NULL, size = NULL, fixed = TRUE,
     if(!is.null(ext$toolbox)) opt$toolbox = ext$toolbox
     if(!is.null(ext$timeline)) opt$timeline = ext$timeline
   }
-  
-  
+
+
   #jsonStr <- toJSON(opt, pretty=TRUE)
   opt$size = size
-  
+
   ### output list format
   chart = htmlwidgets::createWidget(
     'echarts', opt, width = size[1], height = size[2], package = 'recharts',
@@ -114,5 +114,5 @@ ePlot = function(series, ext = NULL, size = NULL, fixed = TRUE,
       instance
     }
   )
-  chart 
+  chart
 }
