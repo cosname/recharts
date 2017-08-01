@@ -84,6 +84,13 @@ xvar=~weekDay; yvar= ~saleNum; series=~seller
 eRadar(df2, ~weekDay, ~saleNum, ~seller)
 ```
 
+## 水球图
+```{r}
+eLiquid(0.6)
+eLiquid(0.6,wave = 6)
+```
+
+
 
 ## 词云
 ```{r}
