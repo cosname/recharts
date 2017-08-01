@@ -63,7 +63,7 @@
 #' @note You are recommended to use lazyPlot function for interactive chart
 #'   option set through "shiny" server.
 #' @export
-#' @examples require(plyr)
+#' @examples 
 #' eLiquid(0.6)
 #' eLiquid(0.6,wave = 6)
 
