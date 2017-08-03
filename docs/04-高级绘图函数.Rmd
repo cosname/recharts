@@ -83,6 +83,15 @@ weekDay = c(rep(c("Mon","Tue","Wed","Thu","Fri","Sat","Sun"),3))
 dat <- df2
 xvar=~weekDay; yvar= ~saleNum; series=~seller
 eRadar(df2, ~weekDay, ~saleNum, ~seller)
+dat = data.frame(IE8 = (40 - 1:28) * 10,
+                 IE9 = (38 - 1:28) * 4 + 60,
+                 Safari = 1:28 * 5 + 10,
+                 Firefox = 1:28 * 9,
+                 Chrome = 1:28 * 1:28 /2)
+row.names(dat) = 2001:2028
+chart = eRadar(dat, ymax = rep(400,5))
+chart$x$visualMap=list(color=c('red','yellow'))
+chart
 ```
 
 ## 水球图
