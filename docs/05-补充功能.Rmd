@@ -6,7 +6,8 @@ library(recharts)
 ```
 
 
-# MarkPoint
+## MarkPoint
+
 ```{r}
 dat <- cut(rnorm(1000), -4:4)
 chart = eLine(dat)
