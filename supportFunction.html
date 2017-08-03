@@ -33,7 +33,7 @@
   
   
 <link rel="prev" href="nbFunction.html">
-<link rel="next" href="markpoint.html">
+<link rel="next" href="help.html">
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
@@ -149,9 +149,10 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li class="chapter" data-level="7.7" data-path="nbFunction.html"><a href="nbFunction.html#section-7.7"><i class="fa fa-check"></i><b>7.7</b> 词云</a></li>
 <li class="chapter" data-level="7.8" data-path="nbFunction.html"><a href="nbFunction.html#section-7.8"><i class="fa fa-check"></i><b>7.8</b> 地图</a></li>
 </ul></li>
-<li class="chapter" data-level="8" data-path="supportFunction.html"><a href="supportFunction.html"><i class="fa fa-check"></i><b>8</b> 补充函数</a></li>
-<li class="chapter" data-level="9" data-path="markpoint.html"><a href="markpoint.html"><i class="fa fa-check"></i><b>9</b> MarkPoint</a></li>
-<li class="chapter" data-level="10" data-path="help.html"><a href="help.html"><i class="fa fa-check"></i><b>10</b> Introduction</a></li>
+<li class="chapter" data-level="8" data-path="supportFunction.html"><a href="supportFunction.html"><i class="fa fa-check"></i><b>8</b> 补充函数</a><ul>
+<li class="chapter" data-level="8.1" data-path="supportFunction.html"><a href="supportFunction.html#markpoint"><i class="fa fa-check"></i><b>8.1</b> MarkPoint</a></li>
+</ul></li>
+<li class="chapter" data-level="9" data-path="help.html"><a href="help.html"><i class="fa fa-check"></i><b>9</b> Introduction</a></li>
 <li class="divider"></li>
 <li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
 
@@ -174,6 +175,19 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
             <section class="normal" id="section-">
 <div id="supportFunction" class="section level1">
 <h1><span class="header-section-number">章节 8</span> 补充函数</h1>
+<div id="markpoint" class="section level2">
+<h2><span class="header-section-number">8.1</span> MarkPoint</h2>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">dat &lt;-<span class="st"> </span><span class="kw">cut</span>(<span class="kw">rnorm</span>(<span class="dv">1000</span>), -<span class="dv">4</span>:<span class="dv">4</span>)
+chart =<span class="st"> </span><span class="kw">eLine</span>(dat)
+<span class="kw">eMarkPoint</span>(chart, <span class="dt">type=</span><span class="kw">c</span>(<span class="st">&#39;max&#39;</span>,<span class="st">&#39;min&#39;</span>),<span class="dt">valueIndex =</span> <span class="dv">1</span>)</code></pre></div>
+<div id="htmlwidget-854b513de13142880a92" style="width:672px;height:480px;" class="echarts html-widget"></div>
+<script type="application/json" data-for="htmlwidget-854b513de13142880a92">{"x":{"title":{"text":"","subtext":"","x":"center","y":"top"},"calculable":true,"theme":"default","tooltip":{"show":true,"trigger":"axis"},"toolbox":{"show":true,"x":"right","y":"top","orient":"horizontal","feature":{"mark":{"show":true},"dataZoom":{"show":false},"magicType":{"show":true,"type":["line","bar","stack","tiled"]},"restore":{"show":true},"dataView":{"show":{"readOnly":false}},"saveAsImage":{"show":true}}},"legend":{"show":true,"orient":"horizontal","x":"left","y":"top","data":["Frequency"]},"xAxis":{"position":"bottom","name":"","nameLocation":"start","scale":true,"precision":2,"power":2,"axisLine":{"show":true},"axisTick":{"show":false},"axisLable":{"show":true,"textStyle":{"color":"black"}},"splitLine":{"show":true},"splitArea":{"show":false},"type":"category","data":["(-4,-3]","(-3,-2]","(-2,-1]","(-1,0]","(0,1]","(1,2]","(2,3]","(3,4]"],"boundaryGap":true},"yAxis":{"position":"left","name":"","nameLocation":"start","scale":true,"precision":2,"power":2,"axisLine":{"show":true},"axisTick":{"show":false},"axisLable":{"show":true},"splitLine":{"show":true},"splitArea":{"show":false},"type":"value","boundaryGap":[0,0]},"series":[{"type":"line","name":"Frequency","data":[0,25,135,327,342,149,21,1],"markPoint":{"symbol":"pin","symbolSize":50,"symbolOffset":[0,0],"silent":false,"data":[{"name":"max","type":"max","valueIndex":1},{"name":"min","type":"min","valueIndex":1}]}}]},"evals":[],"jsHooks":[]}</script>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">eMarkPoint</span>(chart, <span class="dt">dat =</span> <span class="kw">data.frame</span>(<span class="dv">2</span>:<span class="dv">3</span>,<span class="kw">rep</span>(<span class="dv">200</span>,<span class="dv">2</span>)),
+         <span class="dt">type=</span><span class="kw">c</span>(<span class="st">&#39;max&#39;</span>,<span class="st">&#39;min&#39;</span>),<span class="dt">valueIndex =</span> <span class="dv">1</span>)</code></pre></div>
+<div id="htmlwidget-7fc10e4bd773dacfa7ae" style="width:672px;height:480px;" class="echarts html-widget"></div>
+<script type="application/json" data-for="htmlwidget-7fc10e4bd773dacfa7ae">{"x":{"title":{"text":"","subtext":"","x":"center","y":"top"},"calculable":true,"theme":"default","tooltip":{"show":true,"trigger":"axis"},"toolbox":{"show":true,"x":"right","y":"top","orient":"horizontal","feature":{"mark":{"show":true},"dataZoom":{"show":false},"magicType":{"show":true,"type":["line","bar","stack","tiled"]},"restore":{"show":true},"dataView":{"show":{"readOnly":false}},"saveAsImage":{"show":true}}},"legend":{"show":true,"orient":"horizontal","x":"left","y":"top","data":["Frequency"]},"xAxis":{"position":"bottom","name":"","nameLocation":"start","scale":true,"precision":2,"power":2,"axisLine":{"show":true},"axisTick":{"show":false},"axisLable":{"show":true,"textStyle":{"color":"black"}},"splitLine":{"show":true},"splitArea":{"show":false},"type":"category","data":["(-4,-3]","(-3,-2]","(-2,-1]","(-1,0]","(0,1]","(1,2]","(2,3]","(3,4]"],"boundaryGap":true},"yAxis":{"position":"left","name":"","nameLocation":"start","scale":true,"precision":2,"power":2,"axisLine":{"show":true},"axisTick":{"show":false},"axisLable":{"show":true},"splitLine":{"show":true},"splitArea":{"show":false},"type":"value","boundaryGap":[0,0]},"series":[{"type":"line","name":"Frequency","data":[0,25,135,327,342,149,21,1],"markPoint":{"symbol":"pin","symbolSize":50,"symbolOffset":[0,0],"silent":false,"data":[{"name":"max","type":"max","valueIndex":1},{"name":"min","type":"min","valueIndex":1},{"name":"default1","coord":[2,200]},{"name":"default2","coord":[3,200]}]}}]},"evals":[],"jsHooks":[]}</script>
+
+</div>
 </div>
             </section>
 
@@ -181,7 +195,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
         </div>
       </div>
 <a href="nbFunction.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="markpoint.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="help.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
