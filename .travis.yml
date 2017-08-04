@@ -31,11 +31,11 @@ script:
   - pwd
   - cd ./docs
   - Rscript -e "install.packages('bookdown')"
-  - Rscript -e "devtools::install_github('taiyun/recharts@dev')"
+  - Rscript -e "devtools::install_github('cosname/recharts@dev')"
   - Rscript -e "bookdown::render_book('index.Rmd', 'bookdown::gitbook')"
   - git config --global user.email "happy@langdawei.com"
   - git config --global user.name "Dawei Lang"
-  - git clone -b gh-pages https://${GITHUB_PAT}@github.com/taiyun/recharts.git book-output
+  - git clone -b gh-pages https://${GITHUB_PAT}@github.com/cosname/recharts.git book-output
   - cd book-output
   - cp -r ../_book/* ./
   - git add --all *
