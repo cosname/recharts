@@ -1,4 +1,4 @@
-#' Create an HTML bar charts widget using the ECharts(version:3.2.2) library
+#' Create an markpoint using the ECharts(version:3.2.2) library
 #'
 #' This function creates an HTML widget to display matrix, data.frame and 
 #' factor array, using the JavaScript library ECharts3.

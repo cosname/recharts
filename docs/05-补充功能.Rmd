@@ -16,3 +16,24 @@ eMarkPoint(chart, dat = data.frame(2:3,rep(200,2)),
          type=c('max','min'),valueIndex = 1)
 ```
 
+
+## HLine
+```{r}
+chart = ePoints(iris[, 3:5], theme = 2)
+eHLine(chart,1,lineColor = 'blue')
+eHLine(chart,'min',lineWidth = 5)
+```
+
+## VLine
+```{r}
+eVLine(chart,1,lineColor = 'blue')
+eVLine(chart,'min',lineWidth = 5)
+```
+
+
+## MarkLine
+
+```{r}
+eMarkLine(chart, c(1,0), c(7,2.5))
+```
+
