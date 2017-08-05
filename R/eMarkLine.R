@@ -21,7 +21,7 @@
 #' eVLine(chart,'min',lineWidth = 5)
 #' eMarkLine(chart, c(1,0), c(7,2.5))
 
-## horizontal line
+#' @export
 eHLine = function(chart, yvalue, lineWidth = NULL, lineColor=NULL,
                   name = '', precision = NULL, seriesIndex = NULL){
   
@@ -57,7 +57,7 @@ eHLine = function(chart, yvalue, lineWidth = NULL, lineColor=NULL,
   return(chart)
 }
 
-# vertical line
+#' @export
 eVLine = function(chart, xvalue, lineWidth = NULL, lineColor=NULL,
                   name = '', precision = NULL, seriesIndex = NULL){
   
@@ -93,7 +93,7 @@ eVLine = function(chart, xvalue, lineWidth = NULL, lineColor=NULL,
   return(chart)
 }
 
-# XYline
+#' @export
 eMarkLine = function(chart, startPoint, endPoint, name = '',
                   seriesIndex = NULL,lineWidth = NULL, lineColor=NULL,
                  precision = NULL){
