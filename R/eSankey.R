@@ -108,7 +108,7 @@ eSankey = function(dat,  candleColor, size = NULL,
       instance
     }
   )
-  chart = .addClass(chart, "sankey")
+  chart = .addClass(chart, "eSankey")
   # add theme dependencies
   #chart = addThemeDependencies(chart)
   chart
