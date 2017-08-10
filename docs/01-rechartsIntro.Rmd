@@ -3,7 +3,7 @@
 
 recharts
 ========
-[![Build Status](https://travis-ci.org/taiyun/recharts.png)](https://travis-ci.org/taiyun/recharts)
+[![Build Status](https://travis-ci.org/cosname/recharts.png)](https://travis-ci.org/cosname/recharts)
 
 A R interface to [ECharts](https://github.com/ecomfe/echarts) for data visualization.
 
@@ -15,16 +15,16 @@ recharts 提供了百度开源可视化js框架ECharts的R语言接口，现提�
 平行坐标图([eParallel](http://echarts.baidu.com/demo.html#parallel-aqi))
 和桑基图（[eSankey](http://echarts.baidu.com/demo.html#sankey-energy)）图逐一实现。
 
-# recharts的安装(Installation)
-recharts包的源代码在[Github/taiyun/recharts](https://github.com/taiyun/recharts)上提供下载与安装，安装需要使用以下代码：
+## recharts的安装(Installation)
+recharts包的源代码在[Github/cosname/recharts](https://github.com/cosname/recharts)上提供下载与安装，安装需要使用以下代码：
 
 ```{r eval = F}
 require(devtools)
-devtools::install_github("taiyun/recharts@dev")
+devtools::install_github("cosname/recharts@dev")
 ```
 
 
-目前计划任务列表在[https://github.com/taiyun/recharts/issues/43](https://github.com/taiyun/recharts/issues/43)
+目前计划任务列表在[https://github.com/cosname/recharts/issues/43](https://github.com/cosname/recharts/issues/43)
 
 欢迎贡献issue以及贡献代码
 
