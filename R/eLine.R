@@ -9,6 +9,7 @@
 #'   data.frame data input.
 #' @param series an "formula" object: Associates the levels of variable
 #'   with symbol color, e.g. \code{series = ~groupName}
+#' @param smooth wether the line should be smoothy or not.
 #' @param size an array of html widget width and height(either numeric pixels 
 #'   or percentage could be accepted): e.g. size = c(1024, 768).
 #' @param theme an object of theme name. see(\url{http://datatables.net/extensions/index}) for detail.
@@ -83,7 +84,7 @@
 #'
 #' 
 
-eLine = function(dat, xvar=NULL, yvar=NULL, series=NULL, size = NULL, horiz = FALSE,
+eLine = function(dat, xvar=NULL, yvar=NULL, series=NULL, size = NULL, horiz = FALSE, smooth = NULL,
 	theme = "default", title = NULL, subtitle = NULL, title.x = "center", title.y = "top", 
 	legend = TRUE, legend.x = "left", legend.y= "top", legend.orient="horizontal", 
 	toolbox = TRUE, toolbox.orient = "horizontal", toolbox.x = "right", toolbox.y = "top", 
@@ -180,8 +181,14 @@ eLine = function(dat, xvar=NULL, yvar=NULL, series=NULL, size = NULL, horiz = FA
         } else {
             warning('You can set series:data with dat.')
         }
+      
+        if(!is.null(smooth)){
+          opt$series[[i]]$smooth=smooth
+        }
     }
-
+  
+	
+	
 	if(horiz==TRUE) {
 		tmp = opt$xAxis
 		opt$xAxis = opt$yAxis
