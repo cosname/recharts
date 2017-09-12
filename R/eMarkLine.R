@@ -45,8 +45,10 @@ eHLine = function(chart, yvalue, lineWidth = NULL, lineColor=NULL,
   
   for(i in seriesIndex){
     if(!is.null(precision)) chart$x$series[[i]]$markLine$precision = precision
-    if(!is.null(lineColor)) chart$x$series[[i]]$markLine$lineStyle = list(normal=list(color=lineColor))
-    if(!is.null(lineWidth)) chart$x$series[[i]]$markLine$lineStyle = list(normal=list(width=lineWidth))
+    if(!is.null(lineColor)) chart$x$series[[i]]$markLine$lineStyle$normal = 
+        append(chart$x$series[[i]]$markLine$lineStyle$normal,list(color=lineColor))
+    if(!is.null(lineWidth)) chart$x$series[[i]]$markLine$lineStyle$normal = 
+        append(chart$x$series[[i]]$markLine$lineStyle$normal,list(width=lineWidth))
     
     chart$x$series[[i]]$markLine$data = 
       append(chart$x$series[[i]]$markLine$data,
@@ -81,8 +83,10 @@ eVLine = function(chart, xvalue, lineWidth = NULL, lineColor=NULL,
   
   for(i in seriesIndex){
     if(!is.null(precision)) chart$x$series[[i]]$markLine$precision = precision
-    if(!is.null(lineColor)) chart$x$series[[i]]$markLine$lineStyle = list(normal=list(color=lineColor))
-    if(!is.null(lineWidth)) chart$x$series[[i]]$markLine$lineStyle = list(normal=list(width=lineWidth))
+    if(!is.null(lineColor)) chart$x$series[[i]]$markLine$lineStyle$normal = 
+        append(chart$x$series[[i]]$markLine$lineStyle$normal,list(color=lineColor))
+    if(!is.null(lineWidth)) chart$x$series[[i]]$markLine$lineStyle$normal = 
+        append(chart$x$series[[i]]$markLine$lineStyle$normal,list(width=lineWidth))
     
     chart$x$series[[i]]$markLine$data = 
       append(chart$x$series[[i]]$markLine$data,
@@ -116,8 +120,10 @@ eMarkLine = function(chart, startPoint, endPoint, name = '',
   
 
   if(!is.null(precision)) chart$x$series[[seriesIndex]]$markLine$precision = precision
-  if(!is.null(lineColor)) chart$x$series[[seriesIndex]]$markLine$lineStyle = list(normal=list(color=lineColor))
-  if(!is.null(lineWidth)) chart$x$series[[seriesIndex]]$markLine$lineStyle = list(normal=list(width=lineWidth))
+  if(!is.null(lineColor)) chart$x$series[[i]]$markLine$lineStyle$normal = 
+    append(chart$x$series[[i]]$markLine$lineStyle$normal,list(color=lineColor))
+  if(!is.null(lineWidth)) chart$x$series[[i]]$markLine$lineStyle$normal = 
+    append(chart$x$series[[i]]$markLine$lineStyle$normal,list(width=lineWidth))
   chart$x$series[[seriesIndex]]$markLine$data = 
     append(chart$x$series[[seriesIndex]]$markLine$data,
            tmpOptDat
