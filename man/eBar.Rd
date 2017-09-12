@@ -144,3 +144,4 @@ dat <- cut(rnorm(1000), -4:4)
 eBar(dat)
 
 }
+

@@ -13,3 +13,4 @@ This dataset comes from published articles of cos.name.
 And use the Chinese word segmentation package(jiebaR) to generate the word data.frame.
 }
 \keyword{datasets}
+

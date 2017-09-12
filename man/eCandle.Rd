@@ -121,3 +121,4 @@ mat = rbind(c(2286.33,2299.99,2281.9,2309.39),
 rownames(mat) = Sys.Date() - (16:1)
 eCandle(mat)
 }
+

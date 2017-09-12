@@ -34,3 +34,4 @@ ECharts style 力导向图 graph visulize the social network matrix data.
 testData <- matrix(1:25, nrow=5) #测试中文
 eForce(testData)
 }
+

@@ -9,3 +9,4 @@ eOption(...)
 \description{
 Set recharts general option
 }
+

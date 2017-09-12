@@ -56,3 +56,4 @@ eMarkPoint(chart, type=c('max','min'),valueIndex = 1)
 eMarkPoint(chart, dat = data.frame(2:3,rep(200,2)),
            type=c('max','min'),valueIndex = 1)
 }
+

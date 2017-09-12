@@ -9,3 +9,4 @@ eDataZoom(...)
 \description{
 Set recharts x dataZoom option
 }
+

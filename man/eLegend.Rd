@@ -9,3 +9,4 @@ eLegend(...)
 \description{
 Set recharts legend option
 }
+
