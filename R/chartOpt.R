@@ -878,3 +878,61 @@ optionSet <- function(chart, ...){
 	)
 	chart
 }
+
+
+
+eGridSet = function(chart, ...)
+{
+  
+  settings <- list(...)$optionList
+  #print(settings)
+  if (length(settings) == 0){
+    return(FALSE)
+  }
+
+  usedSettings = c("show", "left", "right", "top", "bottom", 
+                   "width", "height", "backgroudColor", "borderColor")
+  unusedSettings <- setdiff(names(settings), usedSettings)
+  if (length(unusedSettings)>0){
+    wm_1 <- paste("unused calculable setting inputs: ", paste(unusedSettings, collapse=","), ".", sep="")
+    wm_2 <- paste("Acceptable calculable set: ", paste( usedSettings, collapse=", "), ".", sep="")
+    warning(paste(wm_1, wm_2, sep="\n\r"))
+  }
+  if (!is.null(settings$show)){
+    chart$x$grid[[1]]$show = ifelse(settings$show, TRUE, FALSE)
+  }
+  
+  if (!is.null(settings$left)){
+    chart$x$grid[[1]]$left = as.character(settings$left)
+  }
+  
+  if (!is.null(settings$right)){
+    chart$x$grid[[1]]$right = as.character(settings$right)
+  }
+  
+  if (!is.null(settings$top)){
+    chart$x$grid[[1]]$top = as.character(settings$top)
+  }
+  
+  if (!is.null(settings$bottom)){
+    chart$x$grid[[1]]$bottom = as.character(settings$bottom)
+  }
+  
+  if (!is.null(settings$width)){
+    chart$x$grid[[1]]$width = as.character(settings$width)
+  }
+  
+  if (!is.null(settings$height)){
+    chart$x$grid[[1]]$height = as.character(settings$height)
+  }
+  
+  if (!is.null(settings$backgroudColor)){
+    chart$x$grid[[1]]$backgroudColor = as.character(settings$backgroudColor)
+  }
+  
+  if (!is.null(settings$borderColor)){
+    chart$x$grid[[1]]$borderColor = as.character(settings$borderColor)
+  }
+  
+  chart
+}

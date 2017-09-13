@@ -127,12 +127,21 @@ eTheme = function(...){
 }
 
 
+#' Set recharts grid option
+#' @export
+#'
+eGrid = function(...){
+  elements <- list(...)
+  structure(elements, class ="option")
+}
+
+
 "setFunctionName" <- function(e2name){
 	e2name <- strstrip(e2name)
 	functionName = gsub("\\(.*", "", e2name)
 	#print(functionName)
 	setFuncList <- c("eOption", "eTitle", "eToolbox", "eCalculable", "eLegend", "eTooltip", "eDataRange",
-		"eAxis.X", "eAxis.Y", "ePolar", "eDataZoom", "eTheme", "option")
+		"eAxis.X", "eAxis.Y", "ePolar", "eDataZoom", "eTheme", "option", 'eGrid')
 	if (!functionName %in% setFuncList){
 		stop(paste("unspported eCharts setting function inputs", functionName))
 		return(FALSE)
@@ -228,6 +237,12 @@ eTheme = function(...){
 				class(e2) <- "list"
 				return(optionSet(e1, optionList=e2))
 			}
+		},
+		eGrid = {
+		  if ("echarts" %in% class(e1) & is.option(e2)){
+		    class(e2) <- "list"
+		    return(eGridSet(e1, optionList=e2))
+		  }
 		}
 	)
 }
