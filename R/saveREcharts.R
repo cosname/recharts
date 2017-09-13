@@ -18,6 +18,15 @@ saveREcharts = function(chart, file, size = NULL, delay = 2){
     chart$height = size[2]
   }
   
-  webshot::webshot(tmpFile,file,vwidth = chart$width, vheight = chart$height, delay =delay)
+  if(is.null(chart$width) | is.null(chart$height)){
+    webshot::webshot(tmpFile, file, selector = 'div', delay =delay)
+  }else{
+    webshot::webshot(tmpFile, file, selector = 'div',
+                     vwidth = chart$width, vheight = chart$height,
+                     delay =delay)
+  }
+  
+  
+
   
 }
