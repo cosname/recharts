@@ -89,7 +89,7 @@
 #' @examples
 #' x = runif(6)
 #' names(x) = LETTERS[1:6]
-#' ePie(x,reset_radius = c(80,120),showL = T)
+#' ePie(x,reset_radius = c(80,120),showL = TRUE)
 ePie = function(dat, namevar=NULL, datavar=NULL, size = NULL,reset_radius = c(20,100),reset_center= c("50%",200),
 	showL=FALSE,labelformatter = NULL,type=c("pie", "rose"), roseType=c("radias", "area"),
 	theme = "default", title = NULL, subtitle = NULL, title.x = "center", title.y = "top", 
