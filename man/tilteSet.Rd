@@ -20,4 +20,3 @@ The HTML code as a character string.
 \description{
 An shell function for printing of the recharts object.
 }
-

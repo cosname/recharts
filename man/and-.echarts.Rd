@@ -17,4 +17,3 @@ Merge the two ECharts into one output .
 \seealso{
 \code{\link{set}}
 }
-

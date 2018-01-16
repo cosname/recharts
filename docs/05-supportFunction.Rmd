@@ -37,3 +37,20 @@ eVLine(chart,'min',lineWidth = 5)
 eMarkLine(chart, c(1,0), c(7,2.5))
 ```
 
+## eTimeline
+
+```{r}
+x = runif(6)
+names(x) = LETTERS[1:6]
+e1 = ePie(x) + eTitle("test1")
+x = runif(6)
+names(x) = LETTERS[1:6]
+e2 = ePie(x) + eTitle("test2")
+x = runif(6)
+names(x) = LETTERS[1:6]
+e3 = ePie(x) + eTitle("test3")
+x = runif(6)
+names(x) = LETTERS[1:6]
+e4 = ePie(x) + eTitle("test4")
+eTimeline(e1,e2,e3,e4)
+```

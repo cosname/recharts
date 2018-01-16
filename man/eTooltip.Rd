@@ -9,4 +9,3 @@ eTooltip(...)
 \description{
 Set recharts tooltip option
 }
-

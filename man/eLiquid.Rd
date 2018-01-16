@@ -101,4 +101,3 @@ You are recommended to use lazyPlot function for interactive chart
 eLiquid(0.6)
 eLiquid(0.6,wave = 6)
 }
-

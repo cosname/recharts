@@ -9,4 +9,3 @@ eAxis.Y(...)
 \description{
 Set recharts y Axis option
 }
-

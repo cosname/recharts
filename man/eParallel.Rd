@@ -125,4 +125,3 @@ axisList = list(
 eParallel(head(parallelDf, 20), series=~groupName, axisList = axisList)
 
 }
-

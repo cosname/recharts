@@ -9,4 +9,3 @@ escapeData(data, i, colnames)
 \description{
 importFrom DT escapeData
 }
-

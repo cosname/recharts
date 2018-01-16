@@ -12,4 +12,3 @@ is.option(x)
 \description{
 Reports whether x is a option object
 }
-
