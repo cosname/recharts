@@ -5,35 +5,33 @@
 
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title>A Minimal Book Example</title>
-  <meta name="description" content="This is a minimal example of using the bookdown package to write a book. The output format for this example is bookdown::gitbook.">
-  <meta name="generator" content="bookdown 0.4 and GitBook 2.6.7">
+  <title></title>
+  <meta name="description" content="">
+  <meta name="generator" content="bookdown 0.5 and GitBook 2.6.7">
 
-  <meta property="og:title" content="A Minimal Book Example" />
+  <meta property="og:title" content="" />
   <meta property="og:type" content="book" />
   
   
-  <meta property="og:description" content="This is a minimal example of using the bookdown package to write a book. The output format for this example is bookdown::gitbook." />
-  <meta name="github-repo" content="rstudio/bookdown-demo" />
+  
+  
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="A Minimal Book Example" />
+  <meta name="twitter:title" content="" />
   
-  <meta name="twitter:description" content="This is a minimal example of using the bookdown package to write a book. The output format for this example is bookdown::gitbook." />
+  
   
 
-<meta name="author" content="Yihui Xie">
 
 
-<meta name="date" content="2017-08-04">
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black">
   
   
-
-<link rel="next" href="intro.html">
+<link rel="prev" href="intro.html">
+<link rel="next" href="interface.html">
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
@@ -48,8 +46,8 @@
 
 
 <script src="libs/htmlwidgets-0.9/htmlwidgets.js"></script>
-<script src="libs/echarts-3.3.1/echarts.min.js"></script>
-<script src="libs/echarts-3.3.1/echarts-wordcloud.min.js"></script>
+<script src="libs/echarts-4.0.0/echarts.min.js"></script>
+<script src="libs/echarts-4.0.0/echarts-wordcloud.min.js"></script>
 <script src="libs/d3-3.0.1/d3.v3.min.js"></script>
 <script src="libs/echarts_shapeFile-3.2.2/china.js"></script>
 <script src="libs/echarts_shapeFile-3.2.2/provinceShape.js"></script>
@@ -116,43 +114,48 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
       <nav role="navigation">
 
 <ul class="summary">
-<li><a href="./">A Minimal Book Example</a></li>
+<li><a href="./">recharts: R interface to ECharts</a></li>
 
 <li class="divider"></li>
-<li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> Prerequisites</a></li>
-<li class="chapter" data-level="2" data-path="intro.html"><a href="intro.html"><i class="fa fa-check"></i><b>2</b> recharts介绍</a></li>
-<li class="chapter" data-level="3" data-path="recharts.html"><a href="recharts.html"><i class="fa fa-check"></i><b>3</b> recharts</a></li>
-<li class="chapter" data-level="4" data-path="rechartsinstallation.html"><a href="rechartsinstallation.html"><i class="fa fa-check"></i><b>4</b> recharts的安装(Installation)</a></li>
-<li class="chapter" data-level="5" data-path="interface.html"><a href="interface.html"><i class="fa fa-check"></i><b>5</b> 案例及接口</a><ul>
-<li class="chapter" data-level="5.1" data-path="interface.html"><a href="interface.html#echartsexample"><i class="fa fa-check"></i><b>5.1</b> 官网案例(echartsExample)</a><ul>
-<li class="chapter" data-level="5.1.1" data-path="interface.html"><a href="interface.html#section-5.1.1"><i class="fa fa-check"></i><b>5.1.1</b> 官网案例</a></li>
-<li class="chapter" data-level="5.1.2" data-path="interface.html"><a href="interface.html#jscode"><i class="fa fa-check"></i><b>5.1.2</b> JS代码案例</a></li>
+<li class="chapter" data-level="1" data-path="intro.html"><a href="intro.html"><i class="fa fa-check"></i><b>1</b> recharts介绍</a></li>
+<li class="chapter" data-level="2" data-path="recharts.html"><a href="recharts.html"><i class="fa fa-check"></i><b>2</b> recharts</a><ul>
+<li class="chapter" data-level="2.1" data-path="recharts.html"><a href="recharts.html#rechartsinstallation"><i class="fa fa-check"></i><b>2.1</b> recharts的安装(Installation)</a></li>
 </ul></li>
-<li class="chapter" data-level="5.2" data-path="interface.html"><a href="interface.html#replot"><i class="fa fa-check"></i><b>5.2</b> 从R对象中绘图(ePlot)</a><ul>
-<li class="chapter" data-level="5.2.1" data-path="interface.html"><a href="interface.html#section-5.2.1"><i class="fa fa-check"></i><b>5.2.1</b> 构建基本对象</a></li>
-<li class="chapter" data-level="5.2.2" data-path="interface.html"><a href="interface.html#section-5.2.2"><i class="fa fa-check"></i><b>5.2.2</b> 线柱混合</a></li>
+<li class="chapter" data-level="3" data-path="interface.html"><a href="interface.html"><i class="fa fa-check"></i><b>3</b> 案例及接口</a><ul>
+<li class="chapter" data-level="3.1" data-path="interface.html"><a href="interface.html#echartsexample"><i class="fa fa-check"></i><b>3.1</b> 官网案例(echartsExample)</a><ul>
+<li class="chapter" data-level="3.1.1" data-path="interface.html"><a href="interface.html#section-3.1.1"><i class="fa fa-check"></i><b>3.1.1</b> 官网案例</a></li>
+<li class="chapter" data-level="3.1.2" data-path="interface.html"><a href="interface.html#jscode"><i class="fa fa-check"></i><b>3.1.2</b> JS代码案例</a></li>
+</ul></li>
+<li class="chapter" data-level="3.2" data-path="interface.html"><a href="interface.html#replot"><i class="fa fa-check"></i><b>3.2</b> 从R对象中绘图(ePlot)</a><ul>
+<li class="chapter" data-level="3.2.1" data-path="interface.html"><a href="interface.html#section-3.2.1"><i class="fa fa-check"></i><b>3.2.1</b> 构建基本对象</a></li>
+<li class="chapter" data-level="3.2.2" data-path="interface.html"><a href="interface.html#section-3.2.2"><i class="fa fa-check"></i><b>3.2.2</b> 线柱混合</a></li>
 </ul></li>
 </ul></li>
-<li class="chapter" data-level="6" data-path="baseFunction.html"><a href="baseFunction.html"><i class="fa fa-check"></i><b>6</b> 基本绘图函数</a><ul>
-<li class="chapter" data-level="6.1" data-path="baseFunction.html"><a href="baseFunction.html#section-6.1"><i class="fa fa-check"></i><b>6.1</b> 散点图</a></li>
-<li class="chapter" data-level="6.2" data-path="baseFunction.html"><a href="baseFunction.html#section-6.2"><i class="fa fa-check"></i><b>6.2</b> 线图</a></li>
-<li class="chapter" data-level="6.3" data-path="baseFunction.html"><a href="baseFunction.html#section-6.3"><i class="fa fa-check"></i><b>6.3</b> 条形图</a></li>
-<li class="chapter" data-level="6.4" data-path="baseFunction.html"><a href="baseFunction.html#section-6.4"><i class="fa fa-check"></i><b>6.4</b> 饼图</a></li>
+<li class="chapter" data-level="4" data-path="baseFunction.html"><a href="baseFunction.html"><i class="fa fa-check"></i><b>4</b> 基本绘图函数</a><ul>
+<li class="chapter" data-level="4.1" data-path="baseFunction.html"><a href="baseFunction.html#section-4.1"><i class="fa fa-check"></i><b>4.1</b> 散点图</a></li>
+<li class="chapter" data-level="4.2" data-path="baseFunction.html"><a href="baseFunction.html#section-4.2"><i class="fa fa-check"></i><b>4.2</b> 线图</a></li>
+<li class="chapter" data-level="4.3" data-path="baseFunction.html"><a href="baseFunction.html#section-4.3"><i class="fa fa-check"></i><b>4.3</b> 条形图</a></li>
+<li class="chapter" data-level="4.4" data-path="baseFunction.html"><a href="baseFunction.html#section-4.4"><i class="fa fa-check"></i><b>4.4</b> 饼图</a></li>
 </ul></li>
-<li class="chapter" data-level="7" data-path="nbFunction.html"><a href="nbFunction.html"><i class="fa fa-check"></i><b>7</b> 高级绘图函数</a><ul>
-<li class="chapter" data-level="7.1" data-path="nbFunction.html"><a href="nbFunction.html#section-7.1"><i class="fa fa-check"></i><b>7.1</b> 堆砌区域图</a></li>
-<li class="chapter" data-level="7.2" data-path="nbFunction.html"><a href="nbFunction.html#k"><i class="fa fa-check"></i><b>7.2</b> K线图</a></li>
-<li class="chapter" data-level="7.3" data-path="nbFunction.html"><a href="nbFunction.html#section-7.3"><i class="fa fa-check"></i><b>7.3</b> 漏斗图</a></li>
-<li class="chapter" data-level="7.4" data-path="nbFunction.html"><a href="nbFunction.html#section-7.4"><i class="fa fa-check"></i><b>7.4</b> 平行坐标</a></li>
-<li class="chapter" data-level="7.5" data-path="nbFunction.html"><a href="nbFunction.html#section-7.5"><i class="fa fa-check"></i><b>7.5</b> 雷达图</a></li>
-<li class="chapter" data-level="7.6" data-path="nbFunction.html"><a href="nbFunction.html#section-7.6"><i class="fa fa-check"></i><b>7.6</b> 水球图</a></li>
-<li class="chapter" data-level="7.7" data-path="nbFunction.html"><a href="nbFunction.html#section-7.7"><i class="fa fa-check"></i><b>7.7</b> 词云</a></li>
-<li class="chapter" data-level="7.8" data-path="nbFunction.html"><a href="nbFunction.html#section-7.8"><i class="fa fa-check"></i><b>7.8</b> 地图</a></li>
+<li class="chapter" data-level="5" data-path="nbFunction.html"><a href="nbFunction.html"><i class="fa fa-check"></i><b>5</b> 高级绘图函数</a><ul>
+<li class="chapter" data-level="5.1" data-path="nbFunction.html"><a href="nbFunction.html#section-5.1"><i class="fa fa-check"></i><b>5.1</b> 堆砌区域图</a></li>
+<li class="chapter" data-level="5.2" data-path="nbFunction.html"><a href="nbFunction.html#k"><i class="fa fa-check"></i><b>5.2</b> K线图</a></li>
+<li class="chapter" data-level="5.3" data-path="nbFunction.html"><a href="nbFunction.html#section-5.3"><i class="fa fa-check"></i><b>5.3</b> 漏斗图</a></li>
+<li class="chapter" data-level="5.4" data-path="nbFunction.html"><a href="nbFunction.html#section-5.4"><i class="fa fa-check"></i><b>5.4</b> 平行坐标</a></li>
+<li class="chapter" data-level="5.5" data-path="nbFunction.html"><a href="nbFunction.html#section-5.5"><i class="fa fa-check"></i><b>5.5</b> 雷达图</a></li>
+<li class="chapter" data-level="5.6" data-path="nbFunction.html"><a href="nbFunction.html#section-5.6"><i class="fa fa-check"></i><b>5.6</b> 水球图</a></li>
+<li class="chapter" data-level="5.7" data-path="nbFunction.html"><a href="nbFunction.html#section-5.7"><i class="fa fa-check"></i><b>5.7</b> 桑基图</a></li>
+<li class="chapter" data-level="5.8" data-path="nbFunction.html"><a href="nbFunction.html#section-5.8"><i class="fa fa-check"></i><b>5.8</b> 词云</a></li>
+<li class="chapter" data-level="5.9" data-path="nbFunction.html"><a href="nbFunction.html#section-5.9"><i class="fa fa-check"></i><b>5.9</b> 地图</a></li>
 </ul></li>
-<li class="chapter" data-level="8" data-path="supportFunction.html"><a href="supportFunction.html"><i class="fa fa-check"></i><b>8</b> 补充函数</a><ul>
-<li class="chapter" data-level="8.1" data-path="supportFunction.html"><a href="supportFunction.html#markpoint"><i class="fa fa-check"></i><b>8.1</b> MarkPoint</a></li>
+<li class="chapter" data-level="6" data-path="supportFunction.html"><a href="supportFunction.html"><i class="fa fa-check"></i><b>6</b> 补充函数</a><ul>
+<li class="chapter" data-level="6.1" data-path="supportFunction.html"><a href="supportFunction.html#markpoint"><i class="fa fa-check"></i><b>6.1</b> MarkPoint</a></li>
+<li class="chapter" data-level="6.2" data-path="supportFunction.html"><a href="supportFunction.html#hline"><i class="fa fa-check"></i><b>6.2</b> HLine</a></li>
+<li class="chapter" data-level="6.3" data-path="supportFunction.html"><a href="supportFunction.html#vline"><i class="fa fa-check"></i><b>6.3</b> VLine</a></li>
+<li class="chapter" data-level="6.4" data-path="supportFunction.html"><a href="supportFunction.html#markline"><i class="fa fa-check"></i><b>6.4</b> MarkLine</a></li>
+<li class="chapter" data-level="6.5" data-path="supportFunction.html"><a href="supportFunction.html#etimeline"><i class="fa fa-check"></i><b>6.5</b> eTimeline</a></li>
 </ul></li>
-<li class="chapter" data-level="9" data-path="help.html"><a href="help.html"><i class="fa fa-check"></i><b>9</b> Introduction</a></li>
+<li class="chapter" data-level="7" data-path="help.html"><a href="help.html"><i class="fa fa-check"></i><b>7</b> Introduction</a></li>
 <li class="divider"></li>
 <li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
 
@@ -165,7 +168,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
       <div class="body-inner">
         <div class="book-header" role="navigation">
           <h1>
-            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">A Minimal Book Example</a>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./"></a>
           </h1>
         </div>
 
@@ -173,27 +176,28 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="header">
-<h1 class="title">A Minimal Book Example</h1>
-<h4 class="author"><em>Yihui Xie</em></h4>
-<h4 class="date"><em>2017-08-04</em></h4>
-</div>
-<div id="prerequisites" class="section level1">
-<h1><span class="header-section-number">章节 1</span> Prerequisites</h1>
-<p>This is a <em>sample</em> book written in <strong>Markdown</strong>. You can use anything that Pandoc’s Markdown supports, e.g., a math equation <span class="math inline">\(a^2 + b^2 = c^2\)</span>.</p>
-<p>For now, you have to install the development versions of <strong>bookdown</strong> from Github:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">devtools::<span class="kw">install_github</span>(<span class="st">&quot;rstudio/bookdown&quot;</span>)</code></pre></div>
-<p>Remember each Rmd file contains one and only one chapter, and a chapter is defined by the first-level heading <code>#</code>.</p>
-<p>To compile this example to PDF, you need to install XeLaTeX.</p>
+<div id="recharts" class="section level1">
+<h1><span class="header-section-number">章节 2</span> recharts</h1>
+<p><a href="https://travis-ci.org/cosname/recharts"><img src="https://travis-ci.org/cosname/recharts.png" alt="Build Status" /></a></p>
+<p>A R interface to <a href="https://github.com/ecomfe/echarts">ECharts</a> for data visualization.</p>
+<p>recharts 提供了百度开源可视化js框架ECharts(4.0.0)的R语言接口，现提供的图形展示接口包括：地图（eMap），柱状图（eBar），折线图（eLine）， 雷达图（eRadar），散点图（ePoints），漏斗图（eFunnel）以及万恶的饼图（ePie）。 同时计划对力导向图（<a href="http://echarts.baidu.com/demo.html#graph-force">eForce</a>）， 时间序列散点图(<a href="http://echarts.baidu.com/demo.html#graph-life-expectancy">ePoints_timeSeries</a>)， 矩阵树图(<a href="http://echarts.baidu.com/demo.html#treemap-disk">eTree</a>)， 平行坐标图(<a href="http://echarts.baidu.com/demo.html#parallel-aqi">eParallel</a>) 和桑基图（<a href="http://echarts.baidu.com/demo.html#sankey-energy">eSankey</a>）图逐一实现。</p>
+<div id="rechartsinstallation" class="section level2">
+<h2><span class="header-section-number">2.1</span> recharts的安装(Installation)</h2>
+<p>recharts包的源代码在<a href="https://github.com/cosname/recharts">Github/cosname/recharts</a>上提供下载与安装，安装需要使用以下代码：</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">require</span>(devtools)
+devtools::<span class="kw">install_github</span>(<span class="st">&quot;cosname/recharts&quot;</span>)</code></pre></div>
+<p>目前计划任务列表在<a href="https://github.com/cosname/recharts/issues/43" class="uri">https://github.com/cosname/recharts/issues/43</a></p>
+<p>欢迎贡献issue以及贡献代码</p>
 
+</div>
 </div>
             </section>
 
           </div>
         </div>
       </div>
-
-<a href="intro.html" class="navigation navigation-next navigation-unique" aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="intro.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="interface.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
@@ -204,7 +208,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
 <script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
 <script>
-require(["gitbook"], function(gitbook) {
+gitbook.require(["gitbook"], function(gitbook) {
 gitbook.start({
 "sharing": {
 "github": false,
@@ -222,7 +226,7 @@ gitbook.start({
 "size": 2
 },
 "edit": {
-"link": "https://github.com/rstudio/bookdown-demo/edit/master/index.Rmd",
+"link": "https://github.com/cosname/recharts/edit/dev/docs/01-rechartsIntro.Rmd",
 "text": "Edit"
 },
 "download": null,
@@ -233,17 +237,6 @@ gitbook.start({
 });
 </script>
 
-<!-- dynamically load mathjax for compatibility with self-contained -->
-<script>
-  (function () {
-    var script = document.createElement("script");
-    script.type = "text/javascript";
-    script.src  = "https://cdn.bootcss.com/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML";
-    if (location.protocol !== "file:" && /^https?:/.test(script.src))
-      script.src  = script.src.replace(/^https?:/, '');
-    document.getElementsByTagName("head")[0].appendChild(script);
-  })();
-</script>
 </body>
 
 </html>
