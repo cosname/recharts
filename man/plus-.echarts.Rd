@@ -17,3 +17,4 @@ Modify a recharts by adding on new components.
 \seealso{
 \code{\link{set}}
 }
+

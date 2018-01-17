@@ -120,3 +120,4 @@ iris[1:20, "Species"] ="redFlower"
 ePoints(iris[,3:5], xvar=~Petal.Length, yvar=~Petal.Width, series=~Species, theme=2)
 
 }
+

@@ -115,3 +115,4 @@ You are recommended to use lazyPlot function for interactive chart
 eWordcloud(wordFreqDf_chs, namevar = ~Word, datavar = ~Freq)
 
 }
+

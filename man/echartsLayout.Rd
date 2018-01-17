@@ -12,3 +12,4 @@ echartsLayout(multiEcharts)
 \description{
 Use the same layout orgnization as original grDevice layout function.
 }
+

@@ -9,3 +9,4 @@ eCalculable(...)
 \description{
 Set recharts drag-recaluculation option
 }
+

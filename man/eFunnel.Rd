@@ -117,3 +117,4 @@ funnelDf <- data.frame(namevar = c("Exposure", "Click", "Visit", "Query", "Buy")
 eFunnel(funnelDf, ~namevar, ~datavar)
 
 }
+

@@ -49,3 +49,4 @@ names(x) = LETTERS[1:6]
 e4 = ePie(x) + eTitle("test4")
 eTimeline(e1,e2,e3,e4)
 }
+

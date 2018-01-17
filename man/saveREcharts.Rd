@@ -19,3 +19,4 @@ saveREcharts(chart, file, size = NULL, delay = 2)
 This function creates an HTML widget to display matrix, data.frame and 
 factor array, using the JavaScript library ECharts3.
 }
+
