@@ -78,7 +78,7 @@
 
 
 ePoints = function(dat, xvar=NULL, yvar=NULL, series=NULL, size = NULL,   power=2, precision=2,
-	theme = "default", title = NULL, subtitle = NULL, title.x = "center", title.y = "top", 
+	theme = "customed", title = NULL, subtitle = NULL, title.x = "center", title.y = "top", 
 	legend = TRUE, legend.data=NULL, legend.x = "left", legend.y= "top", legend.orient="horizontal", 
 	toolbox = TRUE, toolbox.orient = "horizontal", toolbox.x = "right", toolbox.y = "top", 
 	dataView = TRUE, readOnly = FALSE, mark=TRUE, dataZoom=TRUE, magicType=FALSE,
@@ -229,6 +229,10 @@ ePoints = function(dat, xvar=NULL, yvar=NULL, series=NULL, size = NULL,   power=
 		}
 	)
 	chart = .addClass(chart, "ePoints")
+	
+	# add theme dependencies
+	chart = addThemeDependencies(chart)
+	
 	chart
 }
 

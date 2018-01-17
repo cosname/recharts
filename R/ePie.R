@@ -9,6 +9,14 @@
 #'   data.frame data input.
 #' @param datavar an "formula" object: Associates the value of variable
 #'   with symbol color, e.g. \code{datavar = ~valueName}. 
+#' @param reset_radius  an objects of radius range of the graph,which has default value:c(20,100),
+#'   you can modify the specific range of radius by setting the vector:reset_radius = c(a,b).
+#' @param reset_center  an objects of the position of the graph,which has default valye:c("50%",200),
+#'   you can modify the specific range of radius by setting the vector such aas:reset_center = c("40",150).
+#' @param showL logitcal ,if T the data infomation should be shown in the middle of the graph,otherwise the 
+#'   middle of the graph should be empty.
+#' @param labelformatter an character object to control the specific content shown in the middle of the graph,
+#'   e.g. \code{labelformatter = "{b}:{c}"}.
 #' @param size an array of html widget width and height(either numeric pixels 
 #'   or percentage could be accepted): e.g. size = c(1024, 768).
 #' @param type an option of c("pie", "rose"), the pie type of diplay widgets.
@@ -78,7 +86,12 @@
 #' ePie(x) + eTitle("test")
 #' testData <- head(mapTestData_chs, 5)
 #' ePie(testData, ~stdName, ~val1)
-ePie = function(dat, namevar=NULL, datavar=NULL, size = NULL,  type=c("pie", "rose"), roseType=c("radias", "area"),
+#' @examples
+#' x = runif(6)
+#' names(x) = LETTERS[1:6]
+#' ePie(x,reset_radius = c(80,120),showL = TRUE)
+ePie = function(dat, namevar=NULL, datavar=NULL, size = NULL,reset_radius = c(20,100),reset_center= c("50%",200),
+	showL=FALSE,labelformatter = NULL,type=c("pie", "rose"), roseType=c("radias", "area"),
 	theme = "default", title = NULL, subtitle = NULL, title.x = "center", title.y = "top", 
 	legend = TRUE, legend.x = "left", legend.y= "top", legend.orient="horizontal", 
 	toolbox = TRUE, toolbox.orient = "horizontal", toolbox.x = "right", toolbox.y = "top", 
@@ -139,12 +152,12 @@ ePie = function(dat, namevar=NULL, datavar=NULL, size = NULL,  type=c("pie", "ro
 	
 	#showLabelLine=showLabel
 	#now we don't support the multiple graph in one canvas
+
 	opt$series = list(
 		list(
-			name = paste(type, "chart"),
 			type = "pie",
-			radius = c(20,110),
-			center = c("50%", 200),
+			radius = reset_radius,
+			center = reset_center,
 			roseType = ifelse(type=="rose", roseType, ""),
 			itemStyle = list(
 				normal = list(
@@ -154,6 +167,20 @@ ePie = function(dat, namevar=NULL, datavar=NULL, size = NULL,  type=c("pie", "ro
 				emphasis = list(
 					label = list( show = !showLabel),
 					labelLine = list( show = !showLabel)
+				)
+			),
+			label = list(
+			    normal = list(
+				    show = showL,
+				    position = 'center',
+				    formatter = labelformatter
+			    ),
+			      emphasis = list(
+					 show = showL,
+					textStyle = list(
+						fontSize = 30,
+						 fontWeight = 'bold'
+					)
 				)
 			),
 			data = datList
@@ -171,4 +198,6 @@ ePie = function(dat, namevar=NULL, datavar=NULL, size = NULL,  type=c("pie", "ro
 	chart = .addClass(chart, "ePie")
 	chart
 }
+
+
 

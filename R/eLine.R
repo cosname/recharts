@@ -9,6 +9,10 @@
 #'   data.frame data input.
 #' @param series an "formula" object: Associates the levels of variable
 #'   with symbol color, e.g. \code{series = ~groupName}
+#' @param smooth wether the line should be smoothy or not.
+#' @param symbol Icon types provided by ECharts includes 'circle', 'rect', 'roundRect', 'triangle', 'diamond', 'pin', 'arrow'
+#' @param symbolSize symbol size. It can be set to single numbers like 10, or use an array to represent width and height. For example, [20, 10] means symbol width is 20, and height is10.
+#' @param z z -level
 #' @param size an array of html widget width and height(either numeric pixels 
 #'   or percentage could be accepted): e.g. size = c(1024, 768).
 #' @param theme an object of theme name. see(\url{http://datatables.net/extensions/index}) for detail.
@@ -83,7 +87,8 @@
 #'
 #' 
 
-eLine = function(dat, xvar=NULL, yvar=NULL, series=NULL, size = NULL, horiz = FALSE,
+eLine = function(dat, xvar=NULL, yvar=NULL, series=NULL, size = NULL, horiz = FALSE, smooth = NULL,
+                 symbol = NULL, symbolSize = NULL, z=NULL,
 	theme = "default", title = NULL, subtitle = NULL, title.x = "center", title.y = "top", 
 	legend = TRUE, legend.x = "left", legend.y= "top", legend.orient="horizontal", 
 	toolbox = TRUE, toolbox.orient = "horizontal", toolbox.x = "right", toolbox.y = "top", 
@@ -180,8 +185,26 @@ eLine = function(dat, xvar=NULL, yvar=NULL, series=NULL, size = NULL, horiz = FA
         } else {
             warning('You can set series:data with dat.')
         }
+      
+        if(!is.null(smooth)){
+          opt$series[[i]]$smooth=smooth
+        }
+      
+        if(!is.null(symbol)){
+          opt$series[[i]]$symbol=symbol
+        }
+        
+        if(!is.null(symbolSize)){
+          opt$series[[i]]$symbolSize=symbolSize
+        }
+      
+        if(!is.null(z)){
+          opt$series[[i]]$z=z
+        }
     }
-
+  
+	
+	
 	if(horiz==TRUE) {
 		tmp = opt$xAxis
 		opt$xAxis = opt$yAxis
@@ -197,6 +220,10 @@ eLine = function(dat, xvar=NULL, yvar=NULL, series=NULL, size = NULL, horiz = FA
 		}
 	)
 	chart = .addClass(chart, "eLine")
+	
+	# add theme dependencies
+	chart = addThemeDependencies(chart)
+	
 	chart
 }
 
@@ -337,7 +364,8 @@ eArea = function(dat, xvar=NULL, yvar=NULL, series=NULL, size = NULL, horiz = FA
 			title.x = title.x, title.y = title.y)
 	
 	opt$calculable = calculableSet(calculable = calculable)
-
+	opt$theme = themeSet(theme = theme)
+	
 	# opt$tooltip format, not open to user now.
 	opt$tooltip = tooltipSet( tooltip=tooltip,trigger=tooltip.trigger,
 			formatter = "", islandFormatter="")
@@ -411,6 +439,9 @@ eArea = function(dat, xvar=NULL, yvar=NULL, series=NULL, size = NULL, horiz = FA
 		}
 	)
 	chart = .addClass(chart, "eArea")
+	# add theme dependencies
+	chart = addThemeDependencies(chart)
+	
 	chart
 
 }

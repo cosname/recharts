@@ -4,11 +4,12 @@
 \alias{ePie}
 \title{Create an HTML pie charts widget using the ECharts(version:3.2.2) library}
 \usage{
-ePie(dat, namevar = NULL, datavar = NULL, size = NULL, type = c("pie",
-  "rose"), roseType = c("radias", "area"), theme = "default",
-  title = NULL, subtitle = NULL, title.x = "center", title.y = "top",
-  legend = TRUE, legend.x = "left", legend.y = "top",
-  legend.orient = "horizontal", toolbox = TRUE,
+ePie(dat, namevar = NULL, datavar = NULL, size = NULL,
+  reset_radius = c(20, 100), reset_center = c("50\%", 200), showL = FALSE,
+  labelformatter = NULL, type = c("pie", "rose"), roseType = c("radias",
+  "area"), theme = "default", title = NULL, subtitle = NULL,
+  title.x = "center", title.y = "top", legend = TRUE, legend.x = "left",
+  legend.y = "top", legend.orient = "horizontal", toolbox = TRUE,
   toolbox.orient = "horizontal", toolbox.x = "right", toolbox.y = "top",
   dataView = TRUE, readOnly = FALSE, mark = TRUE, dataZoom = FALSE,
   magicType = FALSE, tooltip = TRUE, tooltip.trigger = "item",
@@ -28,6 +29,18 @@ with symbol color, e.g. \code{datavar = ~valueName}.}
 
 \item{size}{an array of html widget width and height(either numeric pixels 
 or percentage could be accepted): e.g. size = c(1024, 768).}
+
+\item{reset_radius}{an objects of radius range of the graph,which has default value:c(20,100),
+you can modify the specific range of radius by setting the vector:reset_radius = c(a,b).}
+
+\item{reset_center}{an objects of the position of the graph,which has default valye:c("50%",200),
+you can modify the specific range of radius by setting the vector such aas:reset_center = c("40",150).}
+
+\item{showL}{logitcal ,if T the data infomation should be shown in the middle of the graph,otherwise the 
+middle of the graph should be empty.}
+
+\item{labelformatter}{an character object to control the specific content shown in the middle of the graph,
+e.g. \code{labelformatter = "{b}:{c}"}.}
 
 \item{type}{an option of c("pie", "rose"), the pie type of diplay widgets.}
 

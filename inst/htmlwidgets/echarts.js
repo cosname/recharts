@@ -3,16 +3,20 @@ HTMLWidgets.widget({
   type: 'output',
 
   initialize: function(el, width, height) {
-    return echarts.init(el);
+    //return echarts.init(el);
+    return null
   },
 	
   renderValue: function(el, x, instance) {
-    instance.setOption(x, true);
+    myCharts = echarts.init(el, x.theme);
+    myCharts.setOption(x, true);
 	//instance.setTheme(eval(x.theme + "Theme"));
 
   },
 
   resize: function(el, width, height, instance) {
+    myCharts = echarts.getInstanceByDom(el);
+    myCharts.resize()
   }
 
 });

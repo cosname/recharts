@@ -9,7 +9,7 @@ eWordcloud(dat, namevar = NULL, datavar = NULL, size = c(1024, 768),
   sizeRange = c(10, 100), rotationRange = c(-90, 90), rotationStep = 45,
   gridSize = 2, shape = "pentagon", maskImage = NULL, tooltip = TRUE,
   tooltip.trigger = "item", formatter = "", axis.scale = TRUE,
-  opt = list())
+  opt = list(), theme = NULL)
 }
 \arguments{
 \item{dat}{a data object (a matrix, a data frame or a factor array)}
@@ -36,6 +36,10 @@ the tooltip trigger and tooltip formatter is available at present.
 you can modify tooltip widget after chart has been generated: 
 \code{barEchart + eTooltip(trigger = "axis")}}
 
+\item{theme}{an object of theme name. see(\url{http://datatables.net/extensions/index}) for detail.
+supported theme: \code{c("default", "vintage", "dark", "westeros", "essos", "wonderland", "walden",
+"chalk", "infographic", "macarons", "roma", "shine", "purple-passion")}}
+
 \item{xvar, yvar}{objects of class "formula" (or one that can be coerced 
 to that class):  x,y coordinates of the given data.frame colnames, e.g. 
 \code{xvar = ~xAxisName}; \code{yvar = ~yAxisName}. xvar, yvar only needed for the 
@@ -53,10 +57,6 @@ whole bar chart, if \code{unique(df[["groupName"]])} = c("a", "b", "c", "d",
 \code{stackGroup = list(c("a","b"), c("e","f"))}. And the c("a","b") and 
 c("e","f") will be stacked into two bar, and the "c" and "d" will account 
 two seperated bars.}
-
-\item{theme}{an object of theme name. see(\url{http://datatables.net/extensions/index}) for detail.
-supported theme: \code{c("default", "vintage", "dark", "westeros", "essos", "wonderland", "walden",
-"chalk", "infographic", "macarons", "roma", "shine", "purple-passion")}}
 
 \item{legend}{logical whether the legend widget show or not, default is TRUE.
 you can modify legend widget after chart has been generated, the legend position and 

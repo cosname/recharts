@@ -47,7 +47,7 @@ calculableSet = function(calculable)
 
 themeSet = function(theme="default")
 {
-	themeArray <- c("macarons","infographic","shiny","dark","blue","green","red","gray","helianthus","roma","mint","macarons2","sakura","default")
+	themeArray <- c("dark","infographic","macarons","roma","shine","vintage","customed")
 	if (is.numeric(theme)){
 		return_theme = themeArray[theme]
 		

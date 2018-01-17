@@ -117,6 +117,9 @@ eMap = function(dat, namevar=NULL, datavar=NULL, size = NULL, region="china", co
 	# dat=mapData;namevar = ~province; datavar = ~value + val2
 	placeName = autoArgLabel(namevar, deparse(substitute(namevar)))
 	
+	if(.Platform$OS.type != 'windows'){
+	  placeName = iconv(placeName, 'GBK', 'UTF-8')
+	}
 	# allow multiple variable input
 	# support format: ~value+val2, c("value", "val2")
 	dataName = autoArgLabel(datavar, deparse(substitute(datavar)))
@@ -194,5 +197,7 @@ eMap = function(dat, namevar=NULL, datavar=NULL, size = NULL, region="china", co
 		}
 	)
 	chart = .addClass(chart, "eMap")
+	# add theme dependencies
+	chart = addThemeDependencies(chart)
 	chart
 }

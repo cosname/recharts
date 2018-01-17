@@ -174,3 +174,11 @@ unnames = function(x){
 	names(x) = NULL
 	return(x)
 }
+
+addThemeDependencies = function(chart){
+  if(chart$x$theme != 'customed'){
+    chart$dependencies <- c(chart$dependencies,
+                            themeDependencies(chart$x$theme))
+  }
+  return(chart)
+}

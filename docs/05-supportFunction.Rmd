@@ -1,0 +1,56 @@
+# 补充函数 {#supportFunction}
+
+
+```{r echo = FALSE}
+library(recharts)
+```
+
+
+## MarkPoint
+
+```{r}
+dat <- cut(rnorm(1000), -4:4)
+chart = eLine(dat)
+eMarkPoint(chart, type=c('max','min'),valueIndex = 1)
+eMarkPoint(chart, dat = data.frame(2:3,rep(200,2)),
+         type=c('max','min'),valueIndex = 1)
+```
+
+
+## HLine
+```{r}
+chart = ePoints(iris[, 3:5], theme = 2)
+eHLine(chart,1,lineColor = 'blue')
+eHLine(chart,'min',lineWidth = 5)
+```
+
+## VLine
+```{r}
+eVLine(chart,1,lineColor = 'blue')
+eVLine(chart,'min',lineWidth = 5)
+```
+
+
+## MarkLine
+
+```{r}
+eMarkLine(chart, c(1,0), c(7,2.5))
+```
+
+## eTimeline
+
+```{r}
+x = runif(6)
+names(x) = LETTERS[1:6]
+e1 = ePie(x) + eTitle("test1")
+x = runif(6)
+names(x) = LETTERS[1:6]
+e2 = ePie(x) + eTitle("test2")
+x = runif(6)
+names(x) = LETTERS[1:6]
+e3 = ePie(x) + eTitle("test3")
+x = runif(6)
+names(x) = LETTERS[1:6]
+e4 = ePie(x) + eTitle("test4")
+eTimeline(e1,e2,e3,e4)
+```
