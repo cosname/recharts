@@ -83,25 +83,21 @@ ePlot = function(series, ext = NULL, size = NULL,
 {
   if(missing(legend.data) | is.null(legend.data)){legendData = sapply(series, function(x) x[['name']])
   }else{legendData = legend.data}
-  
+
   opt$legend = legendSet( show=legend, data=legendData, legend.x=legend.x, legend.y=legend.y, orient=legend.orient)
-  
+
   # option$title format.
   opt$title = tilteSet(title = title, subtitle=subtitle,
                        title.x = title.x, title.y = title.y)
-  
+
   opt$calculable = calculableSet(calculable = calculable)
   opt$theme = themeSet(theme = theme)
   # opt$tooltip format, not open to user now.
   opt$tooltip = tooltipSet( tooltip=tooltip,trigger=tooltip.trigger,
                             formatter = "{a} <br/>{b} : {c}", islandFormatter="")
-  
-  
- 
-
   #now we don't support the multiple graph in one canvas
-  opt$series = series
-  
+  opt$series = series 
+
   if(!is.null(ext)){
     if(!is.null(ext$xAxis)) opt$xAxis = ext$xAxis
     if(!is.null(ext$yAxis)) opt$yAxis = ext$yAxis
@@ -109,11 +105,11 @@ ePlot = function(series, ext = NULL, size = NULL,
     if(!is.null(ext$toolbox)) opt$toolbox = ext$toolbox
     if(!is.null(ext$timeline)) opt$timeline = ext$timeline
   }
-  
-  
+
+
   #jsonStr <- toJSON(opt, pretty=TRUE)
   opt$size = size
-  
+
   ### output list format
   chart = htmlwidgets::createWidget(
     'echarts', opt, width = size[1], height = size[2], package = 'recharts',
@@ -121,5 +117,5 @@ ePlot = function(series, ext = NULL, size = NULL,
       instance
     }
   )
-  chart 
+  chart
 }
