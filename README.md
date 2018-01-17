@@ -1,10 +1,12 @@
 recharts
 ========
-[![Build Status](https://travis-ci.org/taiyun/recharts.png)](https://travis-ci.org/taiyun/recharts)
+[![Build Status](https://travis-ci.org/cosname/recharts.png)](https://travis-ci.org/cosname/recharts)
 
 A R interface to [ECharts](https://github.com/ecomfe/echarts) for data visualization.
 
-recharts 提供了百度开源可视化js框架ECharts的R语言接口，现提供的图形展示接口包括：地图（eMap），柱状图（eBar），折线图（eLine），
+文档请点击：<https://recharts.cosx.org>
+
+recharts 提供了百度开源可视化js框架ECharts 4.0.0 的R语言接口，现提供的图形展示接口包括：地图（eMap），柱状图（eBar），折线图（eLine），
 雷达图（eRadar），散点图（ePoints），漏斗图（eFunnel）以及万恶的饼图（ePie）。
 同时计划对力导向图（[eForce](http://echarts.baidu.com/demo.html#graph-force)），
 时间序列散点图([ePoints_timeSeries](http://echarts.baidu.com/demo.html#graph-life-expectancy))，
@@ -13,11 +15,11 @@ recharts 提供了百度开源可视化js框架ECharts的R语言接口，现提�
 和桑基图（[eSankey](http://echarts.baidu.com/demo.html#sankey-energy)）图逐一实现。
 
 # recharts的安装(Installation)
-recharts包的源代码在[Github/taiyun/recharts](https://github.com/taiyun/recharts)上提供下载与安装，安装需要使用以下代码：
+recharts包的源代码在[Github/cosname/recharts](https://github.com/cosname/recharts)上提供下载与安装，安装需要使用以下代码：
 
 ```s
 require(devtools)
-devtools::install_github('taiyun/recharts')
+devtools::install_github('cosname/recharts')
 ```
 
 

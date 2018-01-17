@@ -27,11 +27,11 @@ cache:
 
 script:
   - # docs
-  - git checkout dev
+  - # git checkout dev
   - pwd
   - cd ./docs
   - Rscript -e "install.packages('bookdown')"
-  - Rscript -e "devtools::install_github('cosname/recharts@dev')"
+  - Rscript -e "devtools::install_github('cosname/recharts')"
   - Rscript -e "bookdown::render_book('index.Rmd', 'bookdown::gitbook')"
   - git config --global user.email "happy@langdawei.com"
   - git config --global user.name "Dawei Lang"

@@ -20,7 +20,7 @@ recharts包的源代码在[Github/cosname/recharts](https://github.com/cosname/r
 
 ```{r eval = F}
 require(devtools)
-devtools::install_github("cosname/recharts@dev")
+devtools::install_github("cosname/recharts")
 ```
 
 
