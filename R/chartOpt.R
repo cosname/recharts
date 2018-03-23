@@ -396,9 +396,6 @@ eDataRangeSet = function(chart, ...)
 	if (!is.null(settings$y)){
 		chart$x$dataRange$y = matchPos.y(settings$y)
 	}
-	if (!is.null(settings$y)){
-		chart$x$dataRange$y = matchPos.y(settings$y)
-	}
 
 	if (!is.null(settings$calculable)){
 		chart$x$dataRange$calculable = ifelse(settings$calculable, TRUE, FALSE)
