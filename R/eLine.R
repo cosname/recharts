@@ -7,6 +7,7 @@
 #'   to that class):  x,y coordinates of the given data.frame colnames, e.g. 
 #'   \code{xvar = ~xAxisName}; \code{yvar = ~yAxisName}. xvar, yvar only needed for the 
 #'   data.frame data input.
+#' @param type type : 'scatter' or 'line'
 #' @param series an "formula" object: Associates the levels of variable
 #'   with symbol color, e.g. \code{series = ~groupName}
 #' @param smooth wether the line should be smoothy or not.
@@ -87,7 +88,7 @@
 #'
 #' 
 
-eLine = function(dat, xvar=NULL, yvar=NULL, series=NULL, size = NULL, horiz = FALSE, smooth = NULL,
+eLine = function(dat, xvar=NULL, yvar=NULL,type = "scatter" ,series=NULL, size = NULL, horiz = FALSE, smooth = NULL,
                  symbol = NULL, symbolSize = NULL, z=NULL,
 	theme = "default", title = NULL, subtitle = NULL, title.x = "center", title.y = "top", 
 	legend = TRUE, legend.x = "left", legend.y= "top", legend.orient="horizontal", 
@@ -172,7 +173,7 @@ eLine = function(dat, xvar=NULL, yvar=NULL, series=NULL, size = NULL, horiz = FA
 	opt$series =  vector("list", ncol(plotData))
     for(i in 1:ncol(plotData)) {
         if(is.null(opt$series[[i]]$type)) {
-            opt$series[[i]]$type = 'line'
+            opt$series[[i]]$type = type
         }
         if(is.null(opt$series[[i]]$name)) {
             opt$series[[i]]$name = colnames(plotData)[i]
