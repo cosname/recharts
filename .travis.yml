@@ -8,14 +8,6 @@ env:
   global:
     - secure: "CwEV0N2IeRQBqD7T6uiZmqpw4orE34RDSsouoqmbyb1mWDFYXXPYofdb67YgGXchcgtlC90VhtVVJ2ea57wXpumHebFjPG5lp1OJm3S4p4O1iXiTS/33PE7sLUkotzL2aOiI5p/yYQfoF9uFoO6dFuxWxFTa0oU8OnAB46YoLWA="
 
-addons:
-  apt:
-    sources:
-    - r-packages-precise
-    packages:
-    - r-base-dev
-    - r-recommended
-
 install:
   - # "wget -q -O - http://yihui.name/xran/r-config | bash"
   - Rscript -e "if (!require('devtools')) install.packages('devtools')"
