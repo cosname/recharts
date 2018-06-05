@@ -40,7 +40,7 @@ script:
   - cp -r ../_book/* ./
   - git add --all *
   - git commit -m"Update the book" || true
-  - git push -q origin gh-pages
+  - 'if [ "$TRAVIS_PULL_REQUEST" != "false" ]; then git push -q origin gh-pages; fi'
   - cd ../..
   - # buid & check
   - Rscript -e "devtools::install_deps(dep = TRUE)"
