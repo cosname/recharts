@@ -76,10 +76,9 @@ ext = list(
       max =  25,
       interval =  5,
       axisLabel = list(
-        formatter= '{value} 鈩㠼㸳'
+        formatter= '{value} °C'
       )
     )
   ))
 ePlot(series2, ext )
 }
-

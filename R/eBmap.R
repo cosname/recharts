@@ -2,10 +2,10 @@
 #'
 #' This function creates an HTML widget to display data.frame and 
 #' factor array, using the JavaScript library ECharts3.
-#' @center center of echarts map(lon,lat)
-#' @zoom zoom of the map
-#' @roam allow roam, default is true
-#' @mapStyle a list object to set map style
+#' @param center center of echarts map(lon,lat)
+#' @param zoom zoom of the map
+#' @param roam allow roam, default is true
+#' @param mapStyle a list object to set map style
 #' @param title,subtitle an overall title for the plot. you can modify title widget after chart has been
 #'   generated: Echart + eTitle(title = "your title.")
 #' @param title.x,title.y the xy coordinates of main title, besides the excat exact pixels value, 

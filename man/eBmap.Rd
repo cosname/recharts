@@ -9,6 +9,14 @@ eBmap(center = c(104.114129, 37.550339), zoom = 5, roam = TRUE,
   title.y = "top", size = NULL)
 }
 \arguments{
+\item{center}{center of echarts map(lon,lat)}
+
+\item{zoom}{zoom of the map}
+
+\item{roam}{allow roam, default is true}
+
+\item{mapStyle}{a list object to set map style}
+
 \item{title, subtitle}{an overall title for the plot. you can modify title widget after chart has been
 generated: Echart + eTitle(title = "your title.")}
 
@@ -24,4 +32,3 @@ factor array, using the JavaScript library ECharts3.
 \examples{
 eBmap()
 }
-

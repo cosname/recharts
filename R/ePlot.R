@@ -69,7 +69,7 @@
 #'       max =  25,
 #'       interval =  5,
 #'       axisLabel = list(
-#'         formatter= '{value} ℃'
+#'         formatter= '{value} °C'
 #'       )
 #'     )
 #'   ))
@@ -77,24 +77,38 @@
 #' @export
 ePlot = function(series, ext = NULL, size = NULL, 
                  theme = "default", title = NULL, subtitle = NULL, title.x = "center", title.y = "top", legend.data = NULL,
-                 legend = TRUE, legend.x = "left", legend.y= "top", legend.orient="horizontal", 
+                 legend = TRUE, legend.x = "center", legend.y= "bottom", legend.orient="horizontal", 
                  tooltip = TRUE, tooltip.trigger="item", 
                  calculable=TRUE,  opt = list())
 {
   if(missing(legend.data) | is.null(legend.data)){legendData = sapply(series, function(x) x[['name']])
   }else{legendData = legend.data}
 
-  opt$legend = legendSet( show=legend, data=legendData, legend.x=legend.x, legend.y=legend.y, orient=legend.orient)
-
+  opt$legend <- list()
+  if(is.list(legendData)){
+    for(i in 1:length(legendData)){
+      opt$legend[[i]] <- legendSet(show=legend, data=legendData[[i]], legend.x=legend.x[i], legend.y=legend.y[i], orient=legend.orient)
+    }
+  } else {
+    opt$legend = legendSet( show=legend, data=legendData, legend.x=legend.x, legend.y=legend.y, orient=legend.orient)
+  }
+  
   # option$title format.
-  opt$title = tilteSet(title = title, subtitle=subtitle,
-                       title.x = title.x, title.y = title.y)
+  opt$title <- list()
+  if(length(title) > 1){
+    for(i in 1:length(title)){
+      opt$title[[i]] <- tilteSet(title = title[i],title.x = title.x[i], title.y = title.y[i])
+    }
+  } else {
+    opt$title = tilteSet(title = title, subtitle=subtitle,
+                         title.x = title.x, title.y = title.y)
+  }
 
   opt$calculable = calculableSet(calculable = calculable)
   opt$theme = themeSet(theme = theme)
   # opt$tooltip format, not open to user now.
   opt$tooltip = tooltipSet( tooltip=tooltip,trigger=tooltip.trigger,
-                            formatter = "{a} <br/>{b} : {c}", islandFormatter="")
+                            formatter = "{b}: {c}", islandFormatter="")
   #now we don't support the multiple graph in one canvas
   opt$series = series 
 

@@ -9,4 +9,3 @@ eTitle(...)
 \description{
 Set recharts title option
 }
-

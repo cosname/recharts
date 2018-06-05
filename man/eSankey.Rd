@@ -74,4 +74,3 @@ dat = data.frame(source=c("Agricultural 'waste'","Bio-conversion",
                          10.639,22.505,46.184,104.453,113.726))
 eSankey(dat)
 }
-

@@ -41,4 +41,3 @@ var option = {
 "
 echartsExample(JScontent=JScodes)
 }
-

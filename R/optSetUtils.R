@@ -2,10 +2,13 @@
 #'
 #' An shell function for printing of the recharts object.
 #'
-#' @param x    recharts print object.
-#' @param tag   whether print the recharts object to browser or string.
-#' @param ...   default parameter.
-#' @return The HTML code as a character string.
+#' @param title    The main title text.
+#' @param link   The hyper link of main title text.
+#' @param subtitle   Subtitle text.
+#' @param sublink   The hyper link of subtitle text.
+#' @param title.x   to be confirmed.
+#' @param title.y   to be confirmed.
+#' @return The list for tilteSet.
 #' @export 
 
 tilteSet = function(title=NULL, link=NULL, subtitle=NULL, sublink=NULL,

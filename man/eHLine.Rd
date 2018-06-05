@@ -4,14 +4,19 @@
 \alias{eHLine}
 \title{Create an HTML bar charts widget using the ECharts(version:3.2.2) library}
 \usage{
-eHLine(chart, yvalue, lineWidth = NULL, lineColor = NULL, name = "",
-  precision = NULL, seriesIndex = NULL)
+eHLine(chart, yvalue, lineType = "solid", symbol = "none", lineWidth = 1,
+  lineColor = "red", name = "", precision = NULL, seriesIndex = NULL)
 }
 \arguments{
 \item{chart}{a recharts object}
 
 \item{yvalue, xvalue}{x,y value for horizontal or vertical line,can be one of 
 ('min','max','average')}
+
+\item{lineType}{default is solid, can be of ('solid','dashed','dotted')}
+
+\item{symbol}{symbol type at the two ends of the mark line, none  includes 
+'circle', 'rect', 'roundRect', 'triangle', 'diamond', 'pin', 'arrow'}
 
 \item{lineWidth}{line width, default is 1}
 
@@ -32,4 +37,11 @@ with symbol color, e.g. \code{series = ~groupName}}
 This function creates an HTML widget to display matrix, data.frame and 
 factor array, using the JavaScript library ECharts3.
 }
-
+\examples{
+chart = ePoints(iris[, 3:5], theme = 2)
+eHLine(chart,1,lineColor = 'blue')
+eHLine(chart,'min',lineWidth = 5)
+eVLine(chart,1,lineColor = 'blue')
+eVLine(chart,'min',lineWidth = 5)
+eMarkLine(chart, c(1,0), c(7,2.5))
+}

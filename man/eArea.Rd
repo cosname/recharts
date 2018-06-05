@@ -125,4 +125,3 @@ You are recommended to use lazyPlot function for interactive chart
 
 
 }
-

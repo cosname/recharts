@@ -131,5 +131,7 @@ names(x) = LETTERS[1:6]
 ePie(x) + eTitle("test")
 testData <- head(mapTestData_chs, 5)
 ePie(testData, ~stdName, ~val1)
+x = runif(6)
+names(x) = LETTERS[1:6]
+ePie(x,reset_radius = c(80,120),showL = TRUE)
 }
-

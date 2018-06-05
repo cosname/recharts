@@ -7,7 +7,7 @@
 optionSet(chart, ...)
 }
 \arguments{
-\item{obj}{recharts object.}
+\item{chart}{recharts object.}
 }
 \value{
 The output list of recharts as a list.
@@ -15,4 +15,3 @@ The output list of recharts as a list.
 \description{
 An shell function for setting arguments of the recharts object.
 }
-

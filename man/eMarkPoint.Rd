@@ -7,7 +7,7 @@
 eMarkPoint(chart, dat = NULL, xvar = NULL, yvar = NULL, series = NULL,
   type = NULL, valueIndex = 0, seriesIndex = NULL, symbol = "pin",
   symbolSize = 50, symbolRotate = NULL, symbolOffset = c(0, 0),
-  silent = FALSE, label = NULL, itemStyle = NULL)
+  silent = TRUE, label = NULL, itemStyle = NULL)
 }
 \arguments{
 \item{chart}{a recharts object}
@@ -56,4 +56,3 @@ eMarkPoint(chart, type=c('max','min'),valueIndex = 1)
 eMarkPoint(chart, dat = data.frame(2:3,rep(200,2)),
            type=c('max','min'),valueIndex = 1)
 }
-

@@ -9,4 +9,3 @@ convertIdx(i, names, n = length(names), invert = FALSE)
 \description{
 importFrom DT convertIdx
 }
-

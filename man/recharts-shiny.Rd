@@ -42,4 +42,3 @@ app = shinyApp(
 
 if (interactive()) print(app)}
 }
-

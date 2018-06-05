@@ -7,11 +7,9 @@
 eTitleSet(chart, ...)
 }
 \arguments{
+\item{chart}{recharts print object.}
+
 \item{...}{default parameter.}
-
-\item{x}{recharts print object.}
-
-\item{tag}{whether print the recharts object to browser or string.}
 }
 \value{
 The HTML code as a character string.
@@ -19,4 +17,3 @@ The HTML code as a character string.
 \description{
 An shell function for printing of the recharts object.
 }
-

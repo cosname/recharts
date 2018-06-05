@@ -2,8 +2,7 @@
 #'
 #' An shell function for printing of the recharts object.
 #'
-#' @param x    recharts print object.
-#' @param tag   whether print the recharts object to browser or string.
+#' @param chart    recharts print object.
 #' @param ...   default parameter.
 #' @return The HTML code as a character string.
 #' @export 
@@ -831,7 +830,7 @@ ePolarSet = function(chart, ...)
 #'
 #' An shell function for setting arguments of the recharts object.
 #'
-#' @param obj  recharts object.
+#' @param chart  recharts object.
 #' @return The output list of recharts as a list.
 #' @export 
 

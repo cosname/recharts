@@ -8,16 +8,21 @@ tilteSet(title = NULL, link = NULL, subtitle = NULL, sublink = NULL,
   title.x = "left", title.y = "top")
 }
 \arguments{
-\item{x}{recharts print object.}
+\item{title}{The main title text.}
 
-\item{tag}{whether print the recharts object to browser or string.}
+\item{link}{The hyper link of main title text.}
 
-\item{...}{default parameter.}
+\item{subtitle}{Subtitle text.}
+
+\item{sublink}{The hyper link of subtitle text.}
+
+\item{title.x}{to be confirmed.}
+
+\item{title.y}{to be confirmed.}
 }
 \value{
-The HTML code as a character string.
+The list for tilteSet.
 }
 \description{
 An shell function for printing of the recharts object.
 }
-

@@ -135,26 +135,35 @@ pause <- function(){
   invisible(readline("\nPress <return> to continue: "))
 }
 
-
 matchPos.x <- function(x){
-	X <- tryCatch({
-		x <- as.numeric(x)
-		x <- ifelse(is.na(x), "", x)
-		return(x)
-	},warning = function(w){
-		match.arg(x,c("center", "left", "right"))
-	})
+  ind <- grep("%",x)
+  if(length(ind) > 0){
+    X <- x 
+  } else {
+    X <- tryCatch({
+      x <- as.numeric(x)
+      x <- ifelse(is.na(x), "", x)
+      return(x)
+    },warning = function(w){
+      match.arg(x,c("center", "left", "right"))
+    })
+  }
 	return(X)
 }
 
 matchPos.y <- function(y){
-	Y <- tryCatch({
-		y <- as.numeric(y)
-		y <- ifelse(is.na(y), "", y)
-		return(y)
-	},warning = function(w){
-		match.arg(y,c("bottom", "center", "top"))
-	})
+  ind <- grep("%",y)
+  if(length(ind) > 0){
+    Y <- y 
+  } else {
+    Y <- tryCatch({
+      y <- as.numeric(y)
+      y <- ifelse(is.na(y), "", y)
+      return(y)
+    },warning = function(w){
+      match.arg(y,c("bottom", "center", "top"))
+    })
+  }
 	return(Y)
 }
 

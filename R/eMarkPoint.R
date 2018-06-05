@@ -33,7 +33,7 @@
 eMarkPoint = function(chart, dat=NULL, xvar=NULL, yvar=NULL, series=NULL, type = NULL,
                       valueIndex = 0, seriesIndex = NULL,
                       symbol =  'pin', symbolSize = 50, symbolRotate = NULL,
-                      symbolOffset = c(0,0), silent = FALSE, label = NULL,
+                      symbolOffset = c(0,0), silent = TRUE, label = NULL,
                       itemStyle = NULL
                       ){
   
@@ -44,12 +44,12 @@ eMarkPoint = function(chart, dat=NULL, xvar=NULL, yvar=NULL, series=NULL, type =
   markPoint$symbol = symbol
   ## TODO different symbolSize
   markPoint$symbolSize = symbolSize
+  ## Whether to ignore mouse events.
+  markPoint$silent = silent
+  markPoint$symbolOffset = symbolOffset
   
   if(!is.null(symbolRotate))    markPoint$symbolRotate = symbolRotate
-  
-  markPoint$symbolOffset = symbolOffset
-  markPoint$silent = FALSE
-  
+
   if(!is.null(label))    markPoint$label = label
   
   if(!is.null(itemStyle))    markPoint$itemStyle = itemStyle
