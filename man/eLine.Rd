@@ -4,19 +4,21 @@
 \alias{eLine}
 \title{Create an HTML line charts widget using the ECharts(version:3.2.2) library}
 \usage{
-eLine(dat, xvar = NULL, yvar = NULL, series = NULL, size = NULL,
-  horiz = FALSE, smooth = NULL, symbol = NULL, symbolSize = NULL,
-  z = NULL, theme = "default", title = NULL, subtitle = NULL,
-  title.x = "center", title.y = "top", legend = TRUE, legend.x = "left",
+eLine(dat, xvar = NULL, yvar = NULL, type = "scatter",
+  series = NULL, size = NULL, horiz = FALSE, smooth = NULL,
+  symbol = NULL, symbolSize = NULL, z = NULL, theme = "default",
+  title = NULL, subtitle = NULL, title.x = "center",
+  title.y = "top", legend = TRUE, legend.x = "left",
   legend.y = "top", legend.orient = "horizontal", toolbox = TRUE,
-  toolbox.orient = "horizontal", toolbox.x = "right", toolbox.y = "top",
-  dataView = TRUE, readOnly = FALSE, mark = TRUE, dataZoom = FALSE,
-  magicType = TRUE, tooltip = TRUE, tooltip.trigger = "axis",
-  formatter = "", axis.scale = TRUE, axis.line = TRUE,
-  axis.tick = FALSE, axis.lable = TRUE, axis.splitLine = TRUE,
-  axis.splitArea = FALSE, axis.boundaryGap = TRUE, xlab = TRUE,
-  xlab.type = "category", xlab.data = NULL, xlab.position = "bottom",
-  xlab.name = "", xlab.namePosition = "start", xlim = NULL, ylab = TRUE,
+  toolbox.orient = "horizontal", toolbox.x = "right",
+  toolbox.y = "top", dataView = TRUE, readOnly = FALSE,
+  mark = TRUE, dataZoom = FALSE, magicType = TRUE, tooltip = TRUE,
+  tooltip.trigger = "axis", formatter = "", axis.scale = TRUE,
+  axis.line = TRUE, axis.tick = FALSE, axis.lable = TRUE,
+  axis.splitLine = TRUE, axis.splitArea = FALSE,
+  axis.boundaryGap = TRUE, xlab = TRUE, xlab.type = "category",
+  xlab.data = NULL, xlab.position = "bottom", xlab.name = "",
+  xlab.namePosition = "start", xlim = NULL, ylab = TRUE,
   ylab.type = "value", ylab.data = NULL, ylab.position = "left",
   ylab.name = "", ylab.namePosition = "start", ylim = NULL,
   calculable = TRUE, showLabel = TRUE, opt = list())
@@ -28,6 +30,8 @@ eLine(dat, xvar = NULL, yvar = NULL, series = NULL, size = NULL,
 to that class):  x,y coordinates of the given data.frame colnames, e.g. 
 \code{xvar = ~xAxisName}; \code{yvar = ~yAxisName}. xvar, yvar only needed for the 
 data.frame data input.}
+
+\item{type}{type : 'scatter' or 'line'}
 
 \item{series}{an "formula" object: Associates the levels of variable
 with symbol color, e.g. \code{series = ~groupName}}

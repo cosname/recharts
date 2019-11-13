@@ -4,20 +4,22 @@
 \alias{eCandle}
 \title{Create an HTML candle charts widget using the ECharts(version:3.2.2) library}
 \usage{
-eCandle(dat, candleColor, size = NULL, theme = "default", title = NULL,
-  subtitle = NULL, title.x = "center", title.y = "top", legend = TRUE,
-  legend.x = "left", legend.y = "top", legend.orient = "horizontal",
-  toolbox = TRUE, toolbox.orient = "horizontal", toolbox.x = "right",
-  toolbox.y = "top", dataView = TRUE, readOnly = FALSE, mark = TRUE,
-  dataZoom = FALSE, magicType = TRUE, tooltip = TRUE,
-  tooltip.trigger = "axis", tooltip.formatter = "", axis.scale = TRUE,
-  axis.line = TRUE, axis.tick = FALSE, axis.lable = TRUE,
-  axis.splitLine = TRUE, axis.splitArea = FALSE, axis.boundaryGap = TRUE,
-  xlab = TRUE, xlab.type = "category", xlab.data = NULL,
-  xlab.position = "bottom", xlab.name = "", xlab.namePosition = "start",
-  xlim = NULL, ylab = TRUE, ylab.type = "value", ylab.data = NULL,
-  ylab.position = "left", ylab.name = "", ylab.namePosition = "start",
-  ylim = NULL, calculable = TRUE, showLabel = TRUE, opt = list(), ...)
+eCandle(dat, candleColor, size = NULL, theme = "default",
+  title = NULL, subtitle = NULL, title.x = "center",
+  title.y = "top", legend = TRUE, legend.x = "left",
+  legend.y = "top", legend.orient = "horizontal", toolbox = TRUE,
+  toolbox.orient = "horizontal", toolbox.x = "right",
+  toolbox.y = "top", dataView = TRUE, readOnly = FALSE,
+  mark = TRUE, dataZoom = FALSE, magicType = TRUE, tooltip = TRUE,
+  tooltip.trigger = "axis", tooltip.formatter = "",
+  axis.scale = TRUE, axis.line = TRUE, axis.tick = FALSE,
+  axis.lable = TRUE, axis.splitLine = TRUE, axis.splitArea = FALSE,
+  axis.boundaryGap = TRUE, xlab = TRUE, xlab.type = "category",
+  xlab.data = NULL, xlab.position = "bottom", xlab.name = "",
+  xlab.namePosition = "start", xlim = NULL, ylab = TRUE,
+  ylab.type = "value", ylab.data = NULL, ylab.position = "left",
+  ylab.name = "", ylab.namePosition = "start", ylim = NULL,
+  calculable = TRUE, showLabel = TRUE, opt = list(), ...)
 }
 \arguments{
 \item{dat}{a data object (a matrix, a data frame or a factor array)}

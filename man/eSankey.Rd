@@ -6,9 +6,9 @@
 \usage{
 eSankey(dat, candleColor, size = NULL, title = NULL, subtitle = NULL,
   title.x = "center", title.y = "top", toolbox = TRUE,
-  toolbox.orient = "horizontal", toolbox.x = "right", toolbox.y = "top",
-  tooltip = TRUE, tooltip.trigger = "item", calculable = TRUE,
-  opt = list(), ...)
+  toolbox.orient = "horizontal", toolbox.x = "right",
+  toolbox.y = "top", tooltip = TRUE, tooltip.trigger = "item",
+  calculable = TRUE, opt = list(), ...)
 }
 \arguments{
 \item{dat}{a data.frame object}

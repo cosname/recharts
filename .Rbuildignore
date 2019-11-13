@@ -7,3 +7,4 @@ Makefile
 ^\.travis\.yml$
 screenshots/
 docs
+LICENSE.TXT

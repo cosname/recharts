@@ -5,14 +5,16 @@
 \title{Force network graph}
 \usage{
 eForce(networkMatrix, propertyDf = NULL, size = NULL, maxR = 25,
-  minR = 15, density = 0.05, attractiveness = 1.2, showLabel = TRUE,
-  theme = "default", title = NULL, subtitle = NULL, title.x = "center",
-  title.y = "top", legend = TRUE, legend.x = "left", legend.y = "top",
+  minR = 15, density = 0.05, attractiveness = 1.2,
+  showLabel = TRUE, theme = "default", title = NULL,
+  subtitle = NULL, title.x = "center", title.y = "top",
+  legend = TRUE, legend.x = "left", legend.y = "top",
   legend.orient = "horizontal", toolbox = TRUE,
-  toolbox.orient = "horizontal", toolbox.x = "right", toolbox.y = "top",
-  dataView = FALSE, readOnly = TRUE, mark = TRUE, dataZoom = FALSE,
-  tooltip = TRUE, tooltip.trigger = "item", formatter = "",
-  calculable = FALSE, xlab = NULL, ylab = NULL, opt = list())
+  toolbox.orient = "horizontal", toolbox.x = "right",
+  toolbox.y = "top", dataView = FALSE, readOnly = TRUE,
+  mark = TRUE, dataZoom = FALSE, tooltip = TRUE,
+  tooltip.trigger = "item", formatter = "", calculable = FALSE,
+  xlab = NULL, ylab = NULL, opt = list())
 }
 \arguments{
 \item{networkMatrix}{required, a symmetric matrix, each cell value indicates 

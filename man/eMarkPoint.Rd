@@ -4,10 +4,11 @@
 \alias{eMarkPoint}
 \title{Create an markpoint using the ECharts(version:3.2.2) library}
 \usage{
-eMarkPoint(chart, dat = NULL, xvar = NULL, yvar = NULL, series = NULL,
-  type = NULL, valueIndex = 0, seriesIndex = NULL, symbol = "pin",
-  symbolSize = 50, symbolRotate = NULL, symbolOffset = c(0, 0),
-  silent = TRUE, label = NULL, itemStyle = NULL)
+eMarkPoint(chart, dat = NULL, xvar = NULL, yvar = NULL,
+  series = NULL, type = NULL, valueIndex = 0, seriesIndex = NULL,
+  symbol = "pin", symbolSize = 50, symbolRotate = NULL,
+  symbolOffset = c(0, 0), silent = TRUE, label = NULL,
+  itemStyle = NULL)
 }
 \arguments{
 \item{chart}{a recharts object}

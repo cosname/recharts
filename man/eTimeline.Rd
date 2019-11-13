@@ -5,8 +5,8 @@
 \title{Save recharts into a png/jpg file}
 \usage{
 eTimeline(..., timeLineName = NULL, width = NULL, height = NULL,
-  currentIndex = 0, autoPlay = TRUE, loop = TRUE, playInterval = 2000,
-  orient = "horizontal", z = 2)
+  currentIndex = 0, autoPlay = TRUE, loop = TRUE,
+  playInterval = 2000, orient = "horizontal", z = 2)
 }
 \arguments{
 \item{...}{Echarts object}

@@ -14,6 +14,9 @@ echartsExample = function(url = NULL,
 
 \item{JScontent}{JScodes for Echarts. An object named option should be created in these codes.}
 }
+\description{
+Create Echarts from Echarts Glaery
+}
 \examples{
 # Create from link
 echartsExample("http://echarts.baidu.com/demo.html#effectScatter-bmap")

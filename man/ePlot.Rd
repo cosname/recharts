@@ -14,6 +14,9 @@ ePlot (series, ext = NULL, size = NULL)
 \item{size}{an array of html widget width and height(either numeric pixels 
 or percentage could be accepted): e.g. size = c(1024, 768).}
 }
+\description{
+Create rEcharts from an R object
+}
 \examples{
 series = list(
 list(
@@ -76,7 +79,7 @@ ext = list(
       max =  25,
       interval =  5,
       axisLabel = list(
-        formatter= '{value} °C'
+        formatter= '{value} 掳C'
       )
     )
   ))

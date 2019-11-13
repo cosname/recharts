@@ -1,6 +1,10 @@
 language: r
+dist: xenial
 
-sudo: false
+r:
+ - 3.4
+ - 3.5
+ - 3.6
 
 env:
   matrix:

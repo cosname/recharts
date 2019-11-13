@@ -5,11 +5,11 @@
 \title{Create an HTML parallel charts widget using the ECharts(version:3.2.2) library}
 \usage{
 eWordcloud(dat, namevar = NULL, datavar = NULL, size = c(1024, 768),
-  title = NULL, subtitle = NULL, title.x = "center", title.y = "top",
-  sizeRange = c(10, 100), rotationRange = c(-90, 90), rotationStep = 45,
-  gridSize = 2, shape = "pentagon", maskImage = NULL, tooltip = TRUE,
-  tooltip.trigger = "item", formatter = "", axis.scale = TRUE,
-  opt = list(), theme = NULL)
+  title = NULL, subtitle = NULL, title.x = "center",
+  title.y = "top", sizeRange = c(10, 100), rotationRange = c(-90,
+  90), rotationStep = 45, gridSize = 2, shape = "pentagon",
+  maskImage = NULL, tooltip = TRUE, tooltip.trigger = "item",
+  formatter = "", axis.scale = TRUE, opt = list(), theme = NULL)
 }
 \arguments{
 \item{dat}{a data object (a matrix, a data frame or a factor array)}

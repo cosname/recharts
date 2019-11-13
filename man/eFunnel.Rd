@@ -4,15 +4,17 @@
 \alias{eFunnel}
 \title{Create an HTML funnel charts widget using the ECharts(version:3.2.2) library}
 \usage{
-eFunnel(dat, namevar = NULL, datavar = NULL, size = NULL, fixed = TRUE,
-  theme = "default", title = NULL, subtitle = NULL, title.x = "center",
-  title.y = "top", legend.data = NULL, legend = TRUE, legend.x = "left",
-  legend.y = "top", legend.orient = "horizontal", toolbox = TRUE,
-  toolbox.orient = "horizontal", toolbox.x = "right", toolbox.y = "top",
-  dataView = TRUE, readOnly = FALSE, mark = TRUE, dataZoom = FALSE,
-  magicType = FALSE, tooltip = TRUE, tooltip.trigger = "item",
-  formatter = "", axis.scale = TRUE, xlab = FALSE, ylab = FALSE,
-  calculable = TRUE, showLabel = TRUE, opt = list())
+eFunnel(dat, namevar = NULL, datavar = NULL, size = NULL,
+  fixed = TRUE, theme = "default", title = NULL, subtitle = NULL,
+  title.x = "center", title.y = "top", legend.data = NULL,
+  legend = TRUE, legend.x = "left", legend.y = "top",
+  legend.orient = "horizontal", toolbox = TRUE,
+  toolbox.orient = "horizontal", toolbox.x = "right",
+  toolbox.y = "top", dataView = TRUE, readOnly = FALSE,
+  mark = TRUE, dataZoom = FALSE, magicType = FALSE, tooltip = TRUE,
+  tooltip.trigger = "item", formatter = "", axis.scale = TRUE,
+  xlab = FALSE, ylab = FALSE, calculable = TRUE, showLabel = TRUE,
+  opt = list())
 }
 \arguments{
 \item{dat}{a data object (a data frame or a numeric array with name)}

@@ -5,11 +5,12 @@
 \title{Create an HTML Liquid charts widget using the ECharts(version:3.2.2) library}
 \usage{
 eLiquid(percentDat, wave = 3, radius = "80\%", size = NULL,
-  theme = "default", title = NULL, subtitle = NULL, title.x = "center",
-  title.y = "top", toolbox = FALSE, toolbox.orient = "horizontal",
-  toolbox.x = "right", toolbox.y = "top", dataView = TRUE,
-  readOnly = FALSE, mark = TRUE, dataZoom = FALSE, magicType = TRUE,
-  tooltip = TRUE, tooltip.trigger = "axis", tooltip.formatter = "",
+  theme = "default", title = NULL, subtitle = NULL,
+  title.x = "center", title.y = "top", toolbox = FALSE,
+  toolbox.orient = "horizontal", toolbox.x = "right",
+  toolbox.y = "top", dataView = TRUE, readOnly = FALSE,
+  mark = TRUE, dataZoom = FALSE, magicType = TRUE, tooltip = TRUE,
+  tooltip.trigger = "axis", tooltip.formatter = "",
   calculable = TRUE, showLabel = TRUE, opt = list())
 }
 \arguments{

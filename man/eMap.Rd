@@ -4,18 +4,20 @@
 \alias{eMap}
 \title{Create an HTML map charts widget using the ECharts(version:3.2.2) library}
 \usage{
-eMap(dat, namevar = NULL, datavar = NULL, size = NULL, region = "china",
-  color = c("#1e90ff", "#f0ffff"), theme = "default", title = NULL,
-  subtitle = NULL, title.x = "center", title.y = "top", legend = TRUE,
+eMap(dat, namevar = NULL, datavar = NULL, size = NULL,
+  region = "china", color = c("#1e90ff", "#f0ffff"),
+  theme = "default", title = NULL, subtitle = NULL,
+  title.x = "center", title.y = "top", legend = TRUE,
   legend.x = "left", legend.y = "top", legend.orient = "horizontal",
   toolbox = TRUE, toolbox.orient = "horizontal", toolbox.x = "right",
-  toolbox.y = "top", dataView = FALSE, readOnly = FALSE, mark = TRUE,
-  dataZoom = FALSE, dataRange = TRUE, dataRange.x = "left",
-  dataRange.y = "bottom", dataRange.min = NULL, dataRange.max = NULL,
-  dataRange.calculable = TRUE, dataRange.text = c("high", "low"),
-  dataRange.orient = "horizontal", tooltip = TRUE,
-  tooltip.trigger = "item", formatter = "", calculable = FALSE,
-  xlab = NULL, ylab = NULL, showLabel = TRUE, opt = list())
+  toolbox.y = "top", dataView = FALSE, readOnly = FALSE,
+  mark = TRUE, dataZoom = FALSE, dataRange = TRUE,
+  dataRange.x = "left", dataRange.y = "bottom", dataRange.min = NULL,
+  dataRange.max = NULL, dataRange.calculable = TRUE,
+  dataRange.text = c("high", "low"), dataRange.orient = "horizontal",
+  tooltip = TRUE, tooltip.trigger = "item", formatter = "",
+  calculable = FALSE, xlab = NULL, ylab = NULL, showLabel = TRUE,
+  opt = list())
 }
 \arguments{
 \item{dat}{a data object (a data frame or a factor array)}

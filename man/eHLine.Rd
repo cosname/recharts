@@ -4,8 +4,9 @@
 \alias{eHLine}
 \title{Create an HTML bar charts widget using the ECharts(version:3.2.2) library}
 \usage{
-eHLine(chart, yvalue, lineType = "solid", symbol = "none", lineWidth = 1,
-  lineColor = "red", name = "", precision = NULL, seriesIndex = NULL)
+eHLine(chart, yvalue, lineType = "solid", symbol = "none",
+  lineWidth = 1, lineColor = "red", name = "", precision = NULL,
+  seriesIndex = NULL)
 }
 \arguments{
 \item{chart}{a recharts object}

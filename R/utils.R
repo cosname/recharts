@@ -88,7 +88,7 @@ df2List = function(valDf){
 # matched to the standard name.
 regionFormat = function(regionName){
 	#print(regionName)
-	regionName = stringr:::str_trim(regionName)
+	regionName = stringr::str_trim(regionName)
 	cnFixed = grepl(regionName, mapInfoDf$cnName_full, fixed=TRUE)
 	enFixed = grepl(regionName, mapInfoDf$enName_full, fixed=TRUE)
 	if(any(cnFixed)){

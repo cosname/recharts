@@ -4,8 +4,8 @@
 \alias{tilteSet}
 \title{recharts tilteSet fucntion}
 \usage{
-tilteSet(title = NULL, link = NULL, subtitle = NULL, sublink = NULL,
-  title.x = "left", title.y = "top")
+tilteSet(title = NULL, link = NULL, subtitle = NULL,
+  sublink = NULL, title.x = "left", title.y = "top")
 }
 \arguments{
 \item{title}{The main title text.}

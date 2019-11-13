@@ -5,8 +5,8 @@
 \title{Create an HTML map charts widget using the ECharts(version:3.2.2) library}
 \usage{
 eBmap(center = c(104.114129, 37.550339), zoom = 5, roam = TRUE,
-  mapStyle = NULL, title = NULL, subtitle = NULL, title.x = "center",
-  title.y = "top", size = NULL)
+  mapStyle = NULL, title = NULL, subtitle = NULL,
+  title.x = "center", title.y = "top", size = NULL)
 }
 \arguments{
 \item{center}{center of echarts map(lon,lat)}
