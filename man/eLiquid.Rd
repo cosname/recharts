@@ -18,7 +18,7 @@ eLiquid(percentDat, wave = 3, radius = "80\%", size = NULL,
 
 \item{wave}{number of waves, default is 3}
 
-\item{radius}{raduis for liquid chart, default is '80%'}
+\item{radius}{raduis for liquid chart, default is '80\%'}
 
 \item{size}{an array of html widget width and height(either numeric pixels 
 or percentage could be accepted): e.g. size = c(1024, 768).}
