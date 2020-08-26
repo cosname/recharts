@@ -6,7 +6,7 @@ A R interface to [ECharts](https://github.com/ecomfe/echarts) for data visualiza
 
 文档请点击：<https://recharts.cosx.org>
 
-recharts 提供了百度开源可视化js框架ECharts的R语言接口，现提供的图形展示接口包括：地图（eMap），柱状图（eBar），折线图（eLine），
+recharts 提供了百度开源可视化js框架Apache ECharts (incubating)的R语言接口，现提供的图形展示接口包括：地图（eMap），柱状图（eBar），折线图（eLine），
 雷达图（eRadar），散点图（ePoints），漏斗图（eFunnel）以及万恶的饼图（ePie）。
 同时计划对力导向图（[eForce](http://echarts.baidu.com/demo.html#graph-force)），
 时间序列散点图([ePoints_timeSeries](http://echarts.baidu.com/demo.html#graph-life-expectancy))，矩阵树图([eTree](http://echarts.baidu.com/demo.html#treemap-disk))，平行坐标图([eParallel](http://echarts.baidu.com/demo.html#parallel-aqi)) 和桑基图（[eSankey](http://echarts.baidu.com/demo.html#sankey-energy)）图逐一实现。
